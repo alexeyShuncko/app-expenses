@@ -1,0 +1,11 @@
+.news {
+    display: flex;
+    
+}
+.newsItems {
+    flex: 2;
+    padding: 10px;
+}
+.newsItems1 {
+    flex: 3;
+}

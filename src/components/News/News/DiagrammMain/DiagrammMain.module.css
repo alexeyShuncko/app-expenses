@@ -1,0 +1,32 @@
+.diagrammMain {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.diagrammMainName {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.diagrammMainDiagramm {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.select {
+display: flex;
+}
+
+.selectText {
+flex: 3;
+text-align: end;
+}
+.selectValue {
+flex: 2;
+text-align: left;
+margin-left: 3px;
+font-weight: bold;
+}

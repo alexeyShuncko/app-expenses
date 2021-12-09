@@ -1,0 +1,68 @@
+
+.statisticDate { 
+    display: flex;
+    margin-bottom: 20px;  
+}
+.statisticDateItem {
+flex:1;
+
+}
+.statisticDateDiagramm {
+    flex:1;
+    text-align: center;
+}
+.statisticTable {
+    display: flex;
+    flex-direction: column;
+}
+.statisticName {
+    display: flex;
+}
+
+.statisticNameDate {
+    font-weight: bold;
+ flex: 2;
+ text-align: center;
+}
+.statisticNameSumm {
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+}
+
+.statisticDateTime {
+    flex: 2;
+    border: solid black 1px;
+    border-right: none;  
+}
+
+.statisticDateNum {
+    flex: 1;
+    text-align: center;
+    border: solid black 1px; 
+}
+
+.statisticDateTable {
+ text-align: center;
+ margin-right: 10px;
+}
+
+.categoryVal {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    border: solid green 2px;
+}
+
+.statisticDateSumm {
+    margin-top: 10px;   
+}
+
+.categorySumm {
+    font-weight: bold;
+    border-bottom: solid 1px;
+}
+
+.table {
+display: flex;
+}

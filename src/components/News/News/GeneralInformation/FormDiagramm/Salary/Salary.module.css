@@ -1,0 +1,23 @@
+
+.salaryUpdate {
+    font-weight: bold;
+    font-size: 20px;
+    border: solid red 2px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.fieldBynUsd {
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    text-align: center;
+    }
+
+    .fieldBynUsd:hover {
+        border-color:green;
+    }
+    .fieldBynUsd:focus {
+        outline: none;
+    }
+    

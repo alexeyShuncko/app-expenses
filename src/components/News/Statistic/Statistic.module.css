@@ -1,0 +1,67 @@
+.button {
+    margin-top: 10px;
+}
+
+.button button {
+    margin-top: 10px;
+}
+
+.statistic {
+    display: flex;
+    margin-right: 20px;
+}
+
+.statisticItem1 {
+    flex: 2;
+    margin-right: 20px;
+}
+
+.statisticItem2 {
+    flex: 5;
+}
+
+.statisticItem1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryStatistic {
+    flex: 1;
+    margin-bottom: 30px;
+}
+.categoryStatisticName {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+.period {
+    flex: 1;
+    margin-bottom: 30px;
+}
+
+.statisticName {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.option option {
+    text-align: center;
+}
+
+.option {
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+}
+
+.periodStatistic {
+    display: flex;
+}
+
+.periodStatistic label {
+    flex: 1;
+}

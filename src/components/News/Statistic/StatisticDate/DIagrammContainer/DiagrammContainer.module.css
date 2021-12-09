@@ -1,0 +1,21 @@
+.categoryVal {
+    margin-top: 9px;
+    font-weight: bold;
+    font-size: 15px;
+    border: solid green 2px;
+}
+
+.select {
+    display: flex;
+}
+
+.selectText {
+    flex: 2;
+    text-align: end;
+}
+
+.selectValue {
+    flex: 1;
+    text-align: left;
+    margin-left: 3px;
+}

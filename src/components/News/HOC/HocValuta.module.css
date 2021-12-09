@@ -1,0 +1,14 @@
+.salary {
+    display: flex;
+}
+
+.salaryName {
+    font-weight: bold;
+    font-size: 20px;
+}
+.salaryValue {
+}
+.salaryValuta {
+    align-self: flex-end;
+    margin-left: 3px;
+}

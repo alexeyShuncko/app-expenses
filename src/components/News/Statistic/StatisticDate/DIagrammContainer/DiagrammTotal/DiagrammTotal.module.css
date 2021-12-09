@@ -1,0 +1,15 @@
+
+.diagrammSummValue {
+    display: flex;
+    font-weight: bold;
+    border-bottom: solid 2px ;
+}
+.itemNum {
+flex: 1;
+text-align: end;
+}
+.itemValuta {
+flex: 1;
+text-align: left;
+margin-left: 3px;
+}

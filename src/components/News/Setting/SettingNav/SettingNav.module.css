@@ -1,0 +1,15 @@
+.buttons {
+display: flex;
+
+}
+.navNewsitem {
+margin-left: 10px;
+margin-top: 10px;
+
+}
+
+.settingButton {
+    font-size: 17px;
+    width: 200px;
+    height: 50px;
+}

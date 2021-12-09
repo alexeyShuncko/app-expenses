@@ -1,0 +1,12 @@
+
+.navNewsitem .activeLink {
+    font-size: 25px;
+    color: green;
+    font-weight: bold;
+}
+.navNewsitem a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    
+}

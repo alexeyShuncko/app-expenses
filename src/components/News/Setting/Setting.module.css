@@ -1,0 +1,11 @@
+.setting {
+    margin-top: 20px;
+   color: red;
+   text-align: center;
+   border: solid red 1px;
+}
+
+.settingButton {
+width: 200px;
+height: 50px;
+}
