@@ -22,13 +22,13 @@ display: flex;
     flex: 1;
 }
 
-.formItemsField:focus {
+/* .formItemsField:focus {
     outline:none;
 border-top: none;
 border-left: none;
 border-right: none;
     border-bottom: solid orange 2px;
-}
+} */
 /* .formItemsField:hover {
     border-top: none;
 border-left: none;

@@ -75,7 +75,7 @@ const Statistic = (props) => {
                         <form onSubmit={handleSubmit} >
 
                             <div className={s.categoryStatistic}>
-                                <label className={s.categoryStatisticName} >Категория : </label>
+                                <label className={s.categoryStatisticName} >Выбери категорию : </label>
 
                                 <Field onClick={colorActiv} name="favorite"
                                     component="select" className={s.option}
@@ -88,7 +88,7 @@ const Statistic = (props) => {
                                 <div> {props.diagramm.activ ? itemSelect(diagramm) : null} </div>
                             </div>
                             <div className={s.period}>
-                                <label className={s.categoryStatisticName}>Период : </label>
+                                <label className={s.categoryStatisticName}>Выбери период : </label>
                                 <div className={s.periodStatistic}>
                                     <label>C: </label>
                                     <Field onChange={periodS} name="periodS" component="input" type="date"></Field>

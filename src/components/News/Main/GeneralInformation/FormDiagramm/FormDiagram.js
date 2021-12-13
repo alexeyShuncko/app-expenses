@@ -11,13 +11,6 @@ const FormDiagram = (props) => {
 
     const onSubmit = (values, form) => {
 
-        const nameFor = () => {
-            for (let x in values) {
-                return x
-            }
-        }
-        const name = nameFor()
-
          const time = new Date()
          function formatDate(date) {
 
@@ -39,7 +32,17 @@ const FormDiagram = (props) => {
              return '20' + yy + '-' + mm + '-' + dd + ' ' + HH + ':' + MM;
          }
          const timer = formatDate(time)
-         props.addDiagramm(name,values[name], timer)
+        
+
+         const value =()=> {
+            let valueArr = []
+            for (let x in values) {
+                valueArr.push(values[x]) 
+            }
+            return valueArr
+         }
+      
+         props.addDiagramm(Object.keys(values),value(values), timer)
         form.reset()
 
     }

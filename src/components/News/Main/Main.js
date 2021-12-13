@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react';
-import s from './News.module.css';
+import s from './Main.module.css';
 import Diagram from './DiagrammMain/Diagram';
 import  FormDiagram  from './GeneralInformation/FormDiagramm/FormDiagram';
 import { connect } from 'react-redux';

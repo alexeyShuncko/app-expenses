@@ -1,11 +1,15 @@
 import React from 'react';
 import s from './RenameCategory.module.css';
 import { Field, Form } from 'react-final-form';
+import { withRouter } from 'react-router-dom';
+import { useState } from 'react';
 
 
 
 const RenameCategory =(props)=> {
   
+    let [valCategory, setValCategory] = useState(false)
+
     const diagramm = props.diagramm.category
 
     const returnSetting = () => {
@@ -13,8 +17,15 @@ const RenameCategory =(props)=> {
     }
 
     const onSubmit = (values, form) => {
-        props.renameCategory(values.favorite,values.name)
-        form.reset()
+        if (values.name &&  
+            !props.diagramm.category.map(a=> a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) { 
+                setValCategory(false) 
+            props.renameCategory(values.favorite,values.name)
+            form.reset()}
+            else if ( props.diagramm.category.map(a=> a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
+                setValCategory(true)
+            }
+      
     }
     return (
         <div className={s.item}>
@@ -47,6 +58,7 @@ const RenameCategory =(props)=> {
                                 type="text"
                                 required
                             />
+                           {valCategory && <span className={s.validColor}>Такая категория уже есть</span>}
                         </div>
                        
                         <div className={s.buttonItem}>
@@ -68,4 +80,4 @@ const RenameCategory =(props)=> {
 
 }
 
-export default (RenameCategory)
+export default withRouter(RenameCategory)

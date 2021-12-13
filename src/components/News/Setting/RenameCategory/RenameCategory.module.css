@@ -12,3 +12,10 @@ margin-top: 10px;
 .buttonItem button {
 margin-right: 10px;
 }
+.validColor {
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: solid red 1px;
+    border-radius: 10px;
+    }

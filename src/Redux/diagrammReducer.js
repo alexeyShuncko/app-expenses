@@ -25,16 +25,16 @@ let initialState = {
     [{
          nameRus: 'Еда', color: '#fde23e',
         data: [
-            { id: 1, time: '2021-11-28 19:05', num: 10 },
-            { id: 2, time: '2021-12-01 14:59', num: 20 },
-            { id: 3, time: '2021-12-01 15:01', num: 20 },
-            { id: 4, time: '2021-12-01 15:02', num: 25 },
-            { id: 5, time: '2021-12-01 15:06', num: 52 }
+            { id: 'Еда1', time: '2021-11-28 19:05', num: 10 },
+            { id: 'Еда2', time: '2021-12-01 14:59', num: 20 },
+            { id: 'Еда3', time: '2021-12-01 15:01', num: 20 },
+            { id: 'Еда4', time: '2021-12-01 15:02', num: 25 },
+            { id: 'Еда5', time: '2021-12-01 15:06', num: 52 }
         ], summ: 127
     },
-     {  nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 1, time: '2021-11-28 19:04', num: 40 }], summ: 40 },
-     {  nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 1, time: '2021-11-28 19:03', num: 25 }], summ: 25 },
-     {  nameRus: 'Транспорт', color: '#169928', data: [{ id: 1, time: '2021-11-28 19:02', num: 25 }], summ: 25 }],
+     {  nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2021-11-28 19:04', num: 40 }], summ: 40 },
+     {  nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2021-11-28 19:03', num: 25 }], summ: 25 },
+     {  nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2021-11-28 19:02', num: 25 }], summ: 25 }],
     activ: '',
     salary: { salaryNum: 700.01, salaryDate: '2021-11-09', salaryValueTrue: false },
     periodPo: '',
@@ -44,7 +44,7 @@ let initialState = {
     selectDiagramm: '%',
     selectDiagrammStat: '%',
     dollar: {
-        Cur_OfficialRate: '',
+        Cur_OfficialRate: '2.5',
         Date: ''
     }
 }
@@ -59,13 +59,13 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 category: [
                     ...state.category.map(a => {
-                        if (a.nameRus === action.name) {
+                        if (action.name.includes(a.nameRus)) {
                             return ({...a,
                                     data: [...a.data, {
                                         id: a.nameRus + String(a.data.length+1), time: action.time,
-                                        num: Number(action.value)
+                                        num: Number(action.value[action.name.indexOf(a.nameRus)])
                                     }],
-                                    summ: a.summ + Number(action.value)})
+                                    summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])})
                         }
                         else return a})]
             }

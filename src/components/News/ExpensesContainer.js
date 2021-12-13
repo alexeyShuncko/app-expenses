@@ -1,9 +1,8 @@
 import React from 'react';
-import s from './NewsContainer.module.css';
+import s from './ExpensesContainer.module.css';
 import NavNews from './NavNews/NavNews';
-
 import { Route, Switch} from 'react-router';
-import News from './News/News';
+import Main from './Main/Main';
 import Statistic from './Statistic/Statistic';
 import Setting from './Setting/Setting';
 
@@ -18,7 +17,7 @@ const NewsContainer = (props) => {
             <div className={s.newsContainerContent}>
                 <div>
                 <Switch>
-                    <Route path='/main' render={() => <News />} />
+                    <Route path='/main' render={() => <Main />} />
                     <Route path='/statistic' render={() => <Statistic />} />
                     <Route path='/setting' render={() => <Setting />} />
                     <Route path='*'

@@ -1,11 +1,13 @@
 .newsContainerItems {
     display: flex;
+    background-color: rgb(204, 163, 204);
 }
 
 .newsContainerNav {
   flex:1;
   margin: 20px;
-  
+  margin-left: 40px; 
+  border-right: solid 1px;
 }
 
 .newsContainerContent {

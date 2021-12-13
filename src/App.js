@@ -1,16 +1,13 @@
 import React from 'react';
 import './App.css';
-import NewsContainer from './components/News/NewsContainer';
+import ExpensesContainer from './components/News/ExpensesContainer';
 
 const  App =()=>  {
   return (
     <div>
-     
-      <NewsContainer />
-    
-    
+      <ExpensesContainer />
     </div>
-  );
+  )
 }
 
 export default App;

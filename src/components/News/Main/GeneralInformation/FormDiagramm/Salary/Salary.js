@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import SalarySpent from './SalarySpent/SalarySpent';
 import SalaryRemainder from './SalaryRemainder/SalaryRemainder';
 import SalaryValue from './SalaryValue/SalaryValue';
-import { HocValuta } from './../../../../HOC/HocValuta';
+import { HocValuta } from '../../../../HOC/HocValuta';
 
 
 const Salary = (props) => {

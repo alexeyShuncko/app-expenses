@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import s from './DeleteCategory.module.css';
 import { Field } from 'react-final-form';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -59,4 +60,4 @@ const DeleteCategory =(props)=> {
 
 }
 
-export default (DeleteCategory)
+export default withRouter(DeleteCategory)

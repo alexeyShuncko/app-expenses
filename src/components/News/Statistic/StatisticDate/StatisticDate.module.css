@@ -13,6 +13,8 @@ flex:1;
 .statisticTable {
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .statisticName {
     display: flex;
@@ -66,4 +68,10 @@ flex:1;
 .categorySumm {
     font-weight: bold;
     border-bottom: solid 1px;
+}
+
+.totalSumm {
+text-align: center;
+margin-top: 10px;
+margin-bottom: 20px;
 }

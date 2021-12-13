@@ -6,7 +6,7 @@ const DollarRate = (props) => {
 
 
     useEffect(()=>{
-        if (props.dollar.Cur_OfficialRate === '') 
+        if (props.dollar.Date === '') 
     {props.getDollarUpdate()}
     else return null})
 
