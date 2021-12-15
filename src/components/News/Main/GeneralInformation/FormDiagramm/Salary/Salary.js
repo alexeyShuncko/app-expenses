@@ -12,6 +12,7 @@ import { HocValuta } from '../../../../HOC/HocValuta';
 const Salary = (props) => {
 
     let [editMode, setEditMode] = useState(false)
+    let [valuta, setValuta] = useState(false)
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -64,12 +65,17 @@ const Salary = (props) => {
 
     const onSubmit = (values) => {
 
-        if (values.valuta === 'BYN')
+        if (values.valuta === 'BYN') {
             props.addSalary(Number(values.salary).toFixed(2), months)
+            deActivateEditMode()
+            setValuta(false)
+        }
         else if (values.valuta === 'USD') {
             props.addSalary((Number(values.salary) * Number(props.diagramm.dollar.Cur_OfficialRate)).toFixed(2), months)
+            deActivateEditMode()
+            setValuta(false)
         }
-        deActivateEditMode()
+        else if (!values.valuta) {setValuta(true)} 
     }
 
     return (
@@ -77,7 +83,7 @@ const Salary = (props) => {
         <div>
 
             {timer >= props.diagramm.salary.salaryDate
-                ? <div className={s.salaryUpdate}>Обнови ЗП</div>
+                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Обнови ЗП</div>
                 : null}
 
             {HocValuta(SalaryValue, props, activateEditMode)}
@@ -88,16 +94,16 @@ const Salary = (props) => {
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit} className={s.form}>
 
-                            <div>
+                            <div className={s.inputSalary}>
                                 <label> </label>
-                                <Field 
+                                <Field
                                     autoFocus={true}
                                     autoComplete="off"
                                     name="salary"
                                     component="input"
                                     type="number"
-                                    step="0.01" 
-                                    required/>
+                                    step="0.01"
+                                    required />
                             </div>
                             <Field className={s.fieldBynUsd}
                                 name="valuta" component="select" required >
@@ -105,8 +111,11 @@ const Salary = (props) => {
                                 <option value="BYN">BYN</option>
                                 <option value="USD">USD</option>
                             </Field>
+                            {valuta
+                                ? <span className={s.valutaValid}> Выбери валюту </span>
+                                : null}
 
-                            <div >
+                            <div className={s.buttonSalary}>
                                 <button type="submit" disabled={submitting || pristine}>
                                     Добавить
                                 </button>

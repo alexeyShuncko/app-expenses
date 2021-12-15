@@ -6,8 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 
 
-const DeleteCategory =(props)=> {
-
+const DeleteCategory = (props) => {
 
     const diagramm = props.diagramm.category
 
@@ -27,20 +26,22 @@ const DeleteCategory =(props)=> {
                     <form onSubmit={handleSubmit} >
                         <div className={s.nameInput}>
                             <label> Название категории: </label>
-                            <Field  name="favorite" 
+                            <Field
+                                name="favorite" style={diagramm.map(a=> a.nameRus).includes(values.favorite)
+                                    ? { backgroundColor: diagramm.filter(a => a.nameRus === values.favorite)[0].color }
+                                    : { backgroundColor: 'ffffff'}}
                                 component="select" className={s.option}
-                                   >
-                                    <option>{props.diagramm.activ} </option>
-                                    {diagramm.map(a=>
-                                    {if (a)  return (
+                            >
+                                <option></option>
+                                {diagramm.map(a => {
+                                    if (a) return (
                                         <option value={a.nameRus} key={a.nameRus}
-                                        style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)
-                                        else return null
-                                    }
-                                        )}
-                                </Field>
+                                            style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)
+                                    else return null
+                                }
+                                )}
+                            </Field>
                         </div>
-                       
                         <div className={s.buttonItem}>
                             <button type="submit"
                                 disabled={submitting || pristine} //сделать видимой невидимой

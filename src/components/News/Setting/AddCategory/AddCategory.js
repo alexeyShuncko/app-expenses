@@ -21,6 +21,7 @@ const AddCategory = (props) => {
     }
 
     const onSubmit = (values, form) => {
+       console.log(values)
         if (values.color !== '#ffffff' &&  
         !props.diagramm.category.map(a=> a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             deactiveVal()
@@ -47,7 +48,7 @@ const AddCategory = (props) => {
                                 type="text"
                                 required
                             />
-                            {/* <span>(Название не должно состоять только из цифр)</span> */}
+                           {typeof(values.name) === Number ? <span>(Название не должно состоять только из цифр)</span> : null}
                             {valCategory && <span className={s.validColor}>Такая категория уже есть</span>}
                         </div>
                         <div className={s.colorInput}>

@@ -54,12 +54,6 @@ const Statistic = (props) => {
         }
     }
 
-    const styles = {
-        backgroundColor: diagramm.filter(a => props.diagramm.activ
-            ? a.nameRus === props.diagramm.activ
-            : a)[0].color
-    }
-
     const onSubmit = (values) => { }
 
     return (
@@ -79,7 +73,9 @@ const Statistic = (props) => {
 
                                 <Field onClick={colorActiv} name="favorite"
                                     component="select" className={s.option}
-                                    style={styles}>
+                                    style={diagramm.map(a=> a.nameRus).includes(props.diagramm.activ)
+                                    ? { backgroundColor: diagramm.filter(a => a.nameRus === props.diagramm.activ)[0].color }
+                                    : { backgroundColor: 'ffffff'}}>
                                     <option>{props.diagramm.activ} </option>
                                     {diagramm.map(a => <option value={a.nameRus} key={a.nameRus}
                                         style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)}

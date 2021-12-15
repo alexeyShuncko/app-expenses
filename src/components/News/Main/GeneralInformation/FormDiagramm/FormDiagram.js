@@ -11,67 +11,44 @@ const FormDiagram = (props) => {
 
     const onSubmit = (values, form) => {
 
-         const time = new Date()
-         function formatDate(date) {
+        const time = new Date()
+        function formatDate(date) {
 
-             let dd = date.getDate();
-             if (dd < 10) dd = '0' + dd;
+            let dd = date.getDate();
+            if (dd < 10) dd = '0' + dd;
 
-             let mm = date.getMonth() + 1;
-             if (mm < 10) mm = '0' + mm;
+            let mm = date.getMonth() + 1;
+            if (mm < 10) mm = '0' + mm;
 
-             let yy = date.getFullYear() % 100;
-             if (yy < 10) yy = '0' + yy;
+            let yy = date.getFullYear() % 100;
+            if (yy < 10) yy = '0' + yy;
 
-             let HH = date.getHours();
-             if (HH < 10) HH = '0' + HH;
+            let HH = date.getHours();
+            if (HH < 10) HH = '0' + HH;
 
-             let MM = date.getMinutes();
-             if (MM < 10) MM = '0' + MM;
+            let MM = date.getMinutes();
+            if (MM < 10) MM = '0' + MM;
 
-             return '20' + yy + '-' + mm + '-' + dd + ' ' + HH + ':' + MM;
-         }
-         const timer = formatDate(time)
-        
+            return '20' + yy + '-' + mm + '-' + dd + ' ' + HH + ':' + MM;
+        }
+        const timer = formatDate(time)
 
-         const value =()=> {
+
+        const value = () => {
             let valueArr = []
             for (let x in values) {
-                valueArr.push(values[x]) 
+                valueArr.push(values[x])
             }
             return valueArr
-         }
-      
-         props.addDiagramm(Object.keys(values),value(values), timer)
+        }
+
+        props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()
 
     }
 
     const diagramm = props.diagramm.category
 
-    function fieldInput(array) {
-        let field = []
-        for (let item of Object.values(array)) {
-            if (item.nameRus)
-                field.push(<div key={field.length + 1} className={s.formItems}>
-                    <label className={s.formItemsLabel}>
-                        {item.nameRus.slice(-1) === 'а'
-                            ? item.nameRus.slice(0, -1) + 'у'
-                            : item.nameRus}: </label>
-                    <Field 
-                        className={s.formItemsField}
-                        max="1000"
-                        autoComplete="off"
-                        name={item.nameRus}
-                        placeholder="... рублей"
-                        component="input"
-                        type="number"
-                        step={0.01}
-                    />
-                </div>)
-        }
-        return field
-    }
 
     return (
         <div className={s.formExpenses}>
@@ -86,7 +63,22 @@ const FormDiagram = (props) => {
                     onSubmit={onSubmit}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit} >
-                            {fieldInput(diagramm)}
+                            {diagramm.map(a => <div key={a.nameRus} className={s.formItems}>
+                                <label className={s.formItemsLabel}>
+                                    {a.nameRus.slice(-1) === 'а'
+                                        ? a.nameRus.slice(0, -1) + 'у'
+                                        : a.nameRus}: </label>
+                                <Field
+                                    className={s.formItemsField}
+                                    max="1000"
+                                    autoComplete="off"
+                                    name={a.nameRus}
+                                    placeholder="... рублей"
+                                    component="input"
+                                    type="number"
+                                    step={0.01}
+                                />
+                            </div>)}
 
                             <div className={s.formItemsButton}>
                                 <button type="submit"

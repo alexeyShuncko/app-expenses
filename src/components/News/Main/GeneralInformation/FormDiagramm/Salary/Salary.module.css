@@ -1,4 +1,3 @@
-
 .salaryUpdate {
     font-weight: bold;
     font-size: 20px;
@@ -7,17 +6,34 @@
     text-align: center;
     margin-bottom: 10px;
 }
+
 .fieldBynUsd {
     background-color: rgb(204, 163, 204);
     border-color: rgb(204, 163, 204);
     border-radius: 10px;
     text-align: center;
-    }
+}
 
-    .fieldBynUsd:hover {
-        border-color:green;
-    }
-    .fieldBynUsd:focus {
-        outline: none;
-    }
-    
+.fieldBynUsd:hover {
+    border-color: green;
+}
+
+.fieldBynUsd:focus {
+    outline: none;
+}
+
+.valutaValid {
+    margin-left: 10px;
+padding-left: 5px;
+padding-right: 5px;
+border: solid red 1px;
+border-radius: 10px;
+}
+
+.inputSalary {
+margin-bottom: 5px;
+}
+
+.buttonSalary button{
+ margin-right: 5px;
+}
