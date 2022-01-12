@@ -21,6 +21,11 @@ const SettingNav = (props) => {
                     <button className={s.settingButton}>Переименовать категорию</button>
                 </NavLink>
             </div>
+            <div className={s.navNewsitem}>
+                <NavLink to="/setting/ChangeColor" activeClassName={s.activeLink}>
+                    <button className={s.settingButton}>Изменить цвет категории</button>
+                </NavLink>
+            </div>
 
         </div>
     )

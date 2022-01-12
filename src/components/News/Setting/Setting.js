@@ -7,6 +7,7 @@ import DeleteCategory from './DeleteCategory/DeleteCategory';
 import RenameCategory from './RenameCategory/RenameCategory';
 import { connect } from 'react-redux';
 import { addCategory,deleteCategory,renameCategory } from './../../../Redux/diagrammReducer';
+import ChangeColor from './ChangeColor/ChangeColor';
 
 const Setting =(props)=> {
     return (
@@ -15,6 +16,7 @@ const Setting =(props)=> {
 <Route path='/setting/AddCategory' render={() => <AddCategory diagramm={props.diagramm} addCategory={props.addCategory} />} />
 <Route path='/setting/DeleteCategory' render={() => <DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory}/>} />
 <Route path='/setting/RenameCategory' render={() => <RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory}/>} />
+<Route path='/setting/СhangeСolor' render={() => <ChangeColor diagramm={props.diagramm}/>} />
        </Switch>
     )
 
