@@ -7,25 +7,26 @@ const SettingNav = (props) => {
         <div className={s.buttons}>
 
             <div className={s.navNewsitem}>
-                <Link to="/setting/AddCategory" activeClassName={s.activeLink}>
+                <Link to="/setting/AddCategory" >
                     <button className={s.settingButton}>Добавить категорию</button>
                 </Link>
             </div>
             <div className={s.navNewsitem}>
-                <Link to="/setting/DeleteCategory" activeClassName={s.activeLink}>
+                <Link to="/setting/DeleteCategory" >
                     <button className={s.settingButton}>Удалить категорию</button>
                 </Link>
             </div>
             <div className={s.navNewsitem}>
-                <Link to="/setting/RenameCategory" activeClassName={s.activeLink}>
+                <Link to="/setting/RenameCategory" >
                     <button className={s.settingButton}>Переименовать категорию</button>
                 </Link>
             </div>
             <div className={s.navNewsitem}>
-                <Link to="/setting/Сolor" activeClassName={s.activeLink}>
+                <Link to="/setting/Color" >
                     <button className={s.settingButton}>Изменить цвет категории</button>
                 </Link>
             </div>
+            
 
         </div>
     )

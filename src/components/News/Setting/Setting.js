@@ -8,7 +8,8 @@ import RenameCategory from './RenameCategory/RenameCategory';
 
 import { connect } from 'react-redux';
 import { addCategory,deleteCategory,renameCategory } from './../../../Redux/diagrammReducer';
-import Color from './ChangeColor/ChangeColor';
+import Color from './Color/Color';
+
 
 
 
@@ -17,10 +18,16 @@ const Setting =(props)=> {
     return (
 <Routes>
 <Route exact path='/' element={<SettingNav />} />
-<Route path='/AddCategory' element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory} />} />
-<Route path='/DeleteCategory' element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory}/>} />
-<Route path='/RenameCategory' element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory}/>} />
-<Route path='/Сolor' element={<Color />} />
+
+<Route path='/AddCategory' 
+element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory} />} />
+<Route path='/DeleteCategory' 
+element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory}/>} />
+<Route path='/RenameCategory' 
+element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory}/>} />
+<Route path='/Color' 
+element={<Color diagramm={props.diagramm} addCategory={props.addCategory} />} />
+
        </Routes>
     )
 

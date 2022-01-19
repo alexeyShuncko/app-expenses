@@ -9,13 +9,13 @@ const NavNews = (props) => {
   return (
     <nav className={s.navNews}>
       <div className={s.navNewsitem}>
-        <Link to="/main" activeClassName={s.activeLink}>Главная</Link>
+        <Link to="/main" activeclassname={s.activeLink}>Главная</Link>
       </div>
       <div className={s.navNewsitem}>
-        <Link to="/statistic" activeClassName={s.activeLink}>Статистика</Link>
+        <Link to="/statistic" activeclassname={s.activeLink}>Статистика</Link>
       </div>
       <div className={s.navNewsitem}>
-        <Link to="/setting" activeClassName={s.activeLink}>Настройка</Link>
+        <Link to="/setting" activeclassname={s.activeLink}>Настройка</Link>
       </div>
 
     </nav>
