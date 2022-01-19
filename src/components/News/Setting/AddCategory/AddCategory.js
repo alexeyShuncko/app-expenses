@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import { withRouter } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom';
 import s from './AddCategory.module.css';
 
 
@@ -81,4 +81,4 @@ const AddCategory = (props) => {
 
 }
 
-export default withRouter(AddCategory)
+export default AddCategory

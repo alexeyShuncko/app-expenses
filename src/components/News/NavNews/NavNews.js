@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import s from './NavNews.module.css';
 
@@ -9,13 +9,13 @@ const NavNews = (props) => {
   return (
     <nav className={s.navNews}>
       <div className={s.navNewsitem}>
-        <NavLink to="/main" activeClassName={s.activeLink}>Главная</NavLink>
+        <Link to="/main" activeClassName={s.activeLink}>Главная</Link>
       </div>
       <div className={s.navNewsitem}>
-        <NavLink to="/statistic" activeClassName={s.activeLink}>Статистика</NavLink>
+        <Link to="/statistic" activeClassName={s.activeLink}>Статистика</Link>
       </div>
       <div className={s.navNewsitem}>
-        <NavLink to="/setting" activeClassName={s.activeLink}>Настройка</NavLink>
+        <Link to="/setting" activeClassName={s.activeLink}>Настройка</Link>
       </div>
 
     </nav>

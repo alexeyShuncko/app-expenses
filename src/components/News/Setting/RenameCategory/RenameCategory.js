@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './RenameCategory.module.css';
 import { Field, Form } from 'react-final-form';
-import { withRouter } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom';
 import { useState } from 'react';
 
 
@@ -84,4 +84,4 @@ const RenameCategory = (props) => {
 
 }
 
-export default withRouter(RenameCategory)
+export default RenameCategory

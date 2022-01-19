@@ -1,14 +1,8 @@
-import React from 'react';
-//import s from './ChangeColor.module.css';
-//import { Field, Form } from 'react-final-form';
-import { withRouter } from 'react-router-dom';
-//import { useState } from 'react';
+import React from "react";
+import s from './ChangeColor.module.css';
 
 
+const Color =()=> {
+  return <div className={s.color}></div>}
 
-const ChangeColor = (props) => {
-    console.log('ghbdt')
-    
-}
-
-export default withRouter(ChangeColor)
+export default Color
