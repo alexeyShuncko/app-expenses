@@ -19,3 +19,8 @@
     text-align: left;
     margin-left: 3px;
 }
+
+.diagramm {
+display: flex;
+text-align: left;
+}

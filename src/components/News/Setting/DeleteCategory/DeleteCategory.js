@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import s from './DeleteCategory.module.css';
 import { Field } from 'react-final-form';
-//import { withRouter } from 'react-router-dom';
+
 
 
 
@@ -11,14 +11,17 @@ const DeleteCategory = (props) => {
     const diagramm = props.diagramm.category
 
     const returnSetting = () => {
-        props.history.push('/setting')
-    }
+        window.history.back()
+     }
 
     const onSubmit = (values, form) => {
         props.deleteCategory(values.favorite)
         form.reset()
     }
     return (
+
+        <div>
+        <div className={s.title}>Удаление категории</div>
         <div className={s.item}>
             <Form
                 onSubmit={onSubmit}
@@ -56,6 +59,7 @@ const DeleteCategory = (props) => {
                 )}
             />
 
+        </div>
         </div>
     )
 

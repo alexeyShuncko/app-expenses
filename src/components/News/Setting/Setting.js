@@ -1,34 +1,34 @@
 import React from 'react';
 //import s from './Setting.module.css';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AddCategory from './AddCategory/AddCategory';
 import SettingNav from './SettingNav/SettingNav';
 import DeleteCategory from './DeleteCategory/DeleteCategory';
 import RenameCategory from './RenameCategory/RenameCategory';
 
 import { connect } from 'react-redux';
-import { addCategory,deleteCategory,renameCategory } from './../../../Redux/diagrammReducer';
+import { addCategory, deleteCategory, renameCategory, addEditColor } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
 
 
 
 
 
-const Setting =(props)=> {
+const Setting = (props) => {
     return (
-<Routes>
-<Route exact path='/' element={<SettingNav />} />
+        <Routes>
+            <Route path='/' element={<SettingNav />} />
 
-<Route path='/AddCategory' 
-element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory} />} />
-<Route path='/DeleteCategory' 
-element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory}/>} />
-<Route path='/RenameCategory' 
-element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory}/>} />
-<Route path='/Color' 
-element={<Color diagramm={props.diagramm} addCategory={props.addCategory} />} />
+            <Route path='/AddCategory'
+                element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory} />} />
+            <Route path='/DeleteCategory'
+                element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory} />} />
+            <Route path='/RenameCategory'
+                element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory} />} />
+            <Route path='/Color'
+                element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor} />} />
 
-       </Routes>
+        </Routes>
     )
 
 }
@@ -38,4 +38,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect (mapStateToProps, {addCategory, deleteCategory, renameCategory}) (Setting)
+export default connect(mapStateToProps, 
+    { addCategory, deleteCategory, renameCategory, addEditColor })(Setting)

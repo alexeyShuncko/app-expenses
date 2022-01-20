@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './RenameCategory.module.css';
 import { Field, Form } from 'react-final-form';
-//import { withRouter } from 'react-router-dom';
 import { useState } from 'react';
 
 
@@ -13,8 +12,8 @@ const RenameCategory = (props) => {
     const diagramm = props.diagramm.category
 
     const returnSetting = () => {
-        props.history.push('/setting')
-    }
+        window.history.back()
+     }
 
     const onSubmit = (values, form) => {
         if (values.name &&
@@ -29,6 +28,8 @@ const RenameCategory = (props) => {
 
     }
     return (
+        <div>
+        <div className={s.title}>Переименование категории</div>
         <div className={s.item}>
             <Form
                 onSubmit={onSubmit}
@@ -79,6 +80,7 @@ const RenameCategory = (props) => {
                 )}
             />
 
+        </div>
         </div>
     )
 

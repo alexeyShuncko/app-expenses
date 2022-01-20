@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Form, Field } from 'react-final-form';
-//import { withRouter } from 'react-router-dom';
 import s from './AddCategory.module.css';
 
 
@@ -16,8 +15,9 @@ const AddCategory = (props) => {
     const deactiveVal = () => {
         setValColor(false)
     }
+    
     const returnSetting = () => {
-        props.history.push('/setting')
+       window.history.back()
     }
 
     const onSubmit = (values, form) => {
@@ -33,6 +33,8 @@ const AddCategory = (props) => {
         else if (props.diagramm.category.map(a=> a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {setValCategory(true)}
     }
     return (
+<div>
+        <div className={s.title}>Добавление категории</div>
         <div className={s.item}>
             <Form
                 onSubmit={onSubmit}
@@ -51,6 +53,11 @@ const AddCategory = (props) => {
                            {typeof(values.name) === Number ? <span>(Название не должно состоять только из цифр)</span> : null}
                             {valCategory && <span className={s.validColor}>Такая категория уже есть</span>}
                         </div>
+                        <div>
+                            <span>Уже используемые цвета: </span>
+                            <span>{props.diagramm.category.map(a=> 
+                            <span key={a.nameRus} className={s.legend} style={{ backgroundColor: ` ${a.color}` }}>&nbsp;</span>)}</span>
+                            </div>
                         <div className={s.colorInput}>
                             <label> Цвет: </label>
                             <Field onClick={deactiveVal}
@@ -62,6 +69,7 @@ const AddCategory = (props) => {
                             />
                             {valColor && <span className={s.validColor}>Выбери цвет</span>}
                         </div>
+                        
                         <div className={s.buttonItem}>
                             <button type="submit"
                                 disabled={submitting || pristine} //сделать видимой невидимой
@@ -76,6 +84,7 @@ const AddCategory = (props) => {
                 )}
             />
 
+        </div>
         </div>
     )
 

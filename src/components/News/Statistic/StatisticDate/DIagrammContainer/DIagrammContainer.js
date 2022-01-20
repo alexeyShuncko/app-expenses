@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FormSelectDiagramm from "../../../helpers/FormSelectDiagramm/FormSelectDiagramm";
+import Legend from "../../../Main/DiagrammMain/Legend";
 import s from './DiagrammContainer.module.css';
 import StatisticDateDiagram from './StatisticDateDiagram';
 
@@ -67,7 +68,9 @@ const DiagrammContainer = (props) => {
                     {total === 0
                         ? <div className={s.categoryVal}>Нет расходов за выбранный период</div>
                         : <div>
-                        <div><canvas id="period" width='250px' height='300px'></canvas></div>
+                        <div className={s.diagramm}><canvas id="period" width='250px' height='300px'></canvas>
+                        <Legend {...props}/>
+                        </div>
                        </div>
                     }
                 </div>

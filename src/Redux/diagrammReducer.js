@@ -25,16 +25,16 @@ let initialState = {
     [{
          nameRus: 'Еда', color: '#fde23e',
         data: [
-            { id: 'Еда1', time: '2021-11-28 19:05', num: 10 },
-            { id: 'Еда2', time: '2021-12-01 14:59', num: 20 },
-            { id: 'Еда3', time: '2021-12-01 15:01', num: 20 },
-            { id: 'Еда4', time: '2021-12-01 15:02', num: 25 },
-            { id: 'Еда5', time: '2021-12-01 15:06', num: 52 }
+            { id: 'Еда1', time: '2022-01-08 19:05', num: 10 },
+            { id: 'Еда2', time: '2022-01-11 14:59', num: 20 },
+            { id: 'Еда3', time: '2022-12-11 15:01', num: 20 },
+            { id: 'Еда4', time: '2022-12-11 15:02', num: 25 },
+            { id: 'Еда5', time: '2022-12-11 15:06', num: 52 }
         ], summ: 127
     },
-     {  nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2021-11-28 19:04', num: 40 }], summ: 40 },
-     {  nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2021-11-28 19:03', num: 25 }], summ: 25 },
-     {  nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2021-11-28 19:02', num: 25 }], summ: 25 }],
+     {  nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
+     {  nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
+     {  nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }],
     activ: '',
     salary: { salaryNum: 700.01, salaryDate: '2021-11-09', salaryValueTrue: false },
     periodPo: '',
