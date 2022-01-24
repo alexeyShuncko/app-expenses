@@ -17,3 +17,22 @@ margin-right: 10px;
     font-size: 22px;
     text-align: center;
 }
+
+.deleteCategoryBloc {
+display: flex;
+flex-direction: row;
+}
+.nameInput {
+    flex: 1;
+}
+.instruction {
+    flex: 2;
+    margin-top: 10px;
+}
+
+.instructionTitle {
+    font-size: 17px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}

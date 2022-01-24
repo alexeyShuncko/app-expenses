@@ -5,7 +5,7 @@
     margin: 0px;
     width: 25px;
     height: 30px;
-    
+
 }
 
 .title {
@@ -14,20 +14,38 @@
 }
 
 .changeСolor {
- margin: 20px;
+    margin: 20px;
 
 }
 
 .item {
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
 }
 
-.itemName {
-}
+.itemName {}
 
 .button {
-margin-top: 20px;
+    margin-top: 20px;
 }
 
+.changeСolorBloc {
+    display: flex;
+    flex-direction: row;
+}
 
+.changeСolor {
+    flex: 1;
+}
+
+.instruction {
+    flex: 4;
+    margin-top: 10px;
+}
+
+.instructionTitle {
+    font-size: 17px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}

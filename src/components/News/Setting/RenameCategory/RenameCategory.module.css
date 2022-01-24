@@ -26,3 +26,29 @@
     font-size: 22px;
     text-align: center;
 }
+.nameInput label {
+    font-weight: bold;
+}
+
+.renameCategoryBloc {
+display: flex;
+flex-direction: row;
+}
+.renameCategory{
+flex: 1;
+}
+.instruction {
+    flex: 2;
+    margin-top: 10px;
+}
+
+.instructionTitle {
+    font-size: 17px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.listCategory {
+    margin-top: 0;
+    }

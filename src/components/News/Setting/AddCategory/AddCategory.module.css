@@ -25,11 +25,18 @@ margin-right: 10px;
 .color:hover{
     border: solid green 1px;
 }
-.colorInput {
 
+.colorInput {
+display: flex;
+flex-direction: row;
+align-items: center;
 }
-.nameInput {
-  
+.colorInput label {
+font-weight: bold;
+margin-right: 5px;
+}
+.nameInput label{
+  font-weight: bold;
 }
 
 .validColor {
@@ -48,4 +55,28 @@ border-radius: 10px;
 .legend {
     width: 20px;
     display: inline-block;
+}
+
+.addCategoryBloc {
+display: flex;
+flex-direction: row;
+}
+.addCategory {
+flex: 1;
+}
+
+.instruction {
+    flex: 2;
+    margin-top: 10px;
+}
+
+.instructionTitle {
+    font-size: 17px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.listCategory {
+margin-top: 0;
 }
