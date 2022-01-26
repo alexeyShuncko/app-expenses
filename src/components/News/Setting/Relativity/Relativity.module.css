@@ -1,0 +1,36 @@
+
+.title {
+    font-size: 22px;
+    text-align: center;
+}
+
+.mainRelativity {
+    margin: 10px;
+}
+
+.button button{
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.RelativityBloc {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.Relativity {
+    flex: 1;
+}
+
+.instruction {
+    flex: 2;
+    margin-top: 10px;
+}
+
+.instructionTitle {
+    font-size: 17px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}

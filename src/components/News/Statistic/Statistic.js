@@ -45,10 +45,10 @@ const Statistic = (props) => {
             if (item.nameRus === props.diagramm.activ) {
                 return <div>
                     <span >
-                        Потрачено : <b>{item.summ.toFixed(2)} рублей.</b></span>
+                        Потрачено за всё время: <b>{item.summ.toFixed(2)} рублей.</b></span>
                     <div>Или : <b>{(item.summ / props.diagramm.dollar.Cur_OfficialRate).toFixed(2)} $</b></div>
                     <div style={{ borderBottom: `solid ${item.color}` }}>
-                        Или : <b>{(item.summ / 4.29).toFixed(0)} бут. по 1,5л аксамитного</b></div>
+                        Или : <b>{(item.summ / props.diagramm.relativity[2].value).toFixed(0)} {props.diagramm.relativity[1].value} {props.diagramm.relativity[0].value}</b></div>
                 </div>
             }
         }

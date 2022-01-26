@@ -9,6 +9,7 @@ import RenameCategory from './RenameCategory/RenameCategory';
 import { connect } from 'react-redux';
 import { addCategory, deleteCategory, renameCategory, addEditColor } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
+import Relativity from './Relativity/Relativity';
 
 
 
@@ -27,6 +28,8 @@ const Setting = (props) => {
                 element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory} />} />
             <Route path='/Color'
                 element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor} />} />
+            <Route path='/Relativity'
+                element={<Relativity diagramm={props.diagramm} />} />
 
         </Routes>
     )

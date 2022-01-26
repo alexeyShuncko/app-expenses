@@ -1,30 +1,35 @@
 import React from 'react';
 import s from './SettingNav.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SettingNav = (props) => {
     return (
         <div className={s.buttons}>
 
             <div className={s.navNewsitem}>
-                <Link to="/setting/AddCategory" >
+                <NavLink to="/setting/AddCategory" >
                     <button className={s.settingButton}>Добавить категорию</button>
-                </Link>
+                </NavLink>
             </div>
             <div className={s.navNewsitem}>
-                <Link to="/setting/DeleteCategory" >
+                <NavLink to="/setting/DeleteCategory" >
                     <button className={s.settingButton}>Удалить категорию</button>
-                </Link>
+                </NavLink>
             </div>
             <div className={s.navNewsitem}>
-                <Link to="/setting/RenameCategory" >
+                <NavLink to="/setting/RenameCategory" >
                     <button className={s.settingButton}>Переименовать категорию</button>
-                </Link>
+                </NavLink>
             </div>
             <div className={s.navNewsitem}>
-                <Link to="/setting/Color" >
+                <NavLink to="/setting/Color" >
                     <button className={s.settingButton}>Изменить цвет категории</button>
-                </Link>
+                </NavLink>
+            </div>
+            <div className={s.navNewsitem}>
+                <NavLink to="/setting/Relativity" >
+                    <button className={s.settingButton}>Относительная величина</button>
+                </NavLink>
             </div>
             
 

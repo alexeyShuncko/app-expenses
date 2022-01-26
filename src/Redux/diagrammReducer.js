@@ -36,7 +36,7 @@ let initialState = {
      {  nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
      {  nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }],
     activ: '',
-    salary: { salaryNum: 700.01, salaryDate: '2021-11-09', salaryValueTrue: false },
+    salary: { salaryNum: 700.01, salaryDate: '2022-01-11', salaryValueTrue: false },
     periodPo: '',
     periodS: '',
     periodPoTime: '23:59',
@@ -46,7 +46,12 @@ let initialState = {
     dollar: {
         Cur_OfficialRate: '2.5',
         Date: ''
-    }
+    },
+relativity: [
+    {nameRus: 'Название величины', value: 'Аксамитного пива по 1,5 л'},
+    {nameRus: 'Единица измерения', value: 'бутылок'},
+    {nameRus: 'Стоимость', value: 4.59 }
+]
 }
 
 const diagrammReduser = (state = initialState, action) => {
