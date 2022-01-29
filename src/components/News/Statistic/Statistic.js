@@ -9,6 +9,7 @@ import {
 } from '../../../Redux/diagrammReducer';
 import { connect } from 'react-redux';
 import StatisticTable from "./StatisticDate/StatisticTable/StatisticTable";
+import RelativityStatistic from './RelativityStatistic/RelativityStatistic';
 
 const Statistic = (props) => {
 
@@ -40,20 +41,6 @@ const Statistic = (props) => {
 
     const diagramm = props.diagramm.category
 
-    function itemSelect(array) {
-        for (let item of Object.values(array)) {
-            if (item.nameRus === props.diagramm.activ) {
-                return <div>
-                    <span >
-                        Потрачено за всё время: <b>{item.summ.toFixed(2)} рублей.</b></span>
-                    <div>Или : <b>{(item.summ / props.diagramm.dollar.Cur_OfficialRate).toFixed(2)} $</b></div>
-                    <div style={{ borderBottom: `solid ${item.color}` }}>
-                        Или : <b>{(item.summ / props.diagramm.relativity[2].value).toFixed(0)} {props.diagramm.relativity[1].value} {props.diagramm.relativity[0].value}</b></div>
-                </div>
-            }
-        }
-    }
-
     const onSubmit = (values) => { }
 
     return (
@@ -69,22 +56,26 @@ const Statistic = (props) => {
                         <form onSubmit={handleSubmit} >
 
                             <div className={s.categoryStatistic}>
-                                <label className={s.categoryStatisticName} >Выбери категорию : </label>
+                                <label className={s.categoryStatisticName} >Выберите категорию : </label>
 
                                 <Field onClick={colorActiv} name="favorite"
                                     component="select" className={s.option}
-                                    style={diagramm.map(a=> a.nameRus).includes(props.diagramm.activ)
-                                    ? { backgroundColor: diagramm.filter(a => a.nameRus === props.diagramm.activ)[0].color }
-                                    : { backgroundColor: 'ffffff'}}>
+                                    style={diagramm.map(a => a.nameRus).includes(props.diagramm.activ)
+                                        ? { backgroundColor: diagramm.filter(a => a.nameRus === props.diagramm.activ)[0].color }
+                                        : { backgroundColor: 'ffffff' }}>
                                     <option>{props.diagramm.activ} </option>
                                     {diagramm.map(a => <option value={a.nameRus} key={a.nameRus}
                                         style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)}
                                 </Field>
 
-                                <div> {props.diagramm.activ ? itemSelect(diagramm) : null} </div>
+                                <div> {props.diagramm.activ 
+                                ? <RelativityStatistic diagramm={props.diagramm}/>
+                                : null} 
+                                </div>
+
                             </div>
                             <div className={s.period}>
-                                <label className={s.categoryStatisticName}>Выбери период : </label>
+                                <label className={s.categoryStatisticName}>Выберите период : </label>
                                 <div className={s.periodStatistic}>
                                     <label>C: </label>
                                     <Field onChange={periodS} name="periodS" component="input" type="date"></Field>
@@ -101,7 +92,7 @@ const Statistic = (props) => {
                     )}
                 />
 
-                <div><StatisticTable diagramm={props.diagramm}/></div>
+                <div><StatisticTable diagramm={props.diagramm} /></div>
 
             </div>
             <div className={s.statisticItem2}>

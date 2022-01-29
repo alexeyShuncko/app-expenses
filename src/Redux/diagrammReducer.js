@@ -13,28 +13,28 @@ const ADD_SALARY_VALUE_TRUE = 'ADD_SALARY_VALUE_TRUE'
 const ADD_EDIT_COLOR = 'ADD_EDIT_COLOR'
 const ADD_DOLLAR = 'ADD_DOLLAR'
 const ADD_SELECT_DIAGRAMM_STAT = 'ADD_SELECT_DIAGRAMM_STAT'
-const ADD_CATEGORY ='ADD_CATEGORY'
-const DELETE_CATEGORY ='DELETE_CATEGORY'
-const RENAME_CATEGORY ='RENAME_CATEGORY'
-
+const ADD_CATEGORY = 'ADD_CATEGORY'
+const DELETE_CATEGORY = 'DELETE_CATEGORY'
+const RENAME_CATEGORY = 'RENAME_CATEGORY'
+const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
 
 
 
 let initialState = {
-    category: 
-    [{
-         nameRus: 'Еда', color: '#fde23e',
-        data: [
-            { id: 'Еда1', time: '2022-01-08 19:05', num: 10 },
-            { id: 'Еда2', time: '2022-01-11 14:59', num: 20 },
-            { id: 'Еда3', time: '2022-12-11 15:01', num: 20 },
-            { id: 'Еда4', time: '2022-12-11 15:02', num: 25 },
-            { id: 'Еда5', time: '2022-12-11 15:06', num: 52 }
-        ], summ: 127
-    },
-     {  nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
-     {  nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
-     {  nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }],
+    category:
+        [{
+            nameRus: 'Еда', color: '#fde23e',
+            data: [
+                { id: 'Еда1', time: '2022-01-08 19:05', num: 10 },
+                { id: 'Еда2', time: '2022-01-11 14:59', num: 20 },
+                { id: 'Еда3', time: '2022-12-11 15:01', num: 20 },
+                { id: 'Еда4', time: '2022-12-11 15:02', num: 25 },
+                { id: 'Еда5', time: '2022-12-11 15:06', num: 52 }
+            ], summ: 127
+        },
+        { nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
+        { nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
+        { nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }],
     activ: '',
     salary: { salaryNum: 700.01, salaryDate: '2022-01-11', salaryValueTrue: false },
     periodPo: '',
@@ -47,11 +47,13 @@ let initialState = {
         Cur_OfficialRate: '2.5',
         Date: ''
     },
-relativity: [
-    {nameRus: 'Название величины', value: 'Аксамитного пива по 1,5 л'},
-    {nameRus: 'Единица измерения', value: 'бутылок'},
-    {nameRus: 'Стоимость', value: 4.59 }
-]
+    relativity: 
+        { 
+        name: 'пива "Аксамитное"', 
+        unit: 'бутылка',
+        price: 4.59 
+    }
+    
 }
 
 const diagrammReduser = (state = initialState, action) => {
@@ -65,14 +67,17 @@ const diagrammReduser = (state = initialState, action) => {
                 category: [
                     ...state.category.map(a => {
                         if (action.name.includes(a.nameRus)) {
-                            return ({...a,
-                                    data: [...a.data, {
-                                        id: a.nameRus + String(a.data.length+1), time: action.time,
-                                        num: Number(action.value[action.name.indexOf(a.nameRus)])
-                                    }],
-                                    summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])})
+                            return ({
+                                ...a,
+                                data: [...a.data, {
+                                    id: a.nameRus + String(a.data.length + 1), time: action.time,
+                                    num: Number(action.value[action.name.indexOf(a.nameRus)])
+                                }],
+                                summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])
+                            })
                         }
-                        else return a})]
+                        else return a
+                    })]
             }
         case ADD_ACTIV:
             return {
@@ -108,10 +113,10 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state, selectDiagramm: action.selectDiagramm
             }
-            case ADD_SELECT_DIAGRAMM_STAT:
-                return {
-                    ...state, selectDiagrammStat: action.selectDiagrammStat
-                }
+        case ADD_SELECT_DIAGRAMM_STAT:
+            return {
+                ...state, selectDiagrammStat: action.selectDiagrammStat
+            }
         case ADD_SALARY_VALUE_TRUE:
             return {
                 ...state, salary: { ...state.salary, salaryValueTrue: action.value }
@@ -122,57 +127,78 @@ const diagrammReduser = (state = initialState, action) => {
                 category: [
                     ...state.category.map(a => {
                         if (a.nameRus === action.qqq) {
-                            return ({...a, color: action.editColor})
+                            return ({ ...a, color: action.editColor })
                         }
-                        else return a })]
+                        else return a
+                    })]
             }
         case ADD_DOLLAR:
             return {
                 ...state,
-                dollar: {...state.dollar,
+                dollar: {
+                    ...state.dollar,
                     Cur_OfficialRate: action.dollar,
                     Date: action.data.slice(0, -9)
                 }
             }
-            case ADD_CATEGORY:
+        case ADD_CATEGORY:
+            return {
+                ...state,
+                category: [...state.category, {
+                    nameRus: action.name, color: action.color,
+                    data: [], summ: 0
+                }]
+            }
+
+        case DELETE_CATEGORY:
+            return {
+                ...state,
+                category: [...state.category.filter(a => a.nameRus !== action.name)]
+            }
+        case RENAME_CATEGORY:
+            return {
+                ...state,
+                category: [...state.category.map(a => {
+                    if (a.nameRus === action.name) {
+                        return ({
+                            ...a,
+                            nameRus: action.rename
+                        })
+                    }
+                    else return a
+                })]
+            }
+            case CHANGE_RELATIVITY:
                 return {
                     ...state,
-                  category:  [...state.category, { nameRus: action.name, color: action.color,
-                      data: [ ], summ: 0 }]
-                }
-
-                case DELETE_CATEGORY:
-                    return {
-                        ...state,
-                      category:  [ ...state.category.filter(a => a.nameRus !== action.name)]
+                    relativity : {
+                        name: action.data.name, 
+                        unit: action.data.unit,
+                        price: Number(action.data.price) 
                     }
-                    case RENAME_CATEGORY:
-                        return {
-                            ...state,
-                          category:  [ ...state.category.map(a =>  {
-                              if (a.nameRus === action.name) {
-                            return ({...a,
-                                nameRus: action.rename})}
-                        else return a})]
-                        }
+                }
 
         default:
             return state
     }
 }
 
-export const addCategory = (name,color) => {
-    return { type: ADD_CATEGORY, name, color}
-}
-export const deleteCategory = (name) => {
-    return { type: DELETE_CATEGORY, name}
-}
-export const renameCategory = (name, rename) => {
-    return { type: RENAME_CATEGORY, name, rename}
+export const changeRelativity = (data) => {
+    return { type: CHANGE_RELATIVITY, data }
 }
 
-export const addDollar = (dollar,data) => {
-    return { type: ADD_DOLLAR, dollar,data }
+export const addCategory = (name, color) => {
+    return { type: ADD_CATEGORY, name, color }
+}
+export const deleteCategory = (name) => {
+    return { type: DELETE_CATEGORY, name }
+}
+export const renameCategory = (name, rename) => {
+    return { type: RENAME_CATEGORY, name, rename }
+}
+
+export const addDollar = (dollar, data) => {
+    return { type: ADD_DOLLAR, dollar, data }
 }
 export const addDiagramm = (name, value, time) => {
     return { type: ADD_DIAGRAMM, name, value, time }

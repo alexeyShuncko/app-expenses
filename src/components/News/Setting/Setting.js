@@ -7,7 +7,7 @@ import DeleteCategory from './DeleteCategory/DeleteCategory';
 import RenameCategory from './RenameCategory/RenameCategory';
 
 import { connect } from 'react-redux';
-import { addCategory, deleteCategory, renameCategory, addEditColor } from './../../../Redux/diagrammReducer';
+import { addCategory, deleteCategory, renameCategory, addEditColor, changeRelativity } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
 import Relativity from './Relativity/Relativity';
 
@@ -29,7 +29,7 @@ const Setting = (props) => {
             <Route path='/Color'
                 element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor} />} />
             <Route path='/Relativity'
-                element={<Relativity diagramm={props.diagramm} />} />
+                element={<Relativity diagramm={props.diagramm} changeRelativity={props.changeRelativity} />} />
 
         </Routes>
     )
@@ -42,4 +42,4 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, 
-    { addCategory, deleteCategory, renameCategory, addEditColor })(Setting)
+    { addCategory, deleteCategory, renameCategory, addEditColor, changeRelativity })(Setting)

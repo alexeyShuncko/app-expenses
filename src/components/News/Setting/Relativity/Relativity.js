@@ -10,7 +10,9 @@ const Relativity = (props) => {
     }
 
     const onSubmit = (values, form) => {
-        console.log(values)
+       
+     console.log(values)
+        props.changeRelativity(values)
         form.reset()
     }
 
@@ -23,29 +25,59 @@ const Relativity = (props) => {
                         onSubmit={onSubmit}
                         render={({ handleSubmit, form, submitting, pristine, values }) => (
                             <form onSubmit={handleSubmit} >
-                                {props.diagramm.relativity.map(a =>
-                                    <div key={a.nameRus}>
-                                        <label> {a.nameRus} : </label>
-                                        <Field
-                                            autoComplete="off"
-                                            name={a.nameRus}
-                                            placeholder={a.value}
-                                            component="input"
-                                            type="text"
-                                            required
-                                        />
-                                    </div>)}
+<div>
+                               
+                                <div  className={s.relativityBloc}>
+                                    <label> Единицы измерения : </label>
+                                    <Field className={s.relativityBlocField1}
+                                        autoComplete="off"
+                                        name="unit"
+                                        component="select"
+                                        required 
+                                    >
+                                        <option></option>
+                                        <option>бутылка</option>
+                                        <option>пачка</option>
+                                        <option>литр</option>
+                                        <option>киллограмм</option>
+                                        <option>пара</option>
+                                    </Field>
+                                </div>
+                                <div  className={s.relativityBloc}>
+                                    <label> Название величины : </label>
+                                    <Field className={s.relativityBlocField}
+                                        autoComplete="off"
+                                        name="name"
+                                        placeholder={props.diagramm.relativity.name}
+                                        component="input"
+                                        type="text"
+                                        required
+                                    />
+                                </div>
+                                <div className={s.relativityBloc} >
+                                    <label> Стоимость : </label>
+                                    <Field className={s.relativityBlocField}
+                                        autoComplete="off"
+                                        name="price"
+                                        placeholder={props.diagramm.relativity.price} 
+                                        component="input"
+                                        type="number"
+                                        step="0.01"
+                                        required
+                                    />
+                                </div>
+                                </div>
                                 <div className={s.button}>
-                                    <button type="submit" 
-                                    disabled={submitting || pristine}
+                                    <button type="submit"
+                                        disabled={submitting || pristine}
                                     >
                                         Добавить величину
                                     </button>
                                     <span>
-                                    <button type="button" onClick={returnSetting}>
-                                        Назад к настройкам
-                                    </button>
-                                    </span>                                   
+                                        <button type="button" onClick={returnSetting}>
+                                            Назад к настройкам
+                                        </button>
+                                    </span>
                                 </div>
 
                             </form>
@@ -57,14 +89,13 @@ const Relativity = (props) => {
                     <div className={s.instructionTitle}>
                         Чтобы добавить относительную величину следуй ниже приведенным шагам:</div>
                     <div>
-                        <div>1) В поле "Название" впишите название в родительном падеже(пример...)</div>
-                        <div>2) В поле "Единицы измерения" впишите в чем измеряется ваша величина
-                            <div>(штука, киллограмм, бутылка, порция и т.д)</div>
-                            </div>
+                    <div>1) Из выпадающего списка "Единицы измерения" выберите в чем измеряется ваша величина</div>
+                        <div>2) В поле "Название величины" впишите название в родительном падеже</div>
+                        <div>(Например: муки "Лидская", носков "Mark Formelle", чая, минералки и т.д.)</div>
                         <div>3) В поле "Стоимость" впишите стоимость за одну единицу вашей величины в бел. рублях</div>
                         <div>4) Нажмите кнопку добавить величину
                             <div>(увидеть пересчёт ваших расходов в относительную величину вы можете на странице "Статистика", выбрав категорию)</div>
-                            </div>
+                        </div>
                     </div>
 
                 </div>
