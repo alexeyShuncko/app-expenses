@@ -8,6 +8,7 @@ const NavNews = (props) => {
   
  
   return (
+    <div>
     <nav className={s.navNews}>
       <div className={s.navNewsitem}>
         <NavLink to="/main" className={(navData) => navData.isActive ? s.active : "" } >Главная</NavLink>
@@ -23,6 +24,8 @@ const NavNews = (props) => {
       </div>
 
     </nav>
+   
+    </div>
   )
 }
 export default NavNews;

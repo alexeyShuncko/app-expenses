@@ -6,15 +6,24 @@ import Main from './Main/Main';
 import Statistic from './Statistic/Statistic';
 import Setting from './Setting/Setting';
 import Graphs from './Graphs/Graphs';
+import { connect } from 'react-redux';
+import Hedgehog from './Hedgehog/Hedgehog';
 
 
 
 const ExpensesContainer = (props) => {
 
+
+
     return (
         <div className={s.newsContainerItems}>
 
-            <div className={s.newsContainerNav}><NavNews /></div>
+            <div className={s.newsContainerNav}>
+                <div className={s.NavNews}><NavNews /></div>
+                <div className={s.hedgehog}><Hedgehog 
+                diagramm={props.diagramm}
+                /></div>
+                </div>
 
             <div className={s.newsContainerContent}>
                 <div>
@@ -32,6 +41,11 @@ const ExpensesContainer = (props) => {
         </div>
     )
 }
+let mapStateToProps = (state) => {
+    return {
+        diagramm: state.expenses
+    }
+}
+export default connect(mapStateToProps)(ExpensesContainer)
 
-export default ExpensesContainer
 

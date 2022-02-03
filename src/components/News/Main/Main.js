@@ -7,6 +7,7 @@ import { addDiagramm, addActiv, addSalary,
     addSelectDiagramm, addSalaryValueTrue, addEditColor,
      getDollarUpdate } from '../../../Redux/diagrammReducer';
 import DiagrammMain from './DiagrammMain/DiagrammMain';
+import { addText } from './../../../Redux/diagrammReducer';
 
 
 const News =(props)=> {
@@ -31,6 +32,7 @@ let totalSumm = props.diagramm.category.map(a =>a && a.summ).reduce((acc, num) =
                         addSalary={props.addSalary}
                         getDollarUpdate={props.getDollarUpdate}
                         addSalaryValueTrue={props.addSalaryValueTrue}
+                        addText={props.addText}
                     />
                 </div>
 
@@ -54,7 +56,7 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps,
     { addDiagramm, addActiv, addSalary, addSelectDiagramm, 
-        addSalaryValueTrue , addEditColor, getDollarUpdate})(News)
+        addSalaryValueTrue , addEditColor, getDollarUpdate, addText})(News)
 
 
 

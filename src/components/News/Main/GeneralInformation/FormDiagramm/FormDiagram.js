@@ -4,6 +4,7 @@ import s from './FormDiagram.module.css';
 import { Field } from 'react-final-form';
 import Salary from './Salary/Salary';
 import DollarRate from './DollarRate/DollarRate';
+import HedgehogFunc from './../../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 const FormDiagram = (props) => {
@@ -34,6 +35,7 @@ const FormDiagram = (props) => {
         const timer = formatDate(time)
 
 
+
         const value = () => {
             let valueArr = []
             for (let x in values) {
@@ -41,6 +43,11 @@ const FormDiagram = (props) => {
             }
             return valueArr
         }
+        HedgehogFunc(props.addText,
+            'Расходы на ' + Object.keys(values).map(a =>
+                a.slice(-1) === 'а'
+                    ? a.slice(0, -1) + 'у'
+                    : a) + ' добавлены')
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()

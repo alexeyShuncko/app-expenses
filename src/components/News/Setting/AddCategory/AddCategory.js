@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './AddCategory.module.css';
+import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 const AddCategory = (props) => {
@@ -25,6 +26,7 @@ const AddCategory = (props) => {
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             deactiveVal()
+            HedgehogFunc(props.addText,'Категория '+ values.name + ' добавлена')
             setValCategory(false)
             props.addCategory(values.name, values.color)
             form.reset()

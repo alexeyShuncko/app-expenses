@@ -1,6 +1,9 @@
 import React from 'react';
 import s from './Relativity.module.css';
 import { Form, Field } from 'react-final-form';
+import  HedgehogFunc  from '../../helpers/HedgehodFunc/HedgehogFunc';
+
+
 
 
 const Relativity = (props) => {
@@ -9,19 +12,11 @@ const Relativity = (props) => {
         window.history.back()
     }
 
-    const myFunction = () => {
-        let popup = document.getElementById("myPopup");
-        popup.classList.toggle(s.show);
-        setTimeout(() => {
-            popup.classList.remove(s.show)
-        }, 2000)
-    }
-
+  
     const onSubmit = (values, form) => {
-
+        HedgehogFunc(props.addText,'Относительная величина добавлена')
         console.log(values)
         props.changeRelativity(values)
-        myFunction()
         form.reset()
     }
 
@@ -95,9 +90,7 @@ const Relativity = (props) => {
                                     </span>
                                 </div>
 
-                                <div className={s.popup}>
-                    <span className={s.popuptext} id="myPopup">Относительная величина добавлена...</span>
-                </div>
+                                
                             </form>
 
                         )}

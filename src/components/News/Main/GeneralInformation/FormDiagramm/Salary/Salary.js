@@ -60,7 +60,7 @@ const Salary = (props) => {
         if (mm < 10) mm = '0' + mm;
         return mm;
     }
-    const months = formatMonth(month)
+    const months = Number(formatMonth(month))
 
 
     const onSubmit = (values) => {

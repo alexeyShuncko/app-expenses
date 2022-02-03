@@ -17,7 +17,7 @@ const ADD_CATEGORY = 'ADD_CATEGORY'
 const DELETE_CATEGORY = 'DELETE_CATEGORY'
 const RENAME_CATEGORY = 'RENAME_CATEGORY'
 const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
-
+const ADD_TEXT = 'ADD_TEXT'
 
 
 let initialState = {
@@ -36,7 +36,7 @@ let initialState = {
         { nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
         { nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }],
     activ: '',
-    salary: { salaryNum: 700.01, salaryDate: '2022-01-11', salaryValueTrue: false },
+    salary: { salaryNum: 700.01, salaryDate: '2022-02-01', salaryValueTrue: false },
     periodPo: '',
     periodS: '',
     periodPoTime: '23:59',
@@ -52,7 +52,8 @@ let initialState = {
         name: 'пива "Аксамитное"', 
         unit: 'бутылка',
         price: 4.59 
-    }
+    },
+    text: 'Привет...'
     
 }
 
@@ -89,7 +90,7 @@ const diagrammReduser = (state = initialState, action) => {
                     ...state.salary,
                     salaryNum: action.salary,
 
-                    salaryDate: state.salary.salaryValueTrue === false ? `2021-${action.months + 1}-09 ` : state.salary.salaryDate,
+                    salaryDate: state.salary.salaryValueTrue === false ? `2022-${action.months + 1}-01 ` : state.salary.salaryDate,
                     salaryValueTrue: true
                 }
             }
@@ -177,10 +178,20 @@ const diagrammReduser = (state = initialState, action) => {
                         price: Number(action.data.price) 
                     }
                 }
+                case ADD_TEXT:
+                    return {
+                        ...state,
+                        text: action.text
+                    }
 
         default:
             return state
     }
+}
+
+
+export const addText = (text) => {
+    return { type: ADD_TEXT, text }
 }
 
 export const changeRelativity = (data) => {

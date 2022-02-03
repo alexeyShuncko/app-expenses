@@ -2,6 +2,7 @@ import React from 'react';
 import s from './RenameCategory.module.css';
 import { Field, Form } from 'react-final-form';
 import { useState } from 'react';
+import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 
@@ -20,6 +21,8 @@ const RenameCategory = (props) => {
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             setValCategory(false)
             props.renameCategory(values.favorite, values.name)
+            HedgehogFunc(props.addText,
+                 values.favorite + ' переименована в ' + values.name)
             form.reset()
         }
         else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {

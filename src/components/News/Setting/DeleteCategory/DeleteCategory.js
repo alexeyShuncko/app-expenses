@@ -2,6 +2,8 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import s from './DeleteCategory.module.css';
 import { Field } from 'react-final-form';
+import  HedgehogFunc  from '../../helpers/HedgehodFunc/HedgehogFunc';
+
 
 
 
@@ -15,6 +17,7 @@ const DeleteCategory = (props) => {
     }
 
     const onSubmit = (values, form) => {
+        HedgehogFunc(props.addText,'Категория ' + values.favorite + ' удалена')
         props.deleteCategory(values.favorite)
         form.reset()
     }

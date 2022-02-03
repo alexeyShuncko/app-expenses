@@ -4,13 +4,32 @@
 }
 
 .newsContainerNav {
-  flex:1;
+  display: flex;
+  flex-direction: column;
+  flex:2;
   margin: 20px;
-  margin-left: 40px; 
   border-right: solid 1px;
+  
+}
+.NavNews {
+  margin-left: 40px; 
+  margin-right: 40px; 
+  padding-bottom: 20px;
+  border-bottom: solid 1px;
 }
 
 .newsContainerContent {
     flex:8;
     margin-top: 20px;
 }
+
+.hedgehog {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 70px;
+  }
+ 
+
+ 
