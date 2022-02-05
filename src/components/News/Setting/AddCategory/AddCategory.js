@@ -10,9 +10,9 @@ const AddCategory = (props) => {
     let [valColor, setValColor] = useState(false)
     let [valCategory, setValCategory] = useState(false)
 
-    const activeVal = () => {
-        setValColor(true)
-    }
+    // const activeVal = () => {
+    //     setValColor(true)
+    // }
     const deactiveVal = () => {
         setValColor(false)
     }
@@ -21,18 +21,23 @@ const AddCategory = (props) => {
         window.history.back()
     }
 
-    const onSubmit = (values, form) => {
-        console.log(values)
+   
+
+    const onSubmit = (values) => {
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             deactiveVal()
             HedgehogFunc(props.addText,'Категория '+ values.name + ' добавлена')
             setValCategory(false)
+            
             props.addCategory(values.name, values.color)
-            form.reset()
+            values.name = '' 
+            values.color = '#ffffff'
         }
-        else if (values.color === '#ffffff') { activeVal() }
-        else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) { setValCategory(true) }
+        //else if (values.color === '#ffffff') { activeVal() }
+        else if (values.color === '#ffffff') { HedgehogFunc(props.addText,'Вы забыли выбрать цвет ...') }
+        else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) 
+        { HedgehogFunc(props.addText,'Категория '+ values.name + ' уже есть') }
     }
     return (
         <div>
@@ -50,9 +55,9 @@ const AddCategory = (props) => {
                                     <div className={s.nameInput}>
                                         <label> Название категории: </label>
                                         <Field
+                                        className={s.nameInput__field}
                                             autoComplete="off"
                                             name="name"
-                                            placeholder=""
                                             component="input"
                                             type="text"
                                             required
@@ -80,10 +85,10 @@ const AddCategory = (props) => {
                                         <label> Цвет:</label>
                                         <Field onClick={deactiveVal}
                                             className={s.color}
-                                            defaultValue="#ffffff"
                                             name="color"
                                             component="input"
                                             type="color"
+                                            defaultValue='#ffffff'
                                         />
                                         {valColor && <span className={s.validColor}>Выбери цвет</span>}
                                     </div>

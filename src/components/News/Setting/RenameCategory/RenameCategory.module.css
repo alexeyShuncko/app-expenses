@@ -26,17 +26,20 @@
     font-size: 22px;
     text-align: center;
 }
+
 .nameInput label {
     font-weight: bold;
 }
 
 .renameCategoryBloc {
-display: flex;
-flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
-.renameCategory{
-flex: 1;
+
+.renameCategory {
+    flex: 1;
 }
+
 .instruction {
     flex: 2;
     margin-top: 10px;
@@ -51,4 +54,9 @@ flex: 1;
 
 .listCategory {
     margin-top: 0;
-    }
+}
+
+.option {
+    height: 25px;
+    width: 120px;
+}

@@ -19,6 +19,7 @@ const DeleteCategory = (props) => {
     const onSubmit = (values, form) => {
         HedgehogFunc(props.addText,'Категория ' + values.favorite + ' удалена')
         props.deleteCategory(values.favorite)
+        props.addActiv('')
         form.reset()
     }
     return (
@@ -36,7 +37,7 @@ const DeleteCategory = (props) => {
                                     <Field
                                         name="favorite" style={diagramm.map(a => a.nameRus).includes(values.favorite)
                                             ? { backgroundColor: diagramm.filter(a => a.nameRus === values.favorite)[0].color }
-                                            : { backgroundColor: 'ffffff' }}
+                                            : { backgroundColor: '#ffffff' }}
                                         component="select" className={s.option}
                                     >
                                         <option></option>

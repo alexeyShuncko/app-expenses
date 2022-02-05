@@ -25,9 +25,14 @@ const StatisticTable = (props) => {
         ? a.nameRus === props.diagramm.activ 
         : a.nameRus===category[0].nameRus)[0].data
      .filter(a =>
+        
          a.time <= (props.diagramm.periodPo + ' ' + props.diagramm.periodPoTime)
          && a.time >= (props.diagramm.periodS + ' ' + props.diagramm.periodSTime))
   
+  
+
+  
+
     return (
         <div className={s.statisticDate}>
                 <div className={s.statisticDateTable}>
@@ -57,7 +62,8 @@ const StatisticTable = (props) => {
                                     </div>
 
                                     {filterTable.map(a => <div key={a.id} className={s.table}>
-                                        <span className={s.statisticDateTime}>  {a.time}  </span>
+                                        <span className={s.statisticDateTime}>  
+                                        {a.time.slice(8,10)+'.'+ a.time.slice(5,7)+ '.' + a.time.slice(0,4)+ ' '+ a.time.slice(-5)}  </span>
                                         <span className={s.statisticDateNum}> {a.num} </span>
                                     </div>)}
 

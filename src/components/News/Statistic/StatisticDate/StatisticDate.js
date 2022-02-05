@@ -73,7 +73,8 @@ const StatisticDate = (props) => {
                                             {totalSort.map(a =>
                                                 <div key={a.id} className={s.statisticDate}>
                                                     <span className={s.statisticDateName}> {a.name} </span>
-                                                    <span className={s.statisticDateTime}>  {a.time}  </span>
+                                                    <span className={s.statisticDateTime}>  
+                                                    {a.time.slice(8,10)+'.'+ a.time.slice(5,7)+ '.' + a.time.slice(2,4)+ ' '+ a.time.slice(-5)}</span>
                                                     <span className={s.statisticDateNum}> {a.num} </span>
 
                                                 </div>)}

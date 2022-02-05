@@ -1,13 +1,14 @@
 
 .statisticDate { 
     display: flex;  
+    
 }
 .statisticDateItem {
-flex:1;
+flex:4;
 
 }
 .statisticDateDiagramm {
-    flex:1;
+    flex:5;
     text-align: center;
 }
 .statisticTable {
@@ -21,7 +22,7 @@ flex:1;
 }
 .statisticNameDate {
     font-weight: bold;
- flex: 3;
+ flex: 2;
  text-align: center;
 }
 .statisticNameSumm {
@@ -35,7 +36,7 @@ flex:1;
 
 
 .statisticDateTime {
-    flex: 3;
+    flex: 2;
     border: solid black 1px;
 }
 

@@ -17,7 +17,7 @@
   font-style: italic;
   font-size: 14px;
   visibility: hidden;
-  width: 200px;
+  /* width: 200px; */
   background-color: #555;
   color: #fff;
   text-align: center;

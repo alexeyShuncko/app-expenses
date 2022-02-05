@@ -45,8 +45,11 @@ const obj =()=> {
 
     return (
         <div>
-            <span> Потрачено за всё время:
-                <span className={s.boldValue}>{data[0].summ.toFixed(2)} рублей.</span>
+            <span> Потрачено 
+                <div>За всё время: 
+                    <span className={s.boldValue}>{data[0].summ.toFixed(2)} рублей.</span>
+                </div>
+               
             </span>
             <div>Или:
                 <span className={s.boldValue}>{(data[0].summ / props.diagramm.dollar.Cur_OfficialRate).toFixed(2)} $</span>
