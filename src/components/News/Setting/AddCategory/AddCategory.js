@@ -24,8 +24,10 @@ const AddCategory = (props) => {
    
 
     const onSubmit = (values) => {
+
         if (values.color !== '#ffffff' &&
-            !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
+            !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
+            && isNaN(Number(values.name))) {
             deactiveVal()
             HedgehogFunc(props.addText,'Категория '+ values.name + ' добавлена')
             setValCategory(false)
@@ -36,8 +38,9 @@ const AddCategory = (props) => {
         }
         //else if (values.color === '#ffffff') { activeVal() }
         else if (values.color === '#ffffff') { HedgehogFunc(props.addText,'Вы забыли выбрать цвет ...') }
+        else if (!isNaN(Number(values.name))) {HedgehogFunc(props.addText,'Название не должно состоять только из цифр ...')}
         else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) 
-        { HedgehogFunc(props.addText,'Категория '+ values.name + ' уже есть') }
+        { HedgehogFunc(props.addText,'Категория '+ values.name + ' уже есть ...') }
     }
     return (
         <div>

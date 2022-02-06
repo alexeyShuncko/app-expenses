@@ -13,8 +13,6 @@ import Error from './helpers/Error/Error';
 
 const ExpensesContainer = (props) => {
 
-
-
     return (
         <div className={s.newsContainerItems}>
 

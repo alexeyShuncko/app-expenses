@@ -14,13 +14,7 @@
     margin-right: 10px;
 }
 
-.validColor {
-    margin-left: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border: solid red 1px;
-    border-radius: 10px;
-}
+
 
 .title {
     font-size: 22px;
@@ -60,3 +54,47 @@
     height: 25px;
     width: 120px;
 }
+.nameInput .error {
+    border-color: red;
+}
+
+
+/* Стрелка на новое название категории */
+
+
+.nameArrow {
+display: flex;
+align-items: center;
+}
+.nameInput {
+    flex: 1;
+}
+.arrow {
+    flex: 1;
+}
+.arrowImg {
+ visibility: hidden;
+ 
+}
+
+.arrow .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 4s;
+    animation: fadeIn 4s
+  }
+  
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    25% { opacity: 1;}
+    50% { opacity: 0;}
+    75% { opacity: 1;}
+    to {opacity: 0;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    25% { opacity: 1;}
+    50% { opacity: 0;}
+    75% { opacity: 1;}
+    to {opacity: 0;}
+  }
