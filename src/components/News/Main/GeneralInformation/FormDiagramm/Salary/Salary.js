@@ -7,6 +7,7 @@ import SalarySpent from './SalarySpent/SalarySpent';
 import SalaryRemainder from './SalaryRemainder/SalaryRemainder';
 import SalaryValue from './SalaryValue/SalaryValue';
 import { HocValuta } from '../../../../HOC/HocValuta';
+import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 const Salary = (props) => {
@@ -24,7 +25,6 @@ const Salary = (props) => {
     useEffect(() => {
         if (timer >= props.diagramm.salary.salaryDate && props.diagramm.salary.salaryValueTrue) {
             props.addSalaryValueTrue(false)
-            console.log(11)
         }
     },
     );
@@ -68,11 +68,13 @@ const Salary = (props) => {
         if (values.valuta === 'BYN') {
             props.addSalary(Number(values.salary).toFixed(2), months)
             deActivateEditMode()
+            HedgehogFunc(props.addText,'Поздравляю с ЗП ...')
             setValuta(false)
         }
         else if (values.valuta === 'USD') {
             props.addSalary((Number(values.salary) * Number(props.diagramm.dollar.Cur_OfficialRate)).toFixed(2), months)
             deActivateEditMode()
+            HedgehogFunc(props.addText,'Поздравляю с ЗП ...')
             setValuta(false)
         }
         else if (!values.valuta) {setValuta(true)} 
@@ -83,7 +85,7 @@ const Salary = (props) => {
         <div>
 
             {timer >= props.diagramm.salary.salaryDate
-                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Обнови ЗП</div>
+                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Нажми, чтобы обновить ЗП</div>
                 : null}
 
             {HocValuta(SalaryValue, props, activateEditMode)}

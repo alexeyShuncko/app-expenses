@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './Color.module.css';
+import { Form, Field } from 'react-final-form';
+import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 const Color = (props) => {
@@ -8,8 +10,12 @@ const Color = (props) => {
         window.history.back()
     }
 
-    const onSelectChange = (e) => {
-        props.addEditColor(e.target.value, e.target.name)
+    const onSubmit = (values) => {
+        if (String(props.diagramm.category.map(a => a.color)) === String(Object.values(values))) { HedgehogFunc(props.addText, 'Вы не изменили ни одного цвета ...') }
+        else if (String(props.diagramm.category.map(a => a.color)) !== String(Object.values(values))) {
+            props.addEditColor(Object.values(values), Object.keys(values))
+            HedgehogFunc(props.addText, 'Цвет изменен ...')
+        }
     }
 
     return (
@@ -17,34 +23,51 @@ const Color = (props) => {
             <div className={s.title}>Изменение цвета категории</div>
             <div className={s.changeСolorBloc}>
                 <div className={s.changeСolor}>
-                {props.diagramm.category.map(a =>
-                    <div className={s.item} key={a.nameRus}>
-                             <input name={a.nameRus} defaultValue={a.color} onChange={onSelectChange}
-                            className={s.inputColorValue} type="color"></input>
-                        <span className={s.itemName}> - {a.nameRus}</span>
-                   
-                    </div>
-                )
-                }
+
+                    <Form
+                        onSubmit={onSubmit}
+                        render={({ handleSubmit, form, submitting, pristine, values }) => (
+                            <form onSubmit={handleSubmit} >
+                                {props.diagramm.category.map(a =>
+                                    <div className={s.item} key={a.nameRus}>
+                                        <Field
+                                            name={a.nameRus}
+                                            defaultValue={a.color}
+                                            className={s.inputColorValue}
+                                            component="input"
+                                            type="color" />
+                                        <label className={s.itemName}> - {a.nameRus}</label>
+                                    </div>
+                                )}
+
+                                <div className={s.button}>
+                                    <button
+                                        type="submit"
+                                        disabled={submitting || pristine}>
+                                        Изменить цвет
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={returnSetting}>
+                                        Назад к настройкам
+                                    </button>
+                                </div>
+                            </form>
+                        )}
+                    />
                 </div>
                 <div className={s.instruction}>
-                   <div className={s.instructionTitle}>
-                       Чтобы изменить цвет категории следуй ниже приведенным шагам:</div>
-                   <div>
-                   <div>1) Нажми на цветной квадрат рядом с названием категории</div>
-                   <div>2) Выбери нужный тебе цвет</div>
-                   <div>3) Нажми в любое место экрана, кроме окна выбора цвета и изменение цвета применится.</div>
-                   </div> 
-                  
+                    <div className={s.instructionTitle}>
+                        Чтобы изменить цвет категории следуй ниже приведенным шагам:</div>
+                    <div>
+                        <div>1) Нажми на цветной квадрат рядом с названием категории</div>
+                        <div>2) Выбери нужный тебе цвет</div>
+                        <div>3) Нажми в любое место экрана, кроме окна выбора цвета</div>
+                        <div>(Можно изменить сразу несколько цветов...)</div>
+                        <div>4) Нажми кнопку "Изменить цвет"</div>
+                    </div>
                 </div>
-                
             </div>
-            <div className={s.button}>
-                <button type="button" onClick={returnSetting}>
-                    Назад к настройкам
-                </button>
-            </div>
-
         </div>
     )
 

@@ -1,0 +1,14 @@
+.fieldBynUsd {
+background-color: rgb(204, 163, 204);
+border-color: rgb(204, 163, 204);
+border-radius: 10px;
+}
+
+.fieldBynUsd:hover {
+    border-color:green;
+}
+.fieldBynUsd:focus {
+    outline: none;
+}
+
+

@@ -75,12 +75,10 @@ const Relativity = (props) => {
                                     </div>
                                 </div>
 
-
-
                                 <div className={s.button}>
-                                    <button type="submit"
-                                        disabled={submitting || pristine}
-                                    >
+                                    <button 
+                                    type="submit"
+                                    disabled={submitting || pristine}>
                                         Добавить величину
                                     </button>
                                     <span>
@@ -89,10 +87,7 @@ const Relativity = (props) => {
                                         </button>
                                     </span>
                                 </div>
-
-                                
                             </form>
-
                         )}
                     />
 
@@ -105,7 +100,7 @@ const Relativity = (props) => {
                         <div>2) В поле "Название величины" впишите название в родительном падеже</div>
                         <div>(Например: муки "Лидская", носков "Mark Formelle", чая, минералки и т.д.)</div>
                         <div>3) В поле "Стоимость" впишите стоимость за одну единицу вашей величины в бел. рублях</div>
-                        <div>4) Нажмите кнопку добавить величину
+                        <div>4) Нажмите кнопку "Добавить величину"
                             <div>(увидеть пересчёт ваших расходов в относительную величину вы можете на странице "Статистика", выбрав категорию)</div>
                         </div>
                     </div>

@@ -8,7 +8,7 @@ import Setting from './Setting/Setting';
 import Graphs from './Graphs/Graphs';
 import { connect } from 'react-redux';
 import Hedgehog from './Hedgehog/Hedgehog';
-
+import Error from './helpers/Error/Error';
 
 
 const ExpensesContainer = (props) => {
@@ -32,8 +32,7 @@ const ExpensesContainer = (props) => {
                     <Route path='/statistic' element={<Statistic />} />
                     <Route path='/setting/*' element={<Setting />} />
                     <Route path='/graphs' element={<Graphs />} />
-                    <Route path='*'
-                        render={() => <div>404 not found</div>} />
+                    <Route path='/' element={<Error />}/>
                 </Routes>
                 </div>
             </div>

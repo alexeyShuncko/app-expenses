@@ -27,9 +27,9 @@ let initialState = {
             data: [
                 { id: 'Еда1', time: '2022-01-08 19:05', num: 10 },
                 { id: 'Еда2', time: '2022-01-11 14:59', num: 20 },
-                { id: 'Еда3', time: '2022-12-11 15:01', num: 20 },
-                { id: 'Еда4', time: '2022-12-11 15:02', num: 25 },
-                { id: 'Еда5', time: '2022-12-11 15:06', num: 52 }
+                { id: 'Еда3', time: '2022-01-12 15:01', num: 20 },
+                { id: 'Еда4', time: '2022-01-13 15:02', num: 25 },
+                { id: 'Еда5', time: '2022-01-14 15:06', num: 52 }
             ], summ: 127
         },
         { nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
@@ -127,8 +127,8 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 category: [
                     ...state.category.map(a => {
-                        if (a.nameRus === action.qqq) {
-                            return ({ ...a, color: action.editColor })
+                        if (action.name.includes(a.nameRus)) {
+                            return ({ ...a, color: action.editColor[action.name.indexOf(a.nameRus)] })
                         }
                         else return a
                     })]
@@ -232,8 +232,8 @@ export const addPeriodSTime = (periodSTime) => {
 export const addPeriodPoTime = (periodPoTime) => {
     return { type: ADD_PERIOD_PO_TIME, periodPoTime }
 }
-export const addEditColor = (editColor, qqq) => {
-    return { type: ADD_EDIT_COLOR, editColor, qqq }
+export const addEditColor = (editColor, name) => {
+    return { type: ADD_EDIT_COLOR, editColor, name }
 }
 export const addSelectDiagramm = (selectDiagramm) => {
     return { type: ADD_SELECT_DIAGRAMM, selectDiagramm }

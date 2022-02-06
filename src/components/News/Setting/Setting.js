@@ -31,7 +31,8 @@ const Setting = (props) => {
                 element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory} 
                 addText={props.addText}/>} />
             <Route path='/Color'
-                element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor} />} />
+                element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor} 
+                addText={props.addText}/>} />
             <Route path='/Relativity'
                 element={<Relativity diagramm={props.diagramm} changeRelativity={props.changeRelativity} 
                 addText={props.addText}/>} />

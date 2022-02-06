@@ -47,7 +47,7 @@ const FormDiagram = (props) => {
             'Расходы на ' + Object.keys(values).map(a =>
                 a.slice(-1) === 'а'
                     ? a.slice(0, -1) + 'у'
-                    : a) + ' добавлены')
+                    : a).join(', ') + ' добавлены')
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()
@@ -63,6 +63,7 @@ const FormDiagram = (props) => {
                 diagramm={props.diagramm}
                 addSalary={props.addSalary}
                 addSalaryValueTrue={props.addSalaryValueTrue}
+                addText={props.addText}
             />
             <div className={s.formExpensesName}>Сумма денег, потраченных на :</div>
             <div className={s.formExpensesFild}>
