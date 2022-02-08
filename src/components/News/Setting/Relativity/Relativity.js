@@ -4,6 +4,7 @@ import { Form, Field } from 'react-final-form';
 import  HedgehogFunc  from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from './../../helpers/ArrowFunc/ArrowFunc';
 import ArrowValidate from './../../Arrow/ArrowValidate';
+import OffStyle from './../../helpers/ArrowFunc/Offstyle';
 
 
 
@@ -17,9 +18,10 @@ const Relativity = (props) => {
   
     const onSubmit = (values, form) => {
         if (values.unit && values.name && values.price){
-        HedgehogFunc(props.addText,'Относительная величина добавлена')
+        HedgehogFunc(props.addText,'Относительная величина добавлена ...')
         console.log(values)
         props.changeRelativity(values)
+        OffStyle(['relativityUnitAdd','relativityNameAdd','relativityPriceAdd'])
         form.reset()
         }
         else if (!values.unit) {
@@ -53,6 +55,7 @@ const Relativity = (props) => {
                                     <div className={s.relativityBloc}>
                                         <label> Единицы измерения : </label>
                                         <Field 
+                                          autoFocus='on'
                                         id="relativityUnitAdd"
                                         className={s.relativityBlocField1}
                                             autoComplete="off"

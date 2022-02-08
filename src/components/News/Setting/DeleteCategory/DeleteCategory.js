@@ -35,6 +35,7 @@ const DeleteCategory = (props) => {
                                 <div className={s.nameInput}>
                                     <label> Название категории: </label>
                                     <Field
+                                      autoFocus='on'
                                         name="favorite" style={diagramm.map(a => a.nameRus).includes(values.favorite)
                                             ? { backgroundColor: diagramm.filter(a => a.nameRus === values.favorite)[0].color }
                                             : { backgroundColor: '#ffffff' }}

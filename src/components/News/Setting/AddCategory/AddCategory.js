@@ -67,7 +67,8 @@ const AddCategory = (props) => {
                                                 name="name"
                                                 component="input"
                                                 type="text"
-                                                maxLength='20' />
+                                                maxLength='20'
+                                                autoFocus='on' />
 
                                         </div>
                                         <ArrowValidate arrowId='arrowNameAdd' />
