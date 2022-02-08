@@ -18,7 +18,7 @@ const AddCategory = (props) => {
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
             && isNaN(Number(values.name))) {
-            HedgehogFunc(props.addText, 'Категория ' + values.name + ' добавлена')
+            HedgehogFunc(props.addText, 'Категория ' + values.name + ' добавлена ...')
             props.addCategory(values.name, values.color)
 
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)

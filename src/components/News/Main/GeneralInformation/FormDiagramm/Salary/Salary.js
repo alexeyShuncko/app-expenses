@@ -85,7 +85,7 @@ const Salary = (props) => {
         <div>
 
             {timer >= props.diagramm.salary.salaryDate
-                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Нажми, чтобы обновить ЗП</div>
+                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Нажмите, чтобы обновить ЗП</div>
                 : null}
 
             {HocValuta(SalaryValue, props, activateEditMode)}
