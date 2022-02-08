@@ -1,46 +1,49 @@
 import React from 'react';
-import { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './AddCategory.module.css';
 import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
-
+import ArrowValidate from '../../Arrow/ArrowValidate';
+import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
+import OffStyle from '../../helpers/ArrowFunc/Offstyle';
 
 const AddCategory = (props) => {
-
-    let [valColor, setValColor] = useState(false)
-    let [valCategory, setValCategory] = useState(false)
-
-    // const activeVal = () => {
-    //     setValColor(true)
-    // }
-    const deactiveVal = () => {
-        setValColor(false)
-    }
 
     const returnSetting = () => {
         window.history.back()
     }
 
-   
 
     const onSubmit = (values) => {
 
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
             && isNaN(Number(values.name))) {
-            deactiveVal()
-            HedgehogFunc(props.addText,'Категория '+ values.name + ' добавлена')
-            setValCategory(false)
-            
+            HedgehogFunc(props.addText, 'Категория ' + values.name + ' добавлена')
             props.addCategory(values.name, values.color)
-            values.name = '' 
+
+            OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
+
+            values.name = ''
             values.color = '#ffffff'
         }
-        //else if (values.color === '#ffffff') { activeVal() }
-        else if (values.color === '#ffffff') { HedgehogFunc(props.addText,'Вы забыли выбрать цвет ...') }
-        else if (!isNaN(Number(values.name))) {HedgehogFunc(props.addText,'Название не должно состоять только из цифр ...')}
-        else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) 
-        { HedgehogFunc(props.addText,'Категория '+ values.name + ' уже есть ...') }
+        else if (!values.name) {
+            HedgehogFunc(props.addText, 'Впиши название категории ...')
+            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonAdd')
+        }
+
+        else if (!isNaN(Number(values.name))) {
+            HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...')
+            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonAdd')
+
+        }
+        else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
+            HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
+            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonAdd')
+        }
+        else if (values.color === '#ffffff') {
+            HedgehogFunc(props.addText, 'Вы забыли выбрать цвет ...')
+            ArrowFunc('colorAdd', 'addColor', 'buttonAdd')
+        }
     }
     return (
         <div>
@@ -54,28 +57,29 @@ const AddCategory = (props) => {
 
                             <div className={s.addCategoryBloc}>
                                 <div className={s.addCategory}>
-                                   
-                                    <div className={s.nameInput}>
-                                        <label> Название категории: </label>
-                                        <Field
-                                        className={s.nameInput__field}
-                                            autoComplete="off"
-                                            name="name"
-                                            component="input"
-                                            type="text"
-                                            required
-                                        />
-                                        {typeof (values.name) === Number ? <span>(Название не должно состоять только из цифр)</span> : null}
-                                        {valCategory && <span className={s.validColor}>Такая категория уже есть</span>}
+                                    <div className={s.nameArrow}>
+                                        <div className={s.nameInput}>
+                                            <label> Название категории: </label>
+                                            <Field
+                                                id='nameAdd'
+                                                className={s.nameInput__field}
+                                                autoComplete="off"
+                                                name="name"
+                                                component="input"
+                                                type="text"
+                                                maxLength='20' />
+
+                                        </div>
+                                        <ArrowValidate arrowId='arrowNameAdd' />
                                     </div>
                                     <div>
                                         Уже имеющиеся категории:
                                         <div>
-                                           <ul className={s.listCategory}>
-                                           {props.diagramm.category.map(a =>  
-                                                <li  key={a.nameRus}>{a.nameRus}</li>
-                                        )}
-                                        </ul> 
+                                            <ul className={s.listCategory}>
+                                                {props.diagramm.category.map(a =>
+                                                    <li key={a.nameRus}>{a.nameRus}</li>
+                                                )}
+                                            </ul>
                                         </div>
 
                                     </div>
@@ -86,14 +90,16 @@ const AddCategory = (props) => {
                                     </div>
                                     <div className={s.colorInput}>
                                         <label> Цвет:</label>
-                                        <Field onClick={deactiveVal}
+                                        <Field
+                                            id='addColor'
                                             className={s.color}
                                             name="color"
                                             component="input"
                                             type="color"
-                                            defaultValue='#ffffff'
-                                        />
-                                        {valColor && <span className={s.validColor}>Выбери цвет</span>}
+                                            defaultValue='#ffffff' />
+
+                                        <ArrowValidate arrowId='colorAdd' />
+
                                     </div>
                                 </div>
                                 <div className={s.instruction}>
@@ -101,7 +107,8 @@ const AddCategory = (props) => {
                                         Чтобы добавить категорию следуй ниже приведенным шагам:</div>
                                     <div>
                                         <div>1) В поле "Название категории" впиши название новой категории <br></br>
-                                            (Название не должно состоять только из цифр, а также не должно совпадать с уже имеющимися категориями)</div>
+                                            (Название не должно состоять только из цифр,
+                                            не должно совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)</div>
                                         <div>2) Нажми на белый  квадрат рядом с полем "Цвет"</div>
                                         <div>3) Выбери нужный тебе цвет <br></br>
                                             (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
@@ -115,9 +122,10 @@ const AddCategory = (props) => {
 
 
                             <div className={s.buttonItem}>
-                                <button type="submit"
-                                    disabled={submitting || pristine} //сделать видимой невидимой
-                                >
+                                <button
+                                    id='buttonAdd'
+                                    type="submit"
+                                    disabled={submitting || pristine}>
                                     Добавить категорию
                                 </button>
                                 <button type="button" onClick={returnSetting}>

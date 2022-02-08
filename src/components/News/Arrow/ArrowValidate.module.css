@@ -1,0 +1,36 @@
+
+.error {
+    background-color: rgb(238, 149, 149);
+}
+
+/* Стрелка на  название категории */
+
+.arrow {
+    flex: 4;
+}
+.arrowImg {
+ visibility: hidden;
+ 
+}
+
+.arrow .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 4s;
+    animation: fadeIn 4s
+  }
+  
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    25% { opacity: 1;}
+    50% { opacity: 0;}
+    75% { opacity: 1;}
+    to {opacity: 0;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    25% { opacity: 1;}
+    50% { opacity: 0;}
+    75% { opacity: 1;}
+    to {opacity: 0;}
+  }

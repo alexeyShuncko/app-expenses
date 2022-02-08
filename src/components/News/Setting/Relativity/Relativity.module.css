@@ -12,10 +12,14 @@
     margin-top: 20px;
     margin-right: 10px;
 }
+.nameArrow {
+display: flex;
+}
 
 
 /* Блок шагов инструкций */
 .RelativityBloc {
+   
     display: flex;
     flex-direction: row;
     margin-top: 20px;
@@ -37,11 +41,11 @@
 
 /* Поля ввода относительной величины */
 .relativityBloc { 
-display: flex;
+    flex: 1;
+
 margin-right: 70px;
 }
-.relativityBloc label{
-flex: 5;
+.relativityBloc label {
 font-weight: bold;
 }
 .relativityBlocField {

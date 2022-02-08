@@ -1,7 +1,7 @@
 .item {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 30px;
 
 }
 
@@ -32,6 +32,7 @@
 
 .renameCategory {
     flex: 1;
+    margin-left: 30px;
 }
 
 .instruction {
@@ -51,50 +52,14 @@
 }
 
 .option {
-    height: 25px;
-    width: 120px;
+height: 21px;
+  width: 178px;
 }
-.nameInput .error {
-    border-color: red;
-}
-
-
-/* Стрелка на новое название категории */
-
 
 .nameArrow {
 display: flex;
-align-items: center;
+align-items: flex-end; 
 }
 .nameInput {
     flex: 1;
 }
-.arrow {
-    flex: 1;
-}
-.arrowImg {
- visibility: hidden;
- 
-}
-
-.arrow .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 4s;
-    animation: fadeIn 4s
-  }
-  
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;}
-    25% { opacity: 1;}
-    50% { opacity: 0;}
-    75% { opacity: 1;}
-    to {opacity: 0;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    25% { opacity: 1;}
-    50% { opacity: 0;}
-    75% { opacity: 1;}
-    to {opacity: 0;}
-  }

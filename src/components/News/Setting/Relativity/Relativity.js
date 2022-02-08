@@ -2,6 +2,8 @@ import React from 'react';
 import s from './Relativity.module.css';
 import { Form, Field } from 'react-final-form';
 import  HedgehogFunc  from '../../helpers/HedgehodFunc/HedgehogFunc';
+import ArrowFunc from './../../helpers/ArrowFunc/ArrowFunc';
+import ArrowValidate from './../../Arrow/ArrowValidate';
 
 
 
@@ -14,10 +16,24 @@ const Relativity = (props) => {
 
   
     const onSubmit = (values, form) => {
+        if (values.unit && values.name && values.price){
         HedgehogFunc(props.addText,'Относительная величина добавлена')
         console.log(values)
         props.changeRelativity(values)
         form.reset()
+        }
+        else if (!values.unit) {
+            HedgehogFunc(props.addText,'Выберите из списка единицу измерения ...')
+            ArrowFunc('relativityUnit','relativityUnitAdd','buttonRelativity')
+        }
+        else if (!values.name) {
+            HedgehogFunc(props.addText,'Впишите название в родительном падеже ...')
+            ArrowFunc('relativityName','relativityNameAdd','buttonRelativity')
+        }
+        else if (!values.price) {
+            HedgehogFunc(props.addText,'Впишите стоимость за единицу вашей величины ...')
+            ArrowFunc('relativityPrice','relativityPriceAdd','buttonRelativity')
+        }
     }
 
     return (
@@ -33,15 +49,15 @@ const Relativity = (props) => {
                         render={({ handleSubmit, form, submitting, pristine, values }) => (
                             <form onSubmit={handleSubmit} >
                                 <div>
-
+                                <div className={s.nameArrow}>
                                     <div className={s.relativityBloc}>
                                         <label> Единицы измерения : </label>
-                                        <Field className={s.relativityBlocField1}
+                                        <Field 
+                                        id="relativityUnitAdd"
+                                        className={s.relativityBlocField1}
                                             autoComplete="off"
                                             name="unit"
-                                            component="select"
-                                            required
-                                        >
+                                            component="select">
                                             <option></option>
                                             <option>бутылка</option>
                                             <option>пачка</option>
@@ -50,33 +66,43 @@ const Relativity = (props) => {
                                             <option>пара</option>
                                         </Field>
                                     </div>
+                                    <ArrowValidate arrowId='relativityUnit'/>
+                                    </div>
+                                    <div className={s.nameArrow}>
                                     <div className={s.relativityBloc}>
                                         <label> Название величины : </label>
-                                        <Field className={s.relativityBlocField}
+                                        <Field 
+                                        id='relativityNameAdd'
+                                        className={s.relativityBlocField}
                                             autoComplete="off"
                                             name="name"
                                             placeholder={props.diagramm.relativity.name}
                                             component="input"
                                             type="text"
-                                            required
                                         />
                                     </div>
+                                    <ArrowValidate arrowId='relativityName'/>
+                                    </div>
+                                    <div className={s.nameArrow}>
                                     <div className={s.relativityBloc} >
                                         <label> Стоимость : </label>
-                                        <Field className={s.relativityBlocField}
+                                        <Field 
+                                        id='relativityPriceAdd'
+                                        className={s.relativityBlocField}
                                             autoComplete="off"
                                             name="price"
                                             placeholder={props.diagramm.relativity.price}
                                             component="input"
                                             type="number"
-                                            step="0.01"
-                                            required
-                                        />
+                                            step="0.01"/>
+                                    </div>
+                                    <ArrowValidate arrowId='relativityPrice'/>
                                     </div>
                                 </div>
 
                                 <div className={s.button}>
                                     <button 
+                                    id='buttonRelativity'
                                     type="submit"
                                     disabled={submitting || pristine}>
                                         Добавить величину

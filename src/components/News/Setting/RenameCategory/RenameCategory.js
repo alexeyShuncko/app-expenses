@@ -2,7 +2,9 @@ import React from 'react';
 import s from './RenameCategory.module.css';
 import { Field, Form } from 'react-final-form';
 import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
-import arrow from '../../../../image/arrow1.png'
+import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
+import ArrowValidate from '../../Arrow/ArrowValidate';
+import OffStyle from '../../helpers/ArrowFunc/Offstyle';
 
 
 const RenameCategory = (props) => {
@@ -14,36 +16,36 @@ const RenameCategory = (props) => {
     }
 
     const onSubmit = (values, form) => {
+
         if (values.name
             && !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
-            && isNaN(Number(values.name))) {
+            && isNaN(Number(values.name))
+            && values.favorite) {
             props.renameCategory(values.favorite, values.name)
             HedgehogFunc(props.addText,
                 values.favorite + ' переименована в ' + values.name + ' ...')
-                let error = document.getElementById('nameCategory')
-                error.classList.remove(s.error)
+
+            OffStyle(['nameCategory'])
 
             form.reset()
         }
-        else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) { 
+
+        else if (!values.favorite) {
+            HedgehogFunc(props.addText, 'Выберите категорию из списка ...')
+            ArrowFunc('arrowFavorite', 'favorite', 'buttonRename')
+        }
+        else if (values.name && props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
-            let show = document.getElementById('arrow')
-            show.classList.toggle(s.show)
-            setTimeout(() => {
-               show.classList.remove(s.show)
-            }, 4000)
+            ArrowFunc('arrowName', 'nameCategory', 'buttonRename')
         }
         else if (!isNaN(Number(values.name))) {
-             HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...') 
-             let show = document.getElementById('arrow')
-             show.classList.toggle(s.show)
-             setTimeout(() => {
-                show.classList.remove(s.show)
-             }, 4000)
-             let error = document.getElementById('nameCategory')
-             error.classList.toggle(s.error)
-            }
-
+            HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...')
+            ArrowFunc('arrowName', 'nameCategory', 'buttonRename')
+        }
+        else if (!values.name) {
+            HedgehogFunc(props.addText, 'Впиши новое название категории ...')
+            ArrowFunc('arrowName', 'nameCategory', 'buttonRename')
+        }
 
     }
     return (
@@ -57,47 +59,49 @@ const RenameCategory = (props) => {
 
                             <div className={s.renameCategoryBloc}>
                                 <div className={s.renameCategory}>
-                                    <div className={s.nameInput}>
-                                        <label> Название категории: </label>
-                                        <Field
-                                            name="favorite"
-                                            style={diagramm.map(a => a.nameRus).includes(values.favorite)
-                                                ? { backgroundColor: diagramm.filter(a => a.nameRus === values.favorite)[0].color }
-                                                : { backgroundColor: '#ffffff' }}
-                                            component="select"
-                                            className={s.option}
-                                            required>
-                                            <option></option>
-                                            {diagramm.map(a => {
-                                                if (a) return (
-                                                    <option value={a.nameRus} key={a.nameRus}
-                                                        style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)
-                                                else return null
-                                            }
-                                            )}
-                                        </Field>
+
+                                    <div className={s.nameArrow}>
+                                        <div className={s.nameInput}>
+                                            <label> Название категории: </label>
+                                            <Field
+                                                id="favorite"
+                                                name="favorite"
+                                                style={diagramm.map(a => a.nameRus).includes(values.favorite)
+                                                    ? { backgroundColor: diagramm.filter(a => a.nameRus === values.favorite)[0].color }
+                                                    : { backgroundColor: '#ffffff' }}
+                                                component="select"
+                                                className={s.option}
+                                                autoFocus='on'>
+                                                <option></option>
+                                                {diagramm.map(a => {
+                                                    if (a) return (
+                                                        <option value={a.nameRus} key={a.nameRus}
+                                                            style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)
+                                                    else return null
+                                                }
+                                                )}
+                                            </Field>
+                                        </div>
+                                        <ArrowValidate arrowId='arrowFavorite' />
+
                                     </div>
                                     <div className={s.nameArrow}>
                                         <div className={s.nameInput}>
                                             <label>Новое название категории: </label>
                                             <Field
-                                              id='nameCategory'
-                                              className={s.nameCategory}
+                                                id='nameCategory'
+                                                className={s.nameCategory}
                                                 autoComplete="off"
                                                 name="name"
                                                 placeholder=""
                                                 component="input"
                                                 type="text"
-                                                required
+                                                maxLength='20'
                                             />
                                         </div>
-                                       
-                                        <div className={s.arrow}>
-                                        <img  id='arrow' className={s.arrowImg} src={arrow} alt='Стрелка' />
-                                        </div>
-                                        
-                                            
-                                       
+
+                                        <ArrowValidate arrowId='arrowName' />
+
                                     </div>
                                     <div>
                                         Уже имеющиеся категории:
@@ -117,7 +121,8 @@ const RenameCategory = (props) => {
                                     <div>
                                         <div>1) В поле "Название категории" выбери категорию из выпадающего списка</div>
                                         <div>2) В поле "Новое название категории" впиши новое название категории<br></br>
-                                            (Название не должно состоять только из цифр, а также не должно совпадать с уже имеющимися категориями)
+                                            (Название не должно состоять только из цифр, 
+                                            не должно совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)
                                         </div>
                                         <div>3) Нажми кнопку "Переименовать категорию"</div>
                                     </div>
@@ -126,7 +131,10 @@ const RenameCategory = (props) => {
                             </div>
 
                             <div className={s.buttonItem}>
-                                <button type="submit" disabled={submitting || pristine}>
+                                <button
+                                    id='buttonRename'
+                                    type="submit"
+                                    disabled={submitting || pristine}>
                                     Переименовать категорию
                                 </button>
                                 <button type="button" onClick={returnSetting}>

@@ -47,7 +47,7 @@ const FormDiagram = (props) => {
             'Расходы на ' + Object.keys(values).map(a =>
                 a.slice(-1) === 'а'
                     ? a.slice(0, -1) + 'у'
-                    : a).join(', ') + ' добавлены')
+                    : a).join(', ') + ' добавлены ...')
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()

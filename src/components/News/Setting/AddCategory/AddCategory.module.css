@@ -30,6 +30,7 @@ margin-right: 10px;
 display: flex;
 flex-direction: row;
 align-items: center;
+margin-right: 3px;
 }
 .colorInput label {
 font-weight: bold;
@@ -63,6 +64,7 @@ flex-direction: row;
 }
 .addCategory {
 flex: 1;
+margin-left: 30px;
 }
 
 .instruction {
@@ -83,5 +85,15 @@ margin-top: 0;
 
 
 .nameInput__field {
-width: 120px;
+width: 170px;
 }
+
+.nameArrow {
+display: flex;
+}
+
+.nameInput {
+flex: 1;
+}
+
+
