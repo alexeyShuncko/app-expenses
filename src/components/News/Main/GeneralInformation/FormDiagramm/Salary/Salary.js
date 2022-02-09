@@ -8,12 +8,12 @@ import SalaryRemainder from './SalaryRemainder/SalaryRemainder';
 import SalaryValue from './SalaryValue/SalaryValue';
 import { HocValuta } from '../../../../HOC/HocValuta';
 import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
+import ArrowFunc from '../../../../helpers/ArrowFunc/ArrowFunc';
 
 
 const Salary = (props) => {
 
     let [editMode, setEditMode] = useState(false)
-    let [valuta, setValuta] = useState(false)
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -68,16 +68,19 @@ const Salary = (props) => {
         if (values.valuta === 'BYN') {
             props.addSalary(Number(values.salary).toFixed(2), months)
             deActivateEditMode()
-            HedgehogFunc(props.addText,'Поздравляю с ЗП ...')
-            setValuta(false)
+            HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
+           
         }
         else if (values.valuta === 'USD') {
             props.addSalary((Number(values.salary) * Number(props.diagramm.dollar.Cur_OfficialRate)).toFixed(2), months)
             deActivateEditMode()
-            HedgehogFunc(props.addText,'Поздравляю с ЗП ...')
-            setValuta(false)
+            HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
+          
         }
-        else if (!values.valuta) {setValuta(true)} 
+        else if (!values.valuta) {   
+            HedgehogFunc(props.addText, 'Выберите валюту ЗП ...')
+            ArrowFunc('colorAdd', 'addValutaInput', 'addSalary')
+         }
     }
 
     return (
@@ -88,7 +91,10 @@ const Salary = (props) => {
                 ? <div className={s.salaryUpdate} onClick={activateEditMode}>Нажмите, чтобы обновить ЗП</div>
                 : null}
 
-            {HocValuta(SalaryValue, props, activateEditMode)}
+            <div className={s.salaryValue}>
+                <div className={s.salaryName}>Зарплата:</div>
+                {HocValuta(SalaryValue, props, activateEditMode)}</div>
+
 
             {editMode
                 ? <Form
@@ -107,18 +113,20 @@ const Salary = (props) => {
                                     step="0.01"
                                     required />
                             </div>
-                            <Field className={s.fieldBynUsd}
-                                name="valuta" component="select" required >
-                                <option>Валюта</option>
+                            <Field 
+                            id='addValutaInput'
+                            className={s.fieldBynUsd}
+                            name="valuta" 
+                            component="select" >
                                 <option value="BYN">BYN</option>
                                 <option value="USD">USD</option>
                             </Field>
-                            {valuta
-                                ? <span className={s.valutaValid}> Выбери валюту </span>
-                                : null}
 
                             <div className={s.buttonSalary}>
-                                <button type="submit" disabled={submitting || pristine}>
+                                <button
+                                id='addSalary' 
+                                type="submit" 
+                                disabled={submitting || pristine}>
                                     Добавить
                                 </button>
                                 <button type="button" onClick={deActivateEditMode}>
@@ -130,10 +138,12 @@ const Salary = (props) => {
                     )}
                 />
                 : null}
-            <div >
+            <div className={s.salaryValue}>
+            <div className={s.salaryName}>Всего потрачено:</div>
                 {HocValuta(SalarySpent, props)}
             </div>
-            <div >
+            <div className={s.salaryValue}>
+            <div className={s.salaryName}>Должно остаться:</div>
                 {HocValuta(SalaryRemainder, props)}
             </div>
         </div>

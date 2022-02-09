@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from './StatisticDate.module.css';
 import DiagrammContainer from "./DIagrammContainer/DIagrammContainer";
 import DiagrammTotal from "./DIagrammContainer/DiagrammTotal/DiagrammTotal";
+import { HocValuta } from "../../HOC/HocValuta";
 
 
 const StatisticDate = (props) => {
@@ -45,7 +46,7 @@ const StatisticDate = (props) => {
     const totalSumm = total.map(a=>a.num).reduce((sum, current) => sum + current, 0)
 
     return (
-        <div>
+        <div className={s.container}>
             <div className={s.statisticDate}>
                 <div className={s.statisticDateItem}>
                     <div className={s.statisticDateTable}>
@@ -97,10 +98,8 @@ const StatisticDate = (props) => {
 
             </div>
             <div className={s.totalSumm}>
-                Всего потрачено за выбранный период:
-                <DiagrammTotal
-                    total={totalSumm}
-                    dollar={props.diagramm.dollar.Cur_OfficialRate} />
+                <div>Всего потрачено за выбранный период:</div>
+                {HocValuta(DiagrammTotal, props, null, totalSumm)}
             </div>
         </div>
     )

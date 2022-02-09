@@ -135,7 +135,9 @@ const Statistic = (props) => {
                     )}
                 />
 
-                <div><StatisticTable diagramm={props.diagramm} /></div>
+                <div><StatisticTable 
+                addText={props.addText}
+                diagramm={props.diagramm} /></div>
 
             </div>
             <div className={s.statisticItem2}>

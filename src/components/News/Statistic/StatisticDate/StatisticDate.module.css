@@ -1,4 +1,18 @@
 
+.container {
+display: flex;
+flex-direction: column;
+align-items: center;
+border-bottom: solid 1px;
+}
+
+.totalSumm {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .statisticDate { 
     display: flex;  
     
@@ -69,10 +83,4 @@ flex:4;
 .categorySumm {
     font-weight: bold;
     border-bottom: solid 1px;
-}
-
-.totalSumm {
-text-align: center;
-margin-top: 10px;
-margin-bottom: 20px;
 }

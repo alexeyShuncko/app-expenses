@@ -7,7 +7,6 @@ import  HedgehogFunc  from '../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 
-
 const DeleteCategory = (props) => {
 
     const diagramm = props.diagramm.category
@@ -53,20 +52,19 @@ const DeleteCategory = (props) => {
                                 </div>
                                 <div className={s.instruction}>
                    <div className={s.instructionTitle}>
-                       Чтобы удалить категорию следуй ниже приведенным шагам:</div>
+                       Чтобы удалить категорию, следуйте ниже приведенным шагам:</div>
                    <div>
-                   <div>1) В поле "Название категории" выбери из выпадающего списка необходимую категорию</div>
-                   <div>2) Нажми кнопку "Удалить категорию"</div>
+                   <div>1) В поле "Название категории" выберите из выпадающего списка необходимую категорию</div>
+                   <div>2) Нажмите кнопку "Удалить категорию"</div>
                    </div> 
                   
                 </div>
                             </div>
 
-
                             <div className={s.buttonItem}>
-                                <button type="submit"
-                                    disabled={submitting || pristine} //сделать видимой невидимой
-                                >
+                                <button 
+                                type="submit"
+                                disabled={submitting || pristine}>
                                     Удалить категорию
                                 </button>
                                 <button type="button" onClick={returnSetting}>

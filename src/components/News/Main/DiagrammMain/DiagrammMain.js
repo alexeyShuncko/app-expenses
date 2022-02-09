@@ -7,8 +7,8 @@ import Legend from './Legend';
 const DiagrammMain = (props) => {
 
 
-    const onSelectChange = (e) => {
-        props.addSelectDiagramm(e.target.value)
+    const onSelectChange = (value) => {
+        props.addSelectDiagramm(value)
     }
 
     return (

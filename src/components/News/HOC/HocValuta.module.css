@@ -1,14 +1,32 @@
 .salary {
-    display: flex;
+display: flex;
+align-items: flex-end;
 }
 
-.salaryName {
-    font-weight: bold;
-    font-size: 20px;
-}
 .salaryValue {
+    margin-left: 5px;
+   
 }
-.salaryValuta {
-    align-self: flex-end;
+.salaryValuta { 
     margin-left: 3px;
 }
+
+
+
+/* Классы переключателя валюты */
+
+.fieldBynUsd {
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    }
+    
+    .fieldBynUsd:hover {
+        border-color:green;
+    }
+    .fieldBynUsd:focus {
+        outline: none;
+    }
+    
+    
+    

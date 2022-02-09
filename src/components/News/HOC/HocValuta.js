@@ -1,23 +1,36 @@
 import React, { useState } from "react";
 import s from './HocValuta.module.css';
-import FormBynUsd from './../helpers/FormBynUsd/FormBynUsd';
 
 
-export const HocValuta = (Component, props, activateEditMode, total, styles) => {
+export const HocValuta = (Component, props, activateEditMode, totalSumm, filterTable) => {
 
     let [editBYN, setEditBYN] = useState("BYN")
 
-    const activEditBYN = (value) => {
-         if (value !== editBYN)
-            setEditBYN(value)
+    const activEditBYN = (e) => {
+        if (e.target.value !== editBYN)
+            setEditBYN(e.target.value)
+
     }
     return (
         <div className={s.salary}>
-            <span className={s.salaryValue}>
-                <Component {...props} 
-                activateEditMode={activateEditMode} editBYN={editBYN} total={total} styles={styles} /></span>
-            <span className={s.salaryValuta}>
-                <FormBynUsd addSelect={activEditBYN} editBYN={editBYN} /></span>
+            <div className={s.salaryValue}>
+                <Component {...props}
+                    activateEditMode={activateEditMode}
+                    totalSumm={totalSumm}
+                    filterTable={filterTable}
+                    editBYN={editBYN}
+                />
+            </div>
+            <div className={s.salaryValuta}>
+                <select
+                    className={s.fieldBynUsd}
+                    name="valuta"
+                    defaultValue={editBYN}
+                    onChange={activEditBYN} >
+                    <option value="BYN">BYN</option>
+                    <option value="USD">USD</option>
+                </select>
+            </div>
         </div>
     )
 }

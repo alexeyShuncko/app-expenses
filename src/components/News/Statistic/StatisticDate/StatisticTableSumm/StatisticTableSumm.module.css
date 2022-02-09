@@ -1,16 +1,4 @@
 .item{
-    display: flex;
-    border-bottom: solid 1px;
     font-weight: bold;
 }
 
-.itemName {
-    flex: 1;
-    text-align: end;
-}
-
-.itemValue {
-    flex: 1;
-    text-align: left;
-    margin-left: 3px;
-}

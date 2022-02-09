@@ -37,8 +37,8 @@ const DiagrammContainer = (props) => {
     const select = props.diagramm.selectDiagrammStat
     const Cur_OfficialRate = props.diagramm.dollar.Cur_OfficialRate
 
-    const addSelect = (e) => {
-        props.addSelectDiagrammStat(e.target.value)
+    const addSelect = (value) => {
+        props.addSelectDiagrammStat(value)
     }
 
     useEffect(() => {
