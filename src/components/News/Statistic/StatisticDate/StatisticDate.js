@@ -3,18 +3,30 @@ import s from './StatisticDate.module.css';
 import DiagrammContainer from "./DIagrammContainer/DIagrammContainer";
 import DiagrammTotal from "./DIagrammContainer/DiagrammTotal/DiagrammTotal";
 import { HocValuta } from "../../HOC/HocValuta";
+import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
+import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
 
 
 const StatisticDate = (props) => {
 
     let [editMode, setEditMode] = useState(false)
-    let [editVal, setEditVal] = useState(false)
-
+   
     const activateEditMode = () => {
-        if (props.diagramm.periodPo && props.diagramm.periodS) {
+        if (props.diagramm.periodPo 
+            && props.diagramm.periodS ) {
             setEditMode(true)
         }
-        else setEditVal(true)
+        else if (!props.diagramm.periodS) {
+            HedgehogFunc(props.addText, 'Выберите начало периода ...')
+            ArrowFunc('arrowPeriod', 'periodS', 'buttonTable')
+            
+        }
+        else if (!props.diagramm.periodPo) {
+            HedgehogFunc(props.addText, 'Выберите окончание периода ...')
+            ArrowFunc('arrowPeriod', 'periodPo', 'buttonTable')
+            
+        }
+      
     }
     const deActivateEditMode = () => {
         setEditMode(false)
@@ -45,49 +57,46 @@ const StatisticDate = (props) => {
     let totalSort = total.sort((a, b) => a.time > b.time ? 1 : -1)            //сортировка по времени 
     const totalSumm = total.map(a=>a.num).reduce((sum, current) => sum + current, 0)
 
+
     return (
         <div className={s.container}>
             <div className={s.statisticDate}>
                 <div className={s.statisticDateItem}>
                     <div className={s.statisticDateTable}>
                         <div>Таблица расходов по всем  категориям за выбранный период. </div>
-                        {!editMode
+                        {!editMode 
                             ? <div>
-                                <button onClick={activateEditMode}> Показать </button>
+                                <button 
+                                className='buttonTable'
+                                onClick={activateEditMode}> Показать </button>
                             </div>
                             : <div >
-                                <button onClick={deActivateEditMode}> Убрать </button>
+                                <button  
+                                className='buttonTable'
+                                onClick={deActivateEditMode}> Убрать </button>
+                                     
 
-                                {totalSort.length === 0
-
-                                    ? <div className={s.categoryVal}>Нет расходов за выбранный период</div>
-
-                                    : <div>
-                                        <div className={s.statisticTable}>
+                                {totalSort.length !==0
+                                        ?<div className={s.statisticTable}>
                                             <div className={s.statisticName}>
                                                 <span className={s.statisticNameCateg}>Категория:</span>
                                                 <span className={s.statisticNameDate}>Дата:</span>
                                                 <span className={s.statisticNameSumm}>Сумма:</span>
-
                                             </div>
 
                                             {totalSort.map(a =>
                                                 <div key={a.id} className={s.statisticDate}>
                                                     <span className={s.statisticDateName}> {a.name} </span>
                                                     <span className={s.statisticDateTime}>  
-                                                    {a.time.slice(8,10)+'.'+ a.time.slice(5,7)+ '.' + a.time.slice(2,4)+ ' '+ a.time.slice(-5)}</span>
+                                                    {a.time.slice(8,10)+'.'+ a.time.slice(5,7)+ '.' 
+                                                    + a.time.slice(2,4)+ ' '+ a.time.slice(-5)}</span>
                                                     <span className={s.statisticDateNum}> {a.num} </span>
 
                                                 </div>)}
-
-                                        </div>
-                                    </div>}
-
+                                        </div>  
+                                        : <div>Ноль потрачено</div>
+                                            }
                             </div>}
-                        {editVal && (!props.diagramm.periodPo || !props.diagramm.periodS)
-                            ? <div className={s.categoryVal}>Выбери период</div>
-                            : null
-                        }
                     </div>
                 </div>
                 <div className={s.statisticDateDiagramm}>

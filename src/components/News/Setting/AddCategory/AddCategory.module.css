@@ -13,9 +13,9 @@ margin-bottom: 20px;
 .buttonItem button {
 margin-right: 10px;
 }
-.color{
+.color {
     justify-content: end;
-    background: none;
+    background: none; 
     border: none;
     padding: 0px;
     margin: 0px;
@@ -40,13 +40,7 @@ margin-right: 5px;
   font-weight: bold;
 }
 
-.validColor {
-margin-left: 10px;
-padding-left: 5px;
-padding-right: 5px;
-border: solid red 1px;
-border-radius: 10px;
-}
+
 
 .title {
     font-size: 22px;
@@ -64,7 +58,7 @@ flex-direction: row;
 }
 .addCategory {
 flex: 1;
-margin-left: 30px;
+margin-left: 40px;
 }
 
 .instruction {

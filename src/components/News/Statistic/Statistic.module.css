@@ -27,7 +27,8 @@
 
 .categoryStatistic {
     flex: 1;
-    margin-bottom: 30px;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 .categoryStatisticName {
     font-weight: bold;
@@ -53,8 +54,10 @@
 }
 
 .option {
+    font-size: 16px;
+    margin-top: 5px;
     height: 30px;
-    width: 120px;
+    width: 170px;
     border-radius: 5px;
 }
 
@@ -64,4 +67,13 @@
 
 .periodStatistic label {
     flex: 1;
+    margin-right: 3px;
+}
+
+
+
+/* Стрелка валидации */
+
+.nameArrow {
+display: flex;
 }

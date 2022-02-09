@@ -32,19 +32,19 @@ const RenameCategory = (props) => {
 
         else if (!values.favorite) {
             HedgehogFunc(props.addText, 'Выберите категорию из списка ...')
-            ArrowFunc('arrowFavorite', 'favorite', 'buttonRename')
+            ArrowFunc('arrowFavorite', 'favorite', 'buttonSetting')
         }
         else if (values.name && props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
-            ArrowFunc('arrowName', 'nameCategory', 'buttonRename')
+            ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
         }
         else if (!isNaN(Number(values.name))) {
             HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...')
-            ArrowFunc('arrowName', 'nameCategory', 'buttonRename')
+            ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
         }
         else if (!values.name) {
             HedgehogFunc(props.addText, 'Впишите новое название категории ...')
-            ArrowFunc('arrowName', 'nameCategory', 'buttonRename')
+            ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
         }
 
     }
@@ -132,7 +132,7 @@ const RenameCategory = (props) => {
 
                             <div className={s.buttonItem}>
                                 <button
-                                    id='buttonRename'
+                                     className='buttonSetting'
                                     type="submit"
                                     disabled={submitting || pristine}>
                                     Переименовать категорию

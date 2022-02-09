@@ -19,14 +19,11 @@ display: flex;
 
 /* Блок шагов инструкций */
 .RelativityBloc {
-   
     display: flex;
     flex-direction: row;
     margin-top: 20px;
 }
-.Relativity {
-    flex: 2;
-}
+
 .instruction {
     flex: 3;
     margin-top: 10px;
@@ -41,14 +38,16 @@ display: flex;
 
 /* Поля ввода относительной величины */
 .relativityBloc { 
+    display: flex;
+    flex-direction: column;
     flex: 1;
-
-margin-right: 70px;
 }
 .relativityBloc label {
+    flex: 1;
 font-weight: bold;
 }
 .relativityBlocField {
+  
 width: 120px;
 }
 .relativityBlocField1 {
@@ -56,3 +55,19 @@ width: 120px;
 }
 
 
+
+
+
+.nameArrow {
+display: flex;
+align-items: flex-end;
+margin-left: 30px;
+}
+
+.relativityArrow{
+margin-top: 20px;
+}
+
+.relativityTotal {
+display: flex;
+}

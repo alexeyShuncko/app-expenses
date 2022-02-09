@@ -69,12 +69,6 @@ flex:4;
  margin-right: 20px;
 }
 
-.categoryVal {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 15px;
-    border: solid green 2px;
-}
 
 .statisticDateSumm {
     margin-top: 10px;   
@@ -84,3 +78,6 @@ flex:4;
     font-weight: bold;
     border-bottom: solid 1px;
 }
+
+
+

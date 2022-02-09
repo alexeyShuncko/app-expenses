@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Color.module.css';
 import { Form, Field } from 'react-final-form';
 import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
+import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 
 
 const Color = (props) => {
@@ -11,10 +12,13 @@ const Color = (props) => {
     }
 
     const onSubmit = (values) => {
-        if (String(props.diagramm.category.map(a => a.color)) === String(Object.values(values))) { HedgehogFunc(props.addText, 'Вы не изменили ни одного цвета ...') }
+        if (String(props.diagramm.category.map(a => a.color)) === String(Object.values(values))) { 
+            HedgehogFunc(props.addText, 'Вы не изменили ни одного цвета ...') 
+            ArrowFunc(null, null, 'buttonSetting')}
         else if (String(props.diagramm.category.map(a => a.color)) !== String(Object.values(values))) {
             props.addEditColor(Object.values(values), Object.keys(values))
             HedgehogFunc(props.addText, 'Цвет изменен ...')
+            ArrowFunc(null, null, 'buttonSetting')
         }
     }
 
@@ -42,6 +46,7 @@ const Color = (props) => {
 
                                 <div className={s.button}>
                                     <button
+                                     className='buttonSetting'
                                         type="submit"
                                         disabled={submitting || pristine}>
                                         Изменить цвет

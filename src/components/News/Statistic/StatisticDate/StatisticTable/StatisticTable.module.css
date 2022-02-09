@@ -60,10 +60,7 @@
     display: flex;
 }
 
-/* Чтобы вызов хуков былпо порядку */
-.hocHidden {
-    visibility: hidden;
-}
+
 
 
 /* Выравнивание итоговой суммы  */
@@ -71,3 +68,7 @@
     display: flex;
     justify-content: center;
 }
+
+.buttonTable{
+    margin-left: 3px;
+    }

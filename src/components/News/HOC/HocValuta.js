@@ -12,7 +12,9 @@ export const HocValuta = (Component, props, activateEditMode, totalSumm, filterT
 
     }
     return (
-        <div className={s.salary}>
+        <>
+        {Component
+            ? <div className={s.salary}>
             <div className={s.salaryValue}>
                 <Component {...props}
                     activateEditMode={activateEditMode}
@@ -32,5 +34,8 @@ export const HocValuta = (Component, props, activateEditMode, totalSumm, filterT
                 </select>
             </div>
         </div>
+        : null
+        }
+        </>
     )
 }

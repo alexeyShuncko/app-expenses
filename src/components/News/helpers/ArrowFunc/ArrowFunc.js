@@ -2,23 +2,32 @@
 import s from '../../Arrow/ArrowValidate.module.css';
 
 
- const ArrowFunc = (idArrow, idInput, idButton) => {
+ const ArrowFunc = (idArrow, idInput, classButton) => {
 
-   let button = document.getElementById(idButton)
-   button.disabled= true
-   setTimeout(() => {
-      button.disabled = false
+if (classButton) {
+   let button = document.getElementsByClassName(classButton)
+   let arr = Array.from(button)
+   arr.map(a =>  a.disabled = true)
+   setTimeout(() => {arr.map(a=>
+       a.disabled = false)
    }, 4000)
+}
 
-    let show = document.getElementById(idArrow)
-    show.classList.toggle(s.show)
-    setTimeout(() => {
-       show.classList.remove(s.show)
-    }, 3900)
 
-    let error = document.getElementById(idInput)
+if (idArrow) {
+   let show = document.getElementById(idArrow)
+   show.classList.toggle(s.show)
+   setTimeout(() => {
+      show.classList.remove(s.show)
+   }, 3900)
+}
+   
+if (idInput) {
+   let error = document.getElementById(idInput)
    error.classList.toggle(s.error,true) 
     error.focus()
+}
+    
 }
 
 

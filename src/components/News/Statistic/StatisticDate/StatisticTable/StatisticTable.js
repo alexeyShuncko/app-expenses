@@ -3,7 +3,8 @@ import s from './StatisticTable.module.css';
 import StatisticTableSumm from "../StatisticTableSumm/StatisticTableSumm";
 import { HocValuta } from "../../../HOC/HocValuta";
 import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
-//import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
+import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
+import OffStyle from './../../../helpers/ArrowFunc/Offstyle';
 
 
 const StatisticTable = (props) => {
@@ -32,23 +33,25 @@ const StatisticTable = (props) => {
     const activateEditMode = () => {
         if (props.diagramm.activ
             && props.diagramm.periodPo
-            && props.diagramm.periodS
-            && filterTable.length !== 0) {
-            console.log('попал')
+            && props.diagramm.periodS) {
+              
+                OffStyle(['periodS','periodPo'])
+
             setEditMode(true)
         }
         else if (!props.diagramm.activ) {
             HedgehogFunc(props.addText, 'Выберите категорию ...')
-            //ArrowFunc('colorAdd', 'addColor', 'buttonAdd')
+            ArrowFunc('arrowCategory', 'inputCategoryStatistic', 'buttonTable')
         }
-        else if (!props.diagramm.periodPo || !props.diagramm.periodS) {
-            HedgehogFunc(props.addText, 'Выберите период ...')
-            //ArrowFunc('colorAdd', 'addColor', 'buttonAdd')
+        else if (!props.diagramm.periodS) {
+            HedgehogFunc(props.addText, 'Выберите начало периода ...')
+            ArrowFunc('arrowPeriod', 'periodS', 'buttonTable')
         }
-        else if (filterTable.length === 0) {
-            HedgehogFunc(props.addText, 'Нет расходов за выбранный период ...')
-            //ArrowFunc('colorAdd', 'addColor', 'buttonAdd')
+        else if (!props.diagramm.periodPo) {
+            HedgehogFunc(props.addText, 'Выберите окончание периода ...')
+            ArrowFunc('arrowPeriod', 'periodPo', 'buttonTable')
         }
+       
     }
     const deActivateEditMode = () => {
         setEditMode(false)
@@ -60,13 +63,17 @@ const StatisticTable = (props) => {
                 <div>Таблица расходов по выбранной категории за выбранный период. </div>
                 {!editMode
                     ? <div>
-                        <button onClick={activateEditMode}> Показать </button>
-                        <div className={s.hocHidden}>{HocValuta(StatisticTableSumm, props, null, null, filterTable)}</div>
+                        <button  
+                        className='buttonTable' 
+                        onClick={activateEditMode}> Показать </button>
+                    {HocValuta()}
                     </div>
                     : <div >
-                        <button onClick={deActivateEditMode}> Убрать </button>
-
-                        <div>
+                        <button   
+                        className='buttonTable'
+                        onClick={deActivateEditMode}> Убрать </button>
+                        {filterTable.length !==0
+                        ? <div>
                             <div className={s.statisticTable}>
                                 <div className={s.statisticName}>
                                     <span className={s.statisticNameDate}>Дата:</span>
@@ -94,6 +101,10 @@ const StatisticTable = (props) => {
 
                             </div>
                         </div>
+                        : <div>Ноль потрачено
+                              {HocValuta()}
+                        </div>
+                                }
                     </div>}
 
             </div>

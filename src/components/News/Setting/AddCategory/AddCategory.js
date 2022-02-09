@@ -20,7 +20,7 @@ const AddCategory = (props) => {
             && isNaN(Number(values.name))) {
             HedgehogFunc(props.addText, 'Категория ' + values.name + ' добавлена ...')
             props.addCategory(values.name, values.color)
-
+            ArrowFunc(null, null, 'buttonSetting')
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
 
             values.name = ''
@@ -28,21 +28,21 @@ const AddCategory = (props) => {
         }
         else if (!values.name) {
             HedgehogFunc(props.addText, 'Впишите название категории ...')
-            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonAdd')
+            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
         }
 
         else if (!isNaN(Number(values.name))) {
             HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...')
-            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonAdd')
+            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
 
         }
         else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
-            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonAdd')
+            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
         }
         else if (values.color === '#ffffff') {
             HedgehogFunc(props.addText, 'Вы забыли выбрать цвет ...')
-            ArrowFunc('colorAdd', 'addColor', 'buttonAdd')
+            ArrowFunc('colorAdd', 'addColor', 'buttonSetting')
         }
     }
     return (
@@ -124,7 +124,7 @@ const AddCategory = (props) => {
 
                             <div className={s.buttonItem}>
                                 <button
-                                    id='buttonAdd'
+                                    className='buttonSetting'
                                     type="submit"
                                     disabled={submitting || pristine}>
                                     Добавить категорию
