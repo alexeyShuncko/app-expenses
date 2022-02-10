@@ -5,6 +5,8 @@ import DiagrammTotal from "./DIagrammContainer/DiagrammTotal/DiagrammTotal";
 import { HocValuta } from "../../HOC/HocValuta";
 import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
+import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
+import Message from "../../helpers/Message/Message";
 
 
 const StatisticDate = (props) => {
@@ -57,6 +59,9 @@ const StatisticDate = (props) => {
     let totalSort = total.sort((a, b) => a.time > b.time ? 1 : -1)            //сортировка по времени 
     const totalSumm = total.map(a=>a.num).reduce((sum, current) => sum + current, 0)
 
+    let  textMessage = 
+    `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
+    по ${DataTransformation(props.diagramm.periodPo)} ...`
 
     return (
         <div className={s.container}>
@@ -94,13 +99,14 @@ const StatisticDate = (props) => {
 
                                                 </div>)}
                                         </div>  
-                                        : <div>Ноль потрачено</div>
+                                        : <div> <Message textMessage={textMessage} idMessage='messageTableTotal'/></div>
                                             }
                             </div>}
                     </div>
                 </div>
                 <div className={s.statisticDateDiagramm}>
                     <DiagrammContainer
+                    addText={props.addText}
                         addSelectDiagrammStat={props.addSelectDiagrammStat}
                         diagramm={props.diagramm} />
                 </div>

@@ -9,6 +9,7 @@ import SalaryValue from './SalaryValue/SalaryValue';
 import { HocValuta } from '../../../../HOC/HocValuta';
 import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../../../helpers/ArrowFunc/ArrowFunc';
+import ArrowValidate from './../../../../Arrow/ArrowValidate';
 
 
 const Salary = (props) => {
@@ -65,22 +66,27 @@ const Salary = (props) => {
 
     const onSubmit = (values) => {
 
-        if (values.valuta === 'BYN') {
+        if (values.valuta === 'BYN' && values.salary) {
             props.addSalary(Number(values.salary).toFixed(2), months)
             deActivateEditMode()
             HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
-           
+
         }
-        else if (values.valuta === 'USD') {
+        else if (values.valuta === 'USD' && values.salary) {
             props.addSalary((Number(values.salary) * Number(props.diagramm.dollar.Cur_OfficialRate)).toFixed(2), months)
             deActivateEditMode()
             HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
-          
+
         }
-        else if (!values.valuta) {   
+        else if (!values.salary) {
+            HedgehogFunc(props.addText, 'Введите сумму ЗП ...')
+            ArrowFunc('arrowSalaryAdd', 'addTotalInput', 'addSalary')
+        }
+        else if (!values.valuta) {
             HedgehogFunc(props.addText, 'Выберите валюту ЗП ...')
-            ArrowFunc('colorAdd', 'addValutaInput', 'addSalary')
-         }
+            ArrowFunc('arrowSalaryAdd', 'addValutaInput', 'addSalary')
+        }
+        
     }
 
     return (
@@ -101,32 +107,42 @@ const Salary = (props) => {
                     onSubmit={onSubmit}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit} className={s.form}>
-
-                            <div className={s.inputSalary}>
-                                <label> </label>
-                                <Field
-                                    autoFocus={true}
-                                    autoComplete="off"
-                                    name="salary"
-                                    component="input"
-                                    type="number"
-                                    step="0.01"
-                                    required />
+                            <div className={s.salary}>
+                                <div className={s.salaryAddBloc}>
+                                    <div className={s.salaryAdd}>
+                                        <label> Сумма: </label>
+                                        <Field
+                                        id='addTotalInput'
+                                            className={s.inputSalary}
+                                            autoFocus={true}
+                                            autoComplete="off"
+                                            name="salary"
+                                            component="input"
+                                            type="number"
+                                            step="0.01" />
+                                    </div>
+                                    <div className={s.valutaAdd}>
+                                        <label> Валюта: </label>
+                                        <Field
+                                            id='addValutaInput'
+                                            className={s.fieldBynUsd}
+                                            name="valuta"
+                                            component="select" >
+                                            <option/>
+                                            <option value="BYN">BYN</option>
+                                            <option value="USD">USD</option>
+                                        </Field>
+                                    </div>
+                                </div>
+                                <div className={s.arrowSalary}>
+                                    <ArrowValidate arrowId='arrowSalaryAdd' />
+                                </div>
                             </div>
-                            <Field 
-                            id='addValutaInput'
-                            className={s.fieldBynUsd}
-                            name="valuta" 
-                            component="select" >
-                                <option value="BYN">BYN</option>
-                                <option value="USD">USD</option>
-                            </Field>
-
                             <div className={s.buttonSalary}>
                                 <button
-                                id='addSalary' 
-                                type="submit" 
-                                disabled={submitting || pristine}>
+                                    className='addSalary'
+                                    type="submit"
+                                    disabled={submitting || pristine}>
                                     Добавить
                                 </button>
                                 <button type="button" onClick={deActivateEditMode}>
@@ -139,11 +155,11 @@ const Salary = (props) => {
                 />
                 : null}
             <div className={s.salaryValue}>
-            <div className={s.salaryName}>Всего потрачено:</div>
+                <div className={s.salaryName}>Всего потрачено:</div>
                 {HocValuta(SalarySpent, props)}
             </div>
             <div className={s.salaryValue}>
-            <div className={s.salaryName}>Должно остаться:</div>
+                <div className={s.salaryName}>Должно остаться:</div>
                 {HocValuta(SalaryRemainder, props)}
             </div>
         </div>

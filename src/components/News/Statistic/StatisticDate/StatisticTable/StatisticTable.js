@@ -5,6 +5,8 @@ import { HocValuta } from "../../../HOC/HocValuta";
 import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
 import OffStyle from './../../../helpers/ArrowFunc/Offstyle';
+import Message from "../../../helpers/Message/Message";
+import { DataTransformation } from "../../../helpers/DataTransformation/DataTransformation";
 
 
 const StatisticTable = (props) => {
@@ -57,6 +59,11 @@ const StatisticTable = (props) => {
         setEditMode(false)
     }
 
+    let  textMessage = 
+    `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
+    по ${DataTransformation(props.diagramm.periodPo)}, 
+    по категории ${props.diagramm.activ} ...`
+      
 
     return (
             <div className={s.statisticDateTable}>
@@ -82,8 +89,7 @@ const StatisticTable = (props) => {
 
                                 {filterTable.map(a => <div key={a.id} className={s.table}>
                                     <span className={s.statisticDateTime}>
-                                        {a.time.slice(8, 10) + '.' + a.time.slice(5, 7) + '.'
-                                            + a.time.slice(0, 4) + ' ' + a.time.slice(-5)}
+                                        {DataTransformation(a.time) + ' ' + a.time.slice(-5)}
                                     </span>
                                     <span className={s.statisticDateNum}> {a.num} </span>
                                 </div>)}
@@ -101,7 +107,8 @@ const StatisticTable = (props) => {
 
                             </div>
                         </div>
-                        : <div>Ноль потрачено
+                        : <div>
+                            <Message textMessage={textMessage} idMessage='messageTable'/>
                               {HocValuta()}
                         </div>
                                 }

@@ -1,38 +1,27 @@
-.item {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-
-}
-
-.buttonItem {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.buttonItem button {
-    margin-right: 10px;
-}
-
 .title {
     font-size: 22px;
     text-align: center;
 }
 
+
+
+/* Блоки под названием */
 .deleteCategoryBloc {
     display: flex;
     flex-direction: row;
+    margin-top: 20px;
 }
 
-.nameInput {
+.deleteCategory {
     flex: 1;
+    margin-top: 20px;
+    margin-left: 20px; 
 }
 
 .instruction {
     flex: 2;
     margin-top: 10px;
 }
-
 .instructionTitle {
     font-size: 17px;
     font-style: italic;
@@ -40,8 +29,18 @@
     margin-bottom: 10px;
 }
 
-
+/* Поле выбора категории */
 .option {
     height: 25px;
     width: 120px;
+}
+
+/* Кнопки */
+.buttonItem {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.buttonItem button {
+    margin-right: 10px
 }

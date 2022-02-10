@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
+import { DataTransformation } from "../../../helpers/DataTransformation/DataTransformation";
 import FormSelectDiagramm from "../../../helpers/FormSelectDiagramm/FormSelectDiagramm";
+import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
+import Message from "../../../helpers/Message/Message";
 import Legend from "../../../Main/DiagrammMain/Legend";
 import s from './DiagrammContainer.module.css';
 import StatisticDateDiagram from './StatisticDateDiagram';
@@ -8,13 +12,22 @@ import StatisticDateDiagram from './StatisticDateDiagram';
 const DiagrammContainer = (props) => {
 
     let [edit, setEdit] = useState(false)
-    let [editVal, setEditVal] = useState(false)
 
     const activateEditMode = () => {
         if (props.diagramm.periodPo && props.diagramm.periodS) {
             setEdit(true)
         }
-        else setEditVal(true)
+        else if (!props.diagramm.periodS) {
+            HedgehogFunc(props.addText, 'Выберите начало периода ...')
+            ArrowFunc('arrowPeriod', 'periodS', 'buttonTable')
+
+        }
+        else if (!props.diagramm.periodPo) {
+            HedgehogFunc(props.addText, 'Выберите окончание периода ...')
+            ArrowFunc('arrowPeriod', 'periodPo', 'buttonTable')
+
+        }
+
     }
     const deActivateEditMode = () => {
         setEdit(false)
@@ -48,6 +61,10 @@ const DiagrammContainer = (props) => {
     }, [props.diagramm, edit, diagramm, eee, select, Cur_OfficialRate, total]);
 
 
+    let  textMessage = 
+    `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
+    по ${DataTransformation(props.diagramm.periodPo)} ...`
+
     return (
         <div>
             <div >Диаграмма расходов по всем категориям
@@ -56,29 +73,29 @@ const DiagrammContainer = (props) => {
                     <span className={s.selectValue}>
                         <FormSelectDiagramm
                             addSelect={addSelect}
-                            select={select} /></span> </div>
+                            select={select} /></span>
+                </div>
             </div>
 
             {!edit
                 ? <div >
-                    <button onClick={activateEditMode}> Показать </button>
+                    <button
+                        className='buttonTable'
+                        onClick={activateEditMode}> Показать </button>
                 </div>
                 : <div>
-                    <button onClick={deActivateEditMode}> Убрать </button>
+                    <button
+                        className='buttonTable'
+                        onClick={deActivateEditMode}> Убрать </button>
                     {total === 0
-                        ? <div className={s.categoryVal}>Нет расходов за выбранный период</div>
+                        ?  <Message textMessage={textMessage} idMessage='messageDiagrammTotal'/>
                         : <div>
-                        <div className={s.diagramm}><canvas id="period" width='250px' height='300px'></canvas>
-                        <Legend {...props}/>
+                            <div className={s.diagramm}><canvas id="period" width='250px' height='300px'></canvas>
+                                <Legend {...props} />
+                            </div>
                         </div>
-                       </div>
                     }
                 </div>
-            }
-
-            {editVal && (!props.diagramm.periodPo || !props.diagramm.periodS)
-                ? <div className={s.categoryVal}>Выбери период</div>
-                : null
             }
         </div>)
 }

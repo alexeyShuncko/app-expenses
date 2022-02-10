@@ -45,6 +45,10 @@ const Statistic = (props) => {
             props.addPeriodS(e.target.value)
             HedgehogFunc(props.addText, 'Начало периода выбрано ...')
             ArrowFunc(null, null, 'buttonTable')
+
+            // let disPeriodPo = document.getElementById('periodPo')    на подумать, отключить период 'По' 
+            // disPeriodPo.disabled = false
+
             OffStyle(['periodS'])
         }
         else if (e.target.value !== props.diagramm.periodS) {
@@ -124,9 +128,7 @@ const Statistic = (props) => {
                                                         {a.nameRus}
                                                     </option>)}
                                             </Field>
-
                                         </div>
-
                                     </div>
                                     <div>
                                         <ArrowValidate arrowId='arrowCategory' />
@@ -154,7 +156,7 @@ const Statistic = (props) => {
                                                 component="input"
                                                 type="date"
                                                 min='2022-01-01'
-                                                max={data}>
+                                                max={props.diagramm.periodPo || data }>
                                             </Field>
                                             <Field
                                                 onChange={periodSTime}
@@ -166,12 +168,13 @@ const Statistic = (props) => {
                                         <div className={s.periodStatistic}>
                                             <label>По: </label>
                                             <Field
+                                            //disabled
                                             id='periodPo'
                                                 onChange={periodPo}
                                                 name="periodPo"
                                                 component="input"
                                                 type="date"
-                                                min='2022-01-01'
+                                                min={props.diagramm.periodS || '2022-01-01'}
                                                 max={data}>
                                             </Field>
                                             <Field

@@ -17,7 +17,6 @@
   font-style: italic;
   font-size: 14px;
   visibility: hidden;
-  /* width: 200px; */
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -27,7 +26,6 @@
   z-index: 1;
   bottom: 133px;
   left: 21%;
-  /* margin-left: 0px; */
 }
 
 /* Popup arrow */

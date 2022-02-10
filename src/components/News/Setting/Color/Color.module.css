@@ -1,3 +1,15 @@
+.title {
+    font-size: 22px;
+    text-align: center;
+}
+
+
+/* Каждая категория с цветом */
+.item {
+    display: flex;
+    align-items: center;
+}
+
 .inputColorValue {
     background: none;
     border: none;
@@ -5,48 +17,33 @@
     margin: 0px;
     width: 25px;
     height: 30px;
-
 }
 
-.title {
-    font-size: 22px;
-    text-align: center;
-}
-
-.changeСolor {
-    margin: 20px;
-
-}
-
-.item {
-    display: flex;
-    align-items: center;
-}
-
-.itemName {}
-
-.button button{
-    margin-top: 20px;
-    margin-right: 10px;
-}
-
+/* Блоки под названием  */
 .changeСolorBloc {
     display: flex;
     flex-direction: row;
+    margin-top: 20px;
 }
-
 .changeСolor {
-    flex: 2;
+    flex: 1;
+    margin-left: 40px;
+    margin-top: 20px;
 }
 
 .instruction {
-    flex: 5;
+    flex: 3;
     margin-top: 10px;
 }
-
 .instructionTitle {
     font-size: 17px;
     font-style: italic;
     text-decoration: underline;
     margin-bottom: 10px;
+}
+
+/* Кнопки */
+.button button {
+    margin-top: 20px;
+    margin-right: 10px;
 }
