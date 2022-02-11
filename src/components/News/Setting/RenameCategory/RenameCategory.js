@@ -25,7 +25,7 @@ const RenameCategory = (props) => {
             HedgehogFunc(props.addText,
                 values.favorite + ' переименована в ' + values.name + ' ...')
 
-            OffStyle(['nameCategory'])
+            OffStyle(['nameCategory','favorite'])
 
             form.reset()
         }

@@ -16,6 +16,7 @@ const FormSelectDiagramm = (props) => {
         <option value="%">%</option>
         <option value="BYN">BYN</option>
         <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
     </select>
 
     )

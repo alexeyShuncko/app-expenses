@@ -14,8 +14,10 @@ margin-bottom: 20px;
 margin-right: 10px;
 }
 .color {
+
     justify-content: end;
-    background: none; 
+    /* background: none;  */
+    background-color: rgb(204, 163, 204);
     border: none;
     padding: 0px;
     margin: 0px;

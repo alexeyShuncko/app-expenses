@@ -48,7 +48,8 @@ const DiagrammContainer = (props) => {
 
     const total = diagramm.reduce((sum, current) => sum + current, 0)
     const select = props.diagramm.selectDiagrammStat
-    const Cur_OfficialRate = props.diagramm.dollar.Cur_OfficialRate
+    const dollar = props.diagramm.exchangeRates.dollar.Cur_OfficialRate  
+    const euro = props.diagramm.exchangeRates.euro.Cur_OfficialRate  
 
     const addSelect = (value) => {
         props.addSelectDiagrammStat(value)
@@ -56,9 +57,9 @@ const DiagrammContainer = (props) => {
 
     useEffect(() => {
         if (edit === true && total !== 0) {
-            StatisticDateDiagram(diagramm, eee, select, Cur_OfficialRate)
+            StatisticDateDiagram(diagramm, eee, select, dollar,euro)
         }
-    }, [props.diagramm, edit, diagramm, eee, select, Cur_OfficialRate, total]);
+    }, [props.diagramm, edit, diagramm, eee, select, dollar,euro, total]);
 
 
     let  textMessage = 

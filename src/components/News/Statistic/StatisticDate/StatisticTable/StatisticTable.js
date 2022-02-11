@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from './StatisticTable.module.css';
-import StatisticTableSumm from "../StatisticTableSumm/StatisticTableSumm";
-import { HocValuta } from "../../../HOC/HocValuta";
+//import StatisticTableSumm from "../StatisticTableSumm/StatisticTableSumm";
+import HocValuta from "../../../HOC/HocValuta";
 import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
 import OffStyle from './../../../helpers/ArrowFunc/Offstyle';
@@ -73,7 +73,6 @@ const StatisticTable = (props) => {
                         <button  
                         className='buttonTable' 
                         onClick={activateEditMode}> Показать </button>
-                    {HocValuta()}
                     </div>
                     : <div >
                         <button   
@@ -102,14 +101,16 @@ const StatisticTable = (props) => {
                                         : props.diagramm.activ} </span>
                                 <div> за выбранный период: </div>
                                 <div className={s.totalCAtegory}>
-                                    {HocValuta(StatisticTableSumm, props, null, null, filterTable)}
+                                <HocValuta 
+                                value='statisticTable' 
+                                filterTable={filterTable} 
+                                exchangeRates={props.diagramm.exchangeRates}/>
                                 </div>
 
                             </div>
                         </div>
                         : <div>
                             <Message textMessage={textMessage} idMessage='messageTable'/>
-                              {HocValuta()}
                         </div>
                                 }
                     </div>}

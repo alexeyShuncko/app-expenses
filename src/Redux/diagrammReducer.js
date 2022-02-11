@@ -1,4 +1,4 @@
-import { getDollar } from './../API/api';
+import { getDollar, getEuro } from './../API/api';
 
 
 const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
@@ -12,6 +12,7 @@ const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
 const ADD_SALARY_VALUE_TRUE = 'ADD_SALARY_VALUE_TRUE'
 const ADD_EDIT_COLOR = 'ADD_EDIT_COLOR'
 const ADD_DOLLAR = 'ADD_DOLLAR'
+const ADD_EURO = 'ADD_EURO'
 const ADD_SELECT_DIAGRAMM_STAT = 'ADD_SELECT_DIAGRAMM_STAT'
 const ADD_CATEGORY = 'ADD_CATEGORY'
 const DELETE_CATEGORY = 'DELETE_CATEGORY'
@@ -32,9 +33,13 @@ let initialState = {
                 { id: 'Еда5', time: '2022-01-14 15:06', num: 52 }
             ], summ: 127
         },
-        { nameRus: 'Алкоголь', color: '#2222d1', data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
-        { nameRus: 'Квартира', color: '#57d9ff', data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
-        { nameRus: 'Транспорт', color: '#169928', data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }],
+        { nameRus: 'Алкоголь', color: '#2222d1', 
+        data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
+        { nameRus: 'Квартира', color: '#57d9ff', 
+        data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
+        { nameRus: 'Транспорт', color: '#169928', 
+        data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }
+    ],
     activ: '',
     salary: { salaryNum: 700.01, salaryDate: '2022-02-01', salaryValueTrue: false },
     periodPo: '',
@@ -43,18 +48,18 @@ let initialState = {
     periodSTime: '00:01',
     selectDiagramm: '%',
     selectDiagrammStat: '%',
-    dollar: {
-        Cur_OfficialRate: '2.5',
-        Date: ''
+    exchangeRates: {
+        dollar: { Cur_OfficialRate: '2.5', Date: '' },
+        euro: { Cur_OfficialRate: '2.9', Date: '' }
     },
-    relativity: 
-        { 
-        name: 'пива "Аксамитное"', 
+    relativity:
+    {
+        name: 'пива "Аксамитное"',
         unit: 'бутылка',
-        price: 4.59 
+        price: 4.59
     },
     text: 'Привет...'
-    
+
 }
 
 const diagrammReduser = (state = initialState, action) => {
@@ -136,12 +141,23 @@ const diagrammReduser = (state = initialState, action) => {
         case ADD_DOLLAR:
             return {
                 ...state,
-                dollar: {
-                    ...state.dollar,
+                exchangeRates: {
+                    dollar: {
                     Cur_OfficialRate: action.dollar,
-                    Date: action.data.slice(0, -9)
+                    Date: action.data.slice(0, -9)},
+                    euro: {...state.exchangeRates.euro}
                 }
             }
+            case ADD_EURO:
+                return {
+                    ...state,
+                    exchangeRates: {
+                        dollar: {...state.exchangeRates.dollar},
+                        euro: {
+                            Cur_OfficialRate: action.euro,
+                            Date: action.data.slice(0, -9)}
+                    }
+                }
         case ADD_CATEGORY:
             return {
                 ...state,
@@ -169,20 +185,20 @@ const diagrammReduser = (state = initialState, action) => {
                     else return a
                 })]
             }
-            case CHANGE_RELATIVITY:
-                return {
-                    ...state,
-                    relativity : {
-                        name: action.data.name, 
-                        unit: action.data.unit,
-                        price: Number(action.data.price) 
-                    }
+        case CHANGE_RELATIVITY:
+            return {
+                ...state,
+                relativity: {
+                    name: action.data.name,
+                    unit: action.data.unit,
+                    price: Number(action.data.price)
                 }
-                case ADD_TEXT:
-                    return {
-                        ...state,
-                        text: action.text
-                    }
+            }
+        case ADD_TEXT:
+            return {
+                ...state,
+                text: action.text
+            }
 
         default:
             return state
@@ -210,6 +226,9 @@ export const renameCategory = (name, rename) => {
 
 export const addDollar = (dollar, data) => {
     return { type: ADD_DOLLAR, dollar, data }
+}
+export const addEuro = (euro, data) => {
+    return { type: ADD_EURO, euro, data }
 }
 export const addDiagramm = (name, value, time) => {
     return { type: ADD_DIAGRAMM, name, value, time }
@@ -247,12 +266,19 @@ export const addSalaryValueTrue = (value) => {
 }
 
 
+
 export const getDollarUpdate = () => (dispatch) => {
 
     getDollar().then(data => {
         dispatch(addDollar(data.Cur_OfficialRate, data.Date))
     })
-
 }
+export const getEuroUpdate = () => (dispatch) => {
+
+    getEuro().then(data => {
+        dispatch(addEuro(data.Cur_OfficialRate, data.Date))
+    })
+}
+
 
 export default diagrammReduser

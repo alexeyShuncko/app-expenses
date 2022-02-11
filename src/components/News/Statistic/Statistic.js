@@ -37,6 +37,7 @@ const Statistic = (props) => {
     const colorActiv = (e) => {
         if (e.target.value !== props.diagramm.activ) {
             props.addActiv(e.target.value)
+            OffStyle(['inputCategoryStatistic'])
             //HedgehogFunc(props.addText, 'Категория выбрана ...')   на подумать, + изменение категории
         }
     }

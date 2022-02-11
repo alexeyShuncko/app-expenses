@@ -1,7 +1,7 @@
 //import React from 'react';
 
 
-const StatisticDateDiagram = (diagramm,eee, selectDiagramm,Cur_OfficialRate ) => {
+const StatisticDateDiagram = (diagramm,eee, selectDiagramm, dollar,euro) => {
 
     let color = eee.map(a => a.color)
 
@@ -68,8 +68,9 @@ const StatisticDateDiagram = (diagramm,eee, selectDiagramm,Cur_OfficialRate ) =>
                         else if (labelText <= 5) {this.ctx.font = 'bold 16px Arial'}
                         if (selectDiagramm === '%' && labelText !== 0) { this.ctx.fillText(labelText + '%', labelX, labelY) }
                     else  if (selectDiagramm === 'BYN' && labelText !== 0){ this.ctx.fillText(val.toFixed(0) + 'р', labelX, labelY) }
-                    else  if (selectDiagramm === 'USD' && labelText !== 0){ this.ctx.fillText((val/Cur_OfficialRate).toFixed(0) + '$', labelX, labelY) }
-                        
+                    else  if (selectDiagramm === 'USD' && labelText !== 0){ this.ctx.fillText((val/dollar).toFixed(0) + '$', labelX, labelY) }
+                    else  if (selectDiagramm === 'EUR' && labelText !== 0){ this.ctx.fillText((val/euro).toFixed(0) + '€', labelX, labelY) }   
+
                         start_angle += slice_angle;
                     };
 

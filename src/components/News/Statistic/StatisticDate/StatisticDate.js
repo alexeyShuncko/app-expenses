@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import s from './StatisticDate.module.css';
 import DiagrammContainer from "./DIagrammContainer/DIagrammContainer";
-import DiagrammTotal from "./DIagrammContainer/DiagrammTotal/DiagrammTotal";
-import { HocValuta } from "../../HOC/HocValuta";
+//import DiagrammTotal from "./DIagrammContainer/DiagrammTotal/DiagrammTotal";
+import  HocValuta  from "../../HOC/HocValuta";
 import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
 import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
@@ -114,7 +114,9 @@ const StatisticDate = (props) => {
             </div>
             <div className={s.totalSumm}>
                 <div>Всего потрачено за выбранный период:</div>
-                {HocValuta(DiagrammTotal, props, null, totalSumm)}
+                <HocValuta 
+                value='statisticTotal' 
+                totalSumm={totalSumm}  exchangeRates={props.diagramm.exchangeRates}/>
             </div>
         </div>
     )

@@ -3,13 +3,11 @@ import { Form } from 'react-final-form';
 import s from './Salary.module.css';
 import { Field } from 'react-final-form';
 import { useState, useEffect } from 'react';
-import SalarySpent from './SalarySpent/SalarySpent';
-import SalaryRemainder from './SalaryRemainder/SalaryRemainder';
-import SalaryValue from './SalaryValue/SalaryValue';
-import { HocValuta } from '../../../../HOC/HocValuta';
+import HocValuta from '../../../../HOC/HocValuta';
 import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../../../helpers/ArrowFunc/ArrowFunc';
 import ArrowValidate from './../../../../Arrow/ArrowValidate';
+import { getItem } from '../../../../../../API/api';
 
 
 const Salary = (props) => {
@@ -66,18 +64,24 @@ const Salary = (props) => {
 
     const onSubmit = (values) => {
 
-        if (values.valuta === 'BYN' && values.salary) {
-            props.addSalary(Number(values.salary).toFixed(2), months)
-            deActivateEditMode()
-            HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
+        if (values.salary && values.valuta) {
 
-        }
-        else if (values.valuta === 'USD' && values.salary) {
-            props.addSalary((Number(values.salary) * Number(props.diagramm.dollar.Cur_OfficialRate)).toFixed(2), months)
-            deActivateEditMode()
+            console.log(Object.values( getItem()))
             HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
-
+                deActivateEditMode()
+            if (values.valuta === 'BYN') {
+                props.addSalary(Number(values.salary).toFixed(2), months)
+            }
+            else if (values.valuta === 'USD') {
+                props.addSalary(
+                    (Number(values.salary) * Number(props.exchangeRates.dollar.Cur_OfficialRate)).toFixed(2), months)  
+            }
+            else if (values.valuta === 'EUR') {
+                props.addSalary(
+                    (Number(values.salary) * Number(props.exchangeRates.euro.Cur_OfficialRate)).toFixed(2), months)
+            }
         }
+  
         else if (!values.salary) {
             HedgehogFunc(props.addText, 'Введите сумму ЗП ...')
             ArrowFunc('arrowSalaryAdd', 'addTotalInput', 'addSalary')
@@ -86,7 +90,7 @@ const Salary = (props) => {
             HedgehogFunc(props.addText, 'Выберите валюту ЗП ...')
             ArrowFunc('arrowSalaryAdd', 'addValutaInput', 'addSalary')
         }
-        
+
     }
 
     return (
@@ -99,7 +103,14 @@ const Salary = (props) => {
 
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Зарплата:</div>
-                {HocValuta(SalaryValue, props, activateEditMode)}</div>
+                <div>
+                   <HocValuta 
+                   edit={activateEditMode}
+                   value='salary' 
+                   exchangeRates={props.exchangeRates}
+                   salary={props.diagramm.salary.salaryNum}/>
+                </div>
+            </div>
 
 
             {editMode
@@ -112,7 +123,7 @@ const Salary = (props) => {
                                     <div className={s.salaryAdd}>
                                         <label> Сумма: </label>
                                         <Field
-                                        id='addTotalInput'
+                                            id='addTotalInput'
                                             className={s.inputSalary}
                                             autoFocus={true}
                                             autoComplete="off"
@@ -128,9 +139,10 @@ const Salary = (props) => {
                                             className={s.fieldBynUsd}
                                             name="valuta"
                                             component="select" >
-                                            <option/>
+                                            <option />
                                             <option value="BYN">BYN</option>
                                             <option value="USD">USD</option>
+                                            <option value="EUR">EUR</option>
                                         </Field>
                                     </div>
                                 </div>
@@ -156,11 +168,19 @@ const Salary = (props) => {
                 : null}
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Всего потрачено:</div>
-                {HocValuta(SalarySpent, props)}
+                <HocValuta 
+                value='salarySpent' 
+                exchangeRates={props.exchangeRates}
+                salary={props.diagramm.salary.salaryNum}
+                category={props.diagramm.category}/>
             </div>
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Должно остаться:</div>
-                {HocValuta(SalaryRemainder, props)}
+                <HocValuta 
+                value='salaryRemainder' 
+                exchangeRates={props.exchangeRates} 
+                salary={props.diagramm.salary.salaryNum}
+                category={props.diagramm.category}/>
             </div>
         </div>
     )

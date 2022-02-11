@@ -60,6 +60,7 @@ const FormDiagram = (props) => {
     return (
         <div className={s.formExpenses}>
             <Salary
+                exchangeRates={props.exchangeRates}
                 diagramm={props.diagramm}
                 addSalary={props.addSalary}
                 addSalaryValueTrue={props.addSalaryValueTrue}
@@ -100,8 +101,9 @@ const FormDiagram = (props) => {
                 />
             </div>
             <DollarRate
+                getEuroUpdate={props.getEuroUpdate}
                 getDollarUpdate={props.getDollarUpdate}
-                dollar={props.diagramm.dollar}
+                exchangeRates={props.exchangeRates}
             />
         </div>
     )

@@ -24,7 +24,7 @@ if (idArrow) {
    
 if (idInput) {
    let error = document.getElementById(idInput)
-   error.classList.toggle(s.error,true) 
+   error.classList.toggle(s.error,true)
     error.focus()
 }
     

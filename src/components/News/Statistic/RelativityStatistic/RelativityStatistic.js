@@ -52,7 +52,10 @@ const obj =()=> {
                
             </span>
             <div>Или:
-                <span className={s.boldValue}>{(data[0].summ / props.diagramm.dollar.Cur_OfficialRate).toFixed(2)} $</span>
+                <span className={s.boldValue}>{(data[0].summ / props.diagramm.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)} $</span>
+            </div>
+            <div>Или:
+                <span className={s.boldValue}>{(data[0].summ / props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)} €</span>
             </div>
             <div style={{ borderBottom: `solid ${data[0].color}` }}>
                 Или:<span className={s.boldValue}>
