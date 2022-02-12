@@ -20,7 +20,7 @@ const Relativity = (props) => {
         if (values.unit && values.name && values.price) {
             HedgehogFunc(props.addText, 'Относительная величина добавлена ...')
 
-            props.changeRelativity(values)
+            props.nameCaseRelativity(values.name, values.unit, values.price)
 
             OffStyle(['relativityUnitAdd', 'relativityNameAdd', 'relativityPriceAdd'])
             form.reset()
@@ -30,7 +30,7 @@ const Relativity = (props) => {
             ArrowFunc('relativityUnit', 'relativityUnitAdd', 'buttonSetting')
         }
         else if (!values.name) {
-            HedgehogFunc(props.addText, 'Впишите название в родительном падеже ...')
+            HedgehogFunc(props.addText, 'Впишите название величины ...')
             ArrowFunc('relativityName', 'relativityNameAdd', 'buttonSetting')
         }
         else if (!values.price) {
@@ -65,6 +65,7 @@ const Relativity = (props) => {
                                                     <option>литр</option>
                                                     <option>киллограмм</option>
                                                     <option>пара</option>
+                                                    <option>штука</option>
                                                 </Field>
                                             </div>
                                             <ArrowValidate arrowId='relativityUnit' />
@@ -106,8 +107,7 @@ const Relativity = (props) => {
                                             Чтобы добавить относительную величину, следуйте ниже приведенным шагам:</div>
                                         <div>
                                             <div>1) Из выпадающего списка "Единицы измерения" выберите в чем измеряется ваша величина</div>
-                                            <div>2) В поле "Название величины" впишите название в родительном падеже</div>
-                                            <div>(Например: муки "Лидская", носков "Mark Formelle", чая, минералки и т.д.)</div>
+                                            <div>2) В поле "Название величины" впишите название вашей величины</div>
                                             <div>3) В поле "Стоимость" впишите стоимость за одну единицу вашей величины в бел. рублях</div>
                                             <div>4) Нажмите кнопку "Добавить величину"
                                                 <div>(увидеть пересчёт ваших расходов в относительную величину

@@ -12,7 +12,7 @@ export const getEuro = async () => {
 }
 
 
-export const getItem = async () => {
-    const response = await axios.get('http://htmlweb.ru/api/service/inflect/?inflect=Олень&grammems=РД&nolimit&html&letter_case=ucfirst ');
-    return response;
+export const getItem = async (text) => {
+    const response = await axios.get(`https://ws3.morpher.ru/russian/declension?s=${text}&format=json`);
+    return response.data;
 }

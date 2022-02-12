@@ -26,7 +26,7 @@ const RenameCategory = (props) => {
                 values.favorite + ' переименована в ' + values.name + ' ...')
 
             OffStyle(['nameCategory','favorite'])
-
+            props.nameCase(values.name)
             form.reset()
         }
 

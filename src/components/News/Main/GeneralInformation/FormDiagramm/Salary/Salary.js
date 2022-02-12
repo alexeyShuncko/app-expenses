@@ -61,12 +61,19 @@ const Salary = (props) => {
     }
     const months = Number(formatMonth(month))
 
+   const qqqqqqqqqq = () => {
+
+    getItem('картофель').then(data => {
+            console.log(data.Р,data.В)
+        })
+    }
 
     const onSubmit = (values) => {
 
         if (values.salary && values.valuta) {
 
-            console.log(Object.values( getItem()))
+            qqqqqqqqqq()
+            
             HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
                 deActivateEditMode()
             if (values.valuta === 'BYN') {

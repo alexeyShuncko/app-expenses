@@ -10,6 +10,8 @@ import HedgehogFunc from './../../../helpers/HedgehodFunc/HedgehogFunc';
 const FormDiagram = (props) => {
 
 
+    const diagramm = props.diagramm.category
+
     const onSubmit = (values, form) => {
 
         const time = new Date()
@@ -43,18 +45,19 @@ const FormDiagram = (props) => {
             }
             return valueArr
         }
+        let text = diagramm.map(a => Object.keys(values).includes(a.nameRus) 
+        ? a.nameRusСase
+        : null ).join(' ') // подумать ещё ....
+        console.log(text)
         HedgehogFunc(props.addText,
-            'Расходы на ' + Object.keys(values).map(a =>
-                a.slice(-1) === 'а'
-                    ? a.slice(0, -1) + 'у'
-                    : a).join(', ') + ' добавлены ...')
+            `Расходы на  ${text} добавлены ...`)
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()
 
     }
 
-    const diagramm = props.diagramm.category
+ 
 
 
     return (
@@ -74,9 +77,7 @@ const FormDiagram = (props) => {
                         <form onSubmit={handleSubmit} >
                             {diagramm.map(a => <div key={a.nameRus} className={s.formItems}>
                                 <label className={s.formItemsLabel}>
-                                    {a.nameRus.slice(-1) === 'а'
-                                        ? a.nameRus.slice(0, -1) + 'у'
-                                        : a.nameRus}: </label>
+                                    {a.nameRusСase}: </label>
                                 <Field
                                     className={s.formItemsField}
                                     max="1000"

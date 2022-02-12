@@ -22,7 +22,7 @@ const AddCategory = (props) => {
             props.addCategory(values.name, values.color)
             ArrowFunc(null, null, 'buttonSetting')
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
-
+           props.nameCase(values.name) // добавление имени в винительном падеже
             values.name = ''
             values.color = '#ffffff'
         }

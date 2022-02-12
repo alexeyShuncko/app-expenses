@@ -8,7 +8,8 @@ import RenameCategory from './RenameCategory/RenameCategory';
 
 import { connect } from 'react-redux';
 import { addCategory, deleteCategory, renameCategory, 
-    addEditColor, changeRelativity, addText, addActiv } from './../../../Redux/diagrammReducer';
+    addEditColor, changeRelativity, addText, addActiv, nameCase,
+    nameCaseRelativity } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
 import Relativity from './Relativity/Relativity';
 
@@ -23,19 +24,19 @@ const Setting = (props) => {
 
             <Route path='/AddCategory'
                 element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory} 
-                addText={props.addText}/>} />
+                addText={props.addText} nameCase={props.nameCase}/>} />
             <Route path='/DeleteCategory'
                 element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory} 
                 addText={props.addText} addActiv={props.addActiv}/>} />
             <Route path='/RenameCategory'
                 element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory} 
-                addText={props.addText}/>} />
+                addText={props.addText} nameCase={props.nameCase}/>} />
             <Route path='/Color'
                 element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor} 
                 addText={props.addText}/>} />
             <Route path='/Relativity'
                 element={<Relativity diagramm={props.diagramm} changeRelativity={props.changeRelativity} 
-                addText={props.addText}/>} />
+                addText={props.addText} nameCaseRelativity={props.nameCaseRelativity}/>} />
 
         </Routes>
     )
@@ -50,4 +51,4 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, 
     { addCategory, deleteCategory, renameCategory, 
         addEditColor, changeRelativity, addText, 
-        addActiv })(Setting)
+        addActiv, nameCase, nameCaseRelativity })(Setting)

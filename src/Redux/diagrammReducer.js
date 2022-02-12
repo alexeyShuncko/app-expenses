@@ -1,4 +1,5 @@
-import { getDollar, getEuro } from './../API/api';
+import { a } from 'caniuse-lite/dist/lib/supported';
+import { getDollar, getEuro, getItem } from './../API/api';
 
 
 const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
@@ -19,12 +20,16 @@ const DELETE_CATEGORY = 'DELETE_CATEGORY'
 const RENAME_CATEGORY = 'RENAME_CATEGORY'
 const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
 const ADD_TEXT = 'ADD_TEXT'
+const ADD_NAME_CASE = 'ADD_NAME_CASE'
+
+
+
 
 
 let initialState = {
     category:
         [{
-            nameRus: 'Еда', color: '#fde23e',
+            nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e',
             data: [
                 { id: 'Еда1', time: '2022-01-08 19:05', num: 10 },
                 { id: 'Еда2', time: '2022-01-11 14:59', num: 20 },
@@ -33,11 +38,11 @@ let initialState = {
                 { id: 'Еда5', time: '2022-01-14 15:06', num: 52 }
             ], summ: 127
         },
-        { nameRus: 'Алкоголь', color: '#2222d1', 
+        { nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', 
         data: [{ id: 'Алкоголь1', time: '2022-01-08 19:04', num: 40 }], summ: 40 },
-        { nameRus: 'Квартира', color: '#57d9ff', 
+        { nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', 
         data: [{ id: 'Квартира1', time: '2022-01-18 19:03', num: 25 }], summ: 25 },
-        { nameRus: 'Транспорт', color: '#169928', 
+        { nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', 
         data: [{ id: 'Транспорт1', time: '2022-01-18 19:02', num: 25 }], summ: 25 }
     ],
     activ: '',
@@ -56,7 +61,8 @@ let initialState = {
     {
         name: 'пива "Аксамитное"',
         unit: 'бутылка',
-        price: 4.59
+        price: 4.59,
+        case: []
     },
     text: 'Привет...'
 
@@ -162,10 +168,23 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state,
                 category: [...state.category, {
-                    nameRus: action.name, color: action.color,
+                    nameRus: action.name,
+                    nameRusСase: '',
+                    color: action.color,
                     data: [], summ: 0
                 }]
             }
+            case  ADD_NAME_CASE: 
+            return {
+                ...state,
+                category: [...state.category.map(a=>  {
+                    if (a.nameRus === action.name){
+                        return ({...a, nameRusСase: action.data})
+                    }
+                   return a
+                }
+                    )]
+                }
 
         case DELETE_CATEGORY:
             return {
@@ -189,9 +208,10 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state,
                 relativity: {
-                    name: action.data.name,
-                    unit: action.data.unit,
-                    price: Number(action.data.price)
+                    name: action.name,
+                    unit: action.unit,
+                    price: Number(action.price),
+                    case: action.array
                 }
             }
         case ADD_TEXT:
@@ -210,8 +230,8 @@ export const addText = (text) => {
     return { type: ADD_TEXT, text }
 }
 
-export const changeRelativity = (data) => {
-    return { type: CHANGE_RELATIVITY, data }
+export const changeRelativity = (name, unit, price, array) => {
+    return { type: CHANGE_RELATIVITY, name, unit, price , array}
 }
 
 export const addCategory = (name, color) => {
@@ -260,10 +280,14 @@ export const addSelectDiagramm = (selectDiagramm) => {
 export const addSelectDiagrammStat = (selectDiagrammStat) => {
     return { type: ADD_SELECT_DIAGRAMM_STAT, selectDiagrammStat }
 }
-
 export const addSalaryValueTrue = (value) => {
     return { type: ADD_SALARY_VALUE_TRUE, value }
 }
+export const addNameCase = (data, name) => {
+    return { type: ADD_NAME_CASE, data, name }
+}
+
+
 
 
 
@@ -274,11 +298,25 @@ export const getDollarUpdate = () => (dispatch) => {
     })
 }
 export const getEuroUpdate = () => (dispatch) => {
-
+ 
     getEuro().then(data => {
         dispatch(addEuro(data.Cur_OfficialRate, data.Date))
     })
 }
+
+export const nameCase = (name) => (dispatch) => {
+
+    getItem(name).then(data => {
+        dispatch(addNameCase(data.В, name) )
+        })
+    }
+export const nameCaseRelativity = (name,unit,prise) => (dispatch) => {
+
+        getItem(name).then(data => {
+            dispatch(changeRelativity(data.Р, unit,prise, [data.Р,data.множественное.Р,name]) )
+            })
+        }
+
 
 
 export default diagrammReduser

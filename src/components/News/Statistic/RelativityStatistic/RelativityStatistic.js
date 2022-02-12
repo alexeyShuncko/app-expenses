@@ -8,29 +8,30 @@ const RelativityStatistic = (props) => {
     let amount = Number((data[0].summ / props.diagramm.relativity.price).toFixed(0).slice(-1))
     let amount11 = Number((data[0].summ / props.diagramm.relativity.price).toFixed(0).slice(-2))
 
-let bottle = ['бутылки','бутылок','бутылка']
-let kg = ['киллограмма','киллограмм','киллограмм']
-let pack =['пачки','пачек','пачка']
-let liter = ['литра','литров','литр']
-let two = ['пары','пар','пара']
+    let bottle = ['бутылки', 'бутылок', 'бутылка']
+    let kg = ['киллограмма', 'киллограмм', 'киллограмм']
+    let pack = ['пачки', 'пачек', 'пачка']
+    let liter = ['литра', 'литров', 'литр']
+    let two = ['пары', 'пар', 'пара']
+    
 
-const obj =()=> {
-    if (props.diagramm.relativity.unit === 'бутылка')
-    return bottle
-     else if (props.diagramm.relativity.unit === 'киллограмм')
-    return kg 
-    else if (props.diagramm.relativity.unit === 'пачка')
-    return pack
-    else if (props.diagramm.relativity.unit === 'литр')
-    return liter
-    else if (props.diagramm.relativity.unit === 'пара')
-    return two
-
-}
+    const obj = () => {
+        if (props.diagramm.relativity.unit === 'бутылка')
+            return bottle
+        else if (props.diagramm.relativity.unit === 'киллограмм')
+            return kg
+        else if (props.diagramm.relativity.unit === 'пачка')
+            return pack
+        else if (props.diagramm.relativity.unit === 'литр')
+            return liter
+        else if (props.diagramm.relativity.unit === 'пара')
+            return two
+        else if (props.diagramm.relativity.unit === 'штука')
+            return props.diagramm.relativity.case
+    }
 
     const unit = () => {
-
-        if ( amount <= 4
+        if (amount <= 4
             && amount >= 2
             && !(amount11 <= 19 && amount11 >= 11))
             return obj()[0]
@@ -45,11 +46,11 @@ const obj =()=> {
 
     return (
         <div>
-            <span> Потрачено 
-                <div>За всё время: 
+            <span> Потрачено
+                <div>За всё время:
                     <span className={s.boldValue}>{data[0].summ.toFixed(2)} рублей.</span>
                 </div>
-               
+
             </span>
             <div>Или:
                 <span className={s.boldValue}>{(data[0].summ / props.diagramm.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)} $</span>
@@ -59,7 +60,10 @@ const obj =()=> {
             </div>
             <div style={{ borderBottom: `solid ${data[0].color}` }}>
                 Или:<span className={s.boldValue}>
-                    {(data[0].summ / props.diagramm.relativity.price).toFixed(0) + ' ' +
+                    {props.diagramm.relativity.unit === 'штука'
+                        ? (data[0].summ / props.diagramm.relativity.price).toFixed(0) + ' ' +
+                        unitRus 
+                        : (data[0].summ / props.diagramm.relativity.price).toFixed(0) + ' ' +
                         unitRus + ' ' +
                         props.diagramm.relativity.name}
                 </span>
