@@ -7,7 +7,6 @@ import HocValuta from '../../../../HOC/HocValuta';
 import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../../../helpers/ArrowFunc/ArrowFunc';
 import ArrowValidate from './../../../../Arrow/ArrowValidate';
-import { getItem } from '../../../../../../API/api';
 
 
 const Salary = (props) => {
@@ -61,18 +60,10 @@ const Salary = (props) => {
     }
     const months = Number(formatMonth(month))
 
-   const qqqqqqqqqq = () => {
-
-    getItem('картофель').then(data => {
-            console.log(data.Р,data.В)
-        })
-    }
 
     const onSubmit = (values) => {
 
         if (values.salary && values.valuta) {
-
-            qqqqqqqqqq()
             
             HedgehogFunc(props.addText, 'Поздравляю с ЗП ...')
                 deActivateEditMode()
@@ -103,7 +94,6 @@ const Salary = (props) => {
     return (
 
         <div>
-
             {timer >= props.diagramm.salary.salaryDate
                 ? <div className={s.salaryUpdate} onClick={activateEditMode}>Нажмите, чтобы обновить ЗП</div>
                 : null}

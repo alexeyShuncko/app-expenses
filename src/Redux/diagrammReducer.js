@@ -1,4 +1,3 @@
-import { a } from 'caniuse-lite/dist/lib/supported';
 import { getDollar, getEuro, getItem } from './../API/api';
 
 
@@ -59,10 +58,10 @@ let initialState = {
     },
     relativity:
     {
-        name: 'пива "Аксамитное"',
+        name: 'пива',
         unit: 'бутылка',
         price: 4.59,
-        case: []
+        case: ['пива', 'пив', 'пиво']
     },
     text: 'Привет...'
 
@@ -168,7 +167,7 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state,
                 category: [...state.category, {
-                    nameRus: action.name,
+                    nameRus: `${action.name[0].toUpperCase() + action.name.slice(1)}`,
                     nameRusСase: '',
                     color: action.color,
                     data: [], summ: 0
@@ -178,8 +177,8 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state,
                 category: [...state.category.map(a=>  {
-                    if (a.nameRus === action.name){
-                        return ({...a, nameRusСase: action.data})
+                    if (a.nameRus.toLowerCase() === action.name){
+                        return ({...a, nameRusСase: `${action.data[0].toUpperCase() + action.data.slice(1)}`})
                     }
                    return a
                 }
@@ -198,7 +197,7 @@ const diagrammReduser = (state = initialState, action) => {
                     if (a.nameRus === action.name) {
                         return ({
                             ...a,
-                            nameRus: action.rename
+                            nameRus: `${action.rename[0].toUpperCase() + action.rename.slice(1)}`
                         })
                     }
                     else return a

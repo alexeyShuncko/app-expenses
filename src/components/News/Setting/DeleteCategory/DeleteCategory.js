@@ -16,7 +16,7 @@ const DeleteCategory = (props) => {
     }
 
     const onSubmit = (values, form) => {
-        HedgehogFunc(props.addText, 'Категория ' + values.favorite + ' удалена ...')
+        HedgehogFunc(props.addText, `Категория "${values.favorite}" удалена ...`)
         props.deleteCategory(values.favorite)
         props.addActiv('')
         form.reset()

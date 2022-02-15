@@ -50,7 +50,7 @@ const FormDiagram = (props) => {
         : null ).join(' ') // подумать ещё ....
         console.log(text)
         HedgehogFunc(props.addText,
-            `Расходы на  ${text} добавлены ...`)
+            `Расходы на  "${text}" добавлены ...`)
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()

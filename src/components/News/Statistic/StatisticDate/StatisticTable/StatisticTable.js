@@ -62,7 +62,7 @@ const StatisticTable = (props) => {
     let  textMessage = 
     `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
     по ${DataTransformation(props.diagramm.periodPo)}, 
-    по категории ${props.diagramm.activ} ...`
+    на "${props.diagramm.activ && category.filter(a=> a.nameRus===props.diagramm.activ)[0].nameRusСase}" ...`
       
 
     return (
@@ -96,9 +96,9 @@ const StatisticTable = (props) => {
                             </div>
                             <div className={s.statisticDateSumm} style={styles}>
                                 Потрачено на <span className={s.categorySumm}>
-                                    {props.diagramm.activ.slice(-1) === 'а'
-                                        ? props.diagramm.activ.slice(0, -1) + 'у'
-                                        : props.diagramm.activ} </span>
+                                    {props.diagramm.activ && 
+                                    category.filter(a=> a.nameRus===props.diagramm.activ)[0].nameRusСase} 
+                                    </span>
                                 <div> за выбранный период: </div>
                                 <div className={s.totalCAtegory}>
                                 <HocValuta 

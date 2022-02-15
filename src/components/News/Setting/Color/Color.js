@@ -18,7 +18,7 @@ const Color = (props) => {
         }
         else if (String(props.diagramm.category.map(a => a.color)) !== String(Object.values(values))) {
             props.addEditColor(Object.values(values), Object.keys(values))
-            HedgehogFunc(props.addText, 'Цвет изменен ...')
+            HedgehogFunc(props.addText, `Цвет изменен ...`)
             ArrowFunc(null, null, 'buttonSetting')
         }
     }

@@ -1,15 +1,29 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './AddCategory.module.css';
+import a from '../../Hedgehog/Hedgehog.module.css';
 import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 import OffStyle from '../../helpers/ArrowFunc/Offstyle';
+import { ValidTextFunc } from '../../helpers/ValidTextFunc/ValidTextFunc';
 
 const AddCategory = (props) => {
 
     const returnSetting = () => {
         window.history.back()
+    }
+
+    const funcValidText = (e) => {
+        const regex1 = /[^А-ЯЁа-яё]/
+        const regexEng = /[A-Za-z]/
+        if (regexEng.test(e.target.value)) {
+            let Hedgehog= document.getElementById('myPopup')
+            if (Hedgehog.classList.value===a.popuptext){
+            HedgehogFunc(props.addText, 'Переключи на русский язык ...')
+            }
+        }
+        e.target.value = e.target.value.replace(regex1, '')
     }
 
 
@@ -18,23 +32,17 @@ const AddCategory = (props) => {
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
             && isNaN(Number(values.name))) {
-            HedgehogFunc(props.addText, 'Категория ' + values.name + ' добавлена ...')
+            HedgehogFunc(props.addText, `Категория "${values.name}" добавлена ...`)
             props.addCategory(values.name, values.color)
             ArrowFunc(null, null, 'buttonSetting')
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
-           props.nameCase(values.name) // добавление имени в винительном падеже
+            props.nameCase(values.name) // добавление имени в винительном падеже
             values.name = ''
             values.color = '#ffffff'
         }
         else if (!values.name) {
             HedgehogFunc(props.addText, 'Впишите название категории ...')
             ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
-        }
-
-        else if (!isNaN(Number(values.name))) {
-            HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...')
-            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
-
         }
         else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
@@ -61,6 +69,7 @@ const AddCategory = (props) => {
                                         <div className={s.nameInput}>
                                             <label> Название категории: </label>
                                             <Field
+                                                onInput={ValidTextFunc}
                                                 id='nameAdd'
                                                 className={s.nameInput__field}
                                                 autoComplete="off"
@@ -108,8 +117,8 @@ const AddCategory = (props) => {
                                         Чтобы добавить категорию, следуйте ниже приведенным шагам:</div>
                                     <div>
                                         <div>1) В поле "Название категории" впишите название новой категории <br></br>
-                                            (Название не должно состоять только из цифр,
-                                            не должно совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)</div>
+                                            (Название не должно содержать цифры, содержать спецсимволы (. , ; № и т.д.),
+                                            совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)</div>
                                         <div>2) Нажмите на белый  квадрат рядом с полем "Цвет"</div>
                                         <div>3) Выберите нужный тебе цвет <br></br>
                                             (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>

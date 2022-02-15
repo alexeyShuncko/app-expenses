@@ -14,6 +14,17 @@ const RenameCategory = (props) => {
     const returnSetting = () => {
         window.history.back()
     }
+    // const funcValidText = (e) => {
+    //     const regex1 = /[^А-ЯЁа-яё]/
+    //     const regexEng = /[A-Za-z]/
+    //     if (regexEng.test(e.target.value)) {
+    //         let Hedgehog= document.getElementById('myPopup')
+    //         if (Hedgehog.classList.value===a.popuptext){
+    //         HedgehogFunc(props.addText, 'Переключи на русский язык ...')
+    //         }
+    //     }
+    //     e.target.value = e.target.value.replace(regex1, '')
+    // }
 
     const onSubmit = (values, form) => {
 
@@ -23,10 +34,10 @@ const RenameCategory = (props) => {
             && values.favorite) {
             props.renameCategory(values.favorite, values.name)
             HedgehogFunc(props.addText,
-                values.favorite + ' переименована в ' + values.name + ' ...')
+                `"${values.favorite}" переименована в  "${values.name}" ...`)
 
             OffStyle(['nameCategory','favorite'])
-            props.nameCase(values.name)
+            props.nameCase(values.name) //добавление имени в винительном падеже ...
             form.reset()
         }
 
@@ -36,10 +47,6 @@ const RenameCategory = (props) => {
         }
         else if (values.name && props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
-            ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
-        }
-        else if (!isNaN(Number(values.name))) {
-            HedgehogFunc(props.addText, 'Название не должно состоять только из цифр ...')
             ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
         }
         else if (!values.name) {
@@ -89,6 +96,7 @@ const RenameCategory = (props) => {
                                         <div className={s.nameInput}>
                                             <label>Новое название категории: </label>
                                             <Field
+                                            //onInput={funcValidText}
                                                 id='nameCategory'
                                                 className={s.nameCategory}
                                                 autoComplete="off"
@@ -121,8 +129,8 @@ const RenameCategory = (props) => {
                                     <div>
                                         <div>1) В поле "Название категории" выберите категорию из выпадающего списка</div>
                                         <div>2) В поле "Новое название категории" впишите новое название категории<br></br>
-                                            (Название не должно состоять только из цифр, 
-                                            не должно совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)
+                                        (Название не должно содержать цифры, содержать спецсимволы (. , ; № и т.д.),
+                                            совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)
                                         </div>
                                         <div>3) Нажмите кнопку "Переименовать категорию"</div>
                                     </div>

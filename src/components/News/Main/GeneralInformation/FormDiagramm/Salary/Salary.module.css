@@ -57,6 +57,11 @@
 .inputSalary {
     width: 60px;
 }
+.inputSalary::-webkit-outer-spin-button,
+.inputSalary::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 
 
