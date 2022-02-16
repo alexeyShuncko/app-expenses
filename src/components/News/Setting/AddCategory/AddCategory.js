@@ -6,7 +6,6 @@ import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 import OffStyle from '../../helpers/ArrowFunc/Offstyle';
-import { ValidTextFunc } from '../../helpers/ValidTextFunc/ValidTextFunc';
 
 const AddCategory = (props) => {
 
@@ -14,13 +13,13 @@ const AddCategory = (props) => {
         window.history.back()
     }
 
-    const funcValidText = (e) => {
-        const regex1 = /[^А-ЯЁа-яё]/
+    const funcValidText = (e) => {    // валидация ввода, только русские буквы ... подумать над пробелом 
+        const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
         const regexEng = /[A-Za-z]/
         if (regexEng.test(e.target.value)) {
             let Hedgehog= document.getElementById('myPopup')
             if (Hedgehog.classList.value===a.popuptext){
-            HedgehogFunc(props.addText, 'Переключи на русский язык ...')
+            HedgehogFunc(props.addText, 'Переключите на русский язык ...')
             }
         }
         e.target.value = e.target.value.replace(regex1, '')
@@ -69,7 +68,7 @@ const AddCategory = (props) => {
                                         <div className={s.nameInput}>
                                             <label> Название категории: </label>
                                             <Field
-                                                onInput={ValidTextFunc}
+                                                onInput={funcValidText}
                                                 id='nameAdd'
                                                 className={s.nameInput__field}
                                                 autoComplete="off"

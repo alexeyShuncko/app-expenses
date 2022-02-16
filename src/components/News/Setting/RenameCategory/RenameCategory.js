@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './RenameCategory.module.css';
+import a from '../../Hedgehog/Hedgehog.module.css';
 import { Field, Form } from 'react-final-form';
 import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
@@ -14,17 +15,17 @@ const RenameCategory = (props) => {
     const returnSetting = () => {
         window.history.back()
     }
-    // const funcValidText = (e) => {
-    //     const regex1 = /[^А-ЯЁа-яё]/
-    //     const regexEng = /[A-Za-z]/
-    //     if (regexEng.test(e.target.value)) {
-    //         let Hedgehog= document.getElementById('myPopup')
-    //         if (Hedgehog.classList.value===a.popuptext){
-    //         HedgehogFunc(props.addText, 'Переключи на русский язык ...')
-    //         }
-    //     }
-    //     e.target.value = e.target.value.replace(regex1, '')
-    // }
+    const funcValidText = (e) => {   // валидация ввода, только русские буквы
+        const regex1 = /[^А-ЯЁа-яё]/
+        const regexEng = /[A-Za-z]/
+        if (regexEng.test(e.target.value)) {
+            let Hedgehog= document.getElementById('myPopup')
+            if (Hedgehog.classList.value===a.popuptext){
+            HedgehogFunc(props.addText, 'Переключите на русский язык ...')
+            }
+        }
+        e.target.value = e.target.value.replace(regex1, '')
+    }
 
     const onSubmit = (values, form) => {
 
@@ -96,7 +97,7 @@ const RenameCategory = (props) => {
                                         <div className={s.nameInput}>
                                             <label>Новое название категории: </label>
                                             <Field
-                                            //onInput={funcValidText}
+                                            onInput={funcValidText}
                                                 id='nameCategory'
                                                 className={s.nameCategory}
                                                 autoComplete="off"

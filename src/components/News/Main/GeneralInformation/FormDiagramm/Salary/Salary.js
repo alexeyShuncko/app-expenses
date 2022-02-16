@@ -61,6 +61,17 @@ const Salary = (props) => {
     const months = Number(formatMonth(month))
 
 
+    const funcValidNumber =(e)=> {
+       
+        if (e.target.value.includes(".")) {
+            e.target.value=e.target.value.substring(0, e.target.value.indexOf(".") + 3);
+          }
+          if (e.target.value.length > 7) {
+            e.target.value = e.target.value.substr(0, 7)}
+           
+    }
+
+
     const onSubmit = (values) => {
 
         if (values.salary && values.valuta) {
@@ -120,13 +131,15 @@ const Salary = (props) => {
                                     <div className={s.salaryAdd}>
                                         <label> Сумма: </label>
                                         <Field
+                                         onInput={funcValidNumber}
                                             id='addTotalInput'
                                             className={s.inputSalary}
                                             autoFocus={true}
                                             autoComplete="off"
                                             name="salary"
                                             component="input"
-                                            type="number"
+                                            type="text"
+                                            max='10000'
                                             step="0.01" />
                                     </div>
                                     <div className={s.valutaAdd}>

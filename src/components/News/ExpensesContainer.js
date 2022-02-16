@@ -5,10 +5,10 @@ import { Route, Routes} from 'react-router';
 import Main from './Main/Main';
 import Statistic from './Statistic/Statistic';
 import Setting from './Setting/Setting';
-import Graphs from './Graphs/Graphs';
 import { connect } from 'react-redux';
 import Hedgehog from './Hedgehog/Hedgehog';
 import Error from './helpers/Error/Error';
+import MyResponsiveLine from './Graphs/Graphs';
 
 
 const ExpensesContainer = (props) => {
@@ -29,7 +29,7 @@ const ExpensesContainer = (props) => {
                     <Route path='/main' element={ <Main />} />
                     <Route path='/statistic' element={<Statistic />} />
                     <Route path='/setting/*' element={<Setting />} />
-                    <Route path='/graphs' element={<Graphs />} />
+                    <Route path='/graphs' element={<MyResponsiveLine />} />
                     <Route path='/' element={<Error />}/>
                 </Routes>
                 </div>

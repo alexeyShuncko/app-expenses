@@ -12,6 +12,16 @@ const FormDiagram = (props) => {
 
     const diagramm = props.diagramm.category
 
+
+    const funcValidNumber = (e) => {      // максимальная длинна 7 символов и 2 после запятой
+        if (e.target.value.includes(".")) {
+            e.target.value = e.target.value.substring(0, e.target.value.indexOf(".") + 3);
+        }
+        if (e.target.value.length > 7) {
+            e.target.value = e.target.value.substr(0, 7)
+        }
+    }
+
     const onSubmit = (values, form) => {
 
         const time = new Date()
@@ -45,9 +55,9 @@ const FormDiagram = (props) => {
             }
             return valueArr
         }
-        let text = diagramm.map(a => Object.keys(values).includes(a.nameRus) 
-        ? a.nameRusСase
-        : null ).join(' ') // подумать ещё ....
+        let text = diagramm.map(a => Object.keys(values).includes(a.nameRus)
+            ? a.nameRusСase
+            : null).join(' ') // подумать ещё ....
         console.log(text)
         HedgehogFunc(props.addText,
             `Расходы на  "${text}" добавлены ...`)
@@ -57,7 +67,7 @@ const FormDiagram = (props) => {
 
     }
 
- 
+
 
 
     return (
@@ -79,13 +89,14 @@ const FormDiagram = (props) => {
                                 <label className={s.formItemsLabel}>
                                     {a.nameRusСase}: </label>
                                 <Field
+                                    onInput={funcValidNumber}
                                     className={s.formItemsField}
-                                    max="1000"
                                     autoComplete="off"
                                     name={a.nameRus}
-                                    placeholder="... рублей"
+                                    placeholder="... бел. рублей"
                                     component="input"
                                     type="number"
+                                    max='10000'
                                     step={0.01}
                                 />
                             </div>)}
