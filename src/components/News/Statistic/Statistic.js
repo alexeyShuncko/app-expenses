@@ -75,16 +75,16 @@ const Statistic = (props) => {
             OffStyle(['periodPo'])
         }
     }
-    const periodSTime = (e) => {
-        if (e.target.value !== props.diagramm.periodSTime) {
-            props.addPeriodSTime(e.target.value)
-        }
-    }
-    const periodPoTime = (e) => {
-        if (e.target.value !== props.diagramm.periodPoTime) {
-            props.addPeriodPoTime(e.target.value)
-        }
-    }
+    // const periodSTime = (e) => {
+    //     if (e.target.value !== props.diagramm.periodSTime) {
+    //         props.addPeriodSTime(e.target.value)
+    //     }
+    // }
+    // const periodPoTime = (e) => {
+    //     if (e.target.value !== props.diagramm.periodPoTime) {
+    //         props.addPeriodPoTime(e.target.value)
+    //     }
+    // }
 
     const diagramm = props.diagramm.category
 
@@ -156,15 +156,15 @@ const Statistic = (props) => {
                                                 name="periodS"
                                                 component="input"
                                                 type="date"
-                                                min='2022-01-01'
+                                                min='2022-02-01'
                                                 max={props.diagramm.periodPo || data }>
                                             </Field>
-                                            <Field
+                                            {/* <Field
                                                 onChange={periodSTime}
                                                 name="periodSTime"
                                                 component="input"
                                                 type="time">
-                                            </Field>
+                                            </Field> */}
                                         </div>
                                         <div className={s.periodStatistic}>
                                             <label>По: </label>
@@ -175,14 +175,14 @@ const Statistic = (props) => {
                                                 name="periodPo"
                                                 component="input"
                                                 type="date"
-                                                min={props.diagramm.periodS || '2022-01-01'}
+                                                min={props.diagramm.periodS || '2022-02-01'}
                                                 max={data}>
                                             </Field>
-                                            <Field
+                                            {/* <Field
                                                 onChange={periodPoTime}
                                                 name="periodPoTime"
                                                 component="input"
-                                                type="time"></Field>
+                                                type="time"></Field> */}
                                         </div>
                                     </div>
                                     <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import FormSelectDiagramm from '../../helpers/FormSelectDiagramm/FormSelectDiagramm';
+import DiagrammTop from './DiagrammTop/DiagrammTop';
 import s from './DiagrammMain.module.css';
-import Legend from './Legend';
 
 
 const DiagrammMain = (props) => {
@@ -26,12 +26,12 @@ const DiagrammMain = (props) => {
             </div>
 
             <div className={s.diagrammMainDiagramm}>
-                <canvas id="tutorial" className={s.diagramm}></canvas>
-                <div>
-                    <Legend
-                        diagramm={props.diagramm}
-                        addEditColor={props.addEditColor} />
-                </div>
+                <DiagrammTop 
+                diagramm={props.diagramm} 
+                selectDiagramm={props.diagramm.selectDiagramm}
+                dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
+                euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}/>
+              
             </div>
 
         </div>

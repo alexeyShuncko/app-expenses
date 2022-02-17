@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
 import { DataTransformation } from "../../../helpers/DataTransformation/DataTransformation";
 import FormSelectDiagramm from "../../../helpers/FormSelectDiagramm/FormSelectDiagramm";
 import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
 import Message from "../../../helpers/Message/Message";
-import Legend from "../../../Main/DiagrammMain/Legend";
 import s from './DiagrammContainer.module.css';
-import StatisticDateDiagram from './StatisticDateDiagram';
+import DiagrammTopStatistic from "./DiagrammTopStatistic/DiagrammTopStatistic";
 
 
 const DiagrammContainer = (props) => {
@@ -33,33 +32,22 @@ const DiagrammContainer = (props) => {
         setEdit(false)
     }
 
-    let eee = props.diagramm.category
-
-    const diagramm = eee.map(a => a.data)
-        .map(a => a
-            .filter(a =>
+    const diagramm = props.diagramm.category.map(a =>{
+        return {
+            ...a,
+            data: a.data.filter(a =>
                 a.time <= (props.diagramm.periodPo + ' ' + props.diagramm.periodPoTime) &&
                 a.time >= (props.diagramm.periodS + ' ' + props.diagramm.periodSTime))
-        )
-        .map(a => a
-            .map(a => a.num)
-            .reduce((sum, current) => sum + current, 0)
-        )
+        }}
+    )
 
-    const total = diagramm.reduce((sum, current) => sum + current, 0)
-    const select = props.diagramm.selectDiagrammStat
-    const dollar = props.diagramm.exchangeRates.dollar.Cur_OfficialRate  
-    const euro = props.diagramm.exchangeRates.euro.Cur_OfficialRate  
+    const total = diagramm.map(a => a.data.map(e=>e.num).reduce((sum, current) => sum + current, 0))
+    .reduce((acc, num) => acc + num, 0)    // суммарный расход за выбранный период
+    
 
     const addSelect = (value) => {
         props.addSelectDiagrammStat(value)
     }
-
-    useEffect(() => {
-        if (edit === true && total !== 0) {
-            StatisticDateDiagram(diagramm, eee, select, dollar,euro)
-        }
-    }, [props.diagramm, edit, diagramm, eee, select, dollar,euro, total]);
 
 
     let  textMessage = 
@@ -74,7 +62,7 @@ const DiagrammContainer = (props) => {
                     <span className={s.selectValue}>
                         <FormSelectDiagramm
                             addSelect={addSelect}
-                            select={select} /></span>
+                            select={props.diagramm.selectDiagrammStat} /></span>
                 </div>
             </div>
 
@@ -90,10 +78,14 @@ const DiagrammContainer = (props) => {
                         onClick={deActivateEditMode}> Убрать </button>
                     {total === 0
                         ?  <Message textMessage={textMessage} idMessage='messageDiagrammTotal'/>
-                        : <div>
-                            <div className={s.diagramm}><canvas id="period" width='250px' height='300px'></canvas>
-                                <Legend {...props} />
-                            </div>
+                        : <div className={s.pie}>
+                            <DiagrammTopStatistic 
+                            total={total}
+                            diagramm={diagramm}
+                            selectDiagramm={props.diagramm.selectDiagrammStat}
+                            dollar = {props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
+                            euro = {props.diagramm.exchangeRates.euro.Cur_OfficialRate}  
+                            />
                         </div>
                     }
                 </div>

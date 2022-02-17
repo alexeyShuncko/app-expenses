@@ -155,10 +155,8 @@ const Grafs = (props) => {
             <ResponsiveBump
                 data={data}
                 yScale={{
-            type: 'linear',
             min: 'auto',
             max: 'auto',
-            stacked: true,
             reverse: false
         }}
                 xOuterPadding={0.25}

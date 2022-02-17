@@ -1,29 +1,21 @@
-.button {
-    margin-top: 10px;
-}
-
-.button button {
-    margin-top: 10px;
-}
-
 .statistic {
     display: flex;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .statisticItem1 {
-    flex: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     margin-right: 20px;
 }
 
 .statisticItem2 {
-    flex: 5;
+    flex: 7;
 }
 
-.statisticItem1 {
-    display: flex;
-    flex-direction: column;
-}
+
 
 .categoryStatistic {
     flex: 1;
