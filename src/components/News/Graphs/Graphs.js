@@ -9,9 +9,6 @@ import { ResponsiveBump } from '@nivo/bump'
 
 
 
-
-
-
 const Grafs = (props) => {
 
 
@@ -31,7 +28,19 @@ const Grafs = (props) => {
          {time: '13.02.2022'},
          {time: '14.02.2022'},
          {time: '15.02.2022'},
-         {time: '16.02.2022'}
+         {time: '16.02.2022'},
+         {time: '17.02.2022'},
+         {time: '18.02.2022'},
+         {time: '19.02.2022'},
+         {time: '20.02.2022'},
+         {time: '21.02.2022'},
+         {time: '22.02.2022'},
+         {time: '23.02.2022'},
+         {time: '24.02.2022'},
+         {time: '25.02.2022'},
+         {time: '26.02.2022'},
+         {time: '27.02.2022'},
+         {time: '28.02.2022'}
      ]
      
      
@@ -84,15 +93,15 @@ const Grafs = (props) => {
 
     return (
         <div className={s.graff}>
-            {/* <ResponsiveLine
+            <ResponsiveLine
         data={data}
-        margin={{ top: 50, right: 110, bottom: 80, left: 60 }}
+        margin={{ top: 50, right: 40, bottom: 110, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{
             type: 'linear',
             min: 'auto',
             max: 'auto',
-            stacked: true,
+            stacked: false,
             reverse: false
         }}
         curve="monotoneX"
@@ -104,7 +113,7 @@ const Grafs = (props) => {
             tickPadding: 4,
             tickRotation: -90,
             legend: 'Дата',
-            legendOffset: 70,
+            legendOffset: 100,
             legendPosition: 'middle'
         }}
         axisLeft={{
@@ -113,7 +122,7 @@ const Grafs = (props) => {
             tickPadding: 5,
             tickRotation: 0,
             legend: 'Потраченная сумма денег',
-            legendOffset: -45,
+            legendOffset: -65,
             legendPosition: 'middle'
         }}
         colors={color}
@@ -122,27 +131,151 @@ const Grafs = (props) => {
         pointBorderWidth={3}
         pointBorderColor={{ from: 'serieColor', modifiers: [] }}
         pointLabelYOffset={-18}
+        enableCrosshair={true}  // перекрестие на точку поумолчанию true
+        crosshairType="cross"
         enableArea={true}
-         enableSlices="x"
-        areaOpacity={0.1}
+         enableSlices="x" // отображаются данны по всем категориям
+         areaBlendMode="darken" // цвет под графиком
+        areaOpacity={0.5}    // прозрачность цвета под графиком
         useMesh={true}
+        theme={                 // объект добавления свойств диаграммы
+            {    "fontSize": 13,
+                // "background": "#ffffff",
+                // "textColor": "#333333",
+                 "axis": {               //оси
+                     // "domain": { 
+                    //      "line": {
+                    //        "stroke": "#777777",
+                    //         "strokeWidth": 1
+                    // }
+                     // },
+                     "legend": {
+                         "text": {
+                            "fontSize": 18,
+                             "fill": "#000"
+                         }
+                     },
+                    //  "ticks": {
+                    //      "line": {
+                    //          "stroke": "#777777",
+                    //          "strokeWidth": 1
+                    //      },
+                    //      "text": {
+                    //          "fontSize": 11,
+                    //          "fill": "#333333"
+                    //      }
+                    //  }
+                 },
+                // "grid": {
+                //     "line": {
+                //         "stroke": "#dddddd",
+                //         "strokeWidth": 1
+                //     }
+                // },
+                  "legends": {
+                //       "title": {
+                //            "text": {
+                //                "fontSize": 20,
+                //                //"fill": "#333333"
+                //           }
+                //    },
+                       "text": {
+                           "fontSize": 16,
+                       },
+                    //   "ticks": {
+                    //       "line": {},
+                    //       "text": {
+                    //           "fontSize": 10,
+                    //           "fill": "#333333"
+                    //   }
+                    //   }
+                 },
+                //  "annotations": {
+                //      "text": {
+                //          "fontSize": 25,
+                //          "fill": "#333333",
+                //          "outlineWidth": 2,
+                //          "outlineColor": "#ffffff",
+                //          "outlineOpacity": 1
+                //      },
+                //      "link": {
+                //          "stroke": "#000000",
+                //          "strokeWidth": 1,
+                //          "outlineWidth": 2,
+                //          "outlineColor": "#ffffff",
+                //          "outlineOpacity": 1
+                //      },
+                //      "outline": {
+                //          "stroke": "#000000",
+                //          "strokeWidth": 2,
+                //          "outlineWidth": 2,
+                //          "outlineColor": "#ffffff",
+                //          "outlineOpacity": 1
+                //      },
+                //  "symbol": {
+                //          "fill": "#000000",
+                //          "outlineWidth": 2,
+                //          "outlineColor": "#ffffff",
+                //          "outlineOpacity": 1
+                //      }
+                //  },
+               
+                  "tooltip": {        // настройка подсказок всплывающих
+                      "container": {
+                          "background": "#ffffff",
+                          "color": "#333333",
+                          "fontSize": 16
+                      },
+                      "basic": {},
+                      "chip": {},
+                      "table": {},
+                      "tableCell": {},
+                      "tableCellValue": {}
+                  }
+             }
+        }
+        // onMouseEnter={(data, e) => {
+        //     console.log({ is: 'mouseenter', data, event: e }) 
+        // }}
+        // onMouseLeave={(data, e) => {
+        //     console.log({ is: 'mouseleave', data, event: e }) 
+        // }}
+        // onClick={(data, e) => {
+        //     console.log({ is: 'onclick', data, event: e }) 
+        // }}
+        sliceTooltip={({ slice }) => {
+            return (
+                <div
+                    style={{
+                        background: 'white',
+                        padding: '9px 12px',
+                        border: '1px solid #ccc',
+                    }}
+                >
+                    <div>x: {slice.x}</div>
+                   
+                </div>
+            )
+        }}
         legends={[
             {
-                anchor: 'right',
-                direction: 'column',
+                anchor: 'top',
+                direction: 'row',
                 justify: false,
-                translateX: 115,
-                translateY: 0,
-                itemWidth: 100,
+                translateX: 0,
+                translateY: -40,
+                itemWidth: 110,
                 itemHeight: 20,
                 itemsSpacing: 4,
                 symbolSize: 20,
                 symbolShape: 'circle',
                 itemDirection: 'left-to-right',
-                itemTextColor: '#777',
+                itemTextColor: '#000',
+                
                 effects: [
                     {
                         on: 'hover',
+                        
                         style: {
                             itemBackground: 'rgba(0, 0, 0, .03)',
                             itemOpacity: 1
@@ -150,14 +283,17 @@ const Grafs = (props) => {
                     }
                 ]
             }
-        ]}
-        /> */}
-            <ResponsiveBump
+        ]
+    }
+        />
+            {/* <ResponsiveBump
                 data={data}
-                yScale={{
-            min: 'auto',
-            max: 'auto',
-            reverse: false
+       yScale={{
+            
+            min: 0,
+            max: 200,
+            stacked: false,
+            reverse: true
         }}
                 xOuterPadding={0.25}
                 colors={color}
@@ -193,7 +329,7 @@ const Grafs = (props) => {
                 }}
                 margin={{ top: 40, right: 100, bottom: 80, left: 60 }}
                 axisRight={null}
-            />
+            /> */}
         </div>
     )
 

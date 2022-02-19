@@ -1,11 +1,11 @@
-.news {
+.main {
     display: flex;
+    margin-bottom: 20px;
     
 }
-.newsItems {
-    flex: 2;
-    padding: 10px;
+.mainInform {
+    flex: 1;
 }
-.newsItems1 {
-    flex: 3;
+.mainDiagramm {
+    flex: 2;
 }

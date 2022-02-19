@@ -45,6 +45,7 @@ return (
 <ResponsivePie
         data={data()}
         margin={{ top: 60, right: 70, bottom: 40, left: 20 }}
+        theme={{"fontSize": 14}}
         //sortByValue={true}  упорядочивание по значению по умолчанию false
         innerRadius={0.65}  // внутренний радиус
         padAngle={2}        // расстояние между частями диаграммы в градусах

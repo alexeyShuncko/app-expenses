@@ -35,7 +35,7 @@ let initialState = {
                 { id: 'Еда3', time: '2022-02-12 ', num: 20 },
                 { id: 'Еда4', time: '2022-02-13 ', num: 25 },
                 { id: 'Еда5', time: '2022-02-14 ', num: 52 }
-            ], summ: 127
+            ], summ: 217
         },
         { nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', 
         data: [{ id: 'Алкоголь1', time: '2022-02-08 ', num: 40 }], summ: 40 },

@@ -12,9 +12,9 @@ import { addText } from './../../../Redux/diagrammReducer';
 const Main =(props)=> {
     
         return (
-            <div className={s.news}>
+            <div className={s.main}>
                 
-                <div className={s.newsItems}>
+                <div className={s.mainInform}>
                     <FormDiagram
                     exchangeRates={props.diagramm.exchangeRates}
                         addDiagramm={props.addDiagramm}
@@ -27,7 +27,7 @@ const Main =(props)=> {
                     />
                 </div>
 
-                <div className={s.newsItems1}>
+                <div className={s.mainDiagramm}>
                     <DiagrammMain
                         addSelectDiagramm={props.addSelectDiagramm}
                         diagramm={props.diagramm} 
