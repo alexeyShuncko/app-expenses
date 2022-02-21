@@ -20,7 +20,8 @@ const RENAME_CATEGORY = 'RENAME_CATEGORY'
 const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
 const ADD_TEXT = 'ADD_TEXT'
 const ADD_NAME_CASE = 'ADD_NAME_CASE'
-
+const ADD_GRAF_S = 'ADD_GRAF_S'
+const ADD_GRAF_PO = 'ADD_GRAF_PO'
 
 
 
@@ -37,13 +38,19 @@ let initialState = {
                 { id: 'Еда5', time: '2022-02-14 ', num: 52 }
             ], summ: 217
         },
-        { nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', 
-        data: [{ id: 'Алкоголь1', time: '2022-02-08 ', num: 40 }], summ: 40 },
-        { nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', 
-        data: [{ id: 'Квартира1', time: '2022-02-11 ', num: 25 }], summ: 25 },
-        { nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', 
-        data: [{ id: 'Транспорт1', time: '2022-02-09 ', num: 25 }], summ: 25 }
-    ],
+        {
+            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1',
+            data: [{ id: 'Алкоголь1', time: '2022-02-08 ', num: 40 }], summ: 40
+        },
+        {
+            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff',
+            data: [{ id: 'Квартира1', time: '2022-02-11 ', num: 25 }], summ: 25
+        },
+        {
+            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928',
+            data: [{ id: 'Транспорт1', time: '2022-02-09 ', num: 25 }], summ: 25
+        }
+        ],
     activ: '',
     salary: { salaryNum: 700.01, salaryDate: '2022-02-01', salaryValueTrue: false },
     periodPo: '',
@@ -63,7 +70,11 @@ let initialState = {
         price: 4.59,
         case: ['пива', 'пив', 'пиво']
     },
-    text: 'Привет...'
+    text: 'Привет...',
+    grafs: {
+        s: '2022-02-01',
+        po: '2022-02-28'
+    }
 
 }
 
@@ -148,21 +159,23 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 exchangeRates: {
                     dollar: {
-                    Cur_OfficialRate: action.dollar,
-                    Date: action.data.slice(0, -9)},
-                    euro: {...state.exchangeRates.euro}
+                        Cur_OfficialRate: action.dollar,
+                        Date: action.data.slice(0, -9)
+                    },
+                    euro: { ...state.exchangeRates.euro }
                 }
             }
-            case ADD_EURO:
-                return {
-                    ...state,
-                    exchangeRates: {
-                        dollar: {...state.exchangeRates.dollar},
-                        euro: {
-                            Cur_OfficialRate: action.euro,
-                            Date: action.data.slice(0, -9)}
+        case ADD_EURO:
+            return {
+                ...state,
+                exchangeRates: {
+                    dollar: { ...state.exchangeRates.dollar },
+                    euro: {
+                        Cur_OfficialRate: action.euro,
+                        Date: action.data.slice(0, -9)
                     }
                 }
+            }
         case ADD_CATEGORY:
             return {
                 ...state,
@@ -173,17 +186,17 @@ const diagrammReduser = (state = initialState, action) => {
                     data: [], summ: 0
                 }]
             }
-            case  ADD_NAME_CASE: 
+        case ADD_NAME_CASE:
             return {
                 ...state,
-                category: [...state.category.map(a=>  {
-                    if (a.nameRus.toLowerCase() === action.name){
-                        return ({...a, nameRusСase: `${action.data[0].toUpperCase() + action.data.slice(1)}`})
+                category: [...state.category.map(a => {
+                    if (a.nameRus.toLowerCase() === action.name) {
+                        return ({ ...a, nameRusСase: `${action.data[0].toUpperCase() + action.data.slice(1)}` })
                     }
-                   return a
+                    return a
                 }
-                    )]
-                }
+                )]
+            }
 
         case DELETE_CATEGORY:
             return {
@@ -218,6 +231,22 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 text: action.text
             }
+        case ADD_GRAF_S:
+            return {
+                ...state,
+                grafs: {
+                    s: action.data,
+                   po: state.grafs.po 
+                }
+            }
+        case ADD_GRAF_PO:
+            return {
+                ...state,
+                grafs: {
+                    s: state.grafs.s ,
+                    po: action.data 
+                }
+            }
 
         default:
             return state
@@ -225,12 +254,25 @@ const diagrammReduser = (state = initialState, action) => {
 }
 
 
+
+
+export const addGrafS = (data) => {
+    return { type: ADD_GRAF_S, data }
+}
+export const addGrafPo = (data) => {
+    return { type: ADD_GRAF_PO, data }
+}
+
+
+
+
+
 export const addText = (text) => {
     return { type: ADD_TEXT, text }
 }
 
 export const changeRelativity = (name, unit, price, array) => {
-    return { type: CHANGE_RELATIVITY, name, unit, price , array}
+    return { type: CHANGE_RELATIVITY, name, unit, price, array }
 }
 
 export const addCategory = (name, color) => {
@@ -297,7 +339,7 @@ export const getDollarUpdate = () => (dispatch) => {
     })
 }
 export const getEuroUpdate = () => (dispatch) => {
- 
+
     getEuro().then(data => {
         dispatch(addEuro(data.Cur_OfficialRate, data.Date))
     })
@@ -306,15 +348,15 @@ export const getEuroUpdate = () => (dispatch) => {
 export const nameCase = (name) => (dispatch) => {
 
     getItem(name).then(data => {
-        dispatch(addNameCase(data.В, name) )
-        })
-    }
-export const nameCaseRelativity = (name,unit,prise) => (dispatch) => {
+        dispatch(addNameCase(data.В, name))
+    })
+}
+export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
 
-        getItem(name).then(data => {
-            dispatch(changeRelativity(data.Р, unit,prise, [data.Р,data.множественное.Р,name]) )
-            })
-        }
+    getItem(name).then(data => {
+        dispatch(changeRelativity(data.Р, unit, prise, [data.Р, data.множественное.Р, name]))
+    })
+}
 
 
 

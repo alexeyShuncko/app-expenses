@@ -65,7 +65,11 @@ return (
    
 <ResponsivePie
         data={data()}
-        margin={{ top: 40, right: 40, bottom: 40, left: 30 }}
+        margin={{ 
+            top: props.diagramm.category.length <= 6 ? 40 : 60, 
+            right: props.diagramm.category.length <= 6 ? 40 : 70, 
+            bottom: props.diagramm.category.length <= 6 ? 70 : 40, 
+            left: props.diagramm.category.length <= 6 ? 30 : 0 }}
         
         theme={                 // объект добавления свойств диаграммы
             {    "fontSize": 16,
@@ -303,7 +307,7 @@ return (
                 direction: props.diagramm.category.length <= 6 ? 'row' : 'column',
                 justify: false,
                 translateX: props.diagramm.category.length <= 6 ? 0 : 40,
-                translateY: props.diagramm.category.length <= 6 ? 40 : -40,
+                translateY: props.diagramm.category.length <= 6 ? 60 : -40,
                 itemsSpacing: props.diagramm.category.length <= 6 ? 0 : 5,
                 itemWidth: 110,
                 itemHeight: 20,

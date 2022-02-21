@@ -13,7 +13,7 @@ const AddCategory = (props) => {
         window.history.back()
     }
 
-    const funcValidText = (e) => {    // валидация ввода, только русские буквы ... подумать над пробелом 
+    const funcValidText = (e) => {    // валидация ввода, только русские буквы ... подумать над пробелом !!!!
         const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
         const regexEng = /[A-Za-z]/
         if (regexEng.test(e.target.value)) {
@@ -35,7 +35,7 @@ const AddCategory = (props) => {
             props.addCategory(values.name, values.color)
             ArrowFunc(null, null, 'buttonSetting')
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
-            props.nameCase(values.name) // добавление имени в винительном падеже
+            //props.nameCase(values.name) // добавление имени в винительном падеже
             values.name = ''
             values.color = '#ffffff'
         }
