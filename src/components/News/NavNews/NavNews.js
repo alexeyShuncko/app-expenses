@@ -20,7 +20,7 @@ const NavNews = (props) => {
         <NavLink to="/graphs" className={(navData) => navData.isActive ? s.active : "" }>Графики</NavLink>
       </div>
       <div className={s.navNewsitem}>
-        <NavLink to="/setting" className={(navData) => navData.isActive ? s.active : "" }>Настройка</NavLink>
+        <NavLink to="/setting" className={(navData) => navData.isActive ? s.active : "" }>Настройки</NavLink>
       </div>
 
     </nav>

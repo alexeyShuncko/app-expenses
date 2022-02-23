@@ -5,13 +5,12 @@ import { Field } from 'react-final-form';
 import Salary from './Salary/Salary';
 import DollarRate from './DollarRate/DollarRate';
 import HedgehogFunc from './../../../helpers/HedgehodFunc/HedgehogFunc';
+import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
 
 
 const FormDiagram = (props) => {
 
-
     const diagramm = props.diagramm.category
-
 
     const funcValidNumber = (e) => {      // максимальная длинна 7 символов и 2 после запятой
         if (e.target.value.includes(".")) {
@@ -24,23 +23,7 @@ const FormDiagram = (props) => {
 
     const onSubmit = (values, form) => {
 
-        const time = new Date()
-        function formatDate(date) {
-
-            let dd = date.getDate();
-            if (dd < 10) dd = '0' + dd;
-
-            let mm = date.getMonth() + 1;
-            if (mm < 10) mm = '0' + mm;
-
-            let yy = date.getFullYear() % 100;
-            if (yy < 10) yy = '0' + yy;
-
-            return '20' + yy + '-' + mm + '-' + dd ;
-        }
-        const timer = formatDate(time)
-
-
+        const timer = DateFunc(new Date())
 
         const value = () => {
             let valueArr = []
@@ -60,7 +43,6 @@ const FormDiagram = (props) => {
         form.reset()
 
     }
-
 
 
 

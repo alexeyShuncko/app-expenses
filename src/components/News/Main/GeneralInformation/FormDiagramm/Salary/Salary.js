@@ -7,6 +7,7 @@ import HocValuta from '../../../../HOC/HocValuta';
 import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../../../helpers/ArrowFunc/ArrowFunc';
 import ArrowValidate from './../../../../Arrow/ArrowValidate';
+import { DateFunc } from '../../../../helpers/DateFunc/DateFunc';
 
 
 const Salary = (props) => {
@@ -27,29 +28,7 @@ const Salary = (props) => {
     },
     );
 
-    const time = new Date()
-    function formatDate(date) {
-
-        var dd = date.getDate();
-        if (dd < 10) dd = '0' + dd;
-
-        var mm = date.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
-
-        var yy = date.getFullYear() % 100;
-        if (yy < 10) yy = '0' + yy;
-        var HH = date.getHours();
-        if (HH < 10) HH = '0' + HH;
-
-        var MM = date.getMinutes();
-        if (MM < 10) MM = '0' + MM;
-
-        var SS = date.getSeconds();
-        if (SS < 10) SS = '0' + SS;
-
-        return '20' + yy + '-' + mm + '-' + dd + ' ' + HH + ':' + MM + ':' + SS;
-    }
-    const timer = formatDate(time)
+    const timer = DateFunc(new Date())
 
     const month = new Date()
     function formatMonth(date) {

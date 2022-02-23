@@ -14,25 +14,11 @@ import HedgehogFunc from './../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from "../Arrow/ArrowValidate";
 import OffStyle from "../helpers/ArrowFunc/Offstyle";
 import ArrowFunc from "../helpers/ArrowFunc/ArrowFunc";
+import { DateFunc } from '../helpers/DateFunc/DateFunc';
 
 const Statistic = (props) => {
 
-    const time = new Date()
-    function formatDate(date) {
-
-        let dd = date.getDate();
-        if (dd < 10) dd = '0' + dd;
-
-        let mm = date.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
-
-        let yy = date.getFullYear() % 100;
-        if (yy < 10) yy = '0' + yy;
-
-        return '20' + yy + '-' + mm + '-' + dd
-    }
-    const data = formatDate(time)
-
+    const data = DateFunc(new Date())
 
     const colorActiv = (e) => {
         if (e.target.value !== props.diagramm.activ.name) {
@@ -42,7 +28,7 @@ const Statistic = (props) => {
         }
     }
     const periodS = (e) => {
-        if (e.target.value !== props.diagramm.periodS && props.diagramm.periodS === '' ) {
+        if (e.target.value !== props.diagramm.periodS && props.diagramm.periodS === '') {
             props.addPeriodS(e.target.value)
             HedgehogFunc(props.addText, 'Начало периода выбрано ...')
             ArrowFunc(null, null, 'buttonTable')
@@ -54,11 +40,11 @@ const Statistic = (props) => {
         }
         else if (e.target.value !== props.diagramm.periodS) {
             props.addPeriodS(e.target.value)
-            HedgehogFunc(props.addText, 'Начало периода изменено ...') 
+            HedgehogFunc(props.addText, 'Начало периода изменено ...')
             ArrowFunc(null, null, 'buttonTable')
             OffStyle(['periodS'])
         }
-        
+
     }
     const periodPo = (e) => {
 
@@ -66,11 +52,11 @@ const Statistic = (props) => {
             props.addPeriodPo(e.target.value)
             HedgehogFunc(props.addText, 'Окончание периода выбрано ...')
             ArrowFunc(null, null, 'buttonTable')
-            OffStyle(['periodPo']) 
+            OffStyle(['periodPo'])
         }
         else if (e.target.value !== props.diagramm.periodPo) {
             props.addPeriodPo(e.target.value)
-            HedgehogFunc(props.addText, 'Окончание периода изменено ...') 
+            HedgehogFunc(props.addText, 'Окончание периода изменено ...')
             ArrowFunc(null, null, 'buttonTable')
             OffStyle(['periodPo'])
         }
@@ -100,103 +86,104 @@ const Statistic = (props) => {
                     }}
 
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
-                        <form onSubmit={handleSubmit} >
-
-                            <div className={s.categoryStatistic}>
-                                <div className={s.nameArrow}>
-                                    <div>
+                        <form onSubmit={handleSubmit} className={s.formStatistic}>
+                          
+                                <div className={s.categoryStatistic}>
+                                    <div className={s.nameArrow}>
                                         <div>
-                                            <label className={s.categoryStatisticName} >Выберите категорию : </label>
+                                            <div>
+                                                <label className={s.categoryStatisticName} >Выберите категорию : </label>
+                                            </div>
+
+                                                <Field
+                                                    autoFocus='on'
+                                                    id='inputCategoryStatistic'
+                                                    onClick={colorActiv}
+                                                    name="favorite"
+                                                    component="select"
+                                                    className={s.option}
+                                                    style={diagramm.map(a => a.idCategory).includes(props.diagramm.activ.id)
+                                                        ? { backgroundColor: diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].color }
+                                                        : { backgroundColor: '#ffffff' }}
+                                                >
+                                                    <option>{props.diagramm.activ.id && diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].nameRus} </option>
+                                                    {diagramm.map(a =>
+                                                        <option value={a.nameRus}
+                                                            key={a.nameRus}
+                                                            style={{ backgroundColor: ` ${a.color}` }}>
+                                                            {a.nameRus}
+                                                        </option>)}
+                                                </Field>
+                                            
+                                        </div>
+                                        <div>
+                                            <ArrowValidate arrowId='arrowCategory' />
                                         </div>
 
-                                        <div className={s.nameArrow}>
-                                            <Field
-                                                autoFocus='on'
-                                                id='inputCategoryStatistic'
-                                                onClick={colorActiv}
-                                                name="favorite"
-                                                component="select"
-                                                className={s.option}
-                                                style={diagramm.map(a => a.idCategory).includes(props.diagramm.activ.id)
-                                                    ? { backgroundColor: diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].color }
-                                                    : { backgroundColor: '#ffffff' }}
-                                                    >
-                                                <option>{props.diagramm.activ.id && diagramm.filter(a=>a.idCategory===props.diagramm.activ.id)[0].nameRus} </option>
-                                                {diagramm.map(a =>
-                                                    <option value={a.nameRus}
-                                                        key={a.nameRus}
-                                                        style={{ backgroundColor: ` ${a.color}` }}>
-                                                        {a.nameRus}
-                                                    </option>)}
-                                            </Field>
-                                        </div>
                                     </div>
-                                    <div>
-                                        <ArrowValidate arrowId='arrowCategory' />
+
+
+                                    <div> {props.diagramm.activ.name
+                                        ? <RelativityStatistic diagramm={props.diagramm} />
+                                        : null}
                                     </div>
 
                                 </div>
-
-
-                                <div> {props.diagramm.activ.name
-                                    ? <RelativityStatistic diagramm={props.diagramm} />
-                                    : null}
-                                </div>
-
-                            </div>
-                            <div className={s.period}>
-                                <label className={s.categoryStatisticName}>Выберите период : </label>
-                                <div className={s.nameArrow}>
-                                    <div>
-                                        <div className={s.periodStatistic}>
-                                            <label>C: </label>
-                                            <Field
-                                            id='periodS'
-                                                onChange={periodS}
-                                                name="periodS"
-                                                component="input"
-                                                type="date"
-                                                min='2022-02-01'
-                                                max={props.diagramm.periodPo || data }>
-                                            </Field>
-                                            {/* <Field
+                                <div className={s.period}>
+                                    <label className={s.categoryStatisticName}>Выберите период : </label>
+                                    <div className={s.nameArrow}>
+                                        <div>
+                                            <div className={s.periodStatistic}>
+                                                <label>C: </label>
+                                                <Field
+                                                    id='periodS'
+                                                    onChange={periodS}
+                                                    name="periodS"
+                                                    component="input"
+                                                    type="date"
+                                                    min='2022-02-01'
+                                                    max={props.diagramm.periodPo || data}>
+                                                </Field>
+                                                {/* <Field
                                                 onChange={periodSTime}
                                                 name="periodSTime"
                                                 component="input"
                                                 type="time">
                                             </Field> */}
-                                        </div>
-                                        <div className={s.periodStatistic}>
-                                            <label>По: </label>
-                                            <Field
-                                            //disabled
-                                            id='periodPo'
-                                                onChange={periodPo}
-                                                name="periodPo"
-                                                component="input"
-                                                type="date"
-                                                min={props.diagramm.periodS || '2022-02-01'}
-                                                max={data}>
-                                            </Field>
-                                            {/* <Field
+                                            </div>
+                                            <div className={s.periodStatistic}>
+                                                <label>По: </label>
+                                                <Field
+                                                    //disabled
+                                                    id='periodPo'
+                                                    onChange={periodPo}
+                                                    name="periodPo"
+                                                    component="input"
+                                                    type="date"
+                                                    min={props.diagramm.periodS || '2022-02-01'}
+                                                    max={data}>
+                                                </Field>
+                                                {/* <Field
                                                 onChange={periodPoTime}
                                                 name="periodPoTime"
                                                 component="input"
                                                 type="time"></Field> */}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <ArrowValidate arrowId='arrowPeriod' />
                                         </div>
                                     </div>
-                                    <div>
-                                        <ArrowValidate arrowId='arrowPeriod' />
-                                    </div>
                                 </div>
-                            </div>
                         </form>
                     )}
                 />
 
-                <div><StatisticTable
+                <div className={s.statisticTable}>
+                    <StatisticTable
                     addText={props.addText}
-                    diagramm={props.diagramm} /></div>
+                    diagramm={props.diagramm} />
+                    </div>
 
             </div>
             <div className={s.statisticItem2}>

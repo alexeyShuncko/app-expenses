@@ -62,7 +62,7 @@ let initialState = {
     periodS: '',
     periodPoTime: '23:59',
     periodSTime: '00:01',
-    selectDiagramm: '%',
+    selectDiagramm: 'BYN',
     selectDiagrammStat: '%',
     exchangeRates: {
         dollar: { Cur_OfficialRate: '2.5', Date: '' },
@@ -111,7 +111,9 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state, activ: {
                     name: action.activ,
-                    id: state.category.filter(a=> a.nameRus === action.activ)[0].idCategory
+                    id: action.activ 
+                    ? state.category.filter(a=> a.nameRus === action.activ)[0].idCategory  
+                    : ''
                 }
             }
         case ADD_SALARY:

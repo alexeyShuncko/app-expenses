@@ -2,31 +2,34 @@ import React from 'react';
 import { ResponsivePie } from '@nivo/pie'
 
 
-const CenteredMetric = ({ dataWithArc, centerX, centerY, props }) => {
-    let total = 0
-    dataWithArc.forEach(datum => {
-    total += Number(datum.value)
-})
-    return (
-        <text
-            x={centerX}
-            y={centerY}
-            textAnchor="middle"
-            dominantBaseline="central"
-            style={{
-                fontSize: '52px',
-                fontWeight: 600,
-            }}
-        >
-            {Math.round(total)}
-        </text>
-    )
-}    
+  
 
 const DiagrammTop = (props) => {
+
+    const CenteredMetric = ({ dataWithArc, centerX, centerY }) => {
+   
+        let total = 0
+        dataWithArc.forEach(datum => {
+        total += Number(datum.value)
+    })
+        return (
+            <text
+                x={centerX}
+                y={centerY}
+                textAnchor="middle"
+                dominantBaseline="central"
+                style={{
+                    fontSize: String(total).length <= 3 ? '52px' : '44px',
+                    fontWeight: 600,
+                }}
+            >
+                {Math.round(total)}
+            </text>
+        )
+    }  
     
     let totalSumm = props.diagramm.category.map(a =>a && a.summ).reduce((acc, num) => acc + num, 0)
-
+    
    const  data =()=> {
 
     if (props.selectDiagramm === 'USD') {
@@ -40,7 +43,7 @@ const DiagrammTop = (props) => {
         return props.diagramm.category.map(a=> { return { 
             'id': a.nameRus,  
         "label": a.nameRus,
-        "value": a.summ,
+        "value": Math.round(a.summ),
         "color": a.color}})
     }
     else if (props.selectDiagramm === 'EUR') {
@@ -53,7 +56,7 @@ const DiagrammTop = (props) => {
     return props.diagramm.category.map(a=> { return { 
         'id': a.nameRus,  
     "label": a.nameRus,
-    "value": ((a.summ/totalSumm)*100).toFixed(0),
+    "value": ((a.summ/totalSumm)*100).toFixed(1),
     "color": a.color}})
          }
 
@@ -66,10 +69,10 @@ return (
 <ResponsivePie
         data={data()}
         margin={{ 
-            top: props.diagramm.category.length <= 5 ? 40 : 70, 
+            top: props.diagramm.category.length <= 5 ? 45 : 70, 
             right: props.diagramm.category.length <= 5 ? 40 : 70, 
             bottom: props.diagramm.category.length <= 5 ? 70 : 40, 
-            left: props.diagramm.category.length <= 5 ? 30 : -40 }}
+            left: props.diagramm.category.length <= 5 ? 30 : -65 }}
         
         theme={                 // объект добавления свойств диаграммы
             {    "fontSize": 16,
@@ -181,12 +184,12 @@ return (
         //         </strong>
         //     </div>
         // )}
-        //sortByValue={true}  упорядочивание по значению по умолчанию false
+        //sortByValue={true}  //упорядочивание по значению по умолчанию false
         innerRadius={0.65}  // внутренний радиус
         padAngle={2}        // расстояние между частями диаграммы в градусах
         cornerRadius={8}    // радиус скругления краёв частей диаграммы
-        activeInnerRadiusOffset={26}  // увеличение внутреннего радиуса при наведении
-        activeOuterRadiusOffset={10} // увеличение внешнего радиуса при наведении
+        activeInnerRadiusOffset={25}  // увеличение внутреннего радиуса при наведении
+        activeOuterRadiusOffset={20} // увеличение внешнего радиуса при наведении
         layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
         colors={color}
         borderWidth={1}
@@ -199,27 +202,28 @@ return (
                 ]
             ]
         }}
-        arcLinkLabelsSkipAngle={10}
+        arcLinkLabelsSkipAngle={16}         // угол при котором не отображается линия выноска
         arcLinkLabelsTextColor="#fff"
-        arcLinkLabelsOffset={-4}
-        arcLinkLabelsStraightLength={21}
-        arcLinkLabelsThickness={2}
+        arcLinkLabelsTextOffset={4}          // расстояние от текста долинии выноски
+        arcLinkLabelsOffset={2}             // длина наклонной линии выноски
+        arcLinkLabelsStraightLength={12}     // длина прямой линии выноски
+        arcLinkLabelsThickness={2}           // толщина линии выноски
         arcLinkLabelsColor={{ from: 'color' }}
-        arcLabel={function(e){ if (props.selectDiagramm === 'USD') {  // вид подписей диаграмм, по умолчанию value
-                        return e.value+"$"
-                    }
-            else if (props.selectDiagramm === 'BYN') {
-                return e.value+"р."
-            }
-            else if (props.selectDiagramm === 'EUR') {
-                return e.value+"€"
-            }
-            else if (props.selectDiagramm === '%') {
-                return e.value+"%"
-            }
-        }
-    }
-        arcLabelsSkipAngle={10}
+    //     arcLabel={function(e){ if (props.selectDiagramm === 'USD') {  // вид подписей диаграмм, по умолчанию value
+    //                     return e.value+"$"
+    //                 }
+    //         else if (props.selectDiagramm === 'BYN') {
+    //             return e.value+"р."
+    //         }
+    //         else if (props.selectDiagramm === 'EUR') {
+    //             return e.value+"€"
+    //         }
+    //         else if (props.selectDiagramm === '%') {
+    //             return e.value+"%"
+    //         }
+    //     }
+    // }
+        arcLabelsSkipAngle={12}             //угол при котором не отображаются значения диаграммы
         arcLabelsTextColor="black" // цвет значений диаграммы
         
         // arcLabelsTextColor={{
@@ -306,7 +310,7 @@ return (
                 anchor: props.diagramm.category.length <= 5 ? 'bottom' : 'top-right',
                 direction: props.diagramm.category.length <= 5 ? 'row' : 'column',
                 justify: false,
-                translateX: props.diagramm.category.length <= 5 ? 0 : 30,
+                translateX: props.diagramm.category.length <= 5 ? 0 : 40,
                 translateY: props.diagramm.category.length <= 5 ? 60 : -40,
                 itemsSpacing: props.diagramm.category.length <= 5 ? 0 : 5,
                 itemWidth: 130,

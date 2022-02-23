@@ -2,6 +2,7 @@ import React from 'react';
 import s from './GraphsContainer.module.css';
 import { ResponsiveLine } from '@nivo/line'
 import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
+import { DateFunc } from '../../helpers/DateFunc/DateFunc';
 //import { ResponsiveBump } from '@nivo/bump'
 
 
@@ -26,31 +27,18 @@ const GraphsContainer = (props) => {
     let grafS = new Date(props.periodS)
     let grafPo = new Date(props.periodPo)
 
-    const qqqq = (a, b) => {
+    const arrDates = (a, b) => {
         let arrTime = []
         for (let i = a; i < b; new Date(i.setDate(i.getDate() + 1))) {
 
-            function formatDate(date) {
-
-                let dd = date.getDate();
-                if (dd < 10) dd = '0' + dd;
-
-                let mm = date.getMonth() + 1;
-                if (mm < 10) mm = '0' + mm;
-
-                let yy = date.getFullYear() % 100;
-                if (yy < 10) yy = '0' + yy;
-
-                return '20' + yy + '-' + mm + '-' + dd
-            }
-            const data = formatDate(new Date(i))
+            const data = DateFunc(new Date(i))
 
             arrTime.push({ time: DataTransformation(data) })
         }
         return arrTime
     }
 
-    let timer = qqqq(grafS, grafPo)
+    let timer = arrDates(grafS, grafPo)
 
 
     const data = props.category.map(a => {
@@ -123,7 +111,7 @@ const GraphsContainer = (props) => {
                 enableArea={true}
                 enableSlices="x" // отображаются данны по всем категориям
                 areaBlendMode="darken" // цвет под графиком
-                areaOpacity={0.5}    // прозрачность цвета под графиком
+                areaOpacity={0.7}    // прозрачность цвета под графиком
                 useMesh={true}
                 theme={                 // объект добавления свойств диаграммы
                     {

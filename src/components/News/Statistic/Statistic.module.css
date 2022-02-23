@@ -1,36 +1,40 @@
 .statistic {
     display: flex;
+    flex-direction: column;
     margin-right: 10px;
     margin-bottom: 20px;
 }
 
 .statisticItem1 {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .statisticItem2 {
-    flex: 7;
+
 }
 
-
+.statisticTable {
+    flex: 1;
+}
+.formStatistic {
+    flex: 2;
+    display: flex;
+}
 
 .categoryStatistic {
     flex: 1;
-    flex-direction: column;
-    margin-bottom: 10px;
 }
+
+.period {
+    flex: 1
+}
+
+
+
 .categoryStatisticName {
     font-weight: bold;
     font-size: 15px;
-}
-
-
-.period {
-    flex: 1;
-    margin-bottom: 30px;
 }
 
 .statisticName {
@@ -67,5 +71,5 @@
 /* Стрелка валидации */
 
 .nameArrow {
-display: flex;
+    display: flex;
 }

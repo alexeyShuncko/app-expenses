@@ -90,7 +90,9 @@ const StatisticTable = (props) => {
                                 </div>)}
 
                             </div>
-                            <div className={s.statisticDateSumm} style={styles}>
+                            <div className={s.statisticDateSumm} 
+                            //style={styles}
+                            >
                                 Потрачено на <span className={s.categorySumm}>
                                     {props.diagramm.activ.name && 
                                     category.filter(a=> a.idCategory===props.diagramm.activ.id)[0].nameRusСase} 

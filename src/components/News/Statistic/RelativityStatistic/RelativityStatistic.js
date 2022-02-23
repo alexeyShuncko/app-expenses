@@ -58,7 +58,9 @@ const RelativityStatistic = (props) => {
             <div>Или:
                 <span className={s.boldValue}>{(data[0].summ / props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)} €</span>
             </div>
-            <div style={{ borderBottom: `solid ${data[0].color}` }}>
+            <div 
+            //style={{ borderBottom: `solid ${data[0].color}` }}
+            >
                 Или:<span className={s.boldValue}>
                     {props.diagramm.relativity.unit === 'штука'
                         ? (data[0].summ / props.diagramm.relativity.price).toFixed(0) + ' ' +

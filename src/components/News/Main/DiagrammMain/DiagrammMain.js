@@ -2,6 +2,7 @@ import React from 'react';
 import FormSelectDiagramm from '../../helpers/FormSelectDiagramm/FormSelectDiagramm';
 import DiagrammTop from './DiagrammTop/DiagrammTop';
 import s from './DiagrammMain.module.css';
+import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 
 
 const DiagrammMain = (props) => {
@@ -9,6 +10,7 @@ const DiagrammMain = (props) => {
 
     const onSelectChange = (value) => {
         props.addSelectDiagramm(value)
+        HedgehogFunc(props.addText, `Значения диаграммы в ${value} ...`)
     }
 
     return (

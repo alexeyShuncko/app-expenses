@@ -75,7 +75,7 @@ const AddCategory = (props) => {
                                                 name="name"
                                                 component="input"
                                                 type="text"
-                                                maxLength='20'
+                                                maxLength='12'
                                                 autoFocus='on' />
 
                                         </div>

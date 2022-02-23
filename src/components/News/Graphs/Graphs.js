@@ -3,7 +3,7 @@ import s from './Graphs.module.css';
 import { connect } from 'react-redux';
 import GraphsContainer from './GrafsContainer/GraphsContainer';
 import GrafsForm from './GrafsForm/GrafsForm';
-import { addGrafS, addGrafPo, addGrafSelect } from './../../../Redux/diagrammReducer';
+import { addGrafS, addGrafPo, addGrafSelect, addText } from './../../../Redux/diagrammReducer';
 
 
 const Grafs = (props) => {
@@ -18,6 +18,7 @@ const Grafs = (props) => {
                 periodS={props.expenses.grafs.s}
                 addGrafS={props.addGrafS}
                 addGrafPo={props.addGrafPo}
+                addText={props.addText}
             />
             <GraphsContainer
                 category={props.expenses.category}
@@ -37,5 +38,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addGrafS, addGrafPo, addGrafSelect })(Grafs)
+export default connect(mapStateToProps, { addGrafS, addGrafPo, addGrafSelect, addText })(Grafs)
 
