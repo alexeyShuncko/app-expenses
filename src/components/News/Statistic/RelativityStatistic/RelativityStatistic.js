@@ -4,7 +4,7 @@ import s from './RelativityStatistic.module.css';
 
 const RelativityStatistic = (props) => {
 
-    let data = props.diagramm.category.filter(a => a.nameRus === props.diagramm.activ)
+    let data = props.diagramm.category.filter(a => a.idCategory === props.diagramm.activ.id)
     let amount = Number((data[0].summ / props.diagramm.relativity.price).toFixed(0).slice(-1))
     let amount11 = Number((data[0].summ / props.diagramm.relativity.price).toFixed(0).slice(-2))
 

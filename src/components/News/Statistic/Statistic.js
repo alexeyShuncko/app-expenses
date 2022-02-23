@@ -35,7 +35,7 @@ const Statistic = (props) => {
 
 
     const colorActiv = (e) => {
-        if (e.target.value !== props.diagramm.activ) {
+        if (e.target.value !== props.diagramm.activ.name) {
             props.addActiv(e.target.value)
             OffStyle(['inputCategoryStatistic'])
             //HedgehogFunc(props.addText, 'Категория выбрана ...')   на подумать, + изменение категории
@@ -117,11 +117,11 @@ const Statistic = (props) => {
                                                 name="favorite"
                                                 component="select"
                                                 className={s.option}
-                                                style={diagramm.map(a => a.nameRus).includes(props.diagramm.activ)
-                                                    ? { backgroundColor: diagramm.filter(a => a.nameRus === props.diagramm.activ)[0].color }
+                                                style={diagramm.map(a => a.idCategory).includes(props.diagramm.activ.id)
+                                                    ? { backgroundColor: diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].color }
                                                     : { backgroundColor: '#ffffff' }}
                                                     >
-                                                <option>{props.diagramm.activ} </option>
+                                                <option>{props.diagramm.activ.id && diagramm.filter(a=>a.idCategory===props.diagramm.activ.id)[0].nameRus} </option>
                                                 {diagramm.map(a =>
                                                     <option value={a.nameRus}
                                                         key={a.nameRus}
@@ -138,7 +138,7 @@ const Statistic = (props) => {
                                 </div>
 
 
-                                <div> {props.diagramm.activ
+                                <div> {props.diagramm.activ.name
                                     ? <RelativityStatistic diagramm={props.diagramm} />
                                     : null}
                                 </div>

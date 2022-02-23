@@ -17,9 +17,9 @@ const AddCategory = (props) => {
         const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
         const regexEng = /[A-Za-z]/
         if (regexEng.test(e.target.value)) {
-            let Hedgehog= document.getElementById('myPopup')
-            if (Hedgehog.classList.value===a.popuptext){
-            HedgehogFunc(props.addText, 'Переключите на русский язык ...')
+            let Hedgehog = document.getElementById('myPopup')
+            if (Hedgehog.classList.value === a.popuptext) {
+                HedgehogFunc(props.addText, 'Переключите на русский язык ...')
             }
         }
         e.target.value = e.target.value.replace(regex1, '')
@@ -94,8 +94,21 @@ const AddCategory = (props) => {
                                     </div>
                                     <div>
                                         <span>Уже используемые цвета: </span>
-                                        <span>{props.diagramm.category.map(a =>
-                                            <span key={a.nameRus} className={s.legend} style={{ backgroundColor: ` ${a.color}` }}>&nbsp;</span>)}</span>
+                                       { props.diagramm.category.length < 7
+                                       ? <span>{props.diagramm.category.map(a =>
+                                            <span
+                                                key={a.nameRus}
+                                                className={s.legend}
+                                                style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                            </span>)}
+                                        </span>
+                                        : <div>{props.diagramm.category.map(a =>
+                                            <span
+                                                key={a.nameRus}
+                                                className={s.legend}
+                                                style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                            </span>)}
+                                        </div>}
                                     </div>
                                     <div className={s.colorInput}>
                                         <label> Цвет:</label>
@@ -144,8 +157,6 @@ const AddCategory = (props) => {
                         </form>
                     )}
                 />
-
-
             </div>
         </div>
     )

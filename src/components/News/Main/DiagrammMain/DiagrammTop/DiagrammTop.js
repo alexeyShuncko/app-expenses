@@ -18,7 +18,7 @@ const CenteredMetric = ({ dataWithArc, centerX, centerY, props }) => {
                 fontWeight: 600,
             }}
         >
-            {total}
+            {Math.round(total)}
         </text>
     )
 }    
@@ -33,7 +33,7 @@ const DiagrammTop = (props) => {
         return props.diagramm.category.map(a=> { return { 
             'id': a.nameRus,  
         "label": a.nameRus,
-        "value": (a.summ / props.dollar).toFixed(0),
+        "value": Math.round(a.summ / props.dollar),
         "color": a.color}})
     }
     else if (props.selectDiagramm === 'BYN') {
@@ -47,7 +47,7 @@ const DiagrammTop = (props) => {
         return props.diagramm.category.map(a=> { return { 
             'id': a.nameRus,  
         "label": a.nameRus,
-        "value": (a.summ / props.euro).toFixed(0),
+        "value": Math.round(a.summ / props.euro),
         "color": a.color}})
     }
     return props.diagramm.category.map(a=> { return { 
@@ -66,10 +66,10 @@ return (
 <ResponsivePie
         data={data()}
         margin={{ 
-            top: props.diagramm.category.length <= 6 ? 40 : 60, 
-            right: props.diagramm.category.length <= 6 ? 40 : 70, 
-            bottom: props.diagramm.category.length <= 6 ? 70 : 40, 
-            left: props.diagramm.category.length <= 6 ? 30 : 0 }}
+            top: props.diagramm.category.length <= 5 ? 40 : 70, 
+            right: props.diagramm.category.length <= 5 ? 40 : 70, 
+            bottom: props.diagramm.category.length <= 5 ? 70 : 40, 
+            left: props.diagramm.category.length <= 5 ? 30 : -40 }}
         
         theme={                 // объект добавления свойств диаграммы
             {    "fontSize": 16,
@@ -303,13 +303,13 @@ return (
         // ]}
         legends={[
             {
-                anchor: props.diagramm.category.length <= 6 ? 'bottom' : 'top-right',
-                direction: props.diagramm.category.length <= 6 ? 'row' : 'column',
+                anchor: props.diagramm.category.length <= 5 ? 'bottom' : 'top-right',
+                direction: props.diagramm.category.length <= 5 ? 'row' : 'column',
                 justify: false,
-                translateX: props.diagramm.category.length <= 6 ? 0 : 40,
-                translateY: props.diagramm.category.length <= 6 ? 60 : -40,
-                itemsSpacing: props.diagramm.category.length <= 6 ? 0 : 5,
-                itemWidth: 110,
+                translateX: props.diagramm.category.length <= 5 ? 0 : 30,
+                translateY: props.diagramm.category.length <= 5 ? 60 : -40,
+                itemsSpacing: props.diagramm.category.length <= 5 ? 0 : 5,
+                itemWidth: 130,
                 itemHeight: 20,
                 itemTextColor: '#ffffff',
                 itemDirection: 'left-to-right',

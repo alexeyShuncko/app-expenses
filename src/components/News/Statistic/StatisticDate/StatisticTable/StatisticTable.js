@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import s from './StatisticTable.module.css';
-//import StatisticTableSumm from "../StatisticTableSumm/StatisticTableSumm";
 import HocValuta from "../../../HOC/HocValuta";
 import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
@@ -15,25 +14,22 @@ const StatisticTable = (props) => {
 
     
     const styles = {
-        borderBottom: `solid 3px ${props.diagramm.category.filter(a => props.diagramm.activ 
-            ? a.nameRus===props.diagramm.activ
-            : a.nameRus===props.diagramm.category[0].nameRus)[0].color}`
+        borderBottom: `solid 3px ${props.diagramm.category.filter(a => props.diagramm.activ.id 
+            ? a.idCategory===props.diagramm.activ.id
+            : a.idCategory===props.diagramm.category[0].idCategory)[0].color}`
     }
 
 
     const category = props.diagramm.category
 
     let filterTable = category
-        .filter(a => props.diagramm.activ
-            ? a.nameRus === props.diagramm.activ
+        .filter(a => props.diagramm.activ.id
+            ? a.idCategory === props.diagramm.activ.id
             : a.nameRus === category[0].nameRus)[0].data
-        .filter(a =>
-
-            a.time <= (props.diagramm.periodPo + ' ' + props.diagramm.periodPoTime)
-            && a.time >= (props.diagramm.periodS + ' ' + props.diagramm.periodSTime))
+        .filter(b => b.time <= props.diagramm.periodPo && b.time >= props.diagramm.periodS)
 
     const activateEditMode = () => {
-        if (props.diagramm.activ
+        if (props.diagramm.activ.name
             && props.diagramm.periodPo
             && props.diagramm.periodS) {
               
@@ -41,7 +37,7 @@ const StatisticTable = (props) => {
 
             setEditMode(true)
         }
-        else if (!props.diagramm.activ) {
+        else if (!props.diagramm.activ.name) {
             HedgehogFunc(props.addText, 'Выберите категорию ...')
             ArrowFunc('arrowCategory', 'inputCategoryStatistic', 'buttonTable')
         }
@@ -61,8 +57,8 @@ const StatisticTable = (props) => {
 
     let  textMessage = 
     `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
-    по ${DataTransformation(props.diagramm.periodPo)}, 
-    на "${props.diagramm.activ && category.filter(a=> a.nameRus===props.diagramm.activ)[0].nameRusСase}" ...`
+    по ${DataTransformation(props.diagramm.periodPo)} 
+    на "${props.diagramm.activ.name && category.filter(a=> a.idCategory===props.diagramm.activ.id)[0].nameRusСase}" ...`
       
 
     return (
@@ -88,7 +84,7 @@ const StatisticTable = (props) => {
 
                                 {filterTable.map(a => <div key={a.id} className={s.table}>
                                     <span className={s.statisticDateTime}>
-                                        {DataTransformation(a.time) + ' ' + a.time.slice(-5)}
+                                        {DataTransformation(a.time)}
                                     </span>
                                     <span className={s.statisticDateNum}> {a.num} </span>
                                 </div>)}
@@ -96,8 +92,8 @@ const StatisticTable = (props) => {
                             </div>
                             <div className={s.statisticDateSumm} style={styles}>
                                 Потрачено на <span className={s.categorySumm}>
-                                    {props.diagramm.activ && 
-                                    category.filter(a=> a.nameRus===props.diagramm.activ)[0].nameRusСase} 
+                                    {props.diagramm.activ.name && 
+                                    category.filter(a=> a.idCategory===props.diagramm.activ.id)[0].nameRusСase} 
                                     </span>
                                 <div> за выбранный период: </div>
                                 <div className={s.totalCAtegory}>

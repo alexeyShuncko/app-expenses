@@ -24,34 +24,32 @@ const DiagrammContainer = (props) => {
         else if (!props.diagramm.periodPo) {
             HedgehogFunc(props.addText, 'Выберите окончание периода ...')
             ArrowFunc('arrowPeriod', 'periodPo', 'buttonTable')
-
         }
-
     }
+
     const deActivateEditMode = () => {
         setEdit(false)
     }
 
-    const diagramm = props.diagramm.category.map(a =>{
+    const diagramm = props.diagramm.category.map(a => {
         return {
             ...a,
-            data: a.data.filter(a =>
-                a.time <= (props.diagramm.periodPo + ' ' + props.diagramm.periodPoTime) &&
-                a.time >= (props.diagramm.periodS + ' ' + props.diagramm.periodSTime))
-        }}
-    )
+            data: a.data.filter(
+                a => a.time <= props.diagramm.periodPo && a.time >= props.diagramm.periodS
+            )
+        }
+    })
 
-    const total = diagramm.map(a => a.data.map(e=>e.num).reduce((sum, current) => sum + current, 0))
-    .reduce((acc, num) => acc + num, 0)    // суммарный расход за выбранный период
-    
+    const total = diagramm.map(a => a.data.map(e => e.num).reduce((sum, current) => sum + current, 0))
+        .reduce((acc, num) => acc + num, 0)    // суммарный расход за выбранный период
+
 
     const addSelect = (value) => {
         props.addSelectDiagrammStat(value)
     }
 
-
-    let  textMessage = 
-    `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
+    let textMessage =
+        `Нет расходов с ${DataTransformation(props.diagramm.periodS)} 
     по ${DataTransformation(props.diagramm.periodPo)} ...`
 
     return (
@@ -77,14 +75,14 @@ const DiagrammContainer = (props) => {
                         className='buttonTable'
                         onClick={deActivateEditMode}> Убрать </button>
                     {total === 0
-                        ?  <Message textMessage={textMessage} idMessage='messageDiagrammTotal'/>
+                        ? <Message textMessage={textMessage} idMessage='messageDiagrammTotal' />
                         : <div className={s.pie}>
-                            <DiagrammTopStatistic 
-                            total={total}
-                            diagramm={diagramm}
-                            selectDiagramm={props.diagramm.selectDiagrammStat}
-                            dollar = {props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro = {props.diagramm.exchangeRates.euro.Cur_OfficialRate}  
+                            <DiagrammTopStatistic
+                                total={total}
+                                diagramm={diagramm}
+                                selectDiagramm={props.diagramm.selectDiagrammStat}
+                                dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
+                                euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
                             />
                         </div>
                     }

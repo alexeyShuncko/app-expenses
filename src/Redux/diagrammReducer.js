@@ -20,6 +20,8 @@ const RENAME_CATEGORY = 'RENAME_CATEGORY'
 const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
 const ADD_TEXT = 'ADD_TEXT'
 const ADD_NAME_CASE = 'ADD_NAME_CASE'
+
+const ADD_GRAF_SELECT = 'ADD_GRAF_SELECT'
 const ADD_GRAF_S = 'ADD_GRAF_S'
 const ADD_GRAF_PO = 'ADD_GRAF_PO'
 
@@ -29,29 +31,32 @@ const ADD_GRAF_PO = 'ADD_GRAF_PO'
 let initialState = {
     category:
         [{
-            nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e',
+            nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e', idCategory: 10000,
             data: [
-                { id: 'Еда1', time: '2022-02-08 ', num: 100 },
-                { id: 'Еда2', time: '2022-02-10 ', num: 20 },
-                { id: 'Еда3', time: '2022-02-12 ', num: 20 },
-                { id: 'Еда4', time: '2022-02-13 ', num: 25 },
-                { id: 'Еда5', time: '2022-02-14 ', num: 52 }
+                { id: 10001, time: '2022-02-08', num: 100 },
+                { id: 10002, time: '2022-02-10', num: 20 },
+                { id: 10003, time: '2022-02-12', num: 20 },
+                { id: 10004, time: '2022-02-13', num: 25 },
+                { id: 10005, time: '2022-02-14', num: 52 }
             ], summ: 217
         },
         {
-            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1',
-            data: [{ id: 'Алкоголь1', time: '2022-02-08 ', num: 40 }], summ: 40
+            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', idCategory: 20000,
+            data: [{ id: 20001, time: '2022-02-08', num: 40 }], summ: 40
         },
         {
-            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff',
-            data: [{ id: 'Квартира1', time: '2022-02-11 ', num: 25 }], summ: 25
+            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', idCategory: 30000,
+            data: [{ id: 30001, time: '2022-02-11', num: 25 }], summ: 25
         },
         {
-            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928',
-            data: [{ id: 'Транспорт1', time: '2022-02-09 ', num: 25 }], summ: 25
+            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', idCategory: 40000,
+            data: [{ id: 40001, time: '2022-02-09', num: 25 }], summ: 25
         }
         ],
-    activ: '',
+    activ: {
+        id: '',
+        name: ''
+    },
     salary: { salaryNum: 700.01, salaryDate: '2022-02-01', salaryValueTrue: false },
     periodPo: '',
     periodS: '',
@@ -71,6 +76,7 @@ let initialState = {
         case: ['пива', 'пив', 'пиво']
     },
     text: 'Привет...',
+    grafSelect: 'BYN',
     grafs: {
         s: '2022-02-01',
         po: '2022-02-28'
@@ -92,7 +98,7 @@ const diagrammReduser = (state = initialState, action) => {
                             return ({
                                 ...a,
                                 data: [...a.data, {
-                                    id: a.nameRus + String(a.data.length + 1), time: action.time,
+                                    id: a.idCategory + (a.data.length + 1), time: action.time,
                                     num: Number(action.value[action.name.indexOf(a.nameRus)])
                                 }],
                                 summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])
@@ -103,7 +109,10 @@ const diagrammReduser = (state = initialState, action) => {
             }
         case ADD_ACTIV:
             return {
-                ...state, activ: action.activ
+                ...state, activ: {
+                    name: action.activ,
+                    id: state.category.filter(a=> a.nameRus === action.activ)[0].idCategory
+                }
             }
         case ADD_SALARY:
             return {
@@ -183,7 +192,9 @@ const diagrammReduser = (state = initialState, action) => {
                     nameRus: `${action.name[0].toUpperCase() + action.name.slice(1)}`,
                     nameRusСase: '',
                     color: action.color,
-                    data: [], summ: 0
+                    idCategory: state.category[0].idCategory * (state.category.length + 1),
+                    data: [], 
+                    summ: 0
                 }]
             }
         case ADD_NAME_CASE:
@@ -231,6 +242,12 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 text: action.text
             }
+            case ADD_GRAF_SELECT:
+                return {
+                    ...state,
+                    grafSelect: action.select
+                }
+
         case ADD_GRAF_S:
             return {
                 ...state,
@@ -255,7 +272,9 @@ const diagrammReduser = (state = initialState, action) => {
 
 
 
-
+export const addGrafSelect = (select) => {
+    return { type: ADD_GRAF_SELECT, select }
+}
 export const addGrafS = (data) => {
     return { type: ADD_GRAF_S, data }
 }

@@ -36,13 +36,7 @@ const FormDiagram = (props) => {
             let yy = date.getFullYear() % 100;
             if (yy < 10) yy = '0' + yy;
 
-            let HH = date.getHours();
-            if (HH < 10) HH = '0' + HH;
-
-            let MM = date.getMinutes();
-            if (MM < 10) MM = '0' + MM;
-
-            return '20' + yy + '-' + mm + '-' + dd + ' ' + HH + ':' + MM;
+            return '20' + yy + '-' + mm + '-' + dd ;
         }
         const timer = formatDate(time)
 
