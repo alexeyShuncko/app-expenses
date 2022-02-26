@@ -1,75 +1,32 @@
 .statistic {
     display: flex;
-    flex-direction: column;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-bottom: 20px;
 }
 
-.statisticItem1 {
-    display: flex;
-    margin-bottom: 20px;
-}
 
-.statisticItem2 {
-
-}
-
-.statisticTable {
-    flex: 1;
-}
-.formStatistic {
-    flex: 2;
-    display: flex;
-}
-
-.categoryStatistic {
-    flex: 1;
-}
-
+/* Выбор категории и периода */
 .period {
-    flex: 1
-}
-
-
-
-.categoryStatisticName {
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.statisticName {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.option option {
-    text-align: center;
-}
-
-.option {
-    font-size: 16px;
-    margin-top: 5px;
-    height: 30px;
-    width: 170px;
-    border-radius: 5px;
-}
-
-.periodStatistic {
-    display: flex;
-}
-
-.periodStatistic label {
     flex: 1;
-    margin-right: 3px;
 }
 
 
 
-/* Стрелка валидации */
-
-.nameArrow {
-    display: flex;
+/* Таблицы */
+.tables {
+flex: 5;
+display: flex;
 }
+
+.tableCategory {
+flex: 1;
+}
+
+.tableDate {
+flex: 2;
+}
+
+
+
+
+

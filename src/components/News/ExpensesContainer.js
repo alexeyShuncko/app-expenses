@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Hedgehog from './Hedgehog/Hedgehog';
 import Error from './helpers/Error/Error';
 import Grafs from './Graphs/Graphs';
+import DiagrammContainer from './Diagramm/DIagrammContainer';
 
 
 const ExpensesContainer = (props) => {
@@ -29,6 +30,7 @@ const ExpensesContainer = (props) => {
                     <Route path='/main' element={ <Main />} />
                     <Route path='/statistic' element={<Statistic />} />
                     <Route path='/graphs' element={<Grafs />} />
+                    <Route path='/diagramm' element={<DiagrammContainer />} />
                     <Route path='/setting/*' element={<Setting />} />
                     <Route path='/' element={<Error />}/>
                 </Routes>

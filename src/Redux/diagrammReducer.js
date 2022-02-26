@@ -25,13 +25,14 @@ const ADD_GRAF_SELECT = 'ADD_GRAF_SELECT'
 const ADD_GRAF_S = 'ADD_GRAF_S'
 const ADD_GRAF_PO = 'ADD_GRAF_PO'
 
-
+const ADD_DIAGRAMM_S = 'ADD_DIAGRAMM_S'
+const ADD_DIAGRAMM_PO = 'ADD_DIAGRAMM_PO'
 
 
 let initialState = {
     category:
         [{
-            nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e', idCategory: 10000,
+            nameRus: 'Еда', nameRusСase: 'Еду', color: 'rgb(253, 226, 62)', idCategory: 10000,
             data: [
                 { id: 10001, time: '2022-02-08', num: 100 },
                 { id: 10002, time: '2022-02-10', num: 20 },
@@ -41,15 +42,15 @@ let initialState = {
             ], summ: 217
         },
         {
-            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', idCategory: 20000,
+            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: 'rgb(34, 34, 209)', idCategory: 20000,
             data: [{ id: 20001, time: '2022-02-08', num: 40 }], summ: 40
         },
         {
-            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', idCategory: 30000,
+            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: 'rgb(87, 217, 255)', idCategory: 30000,
             data: [{ id: 30001, time: '2022-02-11', num: 25 }], summ: 25
         },
         {
-            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', idCategory: 40000,
+            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: 'rgb(22, 153, 40)', idCategory: 40000,
             data: [{ id: 40001, time: '2022-02-09', num: 25 }], summ: 25
         }
         ],
@@ -80,7 +81,11 @@ let initialState = {
     grafs: {
         s: '2022-02-01',
         po: '2022-02-28'
-    }
+    },
+    diagramm: {
+        s: '2022-02-01',
+        po: '2022-02-28'
+    },
 
 }
 
@@ -267,6 +272,23 @@ const diagrammReduser = (state = initialState, action) => {
                 }
             }
 
+            case ADD_DIAGRAMM_S:
+                return {
+                    ...state,
+                    diagramm: {
+                        s: action.data,
+                       po: state.diagramm.po 
+                    }
+                }
+                case ADD_DIAGRAMM_PO:
+                    return {
+                        ...state,
+                        diagramm: {
+                            s: state.diagramm.s, 
+                           po: action.data
+                        }
+                    }
+
         default:
             return state
     }
@@ -285,6 +307,15 @@ export const addGrafPo = (data) => {
 }
 
 
+
+
+
+export const addDiagrammS = (data) => {
+    return { type: ADD_DIAGRAMM_S, data }
+}
+export const addDiagrammPo = (data) => {
+    return { type: ADD_DIAGRAMM_PO, data }
+}
 
 
 

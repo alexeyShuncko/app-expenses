@@ -1,0 +1,47 @@
+/* общий контейнер */
+.categoryStatistic {
+margin-right: 20px;
+}
+
+
+
+/* Выбор категории */
+.category {
+margin-bottom: 20px;
+}
+
+.categoryStatisticName {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.option {
+    font-size: 16px;
+    margin-top: 5px;
+    height: 30px;
+    width: 170px;
+    border-radius: 5px;
+}
+.option option {
+    text-align: center;
+}
+
+
+
+/* Выбор периода */
+.periodStatistic {
+    display: flex;
+}
+
+.periodDate {
+    flex: 1;
+    margin-right: 3px;
+}
+
+
+
+/* Стрелка валидации чтобы была рядом с полем ввода */
+
+.nameArrow {
+    display: flex;
+}

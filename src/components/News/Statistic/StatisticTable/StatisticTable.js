@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import s from './StatisticTable.module.css';
-import HocValuta from "../../../HOC/HocValuta";
-import HedgehogFunc from "../../../helpers/HedgehodFunc/HedgehogFunc";
-import ArrowFunc from "../../../helpers/ArrowFunc/ArrowFunc";
-import OffStyle from './../../../helpers/ArrowFunc/Offstyle';
-import Message from "../../../helpers/Message/Message";
-import { DataTransformation } from "../../../helpers/DataTransformation/DataTransformation";
+import HocValuta from "../../HOC/HocValuta";
+import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
+import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
+import OffStyle from '../../helpers/ArrowFunc/Offstyle';
+import Message from "../../helpers/Message/Message";
+import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
 
 
 const StatisticTable = (props) => {
@@ -55,9 +55,11 @@ const StatisticTable = (props) => {
         setEditMode(false)
     }
 
+    let dateS = DataTransformation(props.diagramm.periodS)
+let datePo = DataTransformation(props.diagramm.periodPo)
+
     let  textMessage = 
-    `Нет расходов с ${ DataTransformation(props.diagramm.periodS)} 
-    по ${DataTransformation(props.diagramm.periodPo)} 
+    `Нет расходов с ${dateS} по ${datePo} 
     на "${props.diagramm.activ.name && category.filter(a=> a.idCategory===props.diagramm.activ.id)[0].nameRusСase}" ...`
       
 
@@ -83,22 +85,20 @@ const StatisticTable = (props) => {
                                 </div>
 
                                 {filterTable.map(a => <div key={a.id} className={s.table}>
-                                    <span className={s.statisticDateTime}>
+                                    <span className={s.tableTime}>
                                         {DataTransformation(a.time)}
                                     </span>
-                                    <span className={s.statisticDateNum}> {a.num} </span>
+                                    <span className={s.tableNum}> {a.num} </span>
                                 </div>)}
 
                             </div>
-                            <div className={s.statisticDateSumm} 
-                            //style={styles}
-                            >
+                            <div className={s.statisticDateSumm} style={styles}>
                                 Потрачено на <span className={s.categorySumm}>
                                     {props.diagramm.activ.name && 
                                     category.filter(a=> a.idCategory===props.diagramm.activ.id)[0].nameRusСase} 
                                     </span>
-                                <div> за выбранный период: </div>
-                                <div className={s.totalCAtegory}>
+                                <div> с {dateS} по {datePo} </div>
+                                <div className={s.totalCategory}>
                                 <HocValuta 
                                 value='statisticTable' 
                                 filterTable={filterTable} 

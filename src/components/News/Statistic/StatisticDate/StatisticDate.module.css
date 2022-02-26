@@ -1,36 +1,20 @@
-
-.container {
-display: flex;
-flex-direction: column;
-align-items: center;
-border-bottom: solid 1px;
-}
-
-.totalSumm {
-    margin-top: 6px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.statisticDate { 
-    display: flex;  
-    
-}
-.statisticDateItem {
-flex: 4;
-
-}
-.statisticDateDiagramm {
-    flex: 7;
+.statisticDateTable {
     text-align: center;
-}
+   }
+
+.statisticDateTable button{
+       margin-top: 10px;
+   }
+
 .statisticTable {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 70px;
+    border-bottom: solid 3px black;
 }
+
+
+/* Названия колонок таблицы */
 .statisticName {
     display: flex;
 }
@@ -49,11 +33,22 @@ flex: 4;
 }
 
 
+
+/* Таблица */
+.statisticDate { 
+    display: flex;
+}
+.statisticDate :hover{
+    display: flex;
+    height: 50px;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+}
 .statisticDateTime {
     flex: 2;
     border: solid black 1px;
 }
-
 .statisticDateNum {
     flex: 1;
     text-align: center;
@@ -64,20 +59,12 @@ flex: 4;
     border: solid black 1px;
 }
 
-.statisticDateTable {
- text-align: center;
- 
+
+/* Всего потрачено */
+.totalSumm {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-
-.statisticDateSumm {
-    margin-top: 10px;   
-}
-
-.categorySumm {
-    font-weight: bold;
-    border-bottom: solid 1px;
-}
-
-
 

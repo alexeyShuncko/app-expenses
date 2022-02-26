@@ -31,7 +31,8 @@ const GrafsForm = (props) => {
     }
     return (
         <div className={s.grafsForm}> 
-        <span className={s.grafTitle}>Графики расходов в</span>
+        <div>
+        <span className={s.grafTitle}>График расходов в</span>
             <select
                 className={s.fieldBynUsd}
                 defaultValue={props.grafSelect}
@@ -40,7 +41,9 @@ const GrafsForm = (props) => {
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
             </select>
-            с: <input
+        </div>
+        <div className={s.grafTitle}>
+        с: <input
                 type='date'
                 onChange={grafPeriodS}
                 min='2022-02-01'
@@ -54,6 +57,9 @@ const GrafsForm = (props) => {
                 max={grafPeriodPoMax}
                 defaultValue={props.periodPo}
             />
+        </div>
+        
+           
         </div>
     )
 }

@@ -1,0 +1,15 @@
+/* Название диаграмы с выбором единиц измерения */
+.select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selectText {
+font-size: 20px;
+}
+
+.select input{
+margin-left: 5px;
+margin-right: 10px;
+}
