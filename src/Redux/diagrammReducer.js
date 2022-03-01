@@ -9,7 +9,9 @@ const ADD_PERIOD_PO = 'ADD_PERIOD_PO'
 const ADD_PERIOD_S_TIME = 'ADD_PERIOD_S_TIME'
 const ADD_PERIOD_PO_TIME = 'ADD_PERIOD_PO_TIME'
 const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
+
 const ADD_SALARY_VALUE_TRUE = 'ADD_SALARY_VALUE_TRUE'
+
 const ADD_EDIT_COLOR = 'ADD_EDIT_COLOR'
 const ADD_DOLLAR = 'ADD_DOLLAR'
 const ADD_EURO = 'ADD_EURO'
@@ -27,6 +29,10 @@ const ADD_GRAF_PO = 'ADD_GRAF_PO'
 
 const ADD_DIAGRAMM_S = 'ADD_DIAGRAMM_S'
 const ADD_DIAGRAMM_PO = 'ADD_DIAGRAMM_PO'
+
+const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
+
+const ADD_INCOME = 'ADD_INCOME'
 
 
 let initialState = {
@@ -58,7 +64,12 @@ let initialState = {
         id: '',
         name: ''
     },
-    salary: { salaryNum: 700.01, salaryDate: '2022-02-01', salaryValueTrue: false },
+    income: {
+        data: [{ name: 'Зарплата', time: '2022-03-01', num: 700 }],
+        total: 700,
+        salary: { Date: '2022-03-01', Value: false },
+        prepayment: { Date: '2022-03-01', Value: false },
+    },
     periodPo: '',
     periodS: '',
     periodPoTime: '23:59',
@@ -116,9 +127,9 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state, activ: {
                     name: action.activ,
-                    id: action.activ 
-                    ? state.category.filter(a=> a.nameRus === action.activ)[0].idCategory  
-                    : ''
+                    id: action.activ
+                        ? state.category.filter(a => a.nameRus === action.activ)[0].idCategory
+                        : ''
                 }
             }
         case ADD_SALARY:
@@ -157,7 +168,8 @@ const diagrammReduser = (state = initialState, action) => {
             }
         case ADD_SALARY_VALUE_TRUE:
             return {
-                ...state, salary: { ...state.salary, salaryValueTrue: action.value }
+                ...state, 
+                income: { ...state.income, salaryValueTrue: action.value }
             }
         case ADD_EDIT_COLOR:
             return {
@@ -200,7 +212,7 @@ const diagrammReduser = (state = initialState, action) => {
                     nameRusСase: '',
                     color: action.color,
                     idCategory: state.category[0].idCategory * (state.category.length + 1),
-                    data: [], 
+                    data: [],
                     summ: 0
                 }]
             }
@@ -249,45 +261,77 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 text: action.text
             }
-            case ADD_GRAF_SELECT:
-                return {
-                    ...state,
-                    grafSelect: action.select
-                }
+        case ADD_GRAF_SELECT:
+            return {
+                ...state,
+                grafSelect: action.select
+            }
 
         case ADD_GRAF_S:
             return {
                 ...state,
                 grafs: {
                     s: action.data,
-                   po: state.grafs.po 
+                    po: state.grafs.po
                 }
             }
         case ADD_GRAF_PO:
             return {
                 ...state,
                 grafs: {
-                    s: state.grafs.s ,
-                    po: action.data 
+                    s: state.grafs.s,
+                    po: action.data
                 }
             }
 
-            case ADD_DIAGRAMM_S:
-                return {
-                    ...state,
-                    diagramm: {
-                        s: action.data,
-                       po: state.diagramm.po 
-                    }
+        case ADD_DIAGRAMM_S:
+            return {
+                ...state,
+                diagramm: {
+                    s: action.data,
+                    po: state.diagramm.po
                 }
-                case ADD_DIAGRAMM_PO:
-                    return {
-                        ...state,
-                        diagramm: {
-                            s: state.diagramm.s, 
-                           po: action.data
-                        }
-                    }
+            }
+        case ADD_DIAGRAMM_PO:
+            return {
+                ...state,
+                diagramm: {
+                    s: state.diagramm.s,
+                    po: action.data
+                }
+            }
+        case ADD_SALARY_DAY:
+            return {
+                ...state,
+                salary: {
+                    ...state.salary,
+                    salaryDate: `2022-03-${action.day}`
+                }
+            }
+
+        case ADD_INCOME:
+            const numValuta = () => {
+                if (action.valuta === "BYN") {
+                    return action.num
+                }
+                else if (action.valuta === "USD") {
+                    return (action.num * state.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
+                }
+                else if (action.valuta === "EUR") {
+                    return (action.num * state.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
+                }
+            }
+            let num = numValuta()
+            return {
+                ...state,
+                income: {
+                    ...state.income,
+                    data: [...state.income.data, { name: action.name, time: action.time, num: Number(num) }],
+                    total: state.income.total + Number(num)
+                }
+            }
+
+
 
         default:
             return state
@@ -316,6 +360,21 @@ export const addDiagrammS = (data) => {
 export const addDiagrammPo = (data) => {
     return { type: ADD_DIAGRAMM_PO, data }
 }
+
+
+
+export const addSalaryDay = (day) => {
+    return { type: ADD_SALARY_DAY, day }
+}
+
+
+
+export const addIncome = (name, time, num, valuta) => {
+    return { type: ADD_INCOME, name, time, num, valuta }
+}
+
+
+
 
 
 

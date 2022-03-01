@@ -1,0 +1,71 @@
+
+.expensesName {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+
+.expensesBloc {
+display: flex;
+flex-direction: column;
+}
+
+.expensesItem {
+display: flex;
+}
+
+
+/* Переключатель валюты */
+
+.fieldBynUsd {
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.fieldBynUsd:hover {
+    border-color: green;
+}
+
+.fieldBynUsd:focus {
+    border-color: green;
+}
+
+
+
+.expensestem label{
+    flex: 1;
+}
+
+
+.formExpenses {
+    margin-top: 20px;
+    margin-left: 10px;  
+}
+.formExpensesFild{
+    display: flex;
+    flex-direction: column;
+}
+
+.formItemsButton {
+    display: flex;
+    margin-top: 10px;
+     justify-content: flex-end; 
+   
+}
+
+
+
+.formItemsField::-webkit-outer-spin-button,
+.formItemsField::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+

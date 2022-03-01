@@ -37,14 +37,14 @@
 /* Таблица */
 .statisticDate { 
     display: flex;
-}
-.statisticDate :hover{
-    display: flex;
-    height: 50px;
-    font-size: 25px;
     align-items: center;
-    justify-content: center;
 }
+.statisticDate:hover{
+    height: 50px;
+    font-size: 22px;
+}
+
+
 .statisticDateTime {
     flex: 2;
     border: solid black 1px;

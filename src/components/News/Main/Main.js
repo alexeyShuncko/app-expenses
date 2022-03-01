@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Main.module.css';
-import FormDiagram from './GeneralInformation/FormDiagramm/FormDiagram';
+import GeneralInformation from './GeneralInformation/GeneralInformation';
 import { connect } from 'react-redux';
 import {
     addDiagramm, addActiv, addSalary,
@@ -8,7 +8,7 @@ import {
     getDollarUpdate, getEuroUpdate
 } from '../../../Redux/diagrammReducer';
 import DiagrammMain from './DiagrammMain/DiagrammMain';
-import { addText } from './../../../Redux/diagrammReducer';
+import { addText, addIncome } from './../../../Redux/diagrammReducer';
 
 
 const Main = (props) => {
@@ -17,7 +17,7 @@ const Main = (props) => {
         <div className={s.main}>
 
             <div className={s.mainInform}>
-                <FormDiagram
+                <GeneralInformation
                     exchangeRates={props.diagramm.exchangeRates}
                     addDiagramm={props.addDiagramm}
                     diagramm={props.diagramm}
@@ -26,6 +26,7 @@ const Main = (props) => {
                     getDollarUpdate={props.getDollarUpdate}
                     addSalaryValueTrue={props.addSalaryValueTrue}
                     addText={props.addText}
+                    addIncome={props.addIncome}
                 />
             </div>
 
@@ -51,7 +52,7 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps,
     {
         addDiagramm, addActiv, addSalary, addSelectDiagramm,
-        addSalaryValueTrue, addEditColor, getDollarUpdate, getEuroUpdate, addText
+        addSalaryValueTrue, addEditColor, getDollarUpdate, getEuroUpdate, addText, addIncome
     })(Main)
 
 

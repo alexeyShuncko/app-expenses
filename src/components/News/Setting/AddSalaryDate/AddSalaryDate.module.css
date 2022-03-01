@@ -1,0 +1,35 @@
+.title {
+    font-size: 22px;
+    text-align: center;
+}
+
+
+
+/* Блоки под названием  */
+.addSalaryDayBloc {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.addSalaryDay {
+    flex: 1;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.instruction {
+    flex: 3;
+    margin-top: 10px;
+}
+.instructionTitle {
+    font-size: 17px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+/* Кнопки */
+.button button {
+    margin-top: 20px;
+    margin-right: 10px;
+}

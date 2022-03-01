@@ -3,11 +3,11 @@ import { Form } from 'react-final-form';
 import s from './Salary.module.css';
 import { Field } from 'react-final-form';
 import { useState, useEffect } from 'react';
-import HocValuta from '../../../../HOC/HocValuta';
-import HedgehogFunc from '../../../../helpers/HedgehodFunc/HedgehogFunc';
-import ArrowFunc from '../../../../helpers/ArrowFunc/ArrowFunc';
-import ArrowValidate from './../../../../Arrow/ArrowValidate';
-import { DateFunc } from '../../../../helpers/DateFunc/DateFunc';
+import HocValuta from '../../../HOC/HocValuta';
+import HedgehogFunc from '../../../helpers/HedgehodFunc/HedgehogFunc';
+import ArrowFunc from '../../../helpers/ArrowFunc/ArrowFunc';
+import ArrowValidate from './../../../Arrow/ArrowValidate';
+import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
 
 
 const Salary = (props) => {
@@ -22,13 +22,13 @@ const Salary = (props) => {
         setEditMode(false)
     }
     useEffect(() => {
-        if (timer >= props.diagramm.salary.salaryDate && props.diagramm.salary.salaryValueTrue) {
+        if (timer >= props.diagramm.income.salary.Date && props.diagramm.income.salary.Value) {
             props.addSalaryValueTrue(false)
         }
     },
     );
 
-    const timer = DateFunc(new Date())
+    const timer = DateFunc(new Date())  //сегодняшняя дата в формате гггг-мм-дд
 
     const month = new Date()
     function formatMonth(date) {
@@ -84,18 +84,18 @@ const Salary = (props) => {
     return (
 
         <div>
-            {timer >= props.diagramm.salary.salaryDate
-                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Нажмите, чтобы обновить ЗП</div>
+            {timer >= props.diagramm.income.salary.Date
+                ? <div className={s.salaryUpdate} onClick={activateEditMode}>Вы получили ЗП</div>
                 : null}
 
             <div className={s.salaryValue}>
-                <div className={s.salaryName}>Зарплата:</div>
+                <div className={s.salaryName}>Доходы:</div>
                 <div>
                    <HocValuta 
                    edit={activateEditMode}
                    value='salary' 
                    exchangeRates={props.exchangeRates}
-                   salary={props.diagramm.salary.salaryNum}/>
+                   salary={props.diagramm.income.total || 0}/>
                 </div>
             </div>
 
@@ -156,19 +156,19 @@ const Salary = (props) => {
                 />
                 : null}
             <div className={s.salaryValue}>
-                <div className={s.salaryName}>Всего потрачено:</div>
+                <div className={s.salaryName}>Расходы:</div>
                 <HocValuta 
                 value='salarySpent' 
                 exchangeRates={props.exchangeRates}
-                salary={props.diagramm.salary.salaryNum}
+                salary={props.diagramm.income.total || 0}
                 category={props.diagramm.category}/>
             </div>
             <div className={s.salaryValue}>
-                <div className={s.salaryName}>Должно остаться:</div>
+                <div className={s.salaryName}>Баланс:</div>
                 <HocValuta 
                 value='salaryRemainder' 
                 exchangeRates={props.exchangeRates} 
-                salary={props.diagramm.salary.salaryNum}
+                salary={props.diagramm.income.total || 0}
                 category={props.diagramm.category}/>
             </div>
         </div>

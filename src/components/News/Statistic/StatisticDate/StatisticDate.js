@@ -93,12 +93,11 @@ let datePo = DataTransformation(props.diagramm.periodPo)
                                 <div key={a.id} 
                                 className={s.statisticDate} 
                                 //style={{backgroundColor: `rgba(${a.color.slice(4,-1)},1)`}} для добавления прозрачности
-                                style={{backgroundColor: a.color}}
                                 >
-                                    <span className={s.statisticDateName}> {a.name} </span>
-                                    <span className={s.statisticDateTime}>
+                                    <span className={s.statisticDateName} style={{backgroundColor: a.color}}> {a.name} </span>
+                                    <span className={s.statisticDateTime} style={{backgroundColor: a.color}}>
                                         {DataTransformation(a.time)}</span>
-                                    <span className={s.statisticDateNum}> {a.num} </span>
+                                    <span className={s.statisticDateNum} style={{backgroundColor: a.color}}> {a.num} </span>
 
                                 </div>)}
                             <div className={s.totalSumm}>

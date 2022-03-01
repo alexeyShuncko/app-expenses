@@ -1,0 +1,56 @@
+
+.formExpenses {
+    margin-top: 20px;
+    margin-left: 10px;  
+}
+.formExpensesFild{
+    display: flex;
+    flex-direction: column;
+}
+
+.formItemsButton {
+    display: flex;
+    margin-top: 10px;
+     justify-content: flex-end; 
+   
+}
+.formItems {
+display: flex;
+}
+.formItemsField {
+   
+    flex: 1;
+}
+
+
+.formItemsField::-webkit-outer-spin-button,
+.formItemsField::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* .formItemsField:focus {
+    outline:none;
+border-top: none;
+border-left: none;
+border-right: none;
+    border-bottom: solid orange 2px;
+} */
+/* .formItemsField:hover {
+    border-top: none;
+border-left: none;
+border-right: none;
+border-bottom: solid orange 2px;
+} */
+
+.formItemsLabel{
+    flex: 1;
+}
+
+
+.formExpensesName {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

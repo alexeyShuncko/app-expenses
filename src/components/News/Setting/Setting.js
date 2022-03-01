@@ -9,9 +9,10 @@ import RenameCategory from './RenameCategory/RenameCategory';
 import { connect } from 'react-redux';
 import { addCategory, deleteCategory, renameCategory, 
     addEditColor, changeRelativity, addText, addActiv, nameCase,
-    nameCaseRelativity } from './../../../Redux/diagrammReducer';
+    nameCaseRelativity, addSalaryDay } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
 import Relativity from './Relativity/Relativity';
+import AddSalaryDate from './AddSalaryDate/AddSalaryDate';
 
 
 
@@ -37,6 +38,9 @@ const Setting = (props) => {
             <Route path='/Relativity'
                 element={<Relativity diagramm={props.diagramm} changeRelativity={props.changeRelativity} 
                 addText={props.addText} nameCaseRelativity={props.nameCaseRelativity}/>} />
+ <Route path='/AddSalaryDate'
+                element={<AddSalaryDate addSalaryDay={props.addSalaryDay} addText={props.addText}/>} />
+
 
         </Routes>
     )
@@ -51,4 +55,4 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, 
     { addCategory, deleteCategory, renameCategory, 
         addEditColor, changeRelativity, addText, 
-        addActiv, nameCase, nameCaseRelativity })(Setting)
+        addActiv, nameCase, nameCaseRelativity, addSalaryDay })(Setting)

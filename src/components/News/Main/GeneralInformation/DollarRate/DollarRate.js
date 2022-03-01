@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import s from './DollarRate.module.css';
-import { DataTransformation } from './../../../../helpers/DataTransformation/DataTransformation';
+import { DataTransformation } from '../../../helpers/DataTransformation/DataTransformation';
 
 
 const DollarRate = (props) => {
