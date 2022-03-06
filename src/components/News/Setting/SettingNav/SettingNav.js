@@ -33,7 +33,7 @@ const SettingNav = (props) => {
             </div>
             <div className={s.navNewsitem}>
                 <NavLink to="/setting/AddSalaryDate" >
-                    <button className={s.settingButton}>Добавить дату ЗП</button>
+                    <button className={s.settingButton}>Добавить/изменить дату доходов</button>
                 </NavLink>
             </div>
             

@@ -29,13 +29,12 @@ const AddCategory = (props) => {
     const onSubmit = (values) => {
 
         if (values.color !== '#ffffff' &&
-            !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
-            && isNaN(Number(values.name))) {
+            !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
             HedgehogFunc(props.addText, `Категория "${values.name}" добавлена ...`)
             props.addCategory(values.name, values.color)
             ArrowFunc(null, null, 'buttonSetting')
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
-            //props.nameCase(values.name) // добавление имени в винительном падеже
+            props.nameCase(values.name) // добавление имени в винительном падеже
             values.name = ''
             values.color = '#ffffff'
         }
@@ -75,7 +74,7 @@ const AddCategory = (props) => {
                                                 name="name"
                                                 component="input"
                                                 type="text"
-                                                maxLength='12'
+                                                maxLength='13'
                                                 autoFocus='on' />
 
                                         </div>
@@ -129,8 +128,7 @@ const AddCategory = (props) => {
                                         Чтобы добавить категорию, следуйте ниже приведенным шагам:</div>
                                     <div>
                                         <div>1) В поле "Название категории" впишите название новой категории <br></br>
-                                            (Название не должно содержать цифры, содержать спецсимволы (. , ; № и т.д.),
-                                            совпадать с уже имеющимися категориями и должно быть длинною до 20 символов)</div>
+                                            (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)</div>
                                         <div>2) Нажмите на белый  квадрат рядом с полем "Цвет"</div>
                                         <div>3) Выберите нужный тебе цвет <br></br>
                                             (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>

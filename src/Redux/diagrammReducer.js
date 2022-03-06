@@ -3,14 +3,13 @@ import { getDollar, getEuro, getItem } from './../API/api';
 
 const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
 const ADD_ACTIV = 'ADD_ACTIV'
-const ADD_SALARY = 'ADD_SALARY'
+
 const ADD_PERIOD_S = 'ADD_PERIOD_S'
 const ADD_PERIOD_PO = 'ADD_PERIOD_PO'
-const ADD_PERIOD_S_TIME = 'ADD_PERIOD_S_TIME'
-const ADD_PERIOD_PO_TIME = 'ADD_PERIOD_PO_TIME'
+
 const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
 
-const ADD_SALARY_VALUE_TRUE = 'ADD_SALARY_VALUE_TRUE'
+
 
 const ADD_EDIT_COLOR = 'ADD_EDIT_COLOR'
 const ADD_DOLLAR = 'ADD_DOLLAR'
@@ -31,6 +30,7 @@ const ADD_DIAGRAMM_S = 'ADD_DIAGRAMM_S'
 const ADD_DIAGRAMM_PO = 'ADD_DIAGRAMM_PO'
 
 const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
+const ADD_SALARY_MONTH = 'ADD_SALARY_MONTH'
 
 const ADD_INCOME = 'ADD_INCOME'
 
@@ -38,7 +38,7 @@ const ADD_INCOME = 'ADD_INCOME'
 let initialState = {
     category:
         [{
-            nameRus: 'Еда', nameRusСase: 'Еду', color: 'rgb(253, 226, 62)', idCategory: 10000,
+            nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e', idCategory: 10000,
             data: [
                 { id: 10001, time: '2022-02-08', num: 100 },
                 { id: 10002, time: '2022-02-10', num: 20 },
@@ -48,15 +48,15 @@ let initialState = {
             ], summ: 217
         },
         {
-            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: 'rgb(34, 34, 209)', idCategory: 20000,
+            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', idCategory: 20000,
             data: [{ id: 20001, time: '2022-02-08', num: 40 }], summ: 40
         },
         {
-            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: 'rgb(87, 217, 255)', idCategory: 30000,
+            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', idCategory: 30000,
             data: [{ id: 30001, time: '2022-02-11', num: 25 }], summ: 25
         },
         {
-            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: 'rgb(22, 153, 40)', idCategory: 40000,
+            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', idCategory: 40000,
             data: [{ id: 40001, time: '2022-02-09', num: 25 }], summ: 25
         }
         ],
@@ -67,8 +67,8 @@ let initialState = {
     income: {
         data: [{ name: 'Зарплата', time: '2022-03-01', num: 700 }],
         total: 700,
-        salary: { Date: '2022-03-01', Value: false },
-        prepayment: { Date: '2022-03-01', Value: false },
+        salary: { Date: { day: '01', month: '03' }},
+        prepayment: { Date: { day: '20', month: '03' }},
     },
     periodPo: '',
     periodS: '',
@@ -132,16 +132,6 @@ const diagrammReduser = (state = initialState, action) => {
                         : ''
                 }
             }
-        case ADD_SALARY:
-            return {
-                ...state, salary: {
-                    ...state.salary,
-                    salaryNum: action.salary,
-
-                    salaryDate: state.salary.salaryValueTrue === false ? `2022-${action.months + 1}-01 ` : state.salary.salaryDate,
-                    salaryValueTrue: true
-                }
-            }
         case ADD_PERIOD_S:
             return {
                 ...state,
@@ -152,11 +142,7 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 periodPo: action.periodPo
             }
-        case ADD_PERIOD_S_TIME:
-            return {
-                ...state,
-                periodSTime: action.periodSTime
-            }
+     
 
         case ADD_SELECT_DIAGRAMM:
             return {
@@ -166,11 +152,7 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state, selectDiagrammStat: action.selectDiagrammStat
             }
-        case ADD_SALARY_VALUE_TRUE:
-            return {
-                ...state, 
-                income: { ...state.income, salaryValueTrue: action.value }
-            }
+     
         case ADD_EDIT_COLOR:
             return {
                 ...state,
@@ -220,7 +202,7 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state,
                 category: [...state.category.map(a => {
-                    if (a.nameRus.toLowerCase() === action.name) {
+                    if (a.nameRus.toLowerCase() === action.name.toLowerCase()) {
                         return ({ ...a, nameRusСase: `${action.data[0].toUpperCase() + action.data.slice(1)}` })
                     }
                     return a
@@ -303,9 +285,49 @@ const diagrammReduser = (state = initialState, action) => {
         case ADD_SALARY_DAY:
             return {
                 ...state,
-                salary: {
-                    ...state.salary,
-                    salaryDate: `2022-03-${action.day}`
+                income: {
+                    ...state.income,
+                    salary:  {
+                        Date: action.name === 'Зарплата'
+                        ? { ...state.income.salary.Date,
+                            day: action.day 
+                        }
+                        : {...state.income.salary.Date}  
+                    },
+                    prepayment: {
+                        Date: action.name === 'Аванс'
+                        ? { ...state.income.prepayment.Date,
+                            day: action.day 
+                        }
+                        : {...state.income.prepayment.Date}  
+                    }
+                }
+            }
+        case ADD_SALARY_MONTH:
+            return {
+                ...state,
+                income: {
+                    ...state.income,
+                    salary: {
+                        Date: action.name === 'Зарплата'
+                       ? {
+                            ...state.income.salary.Date,
+                            month: action.month < 10
+                                ? `0${action.month}`
+                                : action.month
+                        }
+                        : {...state.income.salary.Date} 
+                    },
+                    prepayment: {
+                        Date: action.name === 'Аванс'
+                       ? {   ...state.income.prepayment.Date,
+                            month: action.month < 10
+                                ? `0${action.month}`
+                                : action.month
+                        }
+                        : {...state.income.prepayment.Date} 
+                    }
+
                 }
             }
 
@@ -330,8 +352,6 @@ const diagrammReduser = (state = initialState, action) => {
                     total: state.income.total + Number(num)
                 }
             }
-
-
 
         default:
             return state
@@ -363,17 +383,19 @@ export const addDiagrammPo = (data) => {
 
 
 
-export const addSalaryDay = (day) => {
-    return { type: ADD_SALARY_DAY, day }
+export const addSalaryDay = (name, day) => {
+    return { type: ADD_SALARY_DAY, name, day }
 }
+export const addSalaryMonth = (name, month) => {
+    return { type: ADD_SALARY_MONTH, name, month }
+}
+
 
 
 
 export const addIncome = (name, time, num, valuta) => {
     return { type: ADD_INCOME, name, time, num, valuta }
 }
-
-
 
 
 
@@ -408,21 +430,13 @@ export const addDiagramm = (name, value, time) => {
 export const addActiv = (activ) => {
     return { type: ADD_ACTIV, activ }
 }
-export const addSalary = (salary, months) => {
-    return { type: ADD_SALARY, salary, months }
-}
 export const addPeriodS = (periodS) => {
     return { type: ADD_PERIOD_S, periodS }
 }
 export const addPeriodPo = (periodPo) => {
     return { type: ADD_PERIOD_PO, periodPo }
 }
-export const addPeriodSTime = (periodSTime) => {
-    return { type: ADD_PERIOD_S_TIME, periodSTime }
-}
-export const addPeriodPoTime = (periodPoTime) => {
-    return { type: ADD_PERIOD_PO_TIME, periodPoTime }
-}
+
 export const addEditColor = (editColor, name) => {
     return { type: ADD_EDIT_COLOR, editColor, name }
 }
@@ -431,9 +445,6 @@ export const addSelectDiagramm = (selectDiagramm) => {
 }
 export const addSelectDiagrammStat = (selectDiagrammStat) => {
     return { type: ADD_SELECT_DIAGRAMM_STAT, selectDiagrammStat }
-}
-export const addSalaryValueTrue = (value) => {
-    return { type: ADD_SALARY_VALUE_TRUE, value }
 }
 export const addNameCase = (data, name) => {
     return { type: ADD_NAME_CASE, data, name }

@@ -1,5 +1,15 @@
 
 .dollar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-weight: bold;
     font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.dollarRate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

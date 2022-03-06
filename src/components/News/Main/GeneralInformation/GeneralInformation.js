@@ -14,14 +14,12 @@ const GeneralInformation = (props) => {
             <Salary
                 exchangeRates={props.exchangeRates}
                 diagramm={props.diagramm}
-                addSalary={props.addSalary}
-                addSalaryValueTrue={props.addSalaryValueTrue}
                 addText={props.addText}
             />
             <Income
-                addSalaryValueTrue={props.addSalaryValueTrue}
                 addText={props.addText}
-                addIncome={props.addIncome} />
+                addIncome={props.addIncome}
+                addSalaryMonth={props.addSalaryMonth} />
             <Expenses
                 addDiagramm={props.addDiagramm}
                 diagramm={props.diagramm}

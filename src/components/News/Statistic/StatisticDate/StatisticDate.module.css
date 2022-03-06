@@ -9,7 +9,7 @@
 .statisticTable {
     display: flex;
     flex-direction: column;
-    margin: 10px 70px;
+    margin: 10px 50px;
     border-bottom: solid 3px black;
 }
 
@@ -29,7 +29,7 @@
 }
 .statisticNameCateg {
     font-weight: bold;
-    flex: 2;
+    flex: 3;
 }
 
 
@@ -55,7 +55,7 @@
     border: solid black 1px; 
 }
 .statisticDateName {
-    flex: 2;
+    flex: 3;
     border: solid black 1px;
 }
 

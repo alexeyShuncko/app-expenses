@@ -16,7 +16,7 @@ const DollarRate = (props) => {
 
 
     return (
-        <div >
+        <div className={s.dollarRate}>
             <div className={s.dollar}>Курсы валют по НБРБ
                 <div> 
                     на {DataTransformation(props.exchangeRates.dollar.Date)} :

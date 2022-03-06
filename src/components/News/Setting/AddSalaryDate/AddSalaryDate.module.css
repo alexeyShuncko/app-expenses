@@ -8,14 +8,35 @@
 /* Блоки под названием  */
 .addSalaryDayBloc {
     display: flex;
-    flex-direction: row;
     margin-top: 20px;
 }
 .addSalaryDay {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     margin-left: 40px;
     margin-top: 20px;
 }
+
+
+
+/* Поля ввода  */
+.income {
+display: flex;
+align-items: flex-end;
+margin-top: 20px;
+}
+.income label {
+margin-right: 5px;
+}
+
+
+/* Блок со стрелкой валидации */
+.nameArrow {
+display: flex;
+}
+
+
 
 .instruction {
     flex: 3;

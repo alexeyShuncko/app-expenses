@@ -56,7 +56,10 @@ const Expenses = (props) => {
         <div className={s.expenses}>
 
             {!editMode
-                ? <button onClick={activateEditMode}>Добавить расходы</button>
+                ? <div className={s.buttonExpenses}>
+                    <button onClick={activateEditMode}>Добавить расходы</button>
+                </div>
+
                 :
                 <div>
                     <div className={s.formExpensesName}>Расходы на :</div>

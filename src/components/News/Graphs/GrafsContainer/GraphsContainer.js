@@ -251,7 +251,7 @@ const GraphsContainer = (props) => {
                         justify: false,
                         translateX: props.category.length < 7 ? 0 : 160,
                         translateY: props.category.length < 7 ? -40 : 0,
-                        itemWidth: 140,
+                        itemWidth: 150,
                         itemHeight: 20,
                         itemsSpacing: 4,
                         symbolSize: 20,

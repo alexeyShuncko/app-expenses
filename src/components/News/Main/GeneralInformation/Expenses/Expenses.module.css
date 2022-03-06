@@ -1,25 +1,16 @@
 
-.formExpenses {
-    margin-top: 20px;
-    margin-left: 10px;  
-}
+
 .formExpensesFild{
     display: flex;
     flex-direction: column;
 }
 
-.formItemsButton {
-    display: flex;
-    margin-top: 10px;
-     justify-content: flex-end; 
-   
-}
+
 .formItems {
 display: flex;
 }
 .formItemsField {
-   
-    flex: 1;
+    width: 100px;
 }
 
 
@@ -29,20 +20,6 @@ display: flex;
   margin: 0;
 }
 
-/* .formItemsField:focus {
-    outline:none;
-border-top: none;
-border-left: none;
-border-right: none;
-    border-bottom: solid orange 2px;
-} */
-/* .formItemsField:hover {
-    border-top: none;
-border-left: none;
-border-right: none;
-border-bottom: solid orange 2px;
-} */
-
 .formItemsLabel{
     flex: 1;
 }
@@ -51,6 +28,24 @@ border-bottom: solid orange 2px;
 .formExpensesName {
     font-weight: bold;
     font-size: 20px;
-    margin-top: 20px;
     margin-bottom: 10px;
+}
+
+
+/* Кнопки */
+.formItemsButton {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+     justify-content: flex-end; 
+}
+.formItemsButton button {
+    margin-right: 5px;
+}
+
+/* Общая кнопка */
+.buttonExpenses {
+    display: flex;
+justify-content: center;
+margin-bottom: 20px;
 }

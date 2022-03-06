@@ -69,10 +69,10 @@ return (
 <ResponsivePie
         data={data()}
         margin={{ 
-            top: props.diagramm.category.length <= 5 ? 45 : 70, 
-            right: props.diagramm.category.length <= 5 ? 40 : 70, 
-            bottom: props.diagramm.category.length <= 5 ? 70 : 40, 
-            left: props.diagramm.category.length <= 5 ? 30 : -65 }}
+            top: 70, 
+            right: 70, 
+            bottom: 40, 
+            left: -80 }}
         
         theme={                 // объект добавления свойств диаграммы
             {    "fontSize": 16,
@@ -307,12 +307,12 @@ return (
         // ]}
         legends={[
             {
-                anchor: props.diagramm.category.length <= 5 ? 'bottom' : 'top-right',
-                direction: props.diagramm.category.length <= 5 ? 'row' : 'column',
+                anchor:  'top-right',
+                direction:  'column',
                 justify: false,
-                translateX: props.diagramm.category.length <= 5 ? 0 : 40,
-                translateY: props.diagramm.category.length <= 5 ? 60 : -40,
-                itemsSpacing: props.diagramm.category.length <= 5 ? 0 : 5,
+                translateX:  40,
+                translateY:  -40,
+                itemsSpacing:  5,
                 itemWidth: 130,
                 itemHeight: 20,
                 itemTextColor: '#ffffff',

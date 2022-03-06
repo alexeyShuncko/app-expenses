@@ -1,5 +1,5 @@
 
-.expensesName {
+.incomeName {
     font-weight: bold;
     font-size: 20px;
     margin-top: 20px;
@@ -7,15 +7,27 @@
 }
 
 
+/* Блок со стрелкой валидации */
+.nameArrow {
+    display: flex;
+    }
+    
 
-.expensesBloc {
+.incomeBloc {
+flex: 9;
 display: flex;
 flex-direction: column;
 }
 
-.expensesItem {
+.incomeItem {  
 display: flex;
 }
+
+.incomeItem label{
+flex: 2;
+
+}
+
 
 
 /* Переключатель валюты */
@@ -38,27 +50,24 @@ display: flex;
 
 
 
-.expensestem label{
-    flex: 1;
-}
-
 
 .formExpenses {
     margin-top: 20px;
     margin-left: 10px;  
 }
-.formExpensesFild{
+.formIncomeFild{
     display: flex;
     flex-direction: column;
 }
 
-.formItemsButton {
-    display: flex;
-    margin-top: 10px;
-     justify-content: flex-end; 
-   
+.fieldName {
+    width: 108px;
+    text-align: center;
 }
 
+.formItemsField {
+width: 100px;
+}
 
 
 .formItemsField::-webkit-outer-spin-button,
@@ -68,4 +77,20 @@ display: flex;
 }
 
 
+/* Кнопки */
+.formItemsButton {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+     justify-content: flex-end; 
+}
+.formItemsButton button {
+    margin-right: 5px;
+}
 
+/* Общая кнопка */
+.incomeButton {
+display: flex;
+justify-content: center;
+margin: 20px 0px;
+}

@@ -50,7 +50,7 @@ const GrafsForm = (props) => {
                 max={grafPeriodSMax}
                 defaultValue={props.periodS}
             />
-            по: <input
+            до: <input
                 type='date'
                 onChange={grafPeriodPo}
                 min={grafPeriodPoMin}

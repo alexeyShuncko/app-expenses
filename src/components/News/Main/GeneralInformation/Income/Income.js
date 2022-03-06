@@ -3,6 +3,8 @@ import { Form, Field } from 'react-final-form';
 import s from './Income.module.css';
 import HedgehogFunc from '../../../helpers/HedgehodFunc/HedgehogFunc';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
+import ArrowValidate from './../../../Arrow/ArrowValidate';
+import ArrowFunc from '../../../helpers/ArrowFunc/ArrowFunc';
 
 
 const Income = (props) => {
@@ -28,14 +30,22 @@ const Income = (props) => {
     }
 
     const onSubmit = (values, form) => {
+        if (values.income) {
+            const timer = DateFunc(new Date())
 
-        const timer = DateFunc(new Date())
+            HedgehogFunc(props.addText,
+                `Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
 
-        HedgehogFunc(props.addText,
-            `${values.expenses} ${values.valuta} добавлено ...`)
+            props.addSalaryMonth(values.name,(Number(timer.slice(5, 7)) + 1))
 
-        props.addIncome(values.name, timer, Number(values.expenses), values.valuta)
-        deActivateEditMode()
+            props.addIncome(values.name, timer, Number(values.income), values.valuta)
+            deActivateEditMode()
+        }
+        else if (!values.income) {
+            HedgehogFunc(props.addText, 'Введите сумму доходов ...')
+            ArrowFunc('arrowIncome', 'incomeNum', 'buttonIncome')
+        }
+
     }
 
 
@@ -44,58 +54,70 @@ const Income = (props) => {
         <div className={s.expenses}>
 
             {!editMode
-                ? <button onClick={activateEditMode}>Добавить доходы</button>
+                ? <div className={s.incomeButton}>
+<button  onClick={activateEditMode}>Добавить доходы</button>
+                </div>
+                
                 :
                 <div>
-                    <div className={s.expensesName}>Доходы:</div>
-                    <div className={s.formExpensesFild}>
+                    <div className={s.incomeName}>Доходы:</div>
+                    <div className={s.formIncomeFild}>
                         <Form
                             onSubmit={onSubmit}
                             render={({ handleSubmit, form, submitting, pristine, values }) => (
                                 <form onSubmit={handleSubmit} >
-                                    <div className={s.expensesBloc}>
-                                        <div className={s.expensesItem}>
-                                            <label>Название:</label>
-                                            <Field
-                                                className={s.formItemsField}
-                                                autoComplete="off"
-                                                name='name'
-                                                component="select" >
-                                                <option />
-                                                <option value='Зарплата'>Зарплата</option>
-                                                <option value='Аванс'>Аванс</option>
-                                            </Field>
+                                    <div className={s.nameArrow}>
+                                        <div className={s.incomeBloc}>
+                                            <div className={s.incomeItem}>
+                                                <label>Название:</label>
+                                                <div className={s.incomeItemField}>
+                                                    <Field
+                                                        autoFocus='on'
+                                                        defaultValue='Зарплата'
+                                                        className={s.fieldName}
+                                                        autoComplete="off"
+                                                        name='name'
+                                                        component="select" >
+                                                        <option value='Зарплата'> Зарплата</option>
+                                                        <option value='Аванс'>Аванс</option>
+                                                        <option value='Другие'>Другие</option>
+                                                    </Field>
+                                                </div>
+                                            </div>
+                                            <div className={s.incomeItem}>
+                                                <label>Сумма:</label>
+                                                <Field
+                                                    id='incomeNum'
+                                                    onInput={funcValidNumber}
+                                                    className={s.formItemsField}
+                                                    autoComplete="off"
+                                                    name='income'
+                                                    placeholder="1111.11"
+                                                    component="input"
+                                                    type="number"
+                                                    max='10000'
+                                                    step={0.01} />
+                                            </div>
+                                            <div className={s.incomeItem}>
+                                                <label> Валюта: </label>
+                                                <Field
+                                                    defaultValue='BYN'
+                                                    className={s.fieldBynUsd}
+                                                    name="valuta"
+                                                    component="select" >
+                                                    <option value="BYN">BYN</option>
+                                                    <option value="USD">USD</option>
+                                                    <option value="EUR">EUR</option>
+                                                </Field>
+                                            </div>
                                         </div>
-                                        <div className={s.expensesItem}>
-                                            <label>Сумма:</label>
-                                            <Field
-                                                onInput={funcValidNumber}
-                                                className={s.formItemsField}
-                                                autoComplete="off"
-                                                name='expenses'
-                                                placeholder="... бел. рублей"
-                                                component="input"
-                                                type="number"
-                                                max='10000'
-                                                step={0.01} />
-                                        </div>
-                                        <div className={s.expensesItem}>
-                                            <label> Валюта: </label>
-                                            <Field
-                                                id='addValutaInput'
-                                                className={s.fieldBynUsd}
-                                                name="valuta"
-                                                component="select" >
-                                                <option />
-                                                <option value="BYN">BYN</option>
-                                                <option value="USD">USD</option>
-                                                <option value="EUR">EUR</option>
-                                            </Field>
-                                        </div>
+
+                                        <ArrowValidate arrowId='arrowIncome' />
                                     </div>
 
                                     <div className={s.formItemsButton}>
-                                        <button type="submit" disabled={submitting || pristine}>
+                                        <button className='buttonIncome'
+                                            type="submit" disabled={submitting || pristine}>
                                             Добавить
                                         </button>
                                         <button type="button" onClick={deActivateEditMode}>
