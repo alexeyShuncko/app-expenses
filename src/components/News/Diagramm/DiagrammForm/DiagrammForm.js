@@ -22,7 +22,7 @@ const DiagrammForm = (props) => {
     const diagrammPeriodPo = (e) => {
         props.addDiagrammPo(e.target.value)
     }
-    const selectChange = (e) => {
+    const selectChangeDiagramm = (e) => {
         props.addDiagrammSelect(e.target.value)
     }
 
@@ -32,7 +32,10 @@ const DiagrammForm = (props) => {
         <div className={s.select}>
             <div>
                 <span className={s.selectText}>  Диаграмма
-                    <select className={s.selectDiag} onChange={selectChange} defaultValue={props.diagrammSelect}>
+                    <select 
+                    className={s.selectDiag} 
+                    onChange={selectChangeDiagramm} 
+                    defaultValue={props.diagrammSelect}>
                         <option>расходов</option>
                         <option>доходов</option>
                     </select>

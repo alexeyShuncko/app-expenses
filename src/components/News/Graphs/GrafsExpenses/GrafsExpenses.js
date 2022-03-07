@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './GraphsContainer.module.css';
+import s from './GrafsExpenses.module.css';
 import { ResponsiveLine } from '@nivo/line'
 import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
 import { DateFunc } from '../../helpers/DateFunc/DateFunc';
@@ -7,17 +7,17 @@ import { DateFunc } from '../../helpers/DateFunc/DateFunc';
 
 
 
-const GraphsContainer = (props) => {
+const GrafsExpenses = (props) => {
 
 
     let coefficientFunc = () => {
-        if (props.grafSelect === "BYN") {
+        if (props.grafSelectValuta === "BYN") {
             return 1
         }
-        else if (props.grafSelect === "USD") {
+        else if (props.grafSelectValuta === "USD") {
             return props.dollar
         }
-        else if (props.grafSelect === "EUR") {
+        else if (props.grafSelectValuta === "EUR") {
             return props.euro
         }
     }
@@ -71,7 +71,7 @@ const GraphsContainer = (props) => {
                     bottom: 120,
                     left: 60
                 }}
-                xScale={{ type: 'point' }}
+                xScale={{ type: 'point'}}
                 yScale={{
                     type: 'linear',
                     min: 'auto',
@@ -210,15 +210,6 @@ const GraphsContainer = (props) => {
                         //       }
                     }
                 }
-                // onMouseEnter={(data, e) => {
-                //     console.log({ is: 'mouseenter', data, event: e }) 
-                // }}
-                // onMouseLeave={(data, e) => {
-                //     console.log({ is: 'mouseleave', data, event: e }) 
-                // }}
-                // onClick={(data, e) => {
-                //     console.log({ is: 'onclick', data, event: e }) 
-                // }}
                 // sliceTooltip={({ slice }) => {    // кастомная всплывающая подсказка по всем категориям
                 //     return (
                 //         <div
@@ -317,5 +308,5 @@ const GraphsContainer = (props) => {
 
 
 
-export default GraphsContainer
+export default GrafsExpenses
 

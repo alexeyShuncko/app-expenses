@@ -6,15 +6,6 @@
        margin-top: 10px;
    }
 
-.statisticTable {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 50px;
-    border-bottom: solid 3px black;
-}
-
-
-
 .select {
     background-color: rgb(204, 163, 204);
     border-color: rgb(204, 163, 204);

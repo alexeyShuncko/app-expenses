@@ -10,8 +10,6 @@ const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
 
 const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
 
-
-
 const ADD_EDIT_COLOR = 'ADD_EDIT_COLOR'
 const ADD_DOLLAR = 'ADD_DOLLAR'
 const ADD_EURO = 'ADD_EURO'
@@ -24,14 +22,15 @@ const ADD_TEXT = 'ADD_TEXT'
 const ADD_NAME_CASE = 'ADD_NAME_CASE'
 
 // Графики
-const ADD_GRAF_SELECT = 'ADD_GRAF_SELECT'
+const ADD_GRAF_SELECT_VALUTA = 'ADD_GRAF_SELECT_VALUTA'
 const ADD_GRAF_S = 'ADD_GRAF_S'
 const ADD_GRAF_PO = 'ADD_GRAF_PO'
+const ADD_GRAF_SELECT = 'ADD_DIAGRAMM_SELECT'
 
 // Диаграмма
 const ADD_DIAGRAMM_S = 'ADD_DIAGRAMM_S'
 const ADD_DIAGRAMM_PO = 'ADD_DIAGRAMM_PO'
-const ADD_DIAGRAMM_SELECT = 'ADD_DIAGRAMM_SELECT'
+const ADD_PROBLEM_SELECT = 'ADD_PROBLEM_SELECT'
 
 const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
 const ADD_SALARY_MONTH = 'ADD_SALARY_MONTH'
@@ -70,9 +69,12 @@ let initialState = {
     },
     income: {
         data: [ 
-        {name: 'Зарплата', data:[{ time: '2022-03-01', num: 700, id: 10000 }]},
-        {name: 'Аванс', data:[{ time: '2022-03-05', num: 200, id: 20000 }]},
-        {name: 'Другие', data:[{ time: '2022-03-02', num: 50, id: 30000 }]}
+            {name: 'Другие', data:[{ time: '2022-03-02', num: 50, id: 10000 }]},
+        {name: 'Зарплата', data:[
+            { time: '2022-02-01', num: 700, id: 20000 },
+            { time: '2022-03-01', num: 700, id: 20001 }]},
+        {name: 'Аванс', data:[{ time: '2022-03-05', num: 200, id: 30000 }]}
+        
     ],
         total: 700,
         salary: { Date: { day: '01', month: '03' }},
@@ -99,20 +101,20 @@ let initialState = {
         case: ['пива', 'пив', 'пиво']
     },
     text: 'Привет...',
-    grafSelect: 'BYN',
+    grafSelectValuta: 'BYN',
+    grafSelect: 'расходов',
     grafs: {
-        s: '2022-02-01',
-        po: '2022-03-28'
+        sGrafs: '2022-01-01',
+        poGrafs: '2022-05-28'
     },
-
     selectDiagrammStat: 'BYN',
     diagrammSelect: 'расходов',
     diagramm: {
         s: '2022-02-01',
         po: '2022-03-28'
-    },
-
+    }
 }
+
 
 const diagrammReduser = (state = initialState, action) => {
 
@@ -270,28 +272,35 @@ const diagrammReduser = (state = initialState, action) => {
 
 
  // График
-        case ADD_GRAF_SELECT:
+        case ADD_GRAF_SELECT_VALUTA:
             return {
                 ...state,
-                grafSelect: action.select
+                grafSelectValuta: action.select
             }
 
         case ADD_GRAF_S:
             return {
                 ...state,
-                grafs: {
-                    s: action.data,
-                    po: state.grafs.po
+                grafs: {...state.grafs,
+                    sGrafs: action.data
                 }
             }
         case ADD_GRAF_PO:
             return {
                 ...state,
                 grafs: {
-                    s: state.grafs.s,
-                    po: action.data
+                    ...state.grafs,
+                    poGrafs: action.data
                 }
             }
+            case  ADD_GRAF_SELECT:
+                return {
+                    ...state,
+                    grafSelect: action.select
+                }
+
+
+           
 
 // Диаграмма
         case ADD_DIAGRAMM_S:
@@ -310,16 +319,11 @@ const diagrammReduser = (state = initialState, action) => {
                     po: action.data
                 }
             }
-            case ADD_DIAGRAMM_SELECT:
+        case ADD_PROBLEM_SELECT:
                 return {
                     ...state,
                     diagrammSelect: action.select
                 }
-
-            
-
-
-
         case ADD_SALARY_DAY:
             return {
                 ...state,
@@ -403,15 +407,18 @@ const diagrammReduser = (state = initialState, action) => {
 }
 
 
-
-export const addGrafSelect = (select) => {
-    return { type: ADD_GRAF_SELECT, select }
+// Графики
+export const addGrafSelectValuta = (select) => {
+    return { type: ADD_GRAF_SELECT_VALUTA, select }
 }
 export const addGrafS = (data) => {
     return { type: ADD_GRAF_S, data }
 }
 export const addGrafPo = (data) => {
     return { type: ADD_GRAF_PO, data }
+}
+export const addGrafSelect = (select) => {
+    return { type: ADD_GRAF_SELECT, select }
 }
 
 
@@ -425,10 +432,8 @@ export const addDiagrammPo = (data) => {
     return { type: ADD_DIAGRAMM_PO, data }
 }
 export const addDiagrammSelect = (select) => {
-    return { type: ADD_DIAGRAMM_SELECT, select }
+    return { type: ADD_PROBLEM_SELECT, select }
 }
-
-
 
 
 

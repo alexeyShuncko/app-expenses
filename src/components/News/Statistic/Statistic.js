@@ -15,28 +15,28 @@ const Statistic = (props) => {
     return (
         <div className={s.statistic}>
 
-                <div className={s.period}>
-                    <StatisticPeriod
-                        diagramm={props.diagramm}
-                        addActiv={props.addActiv}
-                        addPeriodS={props.addPeriodS}
-                        addPeriodPo={props.addPeriodPo}
-                        addText={props.addText}/>
-                </div>
+            <div className={s.period}>
+                <StatisticPeriod
+                    diagramm={props.diagramm}
+                    addActiv={props.addActiv}
+                    addPeriodS={props.addPeriodS}
+                    addPeriodPo={props.addPeriodPo}
+                    addText={props.addText} />
+            </div>
 
-                <div className={s.tables}>
-                    <div className={s.tableCategory}>
+            <div className={s.tables}>
+                <div className={s.tableCategory}>
                     <StatisticTable
                         addText={props.addText}
-                        diagramm={props.diagramm}/>
-                    </div>
-                   <div className={s.tableDate}>
-                   <TotalTable
-                   addTableSelect={props.addTableSelect}
-                        diagramm={props.diagramm}
-                        addText={props.addText}/>
-                   </div> 
+                        diagramm={props.diagramm} />
                 </div>
+                <div className={s.tableDate}>
+                    <TotalTable
+                        addTableSelect={props.addTableSelect}
+                        diagramm={props.diagramm}
+                        addText={props.addText} />
+                </div>
+            </div>
         </div>
 
     )

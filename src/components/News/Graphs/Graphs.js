@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './Graphs.module.css';
 import { connect } from 'react-redux';
-import GraphsContainer from './GrafsContainer/GraphsContainer';
+import GrafsExpenses from './GrafsExpenses/GrafsExpenses';
 import GrafsForm from './GrafsForm/GrafsForm';
-import { addGrafS, addGrafPo, addGrafSelect, addText } from './../../../Redux/diagrammReducer';
+import { addGrafS, addGrafPo, addGrafSelectValuta, addText, addGrafSelect } from './../../../Redux/diagrammReducer';
+import GrafsIncome from './GrafIncome/GrafsIncome';
 
 
 const Grafs = (props) => {
@@ -12,22 +13,35 @@ const Grafs = (props) => {
     return (
         <div className={s.graff}>
             <GrafsForm
+                addGrafSelectValuta={props.addGrafSelectValuta}
+                grafSelectValuta={props.expenses.grafSelectValuta}
                 addGrafSelect={props.addGrafSelect}
                 grafSelect={props.expenses.grafSelect}
-                periodPo={props.expenses.grafs.po}
-                periodS={props.expenses.grafs.s}
+                periodPo={props.expenses.grafs.poGrafs}
+                periodS={props.expenses.grafs.sGrafs}
                 addGrafS={props.addGrafS}
                 addGrafPo={props.addGrafPo}
-                addText={props.addText}
-            />
-            <GraphsContainer
-                category={props.expenses.category}
-                dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
-                euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
-                grafSelect={props.expenses.grafSelect}
-                periodS={props.expenses.grafs.s}
-                periodPo={props.expenses.grafs.po}
-            />
+                addText={props.addText}/>
+
+            { props.expenses.grafSelect === 'расходов'
+
+            ? <GrafsExpenses
+            category={props.expenses.category}
+            dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
+            euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
+            grafSelectValuta={props.expenses.grafSelectValuta}
+            periodS={props.expenses.grafs.sGrafs}
+            periodPo={props.expenses.grafs.poGrafs}/>
+            
+            : <GrafsIncome
+            income={props.expenses.income}
+            dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
+            euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
+            grafSelectValuta={props.expenses.grafSelectValuta}
+            periodS={props.expenses.grafs.sGrafs}
+            periodPo={props.expenses.grafs.poGrafs}/>
+
+            }
         </div>
     )
 }
@@ -38,5 +52,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addGrafS, addGrafPo, addGrafSelect, addText })(Grafs)
+export default connect(mapStateToProps, { 
+    addGrafS, addGrafPo, addGrafSelectValuta, addText, addGrafSelect 
+})(Grafs)
 

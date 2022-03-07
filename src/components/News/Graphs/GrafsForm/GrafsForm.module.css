@@ -19,6 +19,8 @@ margin: 0px 5px;
     background-color: rgb(204, 163, 204);
     border-color: rgb(204, 163, 204);
     border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 .fieldBynUsd:hover {
@@ -28,3 +30,20 @@ margin: 0px 5px;
 .fieldBynUsd:focus {
     outline: none;
 }
+/* Классы переключателя графиков */
+.selectDiag {
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    font-size: 18px;
+    margin: 0px 4px;
+    font-weight: bold;
+    }
+    
+    .selectDiag:hover {
+        border-color:green;
+    }
+    .selectDiag:focus {
+        outline: none;
+    }
+    

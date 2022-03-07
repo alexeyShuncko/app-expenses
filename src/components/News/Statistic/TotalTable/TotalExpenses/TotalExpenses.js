@@ -7,17 +7,16 @@ import Message from "../../../helpers/Message/Message";
 
 const TotalTableExpenses = (props) => {
 
-
     const category = props.diagramm.category
 
-    let result =
-        category.map(a => {
+// фильтрую в зависимости от выбранного периода
+    let result = category.map(a => {
             return {
                 nameRus: a.nameRus,
                 color: a.color,
                 data: a.data.filter(b => b.time >= props.diagramm.periodS && b.time <= props.diagramm.periodPo)
             }
-        })  // фильтрую в зависимости от выбранного периода
+        })  
 
 
     let newResult = result.map(a => a.data.map(d => { return { 
