@@ -37,7 +37,6 @@ const Income = (props) => {
                 `Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
 
             props.addSalaryMonth(values.name,(Number(timer.slice(5, 7)) + 1))
-
             props.addIncome(values.name, timer, Number(values.income), values.valuta)
             deActivateEditMode()
         }

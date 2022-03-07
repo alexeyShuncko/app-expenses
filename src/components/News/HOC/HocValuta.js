@@ -25,10 +25,10 @@ const HocValuta = (props) => {
                 return (props.salary - props.category.map(a => a && a.summ).reduce((acc, num) => acc + num, 0)).toFixed(2)
             }
             else if (props.value === 'statisticTable') {
-                return statisticTable
+                return statisticTable.toFixed(2)
             }
             else if (props.value === 'statisticTotal') {
-                return statisticTotal
+                return statisticTotal.toFixed(2)
             }
 
         }
@@ -81,7 +81,6 @@ const HocValuta = (props) => {
     return (
         <div className={s.salary}>
             <div 
-            title={props.value === 'salary' ? 'Нажмите, чтобы изменить' : null}
             className={s.salaryValue} 
             onClick={props.value === 'salary' ? props.edit : null}>
                 {dataTotal}

@@ -1,0 +1,33 @@
+.statisticDateTable {
+    text-align: center;
+   }
+
+.statisticDateTable button{
+       margin-top: 10px;
+   }
+
+.statisticTable {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 50px;
+    border-bottom: solid 3px black;
+}
+
+
+
+.select {
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    font-size: 15px;
+    margin: 0px 3px;
+    font-weight: bold;
+    }
+    
+    .select:hover {
+        border-color:green;
+    }
+    .select:focus {
+        outline: none;
+    }
+    

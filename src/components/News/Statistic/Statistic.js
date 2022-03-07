@@ -1,8 +1,8 @@
 import React from "react";
 import s from './Statistic.module.css';
-import StatisticDate from './StatisticDate/StatisticDate';
+import TotalTable from './TotalTable/TotalTable';
 import {
-    addActiv, addPeriodS, addPeriodPo, addText
+    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect
 } from '../../../Redux/diagrammReducer';
 import { connect } from 'react-redux';
 import StatisticTable from "./StatisticTable/StatisticTable";
@@ -31,7 +31,8 @@ const Statistic = (props) => {
                         diagramm={props.diagramm}/>
                     </div>
                    <div className={s.tableDate}>
-                   <StatisticDate
+                   <TotalTable
+                   addTableSelect={props.addTableSelect}
                         diagramm={props.diagramm}
                         addText={props.addText}/>
                    </div> 
@@ -46,5 +47,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps, {
-    addActiv, addPeriodS, addPeriodPo, addText
+    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect
 })(Statistic)

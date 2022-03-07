@@ -6,6 +6,7 @@ const ADD_ACTIV = 'ADD_ACTIV'
 
 const ADD_PERIOD_S = 'ADD_PERIOD_S'
 const ADD_PERIOD_PO = 'ADD_PERIOD_PO'
+const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
 
 const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
 
@@ -22,12 +23,15 @@ const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
 const ADD_TEXT = 'ADD_TEXT'
 const ADD_NAME_CASE = 'ADD_NAME_CASE'
 
+// Графики
 const ADD_GRAF_SELECT = 'ADD_GRAF_SELECT'
 const ADD_GRAF_S = 'ADD_GRAF_S'
 const ADD_GRAF_PO = 'ADD_GRAF_PO'
 
+// Диаграмма
 const ADD_DIAGRAMM_S = 'ADD_DIAGRAMM_S'
 const ADD_DIAGRAMM_PO = 'ADD_DIAGRAMM_PO'
+const ADD_DIAGRAMM_SELECT = 'ADD_DIAGRAMM_SELECT'
 
 const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
 const ADD_SALARY_MONTH = 'ADD_SALARY_MONTH'
@@ -65,17 +69,24 @@ let initialState = {
         name: ''
     },
     income: {
-        data: [{ name: 'Зарплата', time: '2022-03-01', num: 700 }],
+        data: [ 
+        {name: 'Зарплата', data:[{ time: '2022-03-01', num: 700, id: 10000 }]},
+        {name: 'Аванс', data:[{ time: '2022-03-05', num: 200, id: 20000 }]},
+        {name: 'Другие', data:[{ time: '2022-03-02', num: 50, id: 30000 }]}
+    ],
         total: 700,
         salary: { Date: { day: '01', month: '03' }},
         prepayment: { Date: { day: '20', month: '03' }},
     },
-    periodPo: '',
-    periodS: '',
-    periodPoTime: '23:59',
-    periodSTime: '00:01',
+
+
+    periodPo: '2022-04-28',
+    periodS: '2022-02-01',
+    tableSelect: 'расходов',
+
+
     selectDiagramm: 'BYN',
-    selectDiagrammStat: '%',
+   
     exchangeRates: {
         dollar: { Cur_OfficialRate: '2.5', Date: '' },
         euro: { Cur_OfficialRate: '2.9', Date: '' }
@@ -91,11 +102,14 @@ let initialState = {
     grafSelect: 'BYN',
     grafs: {
         s: '2022-02-01',
-        po: '2022-02-28'
+        po: '2022-03-28'
     },
+
+    selectDiagrammStat: 'BYN',
+    diagrammSelect: 'расходов',
     diagramm: {
         s: '2022-02-01',
-        po: '2022-02-28'
+        po: '2022-03-28'
     },
 
 }
@@ -132,6 +146,9 @@ const diagrammReduser = (state = initialState, action) => {
                         : ''
                 }
             }
+
+
+// Статистика
         case ADD_PERIOD_S:
             return {
                 ...state,
@@ -142,6 +159,13 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 periodPo: action.periodPo
             }
+            case ADD_TABLE_SELECT:
+                return {
+                    ...state,
+                    tableSelect: action.select
+                }
+
+        
      
 
         case ADD_SELECT_DIAGRAMM:
@@ -243,6 +267,9 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 text: action.text
             }
+
+
+ // График
         case ADD_GRAF_SELECT:
             return {
                 ...state,
@@ -266,6 +293,7 @@ const diagrammReduser = (state = initialState, action) => {
                 }
             }
 
+// Диаграмма
         case ADD_DIAGRAMM_S:
             return {
                 ...state,
@@ -282,6 +310,16 @@ const diagrammReduser = (state = initialState, action) => {
                     po: action.data
                 }
             }
+            case ADD_DIAGRAMM_SELECT:
+                return {
+                    ...state,
+                    diagrammSelect: action.select
+                }
+
+            
+
+
+
         case ADD_SALARY_DAY:
             return {
                 ...state,
@@ -344,11 +382,17 @@ const diagrammReduser = (state = initialState, action) => {
                 }
             }
             let num = numValuta()
+           
+            state.income.data.find(a => a.name===action.name).data.push(
+                {time: action.time,
+                num: Number(num),
+                id:  state.income.data.find(a => a.name===action.name).data[0].id + 
+                state.income.data.find(a => a.name===action.name).data.length}
+                )
             return {
                 ...state,
                 income: {
                     ...state.income,
-                    data: [...state.income.data, { name: action.name, time: action.time, num: Number(num) }],
                     total: state.income.total + Number(num)
                 }
             }
@@ -373,13 +417,19 @@ export const addGrafPo = (data) => {
 
 
 
-
+// Диаграмма
 export const addDiagrammS = (data) => {
     return { type: ADD_DIAGRAMM_S, data }
 }
 export const addDiagrammPo = (data) => {
     return { type: ADD_DIAGRAMM_PO, data }
 }
+export const addDiagrammSelect = (select) => {
+    return { type: ADD_DIAGRAMM_SELECT, select }
+}
+
+
+
 
 
 
@@ -430,12 +480,19 @@ export const addDiagramm = (name, value, time) => {
 export const addActiv = (activ) => {
     return { type: ADD_ACTIV, activ }
 }
+
+// Статистика
 export const addPeriodS = (periodS) => {
     return { type: ADD_PERIOD_S, periodS }
 }
 export const addPeriodPo = (periodPo) => {
     return { type: ADD_PERIOD_PO, periodPo }
 }
+export const addTableSelect = (select) => {
+    return { type: ADD_TABLE_SELECT, select }
+}
+
+
 
 export const addEditColor = (editColor, name) => {
     return { type: ADD_EDIT_COLOR, editColor, name }

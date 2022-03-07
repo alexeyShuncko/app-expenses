@@ -13,3 +13,23 @@ font-size: 20px;
 margin-left: 5px;
 margin-right: 10px;
 }
+
+
+
+/* выбор расходы или доходы */
+.selectDiag {
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    font-size: 18px;
+    margin: 0px 4px;
+    font-weight: bold;
+    }
+    
+    .selectDiag:hover {
+        border-color:green;
+    }
+    .selectDiag:focus {
+        outline: none;
+    }
+    

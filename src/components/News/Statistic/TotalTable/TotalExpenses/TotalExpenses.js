@@ -1,36 +1,12 @@
-import React, { useState } from "react";
-import s from './StatisticDate.module.css';
-import HocValuta from "../../HOC/HocValuta";
-import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
-import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
-import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
-import Message from "../../helpers/Message/Message";
+import React from "react";
+import s from './TotalExpenses.module.css';
+import HocValuta from "../../../HOC/HocValuta";
+import { DataTransformation } from "../../../helpers/DataTransformation/DataTransformation";
+import Message from "../../../helpers/Message/Message";
 
 
-const StatisticDate = (props) => {
+const TotalTableExpenses = (props) => {
 
-    let [editMode, setEditMode] = useState(false)
-
-    const activateEditMode = () => {
-        if (props.diagramm.periodPo
-            && props.diagramm.periodS) {
-            setEditMode(true)
-        }
-        else if (!props.diagramm.periodS) {
-            HedgehogFunc(props.addText, 'Выберите начало периода ...')
-            ArrowFunc('arrowPeriod', 'periodS', 'buttonTable')
-
-        }
-        else if (!props.diagramm.periodPo) {
-            HedgehogFunc(props.addText, 'Выберите окончание периода ...')
-            ArrowFunc('arrowPeriod', 'periodPo', 'buttonTable')
-
-        }
-
-    }
-    const deActivateEditMode = () => {
-        setEditMode(false)
-    }
 
     const category = props.diagramm.category
 
@@ -68,19 +44,7 @@ let datePo = DataTransformation(props.diagramm.periodPo)
 
     return (
         <div className={s.statisticDateTable}>
-            <div>Таблица расходов по всем  категориям за выбранный период. </div>
-            {!editMode
-                ? <div>
-                    <button
-                        className='buttonTable'
-                        onClick={activateEditMode}> Показать </button>
-                </div>
-                : <div >
-                    <button
-                        className='buttonTable'
-                        onClick={deActivateEditMode}> Убрать </button>
-
-
+           
                     {totalSort.length !== 0
                         ? <div className={s.statisticTable}>
                             <div className={s.statisticName}>
@@ -114,10 +78,8 @@ let datePo = DataTransformation(props.diagramm.periodPo)
                             <Message textMessage={textMessage} idMessage='messageTableTotal' />
                             </div>
                     }
-                </div>}
-        </div>
-
+                </div>
     )
 }
 
-export default StatisticDate
+export default TotalTableExpenses
