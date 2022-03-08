@@ -33,32 +33,31 @@ const GrafsIncome = (props) => {
 
     const arrDates = (a, b) => {
 
-        if ((b.getTime() - a.getTime()) > 2592000000) {
+        if ((b.getTime() - a.getTime()) > 2678400000) {
 
             let arrTime = []
-            for (let i = a; i < b; new Date(i.setMonth(i.getMonth() + 1))) {
-
-                const data = DateFunc(new Date(i))
+            for (let i = a; i.getMonth() <= b.getMonth(); i.setMonth(i.getMonth() + 1)) {
+ console.log(i)
+                const data = DateFunc(i)
 
                 arrTime.push({ time: MonthFunc(data) })
             }
             return arrTime
         }
-        else if ((b.getTime() - a.getTime()) < 2592000000) {
-            let arrTime = []
-            for (let i = a; i < b; new Date(i.setDate(i.getDate() + 1))) {
 
-                const data = DateFunc(new Date(i))
+        let arrTime = []
+        for (let i = a; i <= b; i.setDate(i.getDate() + 1)) {
 
-                arrTime.push({ time: DataTransformation(data) })
-            }
-            return arrTime
+            const data = DateFunc(i)
+
+            arrTime.push({ time: DataTransformation(data) })
         }
-        
+        return arrTime
+
     }
-   
-    let timer = arrDates(grafS, grafPo)
-    console.log(timer.length)
+
+    const timer = arrDates(grafS, grafPo)
+    console.log(timer)
 
     const data = props.income.data.map(a => {
         return {
@@ -66,9 +65,14 @@ const GrafsIncome = (props) => {
             'data': timer.map(t => {
                 return {
                     'x': t.time,
-                    'y': a.data.filter(e => DataTransformation(e.time) === t.time).length !== 0
+                    'y': a.data.filter(e => timer[0].time.length > 8
+                        ? DataTransformation(e.time) === t.time
+                        : MonthFunc(e.time) === t.time
+                    ).length !== 0
                         ? Math.round(a.data
-                            .filter(e => DataTransformation(e.time) === t.time)
+                            .filter(e => timer[0].time.length > 8
+                                ? DataTransformation(e.time) === t.time
+                                : MonthFunc(e.time) === t.time)
                             .map(m => m.num)
                             .reduce((acc, num) => acc + num, 0) / coefficient)
                         : 0
@@ -77,6 +81,7 @@ const GrafsIncome = (props) => {
         }
     })
 
+    console.log(data)
     // const color = props.category.map(a => a.color)
 
 

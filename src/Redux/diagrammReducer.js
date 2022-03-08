@@ -71,7 +71,7 @@ let initialState = {
         data: [ 
             {name: 'Другие', data:[{ time: '2022-03-02', num: 50, id: 10000 }]},
         {name: 'Зарплата', data:[
-            { time: '2022-02-01', num: 700, id: 20000 },
+            { time: '2022-02-01', num: 400, id: 20000 },
             { time: '2022-03-01', num: 700, id: 20001 }]},
         {name: 'Аванс', data:[{ time: '2022-03-05', num: 200, id: 30000 }]}
         
@@ -105,7 +105,7 @@ let initialState = {
     grafSelect: 'расходов',
     grafs: {
         sGrafs: '2022-01-01',
-        poGrafs: '2022-05-28'
+        poGrafs: '2022-04-25'
     },
     selectDiagrammStat: 'BYN',
     diagrammSelect: 'расходов',

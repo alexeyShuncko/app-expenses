@@ -20,8 +20,7 @@ const GrafsForm = (props) => {
 
     let grafPeriodPoMin = // чтобы запретить выбор одного числа с и по
         DateFunc(new Date(new Date(props.periodS).setDate(new Date(props.periodS).getDate() + 1)))
-    let grafPeriodPoMax = // чтобы график был по сегодняшнее число включительно
-        DateFunc(new Date(new Date(data).setDate(new Date(data).getDate() + 1)))
+
 
     const grafPeriodS = (e) => {
         props.addGrafS(e.target.value)
@@ -62,11 +61,11 @@ const GrafsForm = (props) => {
                     max={grafPeriodSMax}
                     defaultValue={props.periodS}
                 />
-                до: <input
+                по: <input
                     type='date'
                     onChange={grafPeriodPo}
                     min={grafPeriodPoMin}
-                    max={grafPeriodPoMax}
+                    //max={data}
                     defaultValue={props.periodPo}
                 />
             </div>
