@@ -26,12 +26,11 @@ const StatisticTable = (props) => {
         .filter(a => props.diagramm.activ.id
             ? a.idCategory === props.diagramm.activ.id
             : a.nameRus === category[0].nameRus)[0].data
-        .filter(b => b.time <= props.diagramm.periodPo && b.time >= props.diagramm.periodS)
+        .filter(b => b.time <= (props.diagramm.periodPo || props.diagramm.today.po) 
+        && b.time >= (props.diagramm.periodS || props.diagramm.today.s))
 
     const activateEditMode = () => {
-        if (props.diagramm.activ.name
-            && props.diagramm.periodPo
-            && props.diagramm.periodS) {
+        if (props.diagramm.activ.name) {
               
                 OffStyle(['periodS','periodPo'])
 
@@ -41,22 +40,14 @@ const StatisticTable = (props) => {
             HedgehogFunc(props.addText, 'Выберите категорию ...')
             ArrowFunc('arrowCategory', 'inputCategoryStatistic', 'buttonTable')
         }
-        else if (!props.diagramm.periodS) {
-            HedgehogFunc(props.addText, 'Выберите начало периода ...')
-            ArrowFunc('arrowPeriod', 'periodS', 'buttonTable')
-        }
-        else if (!props.diagramm.periodPo) {
-            HedgehogFunc(props.addText, 'Выберите окончание периода ...')
-            ArrowFunc('arrowPeriod', 'periodPo', 'buttonTable')
-        }
        
     }
     const deActivateEditMode = () => {
         setEditMode(false)
     }
 
-    let dateS = DataTransformation(props.diagramm.periodS)
-let datePo = DataTransformation(props.diagramm.periodPo)
+    let dateS = DataTransformation(props.diagramm.periodS || props.diagramm.today.s)
+let datePo = DataTransformation(props.diagramm.periodPo || props.diagramm.today.po)
 
     let  textMessage = 
     `Нет расходов с ${dateS} по ${datePo} 

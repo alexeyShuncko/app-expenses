@@ -4,6 +4,7 @@ import { ResponsiveLine } from '@nivo/line'
 import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
 import { DateFunc } from '../../helpers/DateFunc/DateFunc';
 import { MonthFunc } from '../../helpers/DataTransformation/MonthFunc';
+import Message from '../../helpers/Message/Message';
 
 
 
@@ -26,8 +27,8 @@ const GrafsIncome = (props) => {
     let coefficient = coefficientFunc()
 
 
-    let grafS = new Date(props.periodS)
-    let grafPo = new Date(props.periodPo)
+    let grafS = new Date(props.periodS || props.todayS)
+    let grafPo = new Date(props.periodPo || props.todayPo)
 
 
 
@@ -36,9 +37,9 @@ const GrafsIncome = (props) => {
         if ((b.getTime() - a.getTime()) > 2678400000) {
 
             let arrTime = []
-            for (let i = a; i.getMonth() <= b.getMonth(); i.setMonth(i.getMonth() + 1)) {
- console.log(i)
-                const data = DateFunc(i)
+            for (let i = a; i <= b; new Date(i.setMonth(i.getMonth() + 1, [1]))) {
+
+                const data = DateFunc(new Date(i))
 
                 arrTime.push({ time: MonthFunc(data) })
             }
@@ -46,9 +47,9 @@ const GrafsIncome = (props) => {
         }
 
         let arrTime = []
-        for (let i = a; i <= b; i.setDate(i.getDate() + 1)) {
+        for (let i = a; i <= b; new Date(i.setDate(i.getDate() + 1))) {
 
-            const data = DateFunc(i)
+            const data = DateFunc(new Date(i))
 
             arrTime.push({ time: DataTransformation(data) })
         }
@@ -57,7 +58,7 @@ const GrafsIncome = (props) => {
     }
 
     const timer = arrDates(grafS, grafPo)
-    console.log(timer)
+
 
     const data = props.income.data.map(a => {
         return {
@@ -80,111 +81,121 @@ const GrafsIncome = (props) => {
             })
         }
     })
+    let valid = data.map(a => a.data
+        .map(b => b.y)
+        .reduce((acc, num) => acc + num, 0)
+    ).reduce((acc, num) => acc + num, 0)
 
-    console.log(data)
-    // const color = props.category.map(a => a.color)
+    const color = props.income.data.map(a => a.color)
 
+    let textMessage =
+    `У Вас нет доходов ...`
 
     return (
         <div className={s.graff}>
-            <ResponsiveLine
-                data={data}
-                margin={{
-                    top: 50,
-                    right: 40,
-                    bottom: 120,
-                    left: 80
-                }}
-                xScale={{ type: 'point' }}
-                yScale={{
-                    type: 'linear',
-                    min: 'auto',
-                    max: 'auto',
-                    stacked: false,
-                    reverse: false
-                }}
-                curve="monotoneX"
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                    orient: 'bottom',
-                    tickSize: 3,
-                    tickPadding: 4,
-                    tickRotation: -90,
-                    legend: 'Дата',
-                    legendOffset: 100,
-                    legendPosition: 'middle'
-                }}
-                axisLeft={{
-                    orient: 'left',
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: 'Заработанная сумма денег',
-                    legendOffset: -55,
-                    legendPosition: 'middle'
-                }}
-                colors={{ scheme: 'category10' }}
-                pointSize={5}
-                pointColor="black"
-                pointBorderWidth={3}
-                pointBorderColor={{ from: 'serieColor', modifiers: [] }}
-                pointLabelYOffset={-18}
-                enableCrosshair={true}  // перекрестие на точку поумолчанию true
-                crosshairType="cross"
-                enableArea={true}
-                enableSlices="x" // отображаются данны по всем категориям
-                areaBlendMode="darken" // цвет под графиком
-                areaOpacity={0.7}    // прозрачность цвета под графиком
-                useMesh={true}
-                theme={                 // объект добавления свойств диаграммы
-                    {
-                        "fontSize": 13,
-                        "axis": {               //оси
-                            "legend": {
+            {valid === 0
+                ? <Message textMessage={textMessage} idMessage='messageGrafIncome' />
+                : <ResponsiveLine
+                    data={data}
+                    margin={{
+                        top: 50,
+                        right: 40,
+                        bottom: 120,
+                        left: 80
+                    }}
+                    xScale={{ type: 'point' }}
+                    yScale={{
+                        type: 'linear',
+                        min: 'auto',
+                        max: 'auto',
+                        stacked: false,
+                        reverse: false
+                    }}
+                    curve="monotoneX"
+                    axisTop={null}
+                    axisRight={null}
+                    axisBottom={{
+                        orient: 'bottom',
+                        tickSize: 3,
+                        tickPadding: 4,
+                        tickRotation: -90,
+                        legend: 'Дата',
+                        legendOffset: 100,
+                        legendPosition: 'middle'
+                    }}
+                    axisLeft={{
+                        orient: 'left',
+                        tickSize: 5,
+                        tickPadding: 5,
+                        tickRotation: 0,
+                        legend: 'Заработанная сумма денег',
+                        legendOffset: -55,
+                        legendPosition: 'middle'
+                    }}
+                    colors={color}
+                    pointSize={5}
+                    pointColor="black"
+                    pointBorderWidth={3}
+                    pointBorderColor={{ from: 'serieColor', modifiers: [] }}
+                    pointLabelYOffset={-18}
+                    enableCrosshair={true}  // перекрестие на точку поумолчанию true
+                    crosshairType="cross"
+                    enableArea={true}
+                    enableSlices="x" // отображаются данны по всем категориям
+                    areaBlendMode="darken" // цвет под графиком
+                    areaOpacity={0.4}    // прозрачность цвета под графиком
+                    useMesh={true}
+                    theme={                 // объект добавления свойств диаграммы
+                        {
+                            "fontSize": 13,
+                            "axis": {               //оси
+                                "legend": {
+                                    "text": {
+                                        "fontSize": 18,
+                                        "fill": "#000"
+                                    }
+                                },
+                            },
+                            "legends": {
                                 "text": {
-                                    "fontSize": 18,
-                                    "fill": "#000"
-                                }
+                                    "fontSize": 16,
+                                },
                             },
-                        },
-                        "legends": {
-                            "text": {
-                                "fontSize": 16,
-                            },
-                        },
+                        }
                     }
-                }
 
-                legends={[
-                    {
-                        anchor: 'top',
-                        direction: 'row',
-                        justify: false,
-                        translateX: 0,
-                        translateY: -40,
-                        itemWidth: 150,
-                        itemHeight: 20,
-                        itemsSpacing: 4,
-                        symbolSize: 20,
-                        symbolShape: 'circle',
-                        itemDirection: 'left-to-right',
-                        itemTextColor: '#000',
+                    legends={[
+                        {
+                            anchor: 'top',
+                            direction: 'row',
+                            justify: false,
+                            translateX: 0,
+                            translateY: -40,
+                            itemWidth: 150,
+                            itemHeight: 20,
+                            itemsSpacing: 4,
+                            symbolSize: 20,
+                            symbolShape: 'circle',
+                            itemDirection: 'left-to-right',
+                            itemTextColor: '#000',
 
-                        effects: [
-                            {
-                                on: 'hover',
+                            effects: [
+                                {
+                                    on: 'hover',
 
-                                style: {
-                                    itemBackground: 'rgba(0, 0, 0, .03)',
-                                    itemOpacity: 1
+                                    style: {
+                                        itemBackground: 'rgba(0, 0, 0, .03)',
+                                        itemOpacity: 1
+                                    }
                                 }
-                            }
-                        ]
+                            ]
+                        }
+                    ]
                     }
-                ]
-                }
-            />
+                />
+
+            }
+
         </div>
     )
 

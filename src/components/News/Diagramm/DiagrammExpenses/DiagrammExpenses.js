@@ -5,7 +5,6 @@ import Message from '../../helpers/Message/Message';
 
 
 
-
 const DiagrammExpenses = (props) => {
 
 
@@ -14,7 +13,7 @@ const DiagrammExpenses = (props) => {
         return {
             ...a,
             data: a.data.filter(
-                a => a.time <= props.periodPo && a.time >= props.periodS
+                a => a.time <= (props.periodPo || props.todayPo) && a.time >= (props.periodS || props.todayS)
             )
         }
     })
@@ -24,8 +23,8 @@ const DiagrammExpenses = (props) => {
         .reduce((acc, num) => acc + num, 0)    
 
 
-    let dateS = DataTransformation(props.periodS)
-    let datePo = DataTransformation(props.periodPo)
+    let dateS = DataTransformation(props.periodS || props.todayS)
+    let datePo = DataTransformation(props.periodPo || props.todayPo)
 
     let textMessage =
         `Нет расходов с ${dateS} по ${datePo} ...`
@@ -104,7 +103,7 @@ const DiagrammExpenses = (props) => {
             : <ResponsivePie
                 data={data()}
                 margin={{
-                    top: 50, right: 70, bottom: 40, left: -265
+                    top: 50, right: 70, bottom: 50, left: -265
                 }}
                 theme={                 // объект добавления свойств диаграммы
                     {

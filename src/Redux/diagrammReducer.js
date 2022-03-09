@@ -37,13 +37,18 @@ const ADD_SALARY_MONTH = 'ADD_SALARY_MONTH'
 
 const ADD_INCOME = 'ADD_INCOME'
 
+// Сегодняшняя дата 
+
+const ADD_TODAY_S = 'ADD_TODAY_S'
+const ADD_TODAY_PO = 'ADD_TODAY_PO'
+
 
 let initialState = {
     category:
         [{
             nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e', idCategory: 10000,
             data: [
-                { id: 10001, time: '2022-02-08', num: 100 },
+                { id: 10001, time: '2022-02-01', num: 100 },
                 { id: 10002, time: '2022-02-10', num: 20 },
                 { id: 10003, time: '2022-02-12', num: 20 },
                 { id: 10004, time: '2022-02-13', num: 25 },
@@ -56,7 +61,7 @@ let initialState = {
         },
         {
             nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', idCategory: 30000,
-            data: [{ id: 30001, time: '2022-02-11', num: 25 }], summ: 25
+            data: [{ id: 30001, time: '2022-02-11', num: 15 }], summ: 15
         },
         {
             nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', idCategory: 40000,
@@ -69,11 +74,11 @@ let initialState = {
     },
     income: {
         data: [ 
-            {name: 'Другие', data:[{ time: '2022-03-02', num: 50, id: 10000 }]},
-        {name: 'Зарплата', data:[
-            { time: '2022-02-01', num: 400, id: 20000 },
+            {name: 'Другие', color:'#7a3232', data:[{ time: '2022-01-15', num: 50, id: 10000 }]},
+        {name: 'Зарплата',color:'#12911c', data:[
+            { time: '2022-02-04', num: 400, id: 20000 },
             { time: '2022-03-01', num: 700, id: 20001 }]},
-        {name: 'Аванс', data:[{ time: '2022-03-05', num: 200, id: 30000 }]}
+        {name: 'Аванс', color:'#c98a2d', data:[{ time: '2022-03-05', num: 200, id: 30000 }]}
         
     ],
         total: 700,
@@ -82,8 +87,8 @@ let initialState = {
     },
 
 
-    periodPo: '2022-04-28',
-    periodS: '2022-02-01',
+    periodPo: '',
+    periodS: '',
     tableSelect: 'расходов',
 
 
@@ -104,14 +109,18 @@ let initialState = {
     grafSelectValuta: 'BYN',
     grafSelect: 'расходов',
     grafs: {
-        sGrafs: '2022-01-01',
-        poGrafs: '2022-04-25'
+        sGrafs: '',
+        poGrafs: ''
     },
     selectDiagrammStat: 'BYN',
     diagrammSelect: 'расходов',
     diagramm: {
-        s: '2022-02-01',
-        po: '2022-03-28'
+        s: '',
+        po: ''
+    },
+    today:{
+        s:'',
+        po:''
     }
 }
 
@@ -401,10 +410,40 @@ const diagrammReduser = (state = initialState, action) => {
                 }
             }
 
+            case  ADD_TODAY_S:
+                return {
+                    ...state,
+                    today: {
+                        ...state.today,
+                        s: action.date
+                    }
+                }
+                case  ADD_TODAY_PO:
+                    return {
+                        ...state,
+                    today: {
+                        ...state.today,
+                        po: action.date
+                    }
+                }
+
+
+
+
         default:
             return state
     }
 }
+
+
+// Сегодняшняя дата 
+export const addTodayS = (date) => {
+    return { type: ADD_TODAY_S, date }
+}
+export const addTodayPo = (date) => {
+    return { type: ADD_TODAY_PO, date }
+}
+
 
 
 // Графики

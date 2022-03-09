@@ -23,25 +23,32 @@ const DiagrammContainer = (props) => {
                 periodS={props.diagramm.diagramm.s}
                 periodPo={props.diagramm.diagramm.po}
                 addDiagrammSelect={props.addDiagrammSelect}
-                addText={props.addText}/>
+                addText={props.addText}
+                todayPo={props.diagramm.today.po}
+                todayS={props.diagramm.today.s}/>
                 
             <div className={s.diagramm}>
                 <div className={s.pie}>
                     {props.diagramm.diagrammSelect === 'расходов'
                         ? <DiagrammExpenses
+
                             diagramm={props.diagramm.category}
                             periodPo={props.diagramm.diagramm.po}
                             periodS={props.diagramm.diagramm.s}
                             selectDiagramm={props.diagramm.selectDiagrammStat}
                             dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} />
+                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} 
+                            todayPo={props.diagramm.today.po}
+                            todayS={props.diagramm.today.s}/>
                         : <DiagrammIncome
                             income={props.diagramm.income.data}
                             periodPo={props.diagramm.diagramm.po}
                             periodS={props.diagramm.diagramm.s}
                             selectDiagramm={props.diagramm.selectDiagrammStat}
                             dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} />
+                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} 
+                            todayPo={props.diagramm.today.po}
+                            todayS={props.diagramm.today.s}/>
                     }
                 </div>
             </div>

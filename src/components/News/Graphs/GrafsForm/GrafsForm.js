@@ -12,14 +12,12 @@ const GrafsForm = (props) => {
         HedgehogFunc(props.addText, `Расходы на графике в ${e.target.value} ...`)
     }
 
-    const data = DateFunc(new Date())
-
 
     let grafPeriodSMax = // чтобы запретить выбор одного числа с и по
-        DateFunc(new Date(new Date(props.periodPo).setDate(new Date(props.periodPo).getDate() - 1)))
+        DateFunc(new Date(new Date(props.periodPo || props.todayPo).setDate(new Date(props.periodPo || props.todayPo).getDate() - 1)))
 
     let grafPeriodPoMin = // чтобы запретить выбор одного числа с и по
-        DateFunc(new Date(new Date(props.periodS).setDate(new Date(props.periodS).getDate() + 1)))
+        DateFunc(new Date(new Date(props.periodS || props.todayS).setDate(new Date(props.periodS || props.todayS).getDate() + 1)))
 
 
     const grafPeriodS = (e) => {
@@ -57,22 +55,21 @@ const GrafsForm = (props) => {
                 с: <input
                     type='date'
                     onChange={grafPeriodS}
-                    min='2022-01-01'
+                    min='2021-01-01'
                     max={grafPeriodSMax}
-                    defaultValue={props.periodS}
+                    defaultValue={props.todayS}
                 />
                 по: <input
                     type='date'
                     onChange={grafPeriodPo}
                     min={grafPeriodPoMin}
-                    //max={data}
-                    defaultValue={props.periodPo}
+                    max={props.todayPo}
+                    defaultValue={props.todayPo}
                 />
             </div>
         </div>
     )
 }
-
 
 
 export default GrafsForm

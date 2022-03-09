@@ -9,12 +9,13 @@ import Message from '../../helpers/Message/Message';
 const DiagrammIncome = (props) => {
 
 
+
 // объект расходов за выбранный период
 const diagramm = props.income.map(a => {
     return {
         ...a,
         data: a.data.filter(
-            a => a.time <= props.periodPo && a.time >= props.periodS
+            a => a.time <= (props.periodPo || props.todayPo) && a.time >= (props.periodS || props.todayS)
         )
     }
 })
@@ -24,9 +25,12 @@ const diagramm = props.income.map(a => {
     const totalDiag = diagramm.map(a => a.data.map(e => e.num).reduce((sum, current) => sum + current, 0))
         .reduce((acc, num) => acc + num, 0)    
 
+
+
+   
       
-    let dateS = DataTransformation(props.periodS)
-    let datePo = DataTransformation(props.periodPo)
+    let dateS = DataTransformation(props.periodS || props.todayS)
+    let datePo = DataTransformation(props.periodPo || props.todayPo)
 
     let textMessage =
         `Нет доходов с ${dateS} по ${datePo} ...`
@@ -93,13 +97,15 @@ const diagramm = props.income.map(a => {
         })
     }
 
+    const color = props.income.map(a=> a.color)
+
     return (
         totalDiag === 0
             ? <Message textMessage={textMessage} idMessage='messageDiagrammTotal' />
             : <ResponsivePie
                 data={data()}
                 margin={{
-                    top: 50, right: 70, bottom: 40, left: -265
+                    top: 50, right: 70, bottom: 50, left: -265
                 }}
                 theme={                 // объект добавления свойств диаграммы
                     {
@@ -132,7 +138,7 @@ const diagramm = props.income.map(a => {
                 activeInnerRadiusOffset={25}  // увеличение внутреннего радиуса при наведении
                 activeOuterRadiusOffset={20} // увеличение внешнего радиуса при наведении
                 layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
-                colors={{ scheme: 'category10' }}
+                colors={color}
                 borderWidth={1}
                 borderColor={{
                     from: 'color',

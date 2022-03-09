@@ -10,9 +10,19 @@ import Hedgehog from './Hedgehog/Hedgehog';
 import Error from './helpers/Error/Error';
 import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
+import { DateFunc } from './helpers/DateFunc/DateFunc';
+import { addTodayS, addTodayPo } from './../../Redux/diagrammReducer';
 
 
 const ExpensesContainer = (props) => {
+
+    const dateToday = new Date()
+    if (props.diagramm.today.po !== DateFunc(dateToday)) {
+        console.log('тут')
+        props.addTodayPo(DateFunc(dateToday))
+        props.addTodayS(DateFunc(new Date(dateToday.setDate(dateToday.getDate() - 31))))
+    }
+    
 
     return (
         <div className={s.newsContainerItems}>
@@ -45,6 +55,6 @@ let mapStateToProps = (state) => {
         diagramm: state.expenses
     }
 }
-export default connect(mapStateToProps)(ExpensesContainer)
+export default connect(mapStateToProps, {addTodayS, addTodayPo})(ExpensesContainer)
 
 

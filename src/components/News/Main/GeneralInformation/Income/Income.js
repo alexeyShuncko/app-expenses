@@ -31,12 +31,13 @@ const Income = (props) => {
 
     const onSubmit = (values, form) => {
         if (values.income) {
+            console.log(values.name)
             const timer = DateFunc(new Date())
 
             HedgehogFunc(props.addText,
                 `Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
 
-            props.addSalaryMonth(values.name,(Number(timer.slice(5, 7)) + 1))
+            props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
             props.addIncome(values.name, timer, Number(values.income), values.valuta)
             deActivateEditMode()
         }
@@ -54,9 +55,9 @@ const Income = (props) => {
 
             {!editMode
                 ? <div className={s.incomeButton}>
-<button  onClick={activateEditMode}>Добавить доходы</button>
+                    <button onClick={activateEditMode}>Добавить доходы</button>
                 </div>
-                
+
                 :
                 <div>
                     <div className={s.incomeName}>Доходы:</div>
@@ -71,15 +72,22 @@ const Income = (props) => {
                                                 <label>Название:</label>
                                                 <div className={s.incomeItemField}>
                                                     <Field
+                                                        style={{ backgroundColor: ` ${values.name && props.data.find(a=>a.name === values.name).color}` }}
                                                         autoFocus='on'
                                                         defaultValue='Зарплата'
                                                         className={s.fieldName}
                                                         autoComplete="off"
                                                         name='name'
                                                         component="select" >
-                                                        <option value='Зарплата'> Зарплата</option>
-                                                        <option value='Аванс'>Аванс</option>
-                                                        <option value='Другие'>Другие</option>
+                                                        {
+                                                            props.data.map(a =>
+                                                                <option
+                                                                    value={a.name}
+                                                                    key={a.name}
+                                                                    style={{ backgroundColor: ` ${a.color}` }}> {a.name}</option>
+                                                            )
+                                                        }
+
                                                     </Field>
                                                 </div>
                                             </div>

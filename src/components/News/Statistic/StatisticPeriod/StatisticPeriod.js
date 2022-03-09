@@ -5,12 +5,11 @@ import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from "../../Arrow/ArrowValidate";
 import OffStyle from "../../helpers/ArrowFunc/Offstyle";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
-import { DateFunc } from '../../helpers/DateFunc/DateFunc';
 
 
 const StatisticPeriod = (props) => {
 
-    const data = DateFunc(new Date())
+  
 
     const colorActiv = (e) => {
         if (e.target.value !== props.diagramm.activ.name) {
@@ -106,9 +105,9 @@ const StatisticPeriod = (props) => {
                                 id='periodS'
                                 onChange={periodS}
                                 type="date"
-                                min='2022-02-01'
-                                max={props.diagramm.periodPo || data}
-                                defaultValue={props.diagramm.periodS}>
+                                min='2021-01-01'
+                                max={props.diagramm.periodPo || props.diagramm.today.po}
+                                defaultValue={props.diagramm.today.s}>
                             </input>
                         </div>
                         <div className={s.periodStatistic}>
@@ -118,9 +117,9 @@ const StatisticPeriod = (props) => {
                                 id='periodPo'
                                 onChange={periodPo}
                                 type="date"
-                                min={props.diagramm.periodS || '2022-02-01'}
-                                max={data}
-                                defaultValue={props.diagramm.periodPo}>
+                                min={props.diagramm.periodS}
+                                max={props.diagramm.today.po}
+                                defaultValue={props.diagramm.today.po}>
                             </input>
                         </div>
                     </div>

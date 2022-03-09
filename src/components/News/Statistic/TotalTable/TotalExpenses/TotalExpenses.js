@@ -9,12 +9,14 @@ const TotalTableExpenses = (props) => {
 
     const category = props.diagramm.category
 
+
 // фильтрую в зависимости от выбранного периода
     let result = category.map(a => {
             return {
                 nameRus: a.nameRus,
                 color: a.color,
-                data: a.data.filter(b => b.time >= props.diagramm.periodS && b.time <= props.diagramm.periodPo)
+                data: a.data.filter(b => b.time >= (props.diagramm.periodS || props.todayS) 
+                && b.time <= (props.diagramm.periodPo || props.todayPo))
             }
         })  
 
@@ -35,8 +37,8 @@ const TotalTableExpenses = (props) => {
     let totalSort = total.sort((a, b) => a.time > b.time ? 1 : -1)            //сортировка по времени 
     const totalSumm = total.map(a => a.num).reduce((sum, current) => sum + current, 0)
 
-let dateS = DataTransformation(props.diagramm.periodS)
-let datePo = DataTransformation(props.diagramm.periodPo)
+let dateS = DataTransformation(props.diagramm.periodS || props.todayS)
+let datePo = DataTransformation(props.diagramm.periodPo || props.todayPo)
 
     let textMessage =
         `Нет расходов с ${dateS} по ${datePo} ...`

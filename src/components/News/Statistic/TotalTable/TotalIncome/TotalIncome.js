@@ -7,19 +7,22 @@ import Message from "../../../helpers/Message/Message";
 
 const TotalIncome = (props) => {
 
+  
     // фильтрую в зависимости от выбранного периода
     let result =
     props.income.data.map(a => {
         return {
             name: a.name,
-            data: a.data.filter(b => b.time >= props.periodS && b.time <= props.periodPo)
+            color: a.color,
+            data: a.data.filter(b => b.time >= (props.periodS || props.todayS) 
+            && b.time <= (props.periodPo || props.todayPo))
         }
     })
         
    
 
 let newResult = result.map(a => a.data.map(d => { return { 
-    name: a.name, time: d.time, num: d.num, id: d.id 
+    name: a.name, time: d.time, num: d.num, id: d.id , color:a.color
 } }))
 
   
@@ -32,8 +35,9 @@ let totalSort = total.sort((a, b) => a.time > b.time ? 1 : -1)
 
     const totalSumm = total.map(a => a.num).reduce((sum, current) => sum + current, 0)
 
-    let dateS = DataTransformation(props.periodS)
-    let datePo = DataTransformation(props.periodPo)
+    let dateS = DataTransformation(props.periodS || props.todayS)
+    let datePo = DataTransformation(props.periodPo || props.todayPo)
+
 
     let textMessage =
         `Нет доходов с ${dateS} по ${datePo} ...`

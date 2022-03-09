@@ -17,6 +17,7 @@ const GeneralInformation = (props) => {
                 addText={props.addText}
             />
             <Income
+            data={props.data}
                 addText={props.addText}
                 addIncome={props.addIncome}
                 addSalaryMonth={props.addSalaryMonth} />

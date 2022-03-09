@@ -16,8 +16,8 @@ const TotalTable = (props) => {
         setEditMode(false)
     }
 
-    const selectChange =(e)=> {
-     props.addTableSelect(e.target.value)
+    const selectChange = (e) => {
+        props.addTableSelect(e.target.value)
     }
 
     return (
@@ -36,8 +36,12 @@ const TotalTable = (props) => {
                     <button onClick={deActivateEditMode}> Убрать </button>
                     {props.diagramm.tableSelect === 'расходов'
                         ? <TotalTableExpenses
+                            todayPo={props.diagramm.today.po}
+                            todayS={props.diagramm.today.s}
                             diagramm={props.diagramm} />
                         : <TotalIncome
+                            todayPo={props.diagramm.today.po}
+                            todayS={props.diagramm.today.s}
                             income={props.diagramm.income}
                             periodS={props.diagramm.periodS}
                             periodPo={props.diagramm.periodPo}

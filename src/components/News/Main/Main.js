@@ -20,6 +20,7 @@ const Main = (props) => {
                 <GeneralInformation
                     exchangeRates={props.diagramm.exchangeRates}
                     addDiagramm={props.addDiagramm}
+                    data={props.diagramm.income.data}
                     diagramm={props.diagramm}
                     getEuroUpdate={props.getEuroUpdate}
                     getDollarUpdate={props.getDollarUpdate}

@@ -21,7 +21,9 @@ const Grafs = (props) => {
                 periodS={props.expenses.grafs.sGrafs}
                 addGrafS={props.addGrafS}
                 addGrafPo={props.addGrafPo}
-                addText={props.addText}/>
+                addText={props.addText}
+                todayPo={props.expenses.today.po}
+                todayS={props.expenses.today.s}/>
 
             { props.expenses.grafSelect === 'расходов'
 
@@ -31,7 +33,9 @@ const Grafs = (props) => {
             euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
             grafSelectValuta={props.expenses.grafSelectValuta}
             periodS={props.expenses.grafs.sGrafs}
-            periodPo={props.expenses.grafs.poGrafs}/>
+            periodPo={props.expenses.grafs.poGrafs}
+            todayPo={props.expenses.today.po}
+            todayS={props.expenses.today.s}/>
             
             : <GrafsIncome
             income={props.expenses.income}
@@ -39,7 +43,9 @@ const Grafs = (props) => {
             euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
             grafSelectValuta={props.expenses.grafSelectValuta}
             periodS={props.expenses.grafs.sGrafs}
-            periodPo={props.expenses.grafs.poGrafs}/>
+            periodPo={props.expenses.grafs.poGrafs}
+            todayPo={props.expenses.today.po}
+            todayS={props.expenses.today.s}/>
 
             }
         </div>
