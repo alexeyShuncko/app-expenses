@@ -1,5 +1,5 @@
-import React from 'react';
-import s from './ExpensesContainer.module.css';
+import React, { useEffect, useState } from 'react';
+import s from './ExpensesContainer.module.css'; 
 import NavNews from './NavNews/NavNews';
 import { Route, Routes} from 'react-router';
 import Main from './Main/Main';
@@ -11,21 +11,33 @@ import Error from './helpers/Error/Error';
 import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
 import { DateFunc } from './helpers/DateFunc/DateFunc';
-import { addTodayS, addTodayPo } from './../../Redux/diagrammReducer';
+import { addTodayS, addTodayPo, addText } from './../../Redux/diagrammReducer';
+import HedgehogFunc from './helpers/HedgehodFunc/HedgehogFunc';
 
 
 const ExpensesContainer = (props) => {
 
+    
+ 
+    let [init, setInit]= useState(false)
+    useEffect (()=> { 
+        setInit(true)
+        HedgehogFunc(props.addText, 'Приветствую в приложении учета расходов ...')
+    },[props.addText,init])
+
     const dateToday = new Date()
     if (props.diagramm.today.po !== DateFunc(dateToday)) {
-        console.log('тут')
         props.addTodayPo(DateFunc(dateToday))
         props.addTodayS(DateFunc(new Date(dateToday.setDate(dateToday.getDate() - 31))))
     }
     
 
+    const hedg =()=> {
+            HedgehogFunc(props.addText)
+          }
+
     return (
-        <div className={s.newsContainerItems}>
+        <div className={s.newsContainerItems} onClick={hedg}>
 
             <div className={s.newsContainerNav}>
                 <div className={s.NavNews}><NavNews /></div>
@@ -55,6 +67,6 @@ let mapStateToProps = (state) => {
         diagramm: state.expenses
     }
 }
-export default connect(mapStateToProps, {addTodayS, addTodayPo})(ExpensesContainer)
+export default connect(mapStateToProps, {addTodayS, addTodayPo, addText})(ExpensesContainer)
 
 

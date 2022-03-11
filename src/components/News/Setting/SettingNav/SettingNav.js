@@ -3,44 +3,29 @@ import s from './SettingNav.module.css';
 import { NavLink } from 'react-router-dom';
 
 const SettingNav = (props) => {
+
+    let settingArr = [
+        { name: 'Добавить категорию', path: '/setting/AddCategory' },
+        { name: 'Удалить категорию', path: '/setting/DeleteCategory"' },
+        { name: 'Переименовать категорию', path: '/setting/RenameCategory' },
+        { name: 'Изменить цвет категории', path: '/setting/Color' },
+        { name: 'Добавить относительную величину', path: '/setting/Relativity' },
+        { name: 'Добавить/изменить дату доходов', path: '/setting/AddSalaryDate' },
+    ]
+
     return (
         <div className={s.buttons}>
-
-            <div className={s.navNewsitem}>
-                <NavLink to="/setting/AddCategory" >
-                    <button className={s.settingButton}>Добавить категорию</button>
-                </NavLink>
-            </div>
-            <div className={s.navNewsitem}>
-                <NavLink to="/setting/DeleteCategory" >
-                    <button className={s.settingButton}>Удалить категорию</button>
-                </NavLink>
-            </div>
-            <div className={s.navNewsitem}>
-                <NavLink to="/setting/RenameCategory" >
-                    <button className={s.settingButton}>Переименовать категорию</button>
-                </NavLink>
-            </div>
-            <div className={s.navNewsitem}>
-                <NavLink to="/setting/Color" >
-                    <button className={s.settingButton}>Изменить цвет категории</button>
-                </NavLink>
-            </div>
-            <div className={s.navNewsitem}>
-                <NavLink to="/setting/Relativity" >
-                    <button className={s.settingButton}>Относительная величина</button>
-                </NavLink>
-            </div>
-            <div className={s.navNewsitem}>
-                <NavLink to="/setting/AddSalaryDate" >
-                    <button className={s.settingButton}>Добавить/изменить дату доходов</button>
-                </NavLink>
-            </div>
-            
-
+            {
+                settingArr.map(a =>
+                    <div className={s.navNewsitem} key={a.name}>
+                        <NavLink to={a.path} >
+                            <button className={s.settingButton}>{a.name}</button>
+                        </NavLink>
+                    </div>
+                )
+            }
         </div>
     )
-
 }
 
 export default SettingNav

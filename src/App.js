@@ -1,9 +1,11 @@
 import React from 'react';
-import './App.css';
+//import './App.css';
 import ExpensesContainer from './components/News/ExpensesContainer';
 
 
-const  App =()=>  {
+
+const  App =(props)=>  {
+
   return (
       <ExpensesContainer />
   )

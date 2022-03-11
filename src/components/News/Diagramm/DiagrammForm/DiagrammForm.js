@@ -2,6 +2,7 @@ import React from "react";
 import s from './DiagrammForm.module.css';
 import FormSelectDiagramm from "../../helpers/FormSelectDiagramm/FormSelectDiagramm";
 import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
+import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
 
 
 
@@ -48,14 +49,14 @@ const DiagrammForm = (props) => {
                     type='date'
                     onChange={diagrammPeriodS}
                     min='2021-01-01'
-                    max={props.todayPo}
-                    defaultValue={props.todayS} />
+                    max={PeriodMaxMin(props.periodPo,props.todayPo, 'S')}
+                    defaultValue={props.periodS || props.todayS} />
                 по: <input
                     type='date'
                     onChange={diagrammPeriodPo}
-                    min={props.periodS || props.todayS}
+                    min={PeriodMaxMin(props.periodS , props.todayS)}
                     max={props.todayPo}
-                    defaultValue={props.todayPo} />
+                    defaultValue={props.periodPo || props.todayPo} />
             </div>
 
         </div>

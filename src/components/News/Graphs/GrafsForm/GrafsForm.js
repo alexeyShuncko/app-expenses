@@ -1,5 +1,5 @@
 import React from 'react';
-import { DateFunc } from '../../helpers/DateFunc/DateFunc';
+import PeriodMaxMin from '../../helpers/DateSelect/PeriodMaxMin';
 import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import s from './GrafsForm.module.css';
 
@@ -11,13 +11,6 @@ const GrafsForm = (props) => {
         props.addGrafSelectValuta(e.target.value)
         HedgehogFunc(props.addText, `Расходы на графике в ${e.target.value} ...`)
     }
-
-
-    let grafPeriodSMax = // чтобы запретить выбор одного числа с и по
-        DateFunc(new Date(new Date(props.periodPo || props.todayPo).setDate(new Date(props.periodPo || props.todayPo).getDate() - 1)))
-
-    let grafPeriodPoMin = // чтобы запретить выбор одного числа с и по
-        DateFunc(new Date(new Date(props.periodS || props.todayS).setDate(new Date(props.periodS || props.todayS).getDate() + 1)))
 
 
     const grafPeriodS = (e) => {
@@ -35,10 +28,10 @@ const GrafsForm = (props) => {
         <div className={s.grafsForm}>
             <div>
                 <span className={s.grafTitle}>График
-                    <select 
-                    className={s.selectDiag} 
-                    onChange={selectChange} 
-                    defaultValue={props.grafSelect}>
+                    <select
+                        className={s.selectDiag}
+                        onChange={selectChange}
+                        defaultValue={props.grafSelect}>
                         <option>расходов</option>
                         <option>доходов</option>
                     </select> в</span>
@@ -56,15 +49,15 @@ const GrafsForm = (props) => {
                     type='date'
                     onChange={grafPeriodS}
                     min='2021-01-01'
-                    max={grafPeriodSMax}
-                    defaultValue={props.todayS}
+                    max={PeriodMaxMin(props.periodPo,props.todayPo, 'S')}
+                    defaultValue={props.periodS || props.todayS}
                 />
                 по: <input
                     type='date'
                     onChange={grafPeriodPo}
-                    min={grafPeriodPoMin}
+                    min={PeriodMaxMin(props.periodS ,props.todayS)}
                     max={props.todayPo}
-                    defaultValue={props.todayPo}
+                    defaultValue={props.periodPo || props.todayPo}
                 />
             </div>
         </div>

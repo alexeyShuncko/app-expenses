@@ -5,6 +5,7 @@ import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from "../../Arrow/ArrowValidate";
 import OffStyle from "../../helpers/ArrowFunc/Offstyle";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
+import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
 
 
 const StatisticPeriod = (props) => {
@@ -106,7 +107,7 @@ const StatisticPeriod = (props) => {
                                 onChange={periodS}
                                 type="date"
                                 min='2021-01-01'
-                                max={props.diagramm.periodPo || props.diagramm.today.po}
+                                max={PeriodMaxMin(props.diagramm.periodPo,props.diagramm.today.po, 'S')}
                                 defaultValue={props.diagramm.today.s}>
                             </input>
                         </div>
@@ -117,7 +118,7 @@ const StatisticPeriod = (props) => {
                                 id='periodPo'
                                 onChange={periodPo}
                                 type="date"
-                                min={props.diagramm.periodS}
+                                min={PeriodMaxMin(props.diagramm.periodS , props.diagramm.today.s)}
                                 max={props.diagramm.today.po}
                                 defaultValue={props.diagramm.today.po}>
                             </input>
