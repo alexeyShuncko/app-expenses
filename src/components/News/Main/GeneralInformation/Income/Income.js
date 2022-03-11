@@ -33,9 +33,10 @@ const Income = (props) => {
         if (values.income) {
             console.log(values.name)
             const timer = DateFunc(new Date())
-
-            HedgehogFunc(props.addText,
-                `Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
+            
+         props.addActivHedgehog(true)
+           props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
+           HedgehogFunc()
 
             props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
             props.addIncome(values.name, timer, Number(values.income), values.valuta)

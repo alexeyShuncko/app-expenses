@@ -10,7 +10,10 @@ const DiagrammMain = (props) => {
 
     const onSelectChange = (value) => {
         props.addSelectDiagramm(value)
-        HedgehogFunc(props.addText, `Значения диаграммы в ${value} ...`)
+        HedgehogFunc()
+        props.addText( `Значения диаграммы в ${value} ...`)
+        props.addActivHedgehog(true)
+       
     }
 
     return (

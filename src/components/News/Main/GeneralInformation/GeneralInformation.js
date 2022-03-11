@@ -17,11 +17,13 @@ const GeneralInformation = (props) => {
                 addText={props.addText}
             />
             <Income
+             addActivHedgehog= {props.addActivHedgehog}
             data={props.data}
                 addText={props.addText}
                 addIncome={props.addIncome}
                 addSalaryMonth={props.addSalaryMonth} />
             <Expenses
+             addActivHedgehog= {props.addActivHedgehog}
                 addDiagramm={props.addDiagramm}
                 diagramm={props.diagramm}
                 addText={props.addText} />

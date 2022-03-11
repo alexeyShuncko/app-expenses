@@ -4,8 +4,10 @@ import s from './FormSelectDiagramm.module.css';
 
 const FormSelectDiagramm = (props) => {
 
+
     const addSelect = (e) => {
         props.addSelect(e.target.value)
+        
     }
 
     return (

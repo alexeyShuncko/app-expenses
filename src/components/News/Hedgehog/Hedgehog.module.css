@@ -16,7 +16,6 @@
 .popup .popuptext {
   font-style: italic;
   font-size: 14px;
-  visibility: hidden;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -26,10 +25,11 @@
   z-index: 1;
   bottom: 133px;
   left: 21%;
+  visibility: hidden;
 }
 
 /* Popup arrow */
-.popup .popuptext::after {
+.popup .show::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -42,9 +42,20 @@
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
+  font-style: italic;
+  font-size: 14px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 133px;
+  left: 21%;
   visibility: visible;
-  -webkit-animation: fadeIn 2s;
-  animation: fadeIn 2s
+  -webkit-animation: fadeIn 3s;
+  animation: fadeIn 3s
 }
 
 /* Add animation (fade in the popup) */

@@ -42,6 +42,9 @@ const ADD_INCOME = 'ADD_INCOME'
 const ADD_TODAY_S = 'ADD_TODAY_S'
 const ADD_TODAY_PO = 'ADD_TODAY_PO'
 
+// Сообщение ежа
+const ACTIV_HEDGEHOG = 'ACTIV_HEDGEHOG'
+
 
 let initialState = {
     category:
@@ -121,7 +124,8 @@ let initialState = {
     today:{
         s:'',
         po:''
-    }
+    },
+    activHedgehog: ''
 }
 
 
@@ -427,6 +431,14 @@ const diagrammReduser = (state = initialState, action) => {
                     }
                 }
 
+// Сообщение ежа
+                case  ACTIV_HEDGEHOG:
+                    return {
+                        ...state,
+                    activHedgehog:  action.activ
+                }
+
+
 
 
 
@@ -435,6 +447,12 @@ const diagrammReduser = (state = initialState, action) => {
     }
 }
 
+
+
+
+export const addActivHedgehog = (activ) => {
+    return { type: ACTIV_HEDGEHOG, activ }
+}
 
 // Сегодняшняя дата 
 export const addTodayS = (date) => {

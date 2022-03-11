@@ -11,19 +11,23 @@ import Error from './helpers/Error/Error';
 import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
 import { DateFunc } from './helpers/DateFunc/DateFunc';
-import { addTodayS, addTodayPo, addText } from './../../Redux/diagrammReducer';
+import { addTodayS, addTodayPo, addText, addActivHedgehog } from './../../Redux/diagrammReducer';
 import HedgehogFunc from './helpers/HedgehodFunc/HedgehogFunc';
 
 
-const ExpensesContainer = (props) => {
+const ExpensesContainer = ({addActivHedgehog,addText,...props}) => {
 
-    
+let [init, setInit] = useState(false)
  
-    let [init, setInit]= useState(false)
+console.log(document.activeElement)
     useEffect (()=> { 
-        setInit(true)
-        HedgehogFunc(props.addText, 'Приветствую в приложении учета расходов ...')
-    },[props.addText,init])
+        !init &&
+        console.log('эфект')
+        addText('Приветствую в приложении учёта расходов...')
+        addActivHedgehog(true)
+        HedgehogFunc()
+        setInit(true) 
+    },[init,addActivHedgehog,addText])
 
     const dateToday = new Date()
     if (props.diagramm.today.po !== DateFunc(dateToday)) {
@@ -32,16 +36,13 @@ const ExpensesContainer = (props) => {
     }
     
 
-    const hedg =()=> {
-            HedgehogFunc(props.addText)
-          }
-
     return (
-        <div className={s.newsContainerItems} onClick={hedg}>
+        <div className={s.newsContainerItems}  >
 
             <div className={s.newsContainerNav}>
                 <div className={s.NavNews}><NavNews /></div>
-                <div className={s.hedgehog}><Hedgehog 
+                <div className={s.hedgehog} ><Hedgehog 
+                 addActivHedgehog= {addActivHedgehog}
                 diagramm={props.diagramm}
                 /></div>
                 </div>
@@ -67,6 +68,6 @@ let mapStateToProps = (state) => {
         diagramm: state.expenses
     }
 }
-export default connect(mapStateToProps, {addTodayS, addTodayPo, addText})(ExpensesContainer)
+export default connect(mapStateToProps, {addTodayS, addTodayPo, addText, addActivHedgehog})(ExpensesContainer)
 
 
