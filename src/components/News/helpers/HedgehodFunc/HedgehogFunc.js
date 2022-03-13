@@ -4,9 +4,12 @@
 
 const HedgehogFunc = () => {
 
-
- document.getElementById("myPopup").focus()
+ 
+    let qqq = document.getElementById("myPopup")
   
+    setTimeout(()=> {
+        qqq.focus()
+    },500)
    
  
 }

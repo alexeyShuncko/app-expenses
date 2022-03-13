@@ -2,7 +2,7 @@ import React from "react";
 import s from './Statistic.module.css';
 import TotalTable from './TotalTable/TotalTable';
 import {
-    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect
+    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect, addActivHedgehog
 } from '../../../Redux/diagrammReducer';
 import { connect } from 'react-redux';
 import StatisticTable from "./StatisticTable/StatisticTable";
@@ -21,20 +21,24 @@ const Statistic = (props) => {
                     addActiv={props.addActiv}
                     addPeriodS={props.addPeriodS}
                     addPeriodPo={props.addPeriodPo}
-                    addText={props.addText} />
+                    addText={props.addText}
+                    addActivHedgehog={props.addActivHedgehog} />
             </div>
 
             <div className={s.tables}>
                 <div className={s.tableCategory}>
                     <StatisticTable
                         addText={props.addText}
-                        diagramm={props.diagramm} />
+                        diagramm={props.diagramm}
+                        addActivHedgehog={props.addActivHedgehog} />
                 </div>
                 <div className={s.tableDate}>
                     <TotalTable
                         addTableSelect={props.addTableSelect}
                         diagramm={props.diagramm}
-                        addText={props.addText} />
+                        addText={props.addText}
+                        //на случай взаимодействия с ежом
+                        addActivHedgehog={props.addActivHedgehog} /> 
                 </div>
             </div>
         </div>
@@ -47,5 +51,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps, {
-    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect
+    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect, addActivHedgehog
 })(Statistic)

@@ -451,6 +451,13 @@ const diagrammReduser = (state = initialState, action) => {
 
 
 export const addActivHedgehog = (activ) => {
+    
+    let qqq = document.getElementById("myPopup")
+  
+    setTimeout(()=> {
+        qqq.focus()
+    },500)
+   
     return { type: ACTIV_HEDGEHOG, activ }
 }
 

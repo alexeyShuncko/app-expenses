@@ -9,7 +9,10 @@ const GrafsForm = (props) => {
 
     const activGrafSelect = (e) => {
         props.addGrafSelectValuta(e.target.value)
-        HedgehogFunc(props.addText, `Расходы на графике в ${e.target.value} ...`)
+        
+        props.addText(`Расходы на графике в ${e.target.value} ...`)
+        props.addActivHedgehog(true)
+        HedgehogFunc()
     }
 
 

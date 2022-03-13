@@ -14,7 +14,8 @@ const FormSelectDiagramm = (props) => {
         <select
         className={s.fieldBynUsd}
         defaultValue={props.select}
-        onChange={addSelect} >
+        onChange={addSelect} 
+        >
         <option value="%">%</option>
         <option value="BYN">BYN</option>
         <option value="USD">USD</option>

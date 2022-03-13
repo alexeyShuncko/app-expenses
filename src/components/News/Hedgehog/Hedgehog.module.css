@@ -9,7 +9,7 @@
 .popup {
   position: relative;
   display: inline-block;
-  cursor: pointer;
+ 
 }
 
 /* The actual popup (appears on top) */
@@ -58,6 +58,7 @@
   animation: fadeIn 3s
 }
 
+
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
   from {opacity: 0;}
@@ -69,4 +70,7 @@
   from {opacity: 0;}
    50% {opacity:0.5} 
   to {opacity:1 ;}
+}
+img {
+  cursor: pointer;
 }

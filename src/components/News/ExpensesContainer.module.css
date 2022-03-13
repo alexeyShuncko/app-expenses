@@ -1,5 +1,6 @@
 .newsContainerItems {
     display: flex;
+    /* height: 150vh; */
     background-color: rgb(204, 163, 204);
 }
 

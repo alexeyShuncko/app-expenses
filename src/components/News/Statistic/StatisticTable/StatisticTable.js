@@ -3,7 +3,6 @@ import s from './StatisticTable.module.css';
 import HocValuta from "../../HOC/HocValuta";
 import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
-import OffStyle from '../../helpers/ArrowFunc/Offstyle';
 import Message from "../../helpers/Message/Message";
 import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
 
@@ -30,16 +29,15 @@ const StatisticTable = (props) => {
         && b.time >= (props.diagramm.periodS || props.diagramm.today.s))
 
     const activateEditMode = () => {
-        if (props.diagramm.activ.name) {
-              
-                OffStyle(['periodS','periodPo'])
+       
+         if (!props.diagramm.activ.name) {
 
-            setEditMode(true)
-        }
-        else if (!props.diagramm.activ.name) {
-            HedgehogFunc(props.addText, 'Выберите категорию ...')
+            props.addText('Выберите категорию ...')
+            props.addActivHedgehog(true)
+            HedgehogFunc()
             ArrowFunc('arrowCategory', 'inputCategoryStatistic', 'buttonTable')
         }
+        else  setEditMode(true)
        
     }
     const deActivateEditMode = () => {
@@ -47,7 +45,7 @@ const StatisticTable = (props) => {
     }
 
     let dateS = DataTransformation(props.diagramm.periodS || props.diagramm.today.s)
-let datePo = DataTransformation(props.diagramm.periodPo || props.diagramm.today.po)
+    let datePo = DataTransformation(props.diagramm.periodPo || props.diagramm.today.po)
 
     let  textMessage = 
     `Нет расходов с ${dateS} по ${datePo} 

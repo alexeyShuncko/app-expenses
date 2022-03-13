@@ -43,8 +43,11 @@ const Expenses = (props) => {
             ? a.nameRusСase
             : null).join(' ') // подумать ещё ....
         console.log(text)
-        HedgehogFunc(props.addText,
-            `Расходы на  "${text}" добавлены ...`)
+
+        
+        props.addText( `Расходы на  "${text}" добавлены ...`)
+        props.addActivHedgehog(true)
+        HedgehogFunc()
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()

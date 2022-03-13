@@ -2,7 +2,7 @@ import React from "react";
 import s from './DiagrammContainer.module.css';
 import DiagrammExpenses from "./DiagrammExpenses/DiagrammExpenses";
 import { connect } from 'react-redux';
-import { addDiagrammPo, addDiagrammS,
+import { addDiagrammPo, addDiagrammS, addActivHedgehog,
     addSelectDiagrammStat, addText, addDiagrammSelect } from './../../../Redux/diagrammReducer';
 import DiagrammForm from './DiagrammForm/DiagrammForm';
 import DiagrammIncome from "./DiagrammIncome/DiagrammIncome";
@@ -25,7 +25,8 @@ const DiagrammContainer = (props) => {
                 addDiagrammSelect={props.addDiagrammSelect}
                 addText={props.addText}
                 todayPo={props.diagramm.today.po}
-                todayS={props.diagramm.today.s}/>
+                todayS={props.diagramm.today.s}
+                addActivHedgehog={props.addActivHedgehog}/>
                 
             <div className={s.diagramm}>
                 <div className={s.pie}>
@@ -63,5 +64,5 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     addDiagrammS, addDiagrammPo,
-    addSelectDiagrammStat, addText, addDiagrammSelect
+    addSelectDiagrammStat, addText, addDiagrammSelect, addActivHedgehog
 })(DiagrammContainer)

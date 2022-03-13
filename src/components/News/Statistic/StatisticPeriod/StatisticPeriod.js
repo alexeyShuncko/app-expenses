@@ -4,7 +4,6 @@ import RelativityStatistic from './RelativityStatistic/RelativityStatistic';
 import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from "../../Arrow/ArrowValidate";
 import OffStyle from "../../helpers/ArrowFunc/Offstyle";
-import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
 import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
 
 
@@ -16,41 +15,31 @@ const StatisticPeriod = (props) => {
         if (e.target.value !== props.diagramm.activ.name) {
             props.addActiv(e.target.value)
             OffStyle(['inputCategoryStatistic'])
-            //HedgehogFunc(props.addText, 'Категория выбрана ...')   на подумать, + изменение категории
+
+            props.addText(`Категория "${e.target.value}" выбрана ...`)
+            props.addActivHedgehog(true)
+            HedgehogFunc()
         }
     }
     const periodS = (e) => {
-        if (e.target.value !== props.diagramm.periodS && props.diagramm.periodS === '') {
+    
+     if (e.target.value !== props.diagramm.periodS) {
             props.addPeriodS(e.target.value)
-            HedgehogFunc(props.addText, 'Начало периода выбрано ...')
-            ArrowFunc(null, null, 'buttonTable')
 
-            // let disPeriodPo = document.getElementById('periodPo')    на подумать, отключить период 'По' 
-            // disPeriodPo.disabled = false
-
-            OffStyle(['periodS'])
-        }
-        else if (e.target.value !== props.diagramm.periodS) {
-            props.addPeriodS(e.target.value)
-            HedgehogFunc(props.addText, 'Начало периода изменено ...')
-            ArrowFunc(null, null, 'buttonTable')
-            OffStyle(['periodS'])
+            props.addText('Начало периода изменено ...')
+            props.addActivHedgehog(true)
+            HedgehogFunc()
         }
 
     }
     const periodPo = (e) => {
 
-        if (e.target.value !== props.diagramm.periodPo && props.diagramm.periodPo === '') {
+        if (e.target.value !== props.diagramm.periodPo) {
             props.addPeriodPo(e.target.value)
-            HedgehogFunc(props.addText, 'Окончание периода выбрано ...')
-            ArrowFunc(null, null, 'buttonTable')
-            OffStyle(['periodPo'])
-        }
-        else if (e.target.value !== props.diagramm.periodPo) {
-            props.addPeriodPo(e.target.value)
-            HedgehogFunc(props.addText, 'Окончание периода изменено ...')
-            ArrowFunc(null, null, 'buttonTable')
-            OffStyle(['periodPo'])
+
+            props.addText('Окончание периода изменено ...')
+            props.addActivHedgehog(true)
+            HedgehogFunc()
         }
     }
 
@@ -98,12 +87,10 @@ const StatisticPeriod = (props) => {
             </div>
             <div className={s.period}>
                 <div className={s.categoryStatisticName}>Выберите период : </div>
-                <div className={s.nameArrow}>
-                    <div>
+               
                         <div className={s.periodStatistic}>
                             <div className={s.periodDate}>C:</div>
                             <input
-                                id='periodS'
                                 onChange={periodS}
                                 type="date"
                                 min='2021-01-01'
@@ -114,8 +101,6 @@ const StatisticPeriod = (props) => {
                         <div className={s.periodStatistic}>
                             <div className={s.periodDate}>По:</div>
                             <input
-                                //disabled
-                                id='periodPo'
                                 onChange={periodPo}
                                 type="date"
                                 min={PeriodMaxMin(props.diagramm.periodS , props.diagramm.today.s)}
@@ -123,11 +108,7 @@ const StatisticPeriod = (props) => {
                                 defaultValue={props.diagramm.today.po}>
                             </input>
                         </div>
-                    </div>
-                    <div>
-                        <ArrowValidate arrowId='arrowPeriod' />
-                    </div>
-                </div>
+               
             </div>
         </div>
     )

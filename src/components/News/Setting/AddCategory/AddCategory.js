@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './AddCategory.module.css';
 import a from '../../Hedgehog/Hedgehog.module.css';
-import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 import OffStyle from '../../helpers/ArrowFunc/Offstyle';
@@ -19,7 +18,9 @@ const AddCategory = (props) => {
         if (regexEng.test(e.target.value)) {
             let Hedgehog = document.getElementById('myPopup')
             if (Hedgehog.classList.value === a.popuptext) {
-                HedgehogFunc(props.addText, 'Переключите на русский язык ...')
+                props.addText( 'Переключите на русский язык ...')
+            props.addActivHedgehog(true)
+               
             }
         }
         e.target.value = e.target.value.replace(regex1, '')
@@ -30,24 +31,35 @@ const AddCategory = (props) => {
 
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
-            HedgehogFunc(props.addText, `Категория "${values.name}" добавлена ...`)
+
+                
+            props.addText( `Категория "${values.name}" добавлена ...`)
+            props.addActivHedgehog(true)
+
             props.addCategory(values.name, values.color)
-            ArrowFunc(null, null, 'buttonSetting')
+           
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
             props.nameCase(values.name) // добавление имени в винительном падеже
             values.name = ''
             values.color = '#ffffff'
         }
         else if (!values.name) {
-            HedgehogFunc(props.addText, 'Впишите название категории ...')
+
+            props.addText( 'Впишите название категории ...')
+            props.addActivHedgehog(true)
+        
             ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
         }
         else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
-            HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
+
+            props.addText( 'Категория ' + values.name + ' уже есть ...')
+            props.addActivHedgehog(true)
+
             ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
         }
         else if (values.color === '#ffffff') {
-            HedgehogFunc(props.addText, 'Вы забыли выбрать цвет ...')
+            props.addText( 'Вы забыли выбрать цвет ...')
+            props.addActivHedgehog(true)
             ArrowFunc('colorAdd', 'addColor', 'buttonSetting')
         }
     }

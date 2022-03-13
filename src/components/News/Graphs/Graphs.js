@@ -3,7 +3,8 @@ import s from './Graphs.module.css';
 import { connect } from 'react-redux';
 import GrafsExpenses from './GrafsExpenses/GrafsExpenses';
 import GrafsForm from './GrafsForm/GrafsForm';
-import { addGrafS, addGrafPo, addGrafSelectValuta, addText, addGrafSelect } from './../../../Redux/diagrammReducer';
+import { addGrafS, addGrafPo, addGrafSelectValuta, 
+    addText, addGrafSelect, addActivHedgehog } from './../../../Redux/diagrammReducer';
 import GrafsIncome from './GrafIncome/GrafsIncome';
 
 
@@ -23,7 +24,8 @@ const Grafs = (props) => {
                 addGrafPo={props.addGrafPo}
                 addText={props.addText}
                 todayPo={props.expenses.today.po}
-                todayS={props.expenses.today.s}/>
+                todayS={props.expenses.today.s}
+                addActivHedgehog={props.addActivHedgehog}/>
 
             { props.expenses.grafSelect === 'расходов'
 
@@ -59,6 +61,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { 
-    addGrafS, addGrafPo, addGrafSelectValuta, addText, addGrafSelect 
+    addGrafS, addGrafPo, addGrafSelectValuta, addText, addGrafSelect, addActivHedgehog
 })(Grafs)
 

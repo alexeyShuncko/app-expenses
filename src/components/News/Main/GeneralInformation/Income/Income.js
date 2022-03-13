@@ -31,19 +31,23 @@ const Income = (props) => {
 
     const onSubmit = (values, form) => {
         if (values.income) {
-            console.log(values.name)
+
             const timer = DateFunc(new Date())
-            
-         props.addActivHedgehog(true)
-           props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
-           HedgehogFunc()
+
+            props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
+            props.addActivHedgehog(true)
+            HedgehogFunc()
 
             props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
             props.addIncome(values.name, timer, Number(values.income), values.valuta)
             deActivateEditMode()
         }
         else if (!values.income) {
-            HedgehogFunc(props.addText, 'Введите сумму доходов ...')
+
+            props.addText('Введите сумму доходов ...')
+            props.addActivHedgehog(true)
+            HedgehogFunc()
+
             ArrowFunc('arrowIncome', 'incomeNum', 'buttonIncome')
         }
 
@@ -73,7 +77,7 @@ const Income = (props) => {
                                                 <label>Название:</label>
                                                 <div className={s.incomeItemField}>
                                                     <Field
-                                                        style={{ backgroundColor: ` ${values.name && props.data.find(a=>a.name === values.name).color}` }}
+                                                        style={{ backgroundColor: ` ${values.name && props.data.find(a => a.name === values.name).color}` }}
                                                         autoFocus='on'
                                                         defaultValue='Зарплата'
                                                         className={s.fieldName}

@@ -9,7 +9,7 @@ import RenameCategory from './RenameCategory/RenameCategory';
 import { connect } from 'react-redux';
 import { addCategory, deleteCategory, renameCategory, 
     addEditColor, changeRelativity, addText, addActiv, nameCase,
-    nameCaseRelativity, addSalaryDay } from './../../../Redux/diagrammReducer';
+    nameCaseRelativity, addSalaryDay, addActivHedgehog } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
 import Relativity from './Relativity/Relativity';
 import AddSalaryDate from './AddSalaryDate/AddSalaryDate';
@@ -25,7 +25,7 @@ const Setting = (props) => {
 
             <Route path='/AddCategory'
                 element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory} 
-                addText={props.addText} nameCase={props.nameCase}/>} />
+                addText={props.addText} nameCase={props.nameCase} addActivHedgehog={props.addActivHedgehog}/>} />
             <Route path='/DeleteCategory'
                 element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory} 
                 addText={props.addText} addActiv={props.addActiv}/>} />
@@ -55,4 +55,4 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, 
     { addCategory, deleteCategory, renameCategory, 
         addEditColor, changeRelativity, addText, 
-        addActiv, nameCase, nameCaseRelativity, addSalaryDay })(Setting)
+        addActiv, nameCase, nameCaseRelativity, addSalaryDay, addActivHedgehog })(Setting)

@@ -12,7 +12,10 @@ const DiagrammForm = (props) => {
 
     const addSelect = (value) => {
         props.addSelectDiagrammStat(value)
-        HedgehogFunc(props.addText, `Данные диаграммы в ${value} ...`)
+        
+        props.addText(`Данные диаграммы в ${value} ...`)
+        props.addActivHedgehog(true)
+        HedgehogFunc()
     }
 
     const diagrammPeriodS = (e) => {
