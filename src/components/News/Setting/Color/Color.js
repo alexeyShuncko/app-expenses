@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Color.module.css';
 import { Form, Field } from 'react-final-form';
-import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 
 
@@ -13,13 +12,17 @@ const Color = (props) => {
 
     const onSubmit = (values) => {
         if (String(props.diagramm.category.map(a => a.color)) === String(Object.values(values))) {
-            HedgehogFunc(props.addText, 'Вы не изменили ни одного цвета ...')
+
+            props.addText('Вы не изменили ни одного цвета ...')
+            props.addActivHedgehog(true)
             ArrowFunc(null, null, 'buttonSetting')
         }
         else if (String(props.diagramm.category.map(a => a.color)) !== String(Object.values(values))) {
+
+
             props.addEditColor(Object.values(values), Object.keys(values))
-            HedgehogFunc(props.addText, `Цвет изменен ...`)
-            ArrowFunc(null, null, 'buttonSetting')
+            props.addText(`Цвет изменен ...`)
+            props.addActivHedgehog(true)
         }
     }
 

@@ -48,10 +48,11 @@ font-weight: bold;
 }
 .relativityBlocField {
   
-width: 120px;
+width: 130px;
 }
 .relativityBlocField1 {
-    width: 128px;
+    text-align: center;
+    width: 138px;
     height: 21px;
 }
 

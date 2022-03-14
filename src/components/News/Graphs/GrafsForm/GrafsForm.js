@@ -1,6 +1,5 @@
 import React from 'react';
 import PeriodMaxMin from '../../helpers/DateSelect/PeriodMaxMin';
-import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import s from './GrafsForm.module.css';
 
 
@@ -12,7 +11,6 @@ const GrafsForm = (props) => {
         
         props.addText(`Расходы на графике в ${e.target.value} ...`)
         props.addActivHedgehog(true)
-        HedgehogFunc()
     }
 
 

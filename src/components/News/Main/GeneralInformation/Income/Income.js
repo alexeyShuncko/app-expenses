@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './Income.module.css';
-import HedgehogFunc from '../../../helpers/HedgehodFunc/HedgehogFunc';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
 import ArrowValidate from './../../../Arrow/ArrowValidate';
 import ArrowFunc from '../../../helpers/ArrowFunc/ArrowFunc';
@@ -36,7 +35,6 @@ const Income = (props) => {
 
             props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
             props.addActivHedgehog(true)
-            HedgehogFunc()
 
             props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
             props.addIncome(values.name, timer, Number(values.income), values.valuta)
@@ -46,7 +44,6 @@ const Income = (props) => {
 
             props.addText('Введите сумму доходов ...')
             props.addActivHedgehog(true)
-            HedgehogFunc()
 
             ArrowFunc('arrowIncome', 'incomeNum', 'buttonIncome')
         }

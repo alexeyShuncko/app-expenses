@@ -12,7 +12,7 @@ import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
 import { DateFunc } from './helpers/DateFunc/DateFunc';
 import { addTodayS, addTodayPo, addText, addActivHedgehog } from './../../Redux/diagrammReducer';
-import HedgehogFunc from './helpers/HedgehodFunc/HedgehogFunc';
+import AboutApp from './AboutApp/AboutApp';
 
 
 const ExpensesContainer = ({ addActivHedgehog, addText, ...props }) => {
@@ -21,9 +21,8 @@ const ExpensesContainer = ({ addActivHedgehog, addText, ...props }) => {
 
     useEffect(() => {
         !init &&
-            addText('Привет...Чтобы моё собщение исчезло, кликни вне сообщения...')
+            addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...')
         addActivHedgehog(true)
-        HedgehogFunc()
         setInit(true)
     }, [init, addActivHedgehog, addText])
 
@@ -55,6 +54,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, ...props }) => {
                         <Route path='/graphs' element={<Grafs />} />
                         <Route path='/diagramm' element={<DiagrammContainer />} />
                         <Route path='/setting/*' element={<Setting />} />
+                        <Route path='/about' element={<AboutApp />} />
                         <Route path='/' element={<Error />} />
                     </Routes>
                 </div>

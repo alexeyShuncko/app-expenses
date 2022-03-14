@@ -1,8 +1,6 @@
 import React from 'react';
 import s from './RenameCategory.module.css';
-import a from '../../Hedgehog/Hedgehog.module.css';
 import { Field, Form } from 'react-final-form';
-import HedgehogFunc from './../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import OffStyle from '../../helpers/ArrowFunc/Offstyle';
@@ -19,10 +17,8 @@ const RenameCategory = (props) => {
         const regex1 = /[^А-ЯЁа-яё]/
         const regexEng = /[A-Za-z]/
         if (regexEng.test(e.target.value)) {
-            let Hedgehog= document.getElementById('myPopup')
-            if (Hedgehog.classList.value===a.popuptext){
-            HedgehogFunc(props.addText, 'Переключите на русский язык ...')
-            }
+          props.addText('Переключите на русский язык ...')
+          props.addActivHedgehog(true)  
         }
         e.target.value = e.target.value.replace(regex1, '')
     }
@@ -33,8 +29,9 @@ const RenameCategory = (props) => {
             && !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
             && values.favorite) {
             props.renameCategory(values.favorite, values.name)
-            HedgehogFunc(props.addText,
-                `"${values.favorite}" переименована в  "${values.name}" ...`)
+
+            props.addText(`"${values.favorite}" переименована в  "${values.name}" ...`)
+            props.addActivHedgehog(true)  
 
             OffStyle(['nameCategory','favorite'])
             props.nameCase(values.name) //добавление имени в винительном падеже ...
@@ -42,15 +39,21 @@ const RenameCategory = (props) => {
         }
 
         else if (!values.favorite) {
-            HedgehogFunc(props.addText, 'Выберите категорию из списка ...')
+            
+            props.addText('Выберите категорию из списка ...')
+            props.addActivHedgehog(true)  
             ArrowFunc('arrowFavorite', 'favorite', 'buttonSetting')
         }
         else if (values.name && props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
-            HedgehogFunc(props.addText, 'Категория ' + values.name + ' уже есть ...')
+            
+            props.addText('Категория ' + values.name + ' уже есть ...')
+            props.addActivHedgehog(true)  
             ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
         }
         else if (!values.name) {
-            HedgehogFunc(props.addText, 'Впишите новое название категории ...')
+              
+            props.addText('Впишите новое название категории ...')
+            props.addActivHedgehog(true) 
             ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
         }
 
@@ -73,9 +76,9 @@ const RenameCategory = (props) => {
                                             <Field
                                                 id="favorite"
                                                 name="favorite"
-                                                style={diagramm.map(a => a.nameRus).includes(values.favorite)
-                                                    ? { backgroundColor: diagramm.filter(a => a.nameRus === values.favorite)[0].color }
-                                                    : { backgroundColor: '#ffffff' }}
+                                                style={{ backgroundColor: ` ${values.favorite  
+                                                    ? diagramm.find(a => a.nameRus === values.favorite).color : '#fff'}`  }
+                                                    }
                                                 component="select"
                                                 className={s.option}
                                                 autoFocus='on'>

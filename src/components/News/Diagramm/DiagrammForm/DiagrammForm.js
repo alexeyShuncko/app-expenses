@@ -1,9 +1,7 @@
 import React from "react";
 import s from './DiagrammForm.module.css';
 import FormSelectDiagramm from "../../helpers/FormSelectDiagramm/FormSelectDiagramm";
-import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
 import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
-
 
 
 
@@ -15,7 +13,6 @@ const DiagrammForm = (props) => {
         
         props.addText(`Данные диаграммы в ${value} ...`)
         props.addActivHedgehog(true)
-        HedgehogFunc()
     }
 
     const diagrammPeriodS = (e) => {

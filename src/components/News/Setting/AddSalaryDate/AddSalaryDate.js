@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './AddSalaryDate.module.css';
 import { Form, Field } from 'react-final-form';
-import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
+import OffStyle from '../../helpers/ArrowFunc/Offstyle';
 
 
 const AddSalaryDate = (props) => {
@@ -29,12 +29,17 @@ const AddSalaryDate = (props) => {
                 return values.selectDay
             }
             props.addSalaryDay(values.name, day())
-            HedgehogFunc(props.addText, `${values.name} ${values.selectDay}-го числа, я запомнил  ...`)
+
+            props.addText(`${values.name} ${values.selectDay}-го числа, я запомнил  ...`)
+            props.addActivHedgehog(true)
+            OffStyle(['selectDay'])
             values.selectDay = ''
         }
         else if (!values.selectDay) {
-            ArrowFunc('arrowSalaryDay', 'selectDay', 'buttonSalaryDay')
-            HedgehogFunc(props.addText, `Выберите дату, когда у вас ${values.name} ...`)
+            ArrowFunc('arrowSalaryDay', 'selectDay', null)
+            
+            props.addText(`Выберите дату, когда у вас ${values.name} ...`)
+            props.addActivHedgehog(true)
         }
 
 

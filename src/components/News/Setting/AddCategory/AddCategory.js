@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './AddCategory.module.css';
-import a from '../../Hedgehog/Hedgehog.module.css';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 import OffStyle from '../../helpers/ArrowFunc/Offstyle';
@@ -16,13 +15,9 @@ const AddCategory = (props) => {
         const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
         const regexEng = /[A-Za-z]/
         if (regexEng.test(e.target.value)) {
-            let Hedgehog = document.getElementById('myPopup')
-            if (Hedgehog.classList.value === a.popuptext) {
-                props.addText( 'Переключите на русский язык ...')
-            props.addActivHedgehog(true)
-               
+            props.addText( 'Переключите на русский язык ...')
+            props.addActivHedgehog(true)  
             }
-        }
         e.target.value = e.target.value.replace(regex1, '')
     }
 

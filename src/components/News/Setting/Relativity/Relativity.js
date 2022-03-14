@@ -1,11 +1,9 @@
 import React from 'react';
 import s from './Relativity.module.css';
 import { Form, Field } from 'react-final-form';
-import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowFunc from './../../helpers/ArrowFunc/ArrowFunc';
 import ArrowValidate from './../../Arrow/ArrowValidate';
 import OffStyle from './../../helpers/ArrowFunc/Offstyle';
-
 
 
 
@@ -15,26 +13,49 @@ const Relativity = (props) => {
         window.history.back()
     }
 
+    const funcValidText = (e) => {    // валидация ввода, только русские буквы ... подумать над пробелом !!!!
+        const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
+        const regexEng = /[A-Za-z]/
+        if (regexEng.test(e.target.value)) {
+            props.addText('Переключите на русский язык ...')
+            props.addActivHedgehog(true)
+        }
+        e.target.value = e.target.value.replace(regex1, '')
+    }
+
+    const funcValidNumber = (e) => {      // максимальная длинна 7 символов и 2 после запятой
+        if (e.target.value.includes(".")) {
+            e.target.value = e.target.value.substring(0, e.target.value.indexOf(".") + 3);
+        }
+        if (e.target.value.length > 7) {
+            e.target.value = e.target.value.substr(0, 7)
+        }
+    }
+
 
     const onSubmit = (values, form) => {
         if (values.unit && values.name && values.price) {
-            HedgehogFunc(props.addText, `Относительная величина "${values.name}" добавлена ...`)
-
             props.nameCaseRelativity(values.name, values.unit, values.price)
 
+            props.addText(`Относительная величина "${values.name}" добавлена ...`)
+            props.addActivHedgehog(true)
             OffStyle(['relativityUnitAdd', 'relativityNameAdd', 'relativityPriceAdd'])
             form.reset()
         }
         else if (!values.unit) {
-            HedgehogFunc(props.addText, 'Выберите из списка единицу измерения ...')
+
+            props.addText('Выберите из списка единицу измерения ...')
+            props.addActivHedgehog(true)
             ArrowFunc('relativityUnit', 'relativityUnitAdd', 'buttonSetting')
         }
         else if (!values.name) {
-            HedgehogFunc(props.addText, 'Впишите название величины ...')
+            props.addText('Впишите название величины ...')
+            props.addActivHedgehog(true)
             ArrowFunc('relativityName', 'relativityNameAdd', 'buttonSetting')
         }
         else if (!values.price) {
-            HedgehogFunc(props.addText, 'Впишите стоимость за единицу вашей величины ...')
+            props.addText('Впишите стоимость за единицу вашей величины ...')
+            props.addActivHedgehog(true)
             ArrowFunc('relativityPrice', 'relativityPriceAdd', 'buttonSetting')
         }
     }
@@ -54,6 +75,7 @@ const Relativity = (props) => {
                                         <label> Название величины: </label>
                                         <Field
                                             autoFocus='on'
+                                            onInput={funcValidText}
                                             id='relativityNameAdd'
                                             className={s.relativityBlocField}
                                             autoComplete="off"
@@ -61,6 +83,7 @@ const Relativity = (props) => {
                                             placeholder={props.diagramm.relativity.case[2]}
                                             component="input"
                                             type="text"
+                                            maxLength='13'
                                         />
                                     </div>
                                     <ArrowValidate arrowId='relativityName' />
@@ -89,6 +112,7 @@ const Relativity = (props) => {
                                     <div className={s.relativityBloc} >
                                         <label> Стоимость: </label>
                                         <Field
+                                            onInput={funcValidNumber}
                                             id='relativityPriceAdd'
                                             className={s.relativityBlocField}
                                             autoComplete="off"

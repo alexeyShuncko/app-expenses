@@ -14,16 +14,15 @@ const GeneralInformation = (props) => {
             <Salary
                 exchangeRates={props.exchangeRates}
                 diagramm={props.diagramm}
-                addText={props.addText}
-            />
+                addText={props.addText} />
             <Income
-             addActivHedgehog= {props.addActivHedgehog}
-            data={props.data}
+                addActivHedgehog={props.addActivHedgehog}
+                data={props.data}
                 addText={props.addText}
                 addIncome={props.addIncome}
                 addSalaryMonth={props.addSalaryMonth} />
             <Expenses
-             addActivHedgehog= {props.addActivHedgehog}
+                addActivHedgehog={props.addActivHedgehog}
                 addDiagramm={props.addDiagramm}
                 diagramm={props.diagramm}
                 addText={props.addText} />
@@ -31,8 +30,7 @@ const GeneralInformation = (props) => {
             <DollarRate
                 getEuroUpdate={props.getEuroUpdate}
                 getDollarUpdate={props.getDollarUpdate}
-                exchangeRates={props.exchangeRates}
-            />
+                exchangeRates={props.exchangeRates} />
         </div>
     )
 }

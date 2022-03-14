@@ -1,36 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './Hedgehog.module.css';
 import hedgehog from '../../../image/hedgehog.png';
-import HedgehogFunc from '../helpers/HedgehodFunc/HedgehogFunc';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Hedgehog = (props) => {
 
+    let [count, setCount] = useState(0)
+    let navigate = useNavigate()
 
     const hedgOff = () => {
+        if (count === 0) {
+            navigate('/about')
+            setCount(+1)
+        }
         props.addActivHedgehog(false)
     }
 
-    const preMessage =()=> {
-        
+    const preMessage = () => {
         props.addActivHedgehog(true)
-        HedgehogFunc()
     }
-  
+
     return (
         <div className={s.popup}  >
-            <span  
-            tabIndex='2' 
-            onBlur={hedgOff} 
-           
-            className={!props.activHedgehog
+            <span
+                tabIndex='2'
+                onBlur={hedgOff}
+
+                className={!props.activHedgehog
                     ? s.popuptext
                     : s.show}
-            id="myPopup" >
+                id="myPopup" >
                 {props.text}
             </span>
-            <img src={hedgehog} alt='Ёжик'  onClick={preMessage}/>
+            <img src={hedgehog} alt='Ёжик' onClick={preMessage} />
         </div>
     )
 }

@@ -1,0 +1,50 @@
+.about {
+  margin: 40px;
+  font-size: 18px;
+}
+
+
+.aboutDescript {
+  margin-bottom: 30px;
+}
+
+
+.aboutInform {
+
+}
+
+.aboutInformItem {
+margin-top: 20px;
+font-weight:normal
+}
+
+
+.spanBold {
+  font-weight: bold;
+}
+
+
+
+.select {
+  background-color: rgb(204, 163, 204);
+  border-color: rgb(204, 163, 204);
+  border-radius: 10px;
+  font-size: 18px;
+  margin: 0px 4px;
+  font-weight: bold;
+  }
+  
+  .select:hover {
+      border-color:green;
+  }
+  .select:focus {
+      outline: none;
+  }
+
+
+
+  .page {
+margin-left: 40px;
+margin-top: 20px;
+font-size: 16px;
+  }

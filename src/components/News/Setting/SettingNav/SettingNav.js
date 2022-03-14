@@ -5,10 +5,10 @@ import { NavLink } from 'react-router-dom';
 const SettingNav = (props) => {
 
     let settingArr = [
-        { name: 'Добавить категорию', path: '/setting/AddCategory' },
-        { name: 'Удалить категорию', path: '/setting/DeleteCategory"' },
-        { name: 'Переименовать категорию', path: '/setting/RenameCategory' },
-        { name: 'Изменить цвет категории', path: '/setting/Color' },
+        { name: 'Добавить категорию расходов', path: '/setting/AddCategory' },
+        { name: 'Удалить категорию расходов', path: '/setting/DeleteCategory' },
+        { name: 'Переименовать категорию расходов', path: '/setting/RenameCategory' },
+        { name: 'Изменить цвет категории расходов', path: '/setting/Color' },
         { name: 'Добавить относительную величину', path: '/setting/Relativity' },
         { name: 'Добавить/изменить дату доходов', path: '/setting/AddSalaryDate' },
     ]

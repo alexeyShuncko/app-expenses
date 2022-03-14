@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './Expenses.module.css';
-import HedgehogFunc from '../../../helpers/HedgehodFunc/HedgehogFunc';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
 
 
@@ -47,7 +46,6 @@ const Expenses = (props) => {
         
         props.addText( `Расходы на  "${text}" добавлены ...`)
         props.addActivHedgehog(true)
-        HedgehogFunc()
 
         props.addDiagramm(Object.keys(values), value(values), timer)
         form.reset()

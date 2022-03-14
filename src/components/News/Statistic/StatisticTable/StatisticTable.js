@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import s from './StatisticTable.module.css';
 import HocValuta from "../../HOC/HocValuta";
-import HedgehogFunc from "../../helpers/HedgehodFunc/HedgehogFunc";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
 import Message from "../../helpers/Message/Message";
 import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
@@ -34,7 +33,6 @@ const StatisticTable = (props) => {
 
             props.addText('Выберите категорию ...')
             props.addActivHedgehog(true)
-            HedgehogFunc()
             ArrowFunc('arrowCategory', 'inputCategoryStatistic', 'buttonTable')
         }
         else  setEditMode(true)

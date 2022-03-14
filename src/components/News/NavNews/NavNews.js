@@ -5,7 +5,8 @@ import s from './NavNews.module.css';
 
 
 const NavNews = (props) => {
-  
+
+
  
   return (
     <div>
@@ -24,6 +25,9 @@ const NavNews = (props) => {
       </div>
       <div className={s.navNewsitem}>
         <NavLink to="/setting" className={(navData) => navData.isActive ? s.active : "" }>Настройки</NavLink>
+      </div>
+      <div className={s.navNewsitem}>
+        <NavLink to="/about" className={(navData) => navData.isActive ? s.active : "" }>О приложении</NavLink>
       </div>
 
     </nav>

@@ -1,7 +1,6 @@
 import React from "react";
 import s from './StatisticPeriod.module.css';
 import RelativityStatistic from './RelativityStatistic/RelativityStatistic';
-import HedgehogFunc from '../../helpers/HedgehodFunc/HedgehogFunc';
 import ArrowValidate from "../../Arrow/ArrowValidate";
 import OffStyle from "../../helpers/ArrowFunc/Offstyle";
 import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
@@ -18,7 +17,6 @@ const StatisticPeriod = (props) => {
 
             props.addText(`Категория "${e.target.value}" выбрана ...`)
             props.addActivHedgehog(true)
-            HedgehogFunc()
         }
     }
     const periodS = (e) => {
@@ -28,7 +26,6 @@ const StatisticPeriod = (props) => {
 
             props.addText('Начало периода изменено ...')
             props.addActivHedgehog(true)
-            HedgehogFunc()
         }
 
     }
@@ -39,7 +36,6 @@ const StatisticPeriod = (props) => {
 
             props.addText('Окончание периода изменено ...')
             props.addActivHedgehog(true)
-            HedgehogFunc()
         }
     }
 
