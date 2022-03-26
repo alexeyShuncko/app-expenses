@@ -78,6 +78,8 @@ const HocValuta = (props) => {
             setEditBYN(e.target.value)
 
     }
+
+
     return (
         <div className={s.salary}>
             <div 
@@ -88,7 +90,7 @@ const HocValuta = (props) => {
             <div className={s.salaryValuta}>
                 <select
                     className={s.fieldBynUsd}
-                    name="valuta"
+                   
                     defaultValue={editBYN}
                     onChange={activEditBYN} >
                     <option value="BYN">BYN</option>

@@ -1,5 +1,6 @@
 import React from 'react';
-import PeriodMaxMin from '../../helpers/DateSelect/PeriodMaxMin';
+import DateAnt from '../../helpers/Date/DateAnt';
+//import PeriodMaxMin from '../../helpers/DateSelect/PeriodMaxMin';
 import s from './GrafsForm.module.css';
 
 
@@ -14,15 +15,21 @@ const GrafsForm = (props) => {
     }
 
 
-    const grafPeriodS = (e) => {
-        props.addGrafS(e.target.value)
-    }
-    const grafPeriodPo = (e) => {
-        props.addGrafPo(e.target.value)
-    }
+    // const grafPeriodS = (e) => {
+    //     props.addGrafS(e.target.value)
+    // }
+    // const grafPeriodPo = (e) => {
+    //     props.addGrafPo(e.target.value)
+    // }
 
     const selectChange = (e) => {
         props.addGrafSelect(e.target.value)
+    }
+
+    const onChangeDate =(data, dateString)=> {
+        props.addPeriod('graf',dateString)
+        // props.addText('Период изменён ...')
+        // props.addActivHedgehog(true) условие надо
     }
 
     return (
@@ -45,7 +52,14 @@ const GrafsForm = (props) => {
                     <option value="EUR">EUR</option>
                 </select>
             </div>
-            <div className={s.grafTitle}>
+
+
+            <DateAnt 
+             s={props.todayS} 
+             po={props.todayPo}
+             onChangeDate={onChangeDate}
+             />
+            {/* <div className={s.grafTitle}>
                 с: <input
                     type='date'
                     onChange={grafPeriodS}
@@ -60,7 +74,7 @@ const GrafsForm = (props) => {
                     max={props.todayPo}
                     defaultValue={props.periodPo || props.todayPo}
                 />
-            </div>
+            </div> */}
         </div>
     )
 }

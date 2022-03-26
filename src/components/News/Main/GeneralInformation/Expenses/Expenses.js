@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import s from './Expenses.module.css';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
+import { Button } from 'antd';
 
 
 const Expenses = (props) => {
@@ -58,7 +59,7 @@ const Expenses = (props) => {
 
             {!editMode
                 ? <div className={s.buttonExpenses}>
-                    <button onClick={activateEditMode}>Добавить расходы</button>
+                    <Button type="primary" danger onClick={activateEditMode}>Добавить расходы</Button>
                 </div>
 
                 :

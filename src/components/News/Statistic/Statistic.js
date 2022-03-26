@@ -2,11 +2,12 @@ import React from "react";
 import s from './Statistic.module.css';
 import TotalTable from './TotalTable/TotalTable';
 import {
-    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect, addActivHedgehog
+    addActiv, addPeriod, addText, addTableSelect, addActivHedgehog
 } from '../../../Redux/diagrammReducer';
 import { connect } from 'react-redux';
 import StatisticTable from "./StatisticTable/StatisticTable";
 import StatisticPeriod from "./StatisticPeriod/StatisticPeriod";
+
 
 
 const Statistic = (props) => {
@@ -19,8 +20,7 @@ const Statistic = (props) => {
                 <StatisticPeriod
                     diagramm={props.diagramm}
                     addActiv={props.addActiv}
-                    addPeriodS={props.addPeriodS}
-                    addPeriodPo={props.addPeriodPo}
+                    addPeriod={props.addPeriod}
                     addText={props.addText}
                     addActivHedgehog={props.addActivHedgehog} />
             </div>
@@ -51,5 +51,5 @@ let mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps, {
-    addActiv, addPeriodS, addPeriodPo, addText, addTableSelect, addActivHedgehog
+    addActiv, addPeriod, addText, addTableSelect, addActivHedgehog
 })(Statistic)

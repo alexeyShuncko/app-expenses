@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './SettingNav.module.css';
 import { NavLink } from 'react-router-dom';
+import { Button } from 'antd';
 
 const SettingNav = (props) => {
 
@@ -19,7 +20,7 @@ const SettingNav = (props) => {
                 settingArr.map(a =>
                     <div className={s.navNewsitem} key={a.name}>
                         <NavLink to={a.path} >
-                            <button className={s.settingButton}>{a.name}</button>
+                            <Button type='primary' size='large'>{a.name}</Button>
                         </NavLink>
                     </div>
                 )

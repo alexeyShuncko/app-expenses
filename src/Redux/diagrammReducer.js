@@ -4,7 +4,7 @@ import { getDollar, getEuro, getItem } from './../API/api';
 const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
 const ADD_ACTIV = 'ADD_ACTIV'
 
-const ADD_PERIOD_S = 'ADD_PERIOD_S'
+const ADD_PERIOD = 'ADD_PERIOD'
 const ADD_PERIOD_PO = 'ADD_PERIOD_PO'
 const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
 
@@ -89,9 +89,12 @@ let initialState = {
         prepayment: { Date: { day: '20', month: '03' }},
     },
 
-
-    periodPo: '',
-    periodS: '',
+period: [
+    { name: 'table',  S: '', Po: ''},
+    { name: 'graf',  S: '', Po: ''},
+    { name: 'diagramm',  S: '', Po: ''}
+],
+  
     tableSelect: 'расходов',
 
 
@@ -164,11 +167,26 @@ const diagrammReduser = (state = initialState, action) => {
 
 
 // Статистика
-        case ADD_PERIOD_S:
-            return {
-                ...state,
-                periodS: action.periodS
+        case ADD_PERIOD:
+           
+                return {
+                    ...state,
+                    period: [ ...state.period.map(a => {
+                        if (a.name===action.key) {
+                            return ({
+                                ...a,
+                                S: action.period[0],
+                                Po: action.period[1],
+                            })
+                           
+                        }
+                        else return a
+                    })
+                ]        
             }
+                
+            
+         
         case ADD_PERIOD_PO:
             return {
                 ...state,
@@ -551,8 +569,8 @@ export const addActiv = (activ) => {
 }
 
 // Статистика
-export const addPeriodS = (periodS) => {
-    return { type: ADD_PERIOD_S, periodS }
+export const addPeriod = (key,period) => {
+    return { type: ADD_PERIOD, key,period }
 }
 export const addPeriodPo = (periodPo) => {
     return { type: ADD_PERIOD_PO, periodPo }

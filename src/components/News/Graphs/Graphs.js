@@ -3,7 +3,7 @@ import s from './Graphs.module.css';
 import { connect } from 'react-redux';
 import GrafsExpenses from './GrafsExpenses/GrafsExpenses';
 import GrafsForm from './GrafsForm/GrafsForm';
-import { addGrafS, addGrafPo, addGrafSelectValuta, 
+import { addPeriod, addGrafSelectValuta, 
     addText, addGrafSelect, addActivHedgehog } from './../../../Redux/diagrammReducer';
 import GrafsIncome from './GrafIncome/GrafsIncome';
 
@@ -18,10 +18,8 @@ const Grafs = (props) => {
                 grafSelectValuta={props.expenses.grafSelectValuta}
                 addGrafSelect={props.addGrafSelect}
                 grafSelect={props.expenses.grafSelect}
-                periodPo={props.expenses.grafs.poGrafs}
-                periodS={props.expenses.grafs.sGrafs}
-                addGrafS={props.addGrafS}
-                addGrafPo={props.addGrafPo}
+              
+                addPeriod={props.addPeriod}
                 addText={props.addText}
                 todayPo={props.expenses.today.po}
                 todayS={props.expenses.today.s}
@@ -34,8 +32,7 @@ const Grafs = (props) => {
             dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
             euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
             grafSelectValuta={props.expenses.grafSelectValuta}
-            periodS={props.expenses.grafs.sGrafs}
-            periodPo={props.expenses.grafs.poGrafs}
+            periodGraf={props.expenses.period[1]}
             todayPo={props.expenses.today.po}
             todayS={props.expenses.today.s}/>
             
@@ -44,8 +41,7 @@ const Grafs = (props) => {
             dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
             euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
             grafSelectValuta={props.expenses.grafSelectValuta}
-            periodS={props.expenses.grafs.sGrafs}
-            periodPo={props.expenses.grafs.poGrafs}
+            periodGraf={props.expenses.period[1]}
             todayPo={props.expenses.today.po}
             todayS={props.expenses.today.s}/>
 
@@ -61,6 +57,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { 
-    addGrafS, addGrafPo, addGrafSelectValuta, addText, addGrafSelect, addActivHedgehog
+    addPeriod,  addGrafSelectValuta, addText, addGrafSelect, addActivHedgehog
 })(Grafs)
 

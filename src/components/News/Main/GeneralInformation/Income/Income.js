@@ -4,6 +4,7 @@ import s from './Income.module.css';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
 import ArrowValidate from './../../../Arrow/ArrowValidate';
 import ArrowFunc from '../../../helpers/ArrowFunc/ArrowFunc';
+import { Button } from 'antd';
 
 
 const Income = (props) => {
@@ -57,7 +58,7 @@ const Income = (props) => {
 
             {!editMode
                 ? <div className={s.incomeButton}>
-                    <button onClick={activateEditMode}>Добавить доходы</button>
+                    <Button  type="primary" onClick={activateEditMode}>Добавить доходы</Button>
                 </div>
 
                 :

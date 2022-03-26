@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "antd": "^4.19.3",
     "axios": "^0.24.0",
     "caniuse-lite": "^1.0.30001300",
     "final-form": "^4.20.4",

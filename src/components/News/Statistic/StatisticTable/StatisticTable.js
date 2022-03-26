@@ -4,6 +4,7 @@ import HocValuta from "../../HOC/HocValuta";
 import ArrowFunc from "../../helpers/ArrowFunc/ArrowFunc";
 import Message from "../../helpers/Message/Message";
 import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
+import { Button } from "antd";
 
 
 const StatisticTable = (props) => {
@@ -24,8 +25,8 @@ const StatisticTable = (props) => {
         .filter(a => props.diagramm.activ.id
             ? a.idCategory === props.diagramm.activ.id
             : a.nameRus === category[0].nameRus)[0].data
-        .filter(b => b.time <= (props.diagramm.periodPo || props.diagramm.today.po) 
-        && b.time >= (props.diagramm.periodS || props.diagramm.today.s))
+        .filter(b => b.time <= (props.diagramm.period[0].po || props.diagramm.today.po) 
+        && b.time >= (props.diagramm.period[0].s || props.diagramm.today.s))
 
     const activateEditMode = () => {
        
@@ -42,8 +43,8 @@ const StatisticTable = (props) => {
         setEditMode(false)
     }
 
-    let dateS = DataTransformation(props.diagramm.periodS || props.diagramm.today.s)
-    let datePo = DataTransformation(props.diagramm.periodPo || props.diagramm.today.po)
+    let dateS = DataTransformation(props.diagramm.period[0].S|| props.diagramm.today.s)
+    let datePo = DataTransformation(props.diagramm.period[0].Po || props.diagramm.today.po)
 
     let  textMessage = 
     `Нет расходов с ${dateS} по ${datePo} 
@@ -55,14 +56,11 @@ const StatisticTable = (props) => {
                 <div>Таблица расходов по выбранной категории за выбранный период. </div>
                 {!editMode
                     ? <div>
-                        <button  
-                        className='buttonTable' 
-                        onClick={activateEditMode}> Показать </button>
+                        <Button type='primary' onClick={activateEditMode}>Показать</Button>
                     </div>
                     : <div >
-                        <button   
-                        className='buttonTable'
-                        onClick={deActivateEditMode}> Убрать </button>
+                        <Button type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
+                       
                         {filterTable.length !==0
                         ? <div>
                             <div className={s.statisticTable}>

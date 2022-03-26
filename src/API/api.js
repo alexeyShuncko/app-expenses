@@ -16,3 +16,18 @@ export const getItem = async (text) => {
     const response = await axios.get(`https://ws3.morpher.ru/russian/declension?s=${text}&format=json`);
     return response.data;
 }
+
+
+
+
+
+
+
+
+
+
+// export const ilucha = (Infa) => {
+//     return axios.post(`http://127.0.0.1:8000/get_coordinates`, Infa)
+//     .then(alert('Добавлено в БД'))
+// }
+

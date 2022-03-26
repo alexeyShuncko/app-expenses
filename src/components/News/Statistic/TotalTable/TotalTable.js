@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from './TotalTable.module.css';
 import TotalTableExpenses from "./TotalExpenses/TotalExpenses";
 import TotalIncome from "./TotalIncome/TotalIncome";
+import { Button } from 'antd';
 
 
 const TotalTable = (props) => {
@@ -30,10 +31,10 @@ const TotalTable = (props) => {
                 за выбранный период. </div>
             {!editMode
                 ? <div>
-                    <button onClick={activateEditMode}> Показать </button>
+                    <Button type='primary' onClick={activateEditMode}>Показать</Button>
                 </div>
                 : <div >
-                    <button onClick={deActivateEditMode}> Убрать </button>
+                     <Button type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
                     {props.diagramm.tableSelect === 'расходов'
                         ? <TotalTableExpenses
                             todayPo={props.diagramm.today.po}

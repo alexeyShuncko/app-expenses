@@ -27,8 +27,8 @@ const GrafsIncome = (props) => {
     let coefficient = coefficientFunc()
 
 
-    let grafS = new Date(props.periodS || props.todayS)
-    let grafPo = new Date(props.periodPo || props.todayPo)
+    let grafS = new Date(props.periodGraf.S || props.todayS)
+    let grafPo = new Date(props.periodGraf.Po || props.todayPo)
 
 
 
