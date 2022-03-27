@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Field } from 'react-final-form';
 import s from './Income.module.css';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
-import ArrowValidate from './../../../Arrow/ArrowValidate';
-import ArrowFunc from '../../../helpers/ArrowFunc/ArrowFunc';
-import { Button } from 'antd';
+import { Button, Form, Input, Select, Space } from 'antd';
 
 
 const Income = (props) => {
@@ -29,28 +26,17 @@ const Income = (props) => {
         }
     }
 
-    const onSubmit = (values, form) => {
-        if (values.income) {
+    
+    const onFinish = (values) => {
+        const timer = DateFunc(new Date())
 
-            const timer = DateFunc(new Date())
+        props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
+        props.addActivHedgehog(true)
 
-            props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
-            props.addActivHedgehog(true)
-
-            props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
-            props.addIncome(values.name, timer, Number(values.income), values.valuta)
-            deActivateEditMode()
-        }
-        else if (!values.income) {
-
-            props.addText('Введите сумму доходов ...')
-            props.addActivHedgehog(true)
-
-            ArrowFunc('arrowIncome', 'incomeNum', 'buttonIncome')
-        }
-
+        props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
+        props.addIncome(values.name, timer, Number(values.income), values.valuta)
+        deActivateEditMode()
     }
-
 
 
     return (
@@ -58,89 +44,77 @@ const Income = (props) => {
 
             {!editMode
                 ? <div className={s.incomeButton}>
-                    <Button  type="primary" onClick={activateEditMode}>Добавить доходы</Button>
+                    <Button type="primary" size='large' onClick={activateEditMode}>Добавить доходы</Button>
                 </div>
 
                 :
                 <div>
                     <div className={s.incomeName}>Доходы:</div>
                     <div className={s.formIncomeFild}>
-                        <Form
-                            onSubmit={onSubmit}
-                            render={({ handleSubmit, form, submitting, pristine, values }) => (
-                                <form onSubmit={handleSubmit} >
-                                    <div className={s.nameArrow}>
-                                        <div className={s.incomeBloc}>
-                                            <div className={s.incomeItem}>
-                                                <label>Название:</label>
-                                                <div className={s.incomeItemField}>
-                                                    <Field
-                                                        style={{ backgroundColor: ` ${values.name && props.data.find(a => a.name === values.name).color}` }}
-                                                        autoFocus='on'
-                                                        defaultValue='Зарплата'
-                                                        className={s.fieldName}
-                                                        autoComplete="off"
-                                                        name='name'
-                                                        component="select" >
-                                                        {
-                                                            props.data.map(a =>
-                                                                <option
-                                                                    value={a.name}
-                                                                    key={a.name}
-                                                                    style={{ backgroundColor: ` ${a.color}` }}> {a.name}</option>
-                                                            )
-                                                        }
 
-                                                    </Field>
-                                                </div>
-                                            </div>
-                                            <div className={s.incomeItem}>
-                                                <label>Сумма:</label>
-                                                <Field
-                                                    id='incomeNum'
-                                                    onInput={funcValidNumber}
-                                                    className={s.formItemsField}
-                                                    autoComplete="off"
-                                                    name='income'
-                                                    placeholder="1111.11"
-                                                    component="input"
-                                                    type="number"
-                                                    max='10000'
-                                                    step={0.01} />
-                                            </div>
-                                            <div className={s.incomeItem}>
-                                                <label> Валюта: </label>
-                                                <Field
-                                                    defaultValue='BYN'
-                                                    className={s.fieldBynUsd}
-                                                    name="valuta"
-                                                    component="select" >
-                                                    <option value="BYN">BYN</option>
-                                                    <option value="USD">USD</option>
-                                                    <option value="EUR">EUR</option>
-                                                </Field>
-                                            </div>
-                                        </div>
-
-                                        <ArrowValidate arrowId='arrowIncome' />
-                                    </div>
-
-                                    <div className={s.formItemsButton}>
-                                        <button className='buttonIncome'
-                                            type="submit" disabled={submitting || pristine}>
-                                            Добавить
-                                        </button>
-                                        <button type="button" onClick={deActivateEditMode}>
-                                            Назад
-                                        </button>
-                                    </div>
-                                </form>
-                            )}
-                        />
+                        <Form 
+                            name="basic"
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{  span: 16 }}
+                            initialValues={{ name: "Зарплата", valuta: "BYN" }}
+                            onFinish={onFinish}
+                            //onFinishFailed={onFinishFailed}
+                            autoComplete="off"
+                            
+                        >
+                           
+                            <Form.Item label="Доход" name="name" 
+                            style={{marginBottom: 0 }}>
+                                <Select >
+                                    {/* {
+                                        props.data.map(a=>
+                                            <Select.Option 
+                                            style={{backgroundColor: a.color}} 
+                                            value={a.name}>
+                                            {a.name}
+                                            </Select.Option>)
+                                    } */}
+                                    <Select.Option value="Зарплата">Зарплата</Select.Option>
+                                    <Select.Option value="Аванс">Аванс</Select.Option>
+                                    <Select.Option value="Другие">Другие</Select.Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item style={{marginBottom: 0}}
+                                label="Сумма"
+                                name="income"
+                                rules={[{ required: true, message: 'Введите сумму!'}]}
+                            >
+                                <Input type='number' onInput={funcValidNumber} step='0.01'/>
+                            </Form.Item>
+                            <Form.Item style={{marginBottom: 10}}
+                            label="Валюта" 
+                            name="valuta"
+                            wrapperCol={{ span: 8 }}>
+                                <Select >
+                                    <Select.Option value="BYN">BYN</Select.Option>
+                                    <Select.Option value="USD">USD</Select.Option>
+                                    <Select.Option value="EUR">EUR</Select.Option>
+                                </Select>
+                            </Form.Item>
+                          
+                            <Form.Item  wrapperCol={{ offset: 8}}>
+                            <Space>
+                            <Button 
+                            type="primary" 
+                            htmlType="submit"
+                            >
+                                Добавить
+                            </Button>
+                            <Button type="primary" danger onClick={deActivateEditMode}>
+                                Назад
+                            </Button>
+                            </Space>
+                            </Form.Item>
+                            
+                        </Form>
                     </div>
                 </div>
             }
-
         </div>
     )
 }

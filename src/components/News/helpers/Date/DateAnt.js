@@ -9,7 +9,13 @@ const DateAnt = (props) => {
     
     const { RangePicker } = DatePicker;
 
-   
+   const onOpenChange =(open)=> {
+       if (!open) {
+      
+       }
+     
+   }
+  
     const disabledDate = current => {
         let customDate = props.po;
         return current && current > moment(customDate, "YYYY-MM-DD")
@@ -18,6 +24,8 @@ const DateAnt = (props) => {
   
     return (
                 <RangePicker 
+               
+                onOpenChange={onOpenChange}
                 placement='bottomLeft'
                 defaultValue={[moment(props.s),moment(props.po)]}
                 disabledDate={disabledDate}

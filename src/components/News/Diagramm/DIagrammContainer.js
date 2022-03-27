@@ -2,7 +2,7 @@ import React from "react";
 import s from './DiagrammContainer.module.css';
 import DiagrammExpenses from "./DiagrammExpenses/DiagrammExpenses";
 import { connect } from 'react-redux';
-import { addDiagrammPo, addDiagrammS, addActivHedgehog,
+import { addActivHedgehog, addPeriod,
     addSelectDiagrammStat, addText, addDiagrammSelect } from './../../../Redux/diagrammReducer';
 import DiagrammForm from './DiagrammForm/DiagrammForm';
 import DiagrammIncome from "./DiagrammIncome/DiagrammIncome";
@@ -18,10 +18,8 @@ const DiagrammContainer = (props) => {
                 selectDiagrammStat={props.diagramm.selectDiagrammStat}
                 diagrammSelect={props.diagramm.diagrammSelect}
                 addSelectDiagrammStat={props.addSelectDiagrammStat}
-                addDiagrammS={props.addDiagrammS}
-                addDiagrammPo={props.addDiagrammPo}
-                periodS={props.diagramm.diagramm.s}
-                periodPo={props.diagramm.diagramm.po}
+                // periodDiagramm={props.diagramm.period[2]}
+                addPeriod={props.addPeriod}
                 addDiagrammSelect={props.addDiagrammSelect}
                 addText={props.addText}
                 todayPo={props.diagramm.today.po}
@@ -34,8 +32,7 @@ const DiagrammContainer = (props) => {
                         ? <DiagrammExpenses
 
                             diagramm={props.diagramm.category}
-                            periodPo={props.diagramm.diagramm.po}
-                            periodS={props.diagramm.diagramm.s}
+                            periodDiagramm={props.diagramm.period[2]}
                             selectDiagramm={props.diagramm.selectDiagrammStat}
                             dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
                             euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} 
@@ -43,8 +40,7 @@ const DiagrammContainer = (props) => {
                             todayS={props.diagramm.today.s}/>
                         : <DiagrammIncome
                             income={props.diagramm.income.data}
-                            periodPo={props.diagramm.diagramm.po}
-                            periodS={props.diagramm.diagramm.s}
+                            periodDiagramm={props.diagramm.period[2]}
                             selectDiagramm={props.diagramm.selectDiagrammStat}
                             dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
                             euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} 
@@ -63,6 +59,5 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    addDiagrammS, addDiagrammPo,
-    addSelectDiagrammStat, addText, addDiagrammSelect, addActivHedgehog
+    addSelectDiagrammStat, addText, addDiagrammSelect, addActivHedgehog, addPeriod
 })(DiagrammContainer)

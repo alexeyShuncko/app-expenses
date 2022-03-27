@@ -1,7 +1,8 @@
 import React from "react";
 import s from './DiagrammForm.module.css';
 import FormSelectDiagramm from "../../helpers/FormSelectDiagramm/FormSelectDiagramm";
-import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
+//import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
+import DateAnt from "../../helpers/Date/DateAnt";
 
 
 
@@ -10,31 +11,34 @@ const DiagrammForm = (props) => {
 
     const addSelect = (value) => {
         props.addSelectDiagrammStat(value)
-        
+
         props.addText(`Данные диаграммы в ${value} ...`)
         props.addActivHedgehog(true)
     }
 
-    const diagrammPeriodS = (e) => {
-        props.addDiagrammS(e.target.value)
-    }
-    const diagrammPeriodPo = (e) => {
-        props.addDiagrammPo(e.target.value)
-    }
     const selectChangeDiagramm = (e) => {
+
         props.addDiagrammSelect(e.target.value)
+        e.target.value === 'расходов'
+            ? props.addText(`На диаграмме ваши расходы ...`) && props.addActivHedgehog(true)
+            : props.addText(`На диаграмме ваши доходы ...`) && props.addActivHedgehog(true)
     }
 
+    const onChangeDate = (data, dateString) => {
+
+        props.addPeriod('diagramm', dateString)
+
+    }
 
 
     return (
         <div className={s.select}>
             <div>
                 <span className={s.selectText}>  Диаграмма
-                    <select 
-                    className={s.selectDiag} 
-                    onChange={selectChangeDiagramm} 
-                    defaultValue={props.diagrammSelect}>
+                    <select
+                        className={s.selectDiag}
+                        onChange={selectChangeDiagramm}
+                        defaultValue={props.diagrammSelect}>
                         <option>расходов</option>
                         <option>доходов</option>
                     </select>
@@ -43,21 +47,14 @@ const DiagrammForm = (props) => {
                     addSelect={addSelect}
                     select={props.selectDiagrammStat} />
             </div>
-
             <div className={s.selectText}>
-                с: <input
-                    type='date'
-                    onChange={diagrammPeriodS}
-                    min='2021-01-01'
-                    max={PeriodMaxMin(props.periodPo,props.todayPo, 'S')}
-                    defaultValue={props.periodS || props.todayS} />
-                по: <input
-                    type='date'
-                    onChange={diagrammPeriodPo}
-                    min={PeriodMaxMin(props.periodS , props.todayS)}
-                    max={props.todayPo}
-                    defaultValue={props.periodPo || props.todayPo} />
+                за период:
             </div>
+            <DateAnt
+                s={props.todayS}
+                po={props.todayPo}
+                onChangeDate={onChangeDate}
+            />
 
         </div>
     )

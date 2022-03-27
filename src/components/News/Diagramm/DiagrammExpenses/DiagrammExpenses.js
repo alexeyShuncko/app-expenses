@@ -13,7 +13,8 @@ const DiagrammExpenses = (props) => {
         return {
             ...a,
             data: a.data.filter(
-                a => a.time <= (props.periodPo || props.todayPo) && a.time >= (props.periodS || props.todayS)
+                a => a.time <= (props.periodDiagramm.Po || props.todayPo) 
+                && a.time >= (props.periodDiagramm.S || props.todayS)
             )
         }
     })
@@ -23,8 +24,8 @@ const DiagrammExpenses = (props) => {
         .reduce((acc, num) => acc + num, 0)    
 
 
-    let dateS = DataTransformation(props.periodS || props.todayS)
-    let datePo = DataTransformation(props.periodPo || props.todayPo)
+    let dateS = DataTransformation(props.periodDiagramm.S || props.todayS)
+    let datePo = DataTransformation(props.periodDiagramm.Po || props.todayPo)
 
     let textMessage =
         `Нет расходов с ${dateS} по ${datePo} ...`

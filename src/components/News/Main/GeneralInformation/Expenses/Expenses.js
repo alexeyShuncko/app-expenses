@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Field } from 'react-final-form';
 import s from './Expenses.module.css';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
-import { Button } from 'antd';
+import { Button, Form, Input, Space } from 'antd';
 
 
 const Expenses = (props) => {
@@ -28,75 +27,71 @@ const Expenses = (props) => {
         }
     }
 
-    const onSubmit = (values, form) => {
+    const onFinish = (values) => {
+        console.log(values)
 
         const timer = DateFunc(new Date())
 
-        const value = () => {
-            let valueArr = []
-            for (let x in values) {
-                valueArr.push(values[x])
-            }
-            return valueArr
-        }
         let text = diagramm.map(a => Object.keys(values).includes(a.nameRus)
             ? a.nameRusСase
             : null).join(' ') // подумать ещё ....
         console.log(text)
+console.log(Object.keys(values))
 
-        
-        props.addText( `Расходы на  "${text}" добавлены ...`)
+console.log(Object.values(values).filter(a=>a===true))
+        props.addText(`Расходы на  "${text}" добавлены ...`)
         props.addActivHedgehog(true)
 
-        props.addDiagramm(Object.keys(values), value(values), timer)
-        form.reset()
-
+        props.addDiagramm(Object.keys(values), timer)
+        deActivateEditMode()
     }
-
 
     return (
         <div className={s.expenses}>
 
             {!editMode
                 ? <div className={s.buttonExpenses}>
-                    <Button type="primary" danger onClick={activateEditMode}>Добавить расходы</Button>
+                    <Button type="primary" size='large' danger onClick={activateEditMode}>Добавить расходы</Button>
                 </div>
 
                 :
                 <div>
                     <div className={s.formExpensesName}>Расходы на :</div>
                     <div className={s.formExpensesFild}>
-                        <Form
-                            onSubmit={onSubmit}
-                            render={({ handleSubmit, form, submitting, pristine, values }) => (
-                                <form onSubmit={handleSubmit} >
-                                    {diagramm.map(a => <div key={a.nameRus} className={s.formItems}>
-                                        <label className={s.formItemsLabel}>
-                                            {a.nameRusСase}: </label>
-                                        <Field
-                                            onInput={funcValidNumber}
-                                            className={s.formItemsField}
-                                            autoComplete="off"
-                                            name={a.nameRus}
-                                            placeholder="... бел. рублей"
-                                            component="input"
-                                            type="number"
-                                            max='10000'
-                                            step={0.01}
-                                        />
-                                    </div>)}
 
-                                    <div className={s.formItemsButton}>
-                                        <button type="submit" disabled={submitting || pristine}>
-                                            Добавить
-                                        </button>
-                                        <button type="button" onClick={deActivateEditMode}>
-                                            Назад
-                                        </button>
-                                    </div>
-                                </form>
-                            )}
-                        />
+                        <Form
+                            name="expenses"
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{ span: 16 }}
+                            //initialValues={{}}
+                            onFinish={onFinish}
+                            //onFinishFailed={onFinishFailed}
+                            autoComplete="off">
+
+                            {diagramm.map(a =>
+                                    <Form.Item style={{ marginBottom: 0 }}
+                                        label={a.nameRusСase}
+                                        name={a.nameRus} 
+                                        key={a.nameRus} >
+                                        <Input type='number' onInput={funcValidNumber} step='0.01' />
+                                    </Form.Item>)
+                            }
+
+
+                            <Form.Item wrapperCol={{ offset: 8 }} style={{ marginTop: 10  }}>
+                                <Space>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit">
+                                        Добавить
+                                    </Button>
+                                    <Button type="primary" danger onClick={deActivateEditMode}>
+                                        Назад
+                                    </Button>
+                                </Space>
+                            </Form.Item>
+
+                        </Form>
                     </div>
                 </div>
             }

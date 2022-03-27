@@ -9,27 +9,22 @@ const GrafsForm = (props) => {
 
     const activGrafSelect = (e) => {
         props.addGrafSelectValuta(e.target.value)
-        
+
         props.addText(`Расходы на графике в ${e.target.value} ...`)
         props.addActivHedgehog(true)
     }
 
-
-    // const grafPeriodS = (e) => {
-    //     props.addGrafS(e.target.value)
-    // }
-    // const grafPeriodPo = (e) => {
-    //     props.addGrafPo(e.target.value)
-    // }
-
     const selectChange = (e) => {
         props.addGrafSelect(e.target.value)
+        e.target.value === 'расходов'
+        ? props.addText(`На графике ваши расходы ...`) && props.addActivHedgehog(true)
+        : props.addText(`На графике ваши доходы ...`) && props.addActivHedgehog(true)
     }
 
-    const onChangeDate =(data, dateString)=> {
-        props.addPeriod('graf',dateString)
-        // props.addText('Период изменён ...')
-        // props.addActivHedgehog(true) условие надо
+    const onChangeDate = (data, dateString) => {
+
+        props.addPeriod('graf', dateString)
+      
     }
 
     return (
@@ -52,29 +47,13 @@ const GrafsForm = (props) => {
                     <option value="EUR">EUR</option>
                 </select>
             </div>
+            <div>за период:</div>
+            <DateAnt
+                s={props.todayS}
+                po={props.todayPo}
+                onChangeDate={onChangeDate}
+            />
 
-
-            <DateAnt 
-             s={props.todayS} 
-             po={props.todayPo}
-             onChangeDate={onChangeDate}
-             />
-            {/* <div className={s.grafTitle}>
-                с: <input
-                    type='date'
-                    onChange={grafPeriodS}
-                    min='2021-01-01'
-                    max={PeriodMaxMin(props.periodPo,props.todayPo, 'S')}
-                    defaultValue={props.periodS || props.todayS}
-                />
-                по: <input
-                    type='date'
-                    onChange={grafPeriodPo}
-                    min={PeriodMaxMin(props.periodS ,props.todayS)}
-                    max={props.todayPo}
-                    defaultValue={props.periodPo || props.todayPo}
-                />
-            </div> */}
         </div>
     )
 }

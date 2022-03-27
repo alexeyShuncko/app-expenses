@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import s from './AboutApp.module.css';
 import { connect } from 'react-redux';
 import { addText, addActivHedgehog } from '../../../Redux/diagrammReducer';
+import { Button } from 'antd';
+import DateAnt from '../helpers/Date/DateAnt';
 
 
 const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
@@ -32,9 +34,11 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                 для удобства просмотра и анализа доходов и расходов за разные периоды времени.
                 <div>
                     {!edit
-                        ? <button onClick={aboutFunc}>Подробнее ...</button>
+                        ? <Button type='primary' onClick={aboutFunc} >Подробнее ...</Button>
+                       
                         : <div>
-                            <button onClick={aboutFuncOff}>Меньше подробностей ...</button>
+                            <Button type='primary' danger onClick={aboutFuncOff} >Меньше подробностей ...</Button>
+                          
                             <div className={s.page}>
                                 <span className={s.spanBold}>"Главная" -</span> на этой вкладке представлены:
                                 <ul>
@@ -126,7 +130,7 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                 <div className={s.aboutInformItem}>
                     - Информация во вкладке "Статистика", "График", "Диаграмма" по умолчанию
                     предоставлена за последние <span className={s.spanBold}>33 дня. </span>
-                    Изменить период вы можете нажав на поле даты "С" или "По" и выбрав необходимую Вам дату.
+                    Изменить период вы можете нажав на поле даты <DateAnt /> и выбрав необходимую Вам дату.
                 </div>
                 <div className={s.aboutInformItem}>
                     - Элементы со стрелкой рядом, такие как:

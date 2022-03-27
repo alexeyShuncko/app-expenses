@@ -17,9 +17,9 @@ const Grafs = (props) => {
                 addGrafSelectValuta={props.addGrafSelectValuta}
                 grafSelectValuta={props.expenses.grafSelectValuta}
                 addGrafSelect={props.addGrafSelect}
-                grafSelect={props.expenses.grafSelect}
-              
+                grafSelect={props.expenses.grafSelect}             
                 addPeriod={props.addPeriod}
+                periodGraf={props.expenses.period[1]}
                 addText={props.addText}
                 todayPo={props.expenses.today.po}
                 todayS={props.expenses.today.s}

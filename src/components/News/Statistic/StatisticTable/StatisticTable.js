@@ -25,8 +25,8 @@ const StatisticTable = (props) => {
         .filter(a => props.diagramm.activ.id
             ? a.idCategory === props.diagramm.activ.id
             : a.nameRus === category[0].nameRus)[0].data
-        .filter(b => b.time <= (props.diagramm.period[0].po || props.diagramm.today.po) 
-        && b.time >= (props.diagramm.period[0].s || props.diagramm.today.s))
+        .filter(b => b.time <= (props.diagramm.period[0].Po || props.diagramm.today.po) 
+        && b.time >= (props.diagramm.period[0].S || props.diagramm.today.s))
 
     const activateEditMode = () => {
        

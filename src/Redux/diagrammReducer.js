@@ -5,7 +5,6 @@ const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
 const ADD_ACTIV = 'ADD_ACTIV'
 
 const ADD_PERIOD = 'ADD_PERIOD'
-const ADD_PERIOD_PO = 'ADD_PERIOD_PO'
 const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
 
 const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
@@ -23,13 +22,9 @@ const ADD_NAME_CASE = 'ADD_NAME_CASE'
 
 // Графики
 const ADD_GRAF_SELECT_VALUTA = 'ADD_GRAF_SELECT_VALUTA'
-const ADD_GRAF_S = 'ADD_GRAF_S'
-const ADD_GRAF_PO = 'ADD_GRAF_PO'
 const ADD_GRAF_SELECT = 'ADD_DIAGRAMM_SELECT'
 
 // Диаграмма
-const ADD_DIAGRAMM_S = 'ADD_DIAGRAMM_S'
-const ADD_DIAGRAMM_PO = 'ADD_DIAGRAMM_PO'
 const ADD_PROBLEM_SELECT = 'ADD_PROBLEM_SELECT'
 
 const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
@@ -184,14 +179,7 @@ const diagrammReduser = (state = initialState, action) => {
                     })
                 ]        
             }
-                
-            
-         
-        case ADD_PERIOD_PO:
-            return {
-                ...state,
-                periodPo: action.periodPo
-            }
+  
             case ADD_TABLE_SELECT:
                 return {
                     ...state,
@@ -308,22 +296,6 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 grafSelectValuta: action.select
             }
-
-        case ADD_GRAF_S:
-            return {
-                ...state,
-                grafs: {...state.grafs,
-                    sGrafs: action.data
-                }
-            }
-        case ADD_GRAF_PO:
-            return {
-                ...state,
-                grafs: {
-                    ...state.grafs,
-                    poGrafs: action.data
-                }
-            }
             case  ADD_GRAF_SELECT:
                 return {
                     ...state,
@@ -334,22 +306,7 @@ const diagrammReduser = (state = initialState, action) => {
            
 
 // Диаграмма
-        case ADD_DIAGRAMM_S:
-            return {
-                ...state,
-                diagramm: {
-                    s: action.data,
-                    po: state.diagramm.po
-                }
-            }
-        case ADD_DIAGRAMM_PO:
-            return {
-                ...state,
-                diagramm: {
-                    s: state.diagramm.s,
-                    po: action.data
-                }
-            }
+
         case ADD_PROBLEM_SELECT:
                 return {
                     ...state,
@@ -493,12 +450,6 @@ export const addTodayPo = (date) => {
 export const addGrafSelectValuta = (select) => {
     return { type: ADD_GRAF_SELECT_VALUTA, select }
 }
-export const addGrafS = (data) => {
-    return { type: ADD_GRAF_S, data }
-}
-export const addGrafPo = (data) => {
-    return { type: ADD_GRAF_PO, data }
-}
 export const addGrafSelect = (select) => {
     return { type: ADD_GRAF_SELECT, select }
 }
@@ -507,12 +458,6 @@ export const addGrafSelect = (select) => {
 
 
 // Диаграмма
-export const addDiagrammS = (data) => {
-    return { type: ADD_DIAGRAMM_S, data }
-}
-export const addDiagrammPo = (data) => {
-    return { type: ADD_DIAGRAMM_PO, data }
-}
 export const addDiagrammSelect = (select) => {
     return { type: ADD_PROBLEM_SELECT, select }
 }
@@ -571,9 +516,6 @@ export const addActiv = (activ) => {
 // Статистика
 export const addPeriod = (key,period) => {
     return { type: ADD_PERIOD, key,period }
-}
-export const addPeriodPo = (periodPo) => {
-    return { type: ADD_PERIOD_PO, periodPo }
 }
 export const addTableSelect = (select) => {
     return { type: ADD_TABLE_SELECT, select }
