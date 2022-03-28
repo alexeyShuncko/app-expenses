@@ -1,9 +1,9 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form';
 import s from './AddCategory.module.css';
 import ArrowValidate from '../../Arrow/ArrowValidate';
 import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
 import OffStyle from '../../helpers/ArrowFunc/Offstyle';
+import { Button, Form, Input, Space } from 'antd';
 
 const AddCategory = (props) => {
 
@@ -15,9 +15,9 @@ const AddCategory = (props) => {
         const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
         const regexEng = /[A-Za-z]/
         if (regexEng.test(e.target.value)) {
-            props.addText( 'Переключите на русский язык ...')
-            props.addActivHedgehog(true)  
-            }
+            props.addText('Переключите на русский язык ...')
+            props.addActivHedgehog(true)
+        }
         e.target.value = e.target.value.replace(regex1, '')
     }
 
@@ -27,12 +27,12 @@ const AddCategory = (props) => {
         if (values.color !== '#ffffff' &&
             !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
 
-                
-            props.addText( `Категория "${values.name}" добавлена ...`)
+
+            props.addText(`Категория "${values.name}" добавлена ...`)
             props.addActivHedgehog(true)
 
             props.addCategory(values.name, values.color)
-           
+
             OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
             props.nameCase(values.name) // добавление имени в винительном падеже
             values.name = ''
@@ -40,30 +40,97 @@ const AddCategory = (props) => {
         }
         else if (!values.name) {
 
-            props.addText( 'Впишите название категории ...')
+            props.addText('Впишите название категории ...')
             props.addActivHedgehog(true)
-        
+
             ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
         }
         else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
 
-            props.addText( 'Категория ' + values.name + ' уже есть ...')
+            props.addText('Категория ' + values.name + ' уже есть ...')
             props.addActivHedgehog(true)
 
             ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
         }
         else if (values.color === '#ffffff') {
-            props.addText( 'Вы забыли выбрать цвет ...')
+            props.addText('Вы забыли выбрать цвет ...')
             props.addActivHedgehog(true)
             ArrowFunc('colorAdd', 'addColor', 'buttonSetting')
         }
     }
+
+
+    const onFinish = () => {
+
+    }
+
+
+
     return (
         <div>
             <div className={s.title}>Добавление категории</div>
             <div className={s.item}>
 
-                <Form
+                <Form className={s.form}
+                    name="addCategory"
+                    labelCol={{ span: 11 }}
+                    wrapperCol={{ span: 9 }}
+                    onFinish={onFinish}
+                    //onFinishFailed={onFinishFailed}
+                    autoComplete="off"   >
+
+                    <Form.Item style={{ marginBottom: 0 }}
+                        label="Название категории"
+                        name="addCategory"
+                        rules={[{ required: true, message: 'Напишите название категории!' }]}>
+                        <Input onInput={funcValidText} maxLength='14'/>
+                    </Form.Item>
+
+                    <div>
+                        Уже имеющиеся категории:
+                        <div>
+                            <ul className={s.listCategory}>
+                                {props.diagramm.category.map(a =>
+                                    <li key={a.nameRus}>{a.nameRus}</li>
+                                )}
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span>Уже используемые цвета: </span>
+                        {props.diagramm.category.length < 7
+                            ? <span>{props.diagramm.category.map(a =>
+                                <span
+                                    key={a.nameRus}
+                                    className={s.legend}
+                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                </span>)}
+                            </span>
+                            : <div>{props.diagramm.category.map(a =>
+                                <span
+                                    key={a.nameRus}
+                                    className={s.legend}
+                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                </span>)}
+                            </div>}
+                    </div>
+
+                    <Form.Item wrapperCol={{ offset: 8 }}>
+                        <Space>
+                            <Button
+                                type="primary"
+                                htmlType="submit">
+                                Добавить
+                            </Button>
+                            <Button type="primary" danger onClick={returnSetting}>
+                                Назад
+                            </Button>
+                        </Space>
+                    </Form.Item>
+
+                </Form>
+
+                {/* <Form
                     onSubmit={onSubmit}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit} >
@@ -100,21 +167,21 @@ const AddCategory = (props) => {
                                     </div>
                                     <div>
                                         <span>Уже используемые цвета: </span>
-                                       { props.diagramm.category.length < 7
-                                       ? <span>{props.diagramm.category.map(a =>
-                                            <span
-                                                key={a.nameRus}
-                                                className={s.legend}
-                                                style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
-                                            </span>)}
-                                        </span>
-                                        : <div>{props.diagramm.category.map(a =>
-                                            <span
-                                                key={a.nameRus}
-                                                className={s.legend}
-                                                style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
-                                            </span>)}
-                                        </div>}
+                                        {props.diagramm.category.length < 7
+                                            ? <span>{props.diagramm.category.map(a =>
+                                                <span
+                                                    key={a.nameRus}
+                                                    className={s.legend}
+                                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                                </span>)}
+                                            </span>
+                                            : <div>{props.diagramm.category.map(a =>
+                                                <span
+                                                    key={a.nameRus}
+                                                    className={s.legend}
+                                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                                </span>)}
+                                            </div>}
                                     </div>
                                     <div className={s.colorInput}>
                                         <label> Цвет:</label>
@@ -130,23 +197,10 @@ const AddCategory = (props) => {
 
                                     </div>
                                 </div>
-                                <div className={s.instruction}>
-                                    <div className={s.instructionTitle}>
-                                        Чтобы добавить категорию, следуйте ниже приведенным шагам:</div>
-                                    <div>
-                                        <div>1) В поле "Название категории" впишите название новой категории <br></br>
-                                            (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)</div>
-                                        <div>2) Нажмите на белый  квадрат рядом с полем "Цвет"</div>
-                                        <div>3) Выберите нужный тебе цвет <br></br>
-                                            (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
-                                        <div>4) Нажмите в любое место экрана, кроме окна выбора цвета</div>
-                                        <div>5) Нажмите кнопку "Добавить категорию"</div>
-                                    </div>
 
-                                </div>
+
+
                             </div>
-
-
 
                             <div className={s.buttonItem}>
                                 <button
@@ -161,7 +215,22 @@ const AddCategory = (props) => {
                             </div>
                         </form>
                     )}
-                />
+                /> */}
+
+                <div className={s.instruction}>
+                    <div className={s.instructionTitle}>
+                        Чтобы добавить категорию, следуйте ниже приведенным шагам:</div>
+                    <div>
+                        <div>1) В поле "Название категории" впишите название новой категории <br></br>
+                            (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)</div>
+                        <div>2) Нажмите на белый  квадрат рядом с полем "Цвет"</div>
+                        <div>3) Выберите нужный тебе цвет <br></br>
+                            (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
+                        <div>4) Нажмите в любое место экрана, кроме окна выбора цвета</div>
+                        <div>5) Нажмите кнопку "Добавить категорию"</div>
+                    </div>
+
+                </div>
             </div>
         </div>
     )
