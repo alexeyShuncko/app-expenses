@@ -59,24 +59,21 @@ const Income = (props) => {
                             initialValues={{ name: "Зарплата", valuta: "BYN" }}
                             onFinish={onFinish}
                             //onFinishFailed={onFinishFailed}
-                            autoComplete="off"
-                            
-                        >
-                           
-                            <Form.Item label="Доход" name="name" 
+                            autoComplete="off"   >
+
+                            <Form.Item 
+                            label="Доход" 
+                            name="name" 
                             style={{marginBottom: 0 }}>
-                                <Select >
-                                    {/* {
-                                        props.data.map(a=>
+                                <Select>
+                                    { props.data.map(a=>
                                             <Select.Option 
-                                            style={{backgroundColor: a.color}} 
-                                            value={a.name}>
+                                            //style={{backgroundColor: a.color}} 
+                                            //value={a.name}
+                                            key={a.name}>
                                             {a.name}
                                             </Select.Option>)
-                                    } */}
-                                    <Select.Option value="Зарплата">Зарплата</Select.Option>
-                                    <Select.Option value="Аванс">Аванс</Select.Option>
-                                    <Select.Option value="Другие">Другие</Select.Option>
+                                    }
                                 </Select>
                             </Form.Item>
                             <Form.Item style={{marginBottom: 0}}

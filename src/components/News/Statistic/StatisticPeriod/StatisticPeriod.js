@@ -1,29 +1,18 @@
 import React from "react";
 import s from './StatisticPeriod.module.css';
 import RelativityStatistic from './RelativityStatistic/RelativityStatistic';
-import ArrowValidate from "../../Arrow/ArrowValidate";
-import OffStyle from "../../helpers/ArrowFunc/Offstyle";
 //import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
 import DateAnt from "../../helpers/Date/DateAnt";
+import { Select } from "antd";
 
 
 
 const StatisticPeriod = (props) => {
 
-    
-
-    const colorActiv = (e) => {
-        if (e.target.value !== props.diagramm.activ.name) {
-            props.addActiv(e.target.value)
-            OffStyle(['inputCategoryStatistic'])
-
-            props.addText(`Категория "${e.target.value}" выбрана ...`)
-            props.addActivHedgehog(true)
-        }
-    }
 
     const diagramm = props.diagramm.category
 
+    !props.diagramm.activ.name && props.addActiv(diagramm[0].nameRus)
 
     const onChangeDate =(data, dateString)=> {
         props.addPeriod('table',dateString)
@@ -31,6 +20,14 @@ const StatisticPeriod = (props) => {
         // props.addActivHedgehog(true) условие надо
     }
 
+    const handleChange =(value)=> {
+        if (value !== props.diagramm.activ.name) {
+            props.addActiv(value)
+
+            props.addText(`Категория "${value}" изменена ...`)
+            props.addActivHedgehog(true)
+        }
+    }
     return (
 
         <div className={s.categoryStatistic}>
@@ -41,42 +38,33 @@ const StatisticPeriod = (props) => {
                             Выберите категорию :
                         </div>
 
-                        <select
-                            autoFocus='on'
-                            id='inputCategoryStatistic'
-                            onClick={colorActiv}
-                            className={s.option}
-                            style={diagramm.map(a => a.idCategory).includes(props.diagramm.activ.id)
-                                ? { backgroundColor: diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].color }
-                                : { backgroundColor: '#ffffff' }}
-                        >
-                            <option>{props.diagramm.activ.id && diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].nameRus} </option>
-                            {diagramm.map(a =>
-                                <option value={a.nameRus}
+                        <Select 
+                        style={{ width: 120 }}
+                        onChange={handleChange}
+                        defaultValue= {diagramm[0].nameRus}>
+                           
+                                {diagramm.map(a =>
+                                <Select.Option  value={a.nameRus}
                                     key={a.nameRus}
-                                    style={{ backgroundColor: ` ${a.color}` }}>
+                                    name={a.nameRus}
+                                    //style={{ backgroundColor: ` ${a.color}` }}
+                                    >
                                     {a.nameRus}
-                                </option>)}
-                        </select>
+                                </Select.Option >)}
+                        </Select>
 
                     </div>
-                    <div>
-                        <ArrowValidate arrowId='arrowCategory' />
-                    </div>
                 </div>
-
-                <div> {props.diagramm.activ.name
-                    ? <RelativityStatistic diagramm={props.diagramm} />
-                    : null}
-                </div>
+               
+             <RelativityStatistic diagramm={props.diagramm} />
+              
             </div>
             <div className={s.period}>
                 <div className={s.categoryStatisticName}>Выберите период : </div>
                 <DateAnt 
                 s={props.diagramm.today.s} 
                 po={props.diagramm.today.po}
-                onChangeDate={onChangeDate}/>
-               
+                onChangeDate={onChangeDate}/> 
             </div>
         </div>
     )

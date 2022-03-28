@@ -28,21 +28,24 @@ const Expenses = (props) => {
     }
 
     const onFinish = (values) => {
-        console.log(values)
 
         const timer = DateFunc(new Date())
+        let keyArray = []
+        let valueArray =[]
+        for (let key in values) {
+            
+            if (values[key]) {
+                keyArray.push(key)
+                valueArray.push(values[key])
+            }
+        }
 
-        let text = diagramm.map(a => Object.keys(values).includes(a.nameRus)
-            ? a.nameRusСase
-            : null).join(' ') // подумать ещё ....
-        console.log(text)
-console.log(Object.keys(values))
-
-console.log(Object.values(values).filter(a=>a===true))
+        let text = keyArray.map(a => diagramm.find(b => b.nameRus === a).nameRusСase).join(', ') 
+     
         props.addText(`Расходы на  "${text}" добавлены ...`)
         props.addActivHedgehog(true)
 
-        props.addDiagramm(Object.keys(values), timer)
+        props.addDiagramm(keyArray, valueArray, timer)
         deActivateEditMode()
     }
 
@@ -69,16 +72,16 @@ console.log(Object.values(values).filter(a=>a===true))
                             autoComplete="off">
 
                             {diagramm.map(a =>
-                                    <Form.Item style={{ marginBottom: 0 }}
-                                        label={a.nameRusСase}
-                                        name={a.nameRus} 
-                                        key={a.nameRus} >
-                                        <Input type='number' onInput={funcValidNumber} step='0.01' />
-                                    </Form.Item>)
+                                <Form.Item style={{ marginBottom: 0 }}
+                                    label={a.nameRusСase}
+                                    name={a.nameRus}
+                                    key={a.nameRus} >
+                                    <Input  type='number' onInput={funcValidNumber} step='0.01' />
+                                </Form.Item>)
                             }
 
 
-                            <Form.Item wrapperCol={{ offset: 8 }} style={{ marginTop: 10  }}>
+                            <Form.Item wrapperCol={{ offset: 8 }} style={{ marginTop: 10 }}>
                                 <Space>
                                     <Button
                                         type="primary"

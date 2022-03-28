@@ -67,8 +67,8 @@ let initialState = {
         }
         ],
     activ: {
-        id: '',
-        name: ''
+        id: 10000,
+        name: 'Еда'
     },
     income: {
         data: [ 
@@ -153,10 +153,12 @@ const diagrammReduser = (state = initialState, action) => {
         case ADD_ACTIV:
             return {
                 ...state, activ: {
-                    name: action.activ,
+                    name: action.activ
+                    ? action.activ
+                    : state.category[0].nameRus,
                     id: action.activ
                         ? state.category.filter(a => a.nameRus === action.activ)[0].idCategory
-                        : ''
+                        : state.category[0].idCategory
                 }
             }
 
