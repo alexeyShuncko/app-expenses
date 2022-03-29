@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './AddCategory.module.css';
-import ArrowValidate from '../../Arrow/ArrowValidate';
-import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
-import OffStyle from '../../helpers/ArrowFunc/Offstyle';
 import { Button, Form, Input, Space } from 'antd';
 
+
 const AddCategory = (props) => {
+
+    const [form] = Form.useForm();
 
     const returnSetting = () => {
         window.history.back()
@@ -14,6 +14,7 @@ const AddCategory = (props) => {
     const funcValidText = (e) => {    // валидация ввода, только русские буквы ... подумать над пробелом !!!!
         const regex1 = /[^А-ЯЁа-яё]/  //  и несколькими словами....
         const regexEng = /[A-Za-z]/
+
         if (regexEng.test(e.target.value)) {
             props.addText('Переключите на русский язык ...')
             props.addActivHedgehog(true)
@@ -22,48 +23,28 @@ const AddCategory = (props) => {
     }
 
 
-    const onSubmit = (values) => {
-
-        if (values.color !== '#ffffff' &&
-            !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
-
-
-            props.addText(`Категория "${values.name}" добавлена ...`)
-            props.addActivHedgehog(true)
-
-            props.addCategory(values.name, values.color)
-
-            OffStyle(['nameAdd', 'addColor'])  // удаление класса, после успешного ввода у полей (красный фон)
-            props.nameCase(values.name) // добавление имени в винительном падеже
-            values.name = ''
-            values.color = '#ffffff'
-        }
-        else if (!values.name) {
-
-            props.addText('Впишите название категории ...')
-            props.addActivHedgehog(true)
-
-            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
-        }
-        else if (props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
-
-            props.addText('Категория ' + values.name + ' уже есть ...')
-            props.addActivHedgehog(true)
-
-            ArrowFunc('arrowNameAdd', 'nameAdd', 'buttonSetting')
-        }
-        else if (values.color === '#ffffff') {
-            props.addText('Вы забыли выбрать цвет ...')
-            props.addActivHedgehog(true)
-            ArrowFunc('colorAdd', 'addColor', 'buttonSetting')
-        }
+    const validateMessages = {
+        required: 'Напишите название категории!',
     }
 
 
-    const onFinish = () => {
+    const onFinish = (values) => {
 
+        form.resetFields()
+        props.addText(`Категория "${values.addCategory}" добавлена ...`)
+        props.addActivHedgehog(true)
+
+        props.addCategory(values.addCategory, values.color)
+        props.nameCase(values.addCategory) // добавление имени в винительном падеже
     }
 
+
+    const validator = (rule, value) => {
+        if (value && props.diagramm.category.find(a => a.nameRus.toLowerCase() === value.toLowerCase())) {
+            return Promise.reject(new Error(`Категория "${value}" уже есть!`))
+        }
+        return Promise.resolve()
+    }
 
 
     return (
@@ -72,50 +53,61 @@ const AddCategory = (props) => {
             <div className={s.item}>
 
                 <Form className={s.form}
+                    form={form}
                     name="addCategory"
-                    labelCol={{ span: 11 }}
-                    wrapperCol={{ span: 9 }}
+                    labelCol={{ span: 9 }}
+                    wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
+
+                    validateMessages={validateMessages}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"   >
 
-                    <Form.Item style={{ marginBottom: 0 }}
+                    <Form.Item style={{ marginBottom: 10 }}
                         label="Название категории"
                         name="addCategory"
-                        rules={[{ required: true, message: 'Напишите название категории!' }]}>
-                        <Input onInput={funcValidText} maxLength='14'/>
+                        hasFeedback
+                        rules={[{ required: true }, { validator: validator }]}>
+                        <Input onInput={funcValidText} maxLength='14' />
                     </Form.Item>
 
-                    <div>
-                        Уже имеющиеся категории:
-                        <div>
-                            <ul className={s.listCategory}>
-                                {props.diagramm.category.map(a =>
-                                    <li key={a.nameRus}>{a.nameRus}</li>
-                                )}
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <span>Уже используемые цвета: </span>
-                        {props.diagramm.category.length < 7
-                            ? <span>{props.diagramm.category.map(a =>
-                                <span
-                                    key={a.nameRus}
-                                    className={s.legend}
-                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
-                                </span>)}
-                            </span>
-                            : <div>{props.diagramm.category.map(a =>
-                                <span
-                                    key={a.nameRus}
-                                    className={s.legend}
-                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
-                                </span>)}
-                            </div>}
+                    <Form.Item
+                        label="Цвет"
+                        name="color"
+                        hasFeedback
+                        rules={[{ required: true, message: 'Выберите цвет!' }]}
+                    >
+                        <Input type='color' />
+                    </Form.Item>
+
+                    <div className={s.inform}>
+                        Уже имеющиеся категории и их цвета:
+
+                        <ul>
+                            {props.diagramm.category.map(a =>
+
+                                <li key={a.nameRus} >
+                                    <div className={s.colorCategory}>
+                                        <span className={s.name}>
+                                            {a.nameRus}
+                                        </span>
+                                        <span className={s.nameColor}>
+                                            <span
+                                                key={a.nameRus}
+                                                className={s.legend}
+                                                style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
+                                            </span>
+                                        </span>
+                                    </div>
+                                </li>
+                            )}
+                        </ul>
                     </div>
 
-                    <Form.Item wrapperCol={{ offset: 8 }}>
+
+                    <Form.Item 
+                    style={{ marginTop: 30 }}
+                    wrapperCol={{ offset: 9 }}>
                         <Space>
                             <Button
                                 type="primary"
@@ -130,92 +122,7 @@ const AddCategory = (props) => {
 
                 </Form>
 
-                {/* <Form
-                    onSubmit={onSubmit}
-                    render={({ handleSubmit, form, submitting, pristine, values }) => (
-                        <form onSubmit={handleSubmit} >
 
-                            <div className={s.addCategoryBloc}>
-                                <div className={s.addCategory}>
-                                    <div className={s.nameArrow}>
-                                        <div className={s.nameInput}>
-                                            <label> Название категории: </label>
-                                            <Field
-                                                onInput={funcValidText}
-                                                id='nameAdd'
-                                                className={s.nameInput__field}
-                                                autoComplete="off"
-                                                name="name"
-                                                component="input"
-                                                type="text"
-                                                maxLength='13'
-                                                autoFocus='on' />
-
-                                        </div>
-                                        <ArrowValidate arrowId='arrowNameAdd' />
-                                    </div>
-                                    <div>
-                                        Уже имеющиеся категории:
-                                        <div>
-                                            <ul className={s.listCategory}>
-                                                {props.diagramm.category.map(a =>
-                                                    <li key={a.nameRus}>{a.nameRus}</li>
-                                                )}
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                    <div>
-                                        <span>Уже используемые цвета: </span>
-                                        {props.diagramm.category.length < 7
-                                            ? <span>{props.diagramm.category.map(a =>
-                                                <span
-                                                    key={a.nameRus}
-                                                    className={s.legend}
-                                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
-                                                </span>)}
-                                            </span>
-                                            : <div>{props.diagramm.category.map(a =>
-                                                <span
-                                                    key={a.nameRus}
-                                                    className={s.legend}
-                                                    style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
-                                                </span>)}
-                                            </div>}
-                                    </div>
-                                    <div className={s.colorInput}>
-                                        <label> Цвет:</label>
-                                        <Field
-                                            id='addColor'
-                                            className={s.color}
-                                            name="color"
-                                            component="input"
-                                            type="color"
-                                            defaultValue='#ffffff' />
-
-                                        <ArrowValidate arrowId='colorAdd' />
-
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-                            <div className={s.buttonItem}>
-                                <button
-                                    className='buttonSetting'
-                                    type="submit"
-                                    disabled={submitting || pristine}>
-                                    Добавить категорию
-                                </button>
-                                <button type="button" onClick={returnSetting}>
-                                    Назад к настройкам
-                                </button>
-                            </div>
-                        </form>
-                    )}
-                /> */}
 
                 <div className={s.instruction}>
                     <div className={s.instructionTitle}>
@@ -223,11 +130,11 @@ const AddCategory = (props) => {
                     <div>
                         <div>1) В поле "Название категории" впишите название новой категории <br></br>
                             (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)</div>
-                        <div>2) Нажмите на белый  квадрат рядом с полем "Цвет"</div>
+                        <div>2) Нажмите на чёрный прямоугольник в поле "Цвет"</div>
                         <div>3) Выберите нужный тебе цвет <br></br>
                             (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
                         <div>4) Нажмите в любое место экрана, кроме окна выбора цвета</div>
-                        <div>5) Нажмите кнопку "Добавить категорию"</div>
+                        <div>5) Нажмите кнопку "Добавить"</div>
                     </div>
 
                 </div>

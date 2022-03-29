@@ -4,19 +4,17 @@
 }
 
 
-
-/* Блоки под названием */
-.deleteCategoryBloc {
+.delet {
     display: flex;
-    flex-direction: row;
     margin-top: 20px;
-}
-
-.deleteCategory {
+    }
+    
+    .form {
     flex: 1;
-    margin-top: 20px;
-    margin-left: 20px; 
-}
+    }
+
+
+
 
 .instruction {
     flex: 2;
@@ -29,18 +27,7 @@
     margin-bottom: 10px;
 }
 
-/* Поле выбора категории */
-.option {
-    height: 25px;
-    width: 120px;
-}
 
-/* Кнопки */
-.buttonItem {
-    margin-left: 30px;
-    margin-bottom: 20px;
-}
 
-.buttonItem button {
-    margin-right: 10px
-}
+
+

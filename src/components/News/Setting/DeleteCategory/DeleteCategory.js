@@ -1,12 +1,14 @@
+import { Button, Form, Select, Space } from 'antd';
 import React from 'react';
-import { Form } from 'react-final-form';
 import s from './DeleteCategory.module.css';
-import { Field } from 'react-final-form';
+
 
 
 
 
 const DeleteCategory = (props) => {
+
+    const [form] = Form.useForm()
 
     const diagramm = props.diagramm.category
 
@@ -14,70 +16,78 @@ const DeleteCategory = (props) => {
         window.history.back()
     }
 
-    const onSubmit = (values, form) => {
-        
-        props.deleteCategory(values.favorite)
 
-        props.addText(`Категория "${values.favorite}" удалена ...`)
+    const onFinish = (values) => {
+        props.deleteCategory(values.select)
+
+        props.addText(`Категория "${values.select}" удалена ...`)
         props.addActivHedgehog(true)
-
         props.addActiv('')
-         form.reset()
+        form.resetFields()
     }
+
     return (
 
         <div>
             <div className={s.title}>Удаление категории</div>
-            <Form
-                onSubmit={onSubmit}
-                render={({ handleSubmit, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit} >
-                        <div className={s.deleteCategoryBloc}>
-                            <div className={s.deleteCategory}>
-                                <label> Название категории: </label>
-                                <Field
-                                    autoFocus='on'
-                                    name="favorite"
-                                    style={{ backgroundColor: ` ${values.favorite  
-                 ? diagramm.find(a => a.nameRus === values.favorite).color : '#ffffff' } `}}
-                                    component="select"
-                                    className={s.option}
-                                >
-                                    <option></option>
-                                    {diagramm.map(a => {
-                                        if (a) return (
-                                            <option
-                                                value={a.nameRus}
-                                                key={a.nameRus}
-                                                style={{ backgroundColor: ` ${a.color}` }}>{a.nameRus}</option>)
-                                        else return null
-                                    }
-                                    )}
-                                </Field>
-                            </div>
-                            <div className={s.instruction}>
-                                <div className={s.instructionTitle}>
-                                    Чтобы удалить категорию, следуйте ниже приведенным шагам:</div>
-                                <div>
-                                    <div>1) В поле "Название категории" выберите из выпадающего списка необходимую категорию</div>
-                                    <div>2) Нажмите кнопку "Удалить категорию"</div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className={s.buttonItem}>
-                            <button
-                                type="submit"
-                                disabled={submitting || pristine}>
-                                Удалить категорию
-                            </button>
-                            <button type="button" onClick={returnSetting}>
-                                Назад к настройкам
-                            </button>
-                        </div>
-                    </form>
-                )}
-            />
+            <div className={s.delet}>
+
+                <Form className={s.form}
+                    form={form}
+                    name="deleteCategory"
+                    labelCol={{ span: 9 }}
+                    wrapperCol={{ span: 9 }}
+                    onFinish={onFinish}
+                    initialValues={{ select: diagramm[0].nameRus }}
+                    //onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                     label="Название категории"
+                     labelCol={{ offset: 1 }}
+                        name='select'>
+                        <Select
+                            style={{ width: 120 }}
+                        >
+                            {diagramm.map(a =>
+                                <Select.Option value={a.nameRus}
+                                    key={a.nameRus}
+                                //style={{ backgroundColor: ` ${a.color}` }}
+                                >
+                                    {a.nameRus}
+                                </Select.Option >)}
+                        </Select>
+                    </Form.Item>
+
+
+                    <Form.Item
+                        style={{ marginTop: 30 }}
+                        wrapperCol={{ offset: 8 }}>
+                        <Space>
+                            <Button
+                                type="primary"
+                                htmlType="submit">
+                                Удалить
+                            </Button>
+                            <Button type="primary" danger onClick={returnSetting}>
+                                Назад
+                            </Button>
+                        </Space>
+                    </Form.Item>
+
+                </Form>
+
+
+                <div className={s.instruction}>
+                    <div className={s.instructionTitle}>
+                        Чтобы удалить категорию, следуйте ниже приведенным шагам:</div>
+                    <div>
+                        <div>1) В поле "Название категории" выберите из выпадающего списка необходимую категорию</div>
+                        <div>2) Нажмите кнопку "Удалить"</div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 

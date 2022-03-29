@@ -75,7 +75,8 @@ const Expenses = (props) => {
                                 <Form.Item style={{ marginBottom: 0 }}
                                     label={a.nameRusСase}
                                     name={a.nameRus}
-                                    key={a.nameRus} >
+                                    key={a.nameRus}
+                                    hasFeedback >
                                     <Input  type='number' onInput={funcValidNumber} step='0.01' />
                                 </Form.Item>)
                             }

@@ -1,17 +1,7 @@
 .item {
     display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+    margin-top: 20px;
 
-}
-
-.buttonItem {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.buttonItem button {
-    margin-right: 10px;
 }
 
 
@@ -20,20 +10,11 @@
     font-size: 22px;
     text-align: center;
 }
-
-.nameInput label {
-    font-weight: bold;
+.form {
+    flex: 2;
 }
 
-.renameCategoryBloc {
-    display: flex;
-    flex-direction: row;
-}
 
-.renameCategory {
-    flex: 1;
-    margin-left: 40px;
-}
 
 .instruction {
     flex: 3;
@@ -47,19 +28,6 @@
     margin-bottom: 10px;
 }
 
-.listCategory {
-    margin-top: 0;
-}
 
-.option {
-height: 21px;
-  width: 178px;
-}
 
-.nameArrow {
-display: flex;
-align-items: flex-end; 
-}
-.nameInput {
-    flex: 1;
-}
+

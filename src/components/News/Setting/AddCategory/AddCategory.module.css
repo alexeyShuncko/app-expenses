@@ -1,70 +1,20 @@
-.item {
-    display: flex;
- 
-margin-top: 10px;
-
-}
-
-
-.form {
-    flex: 2;
-}
-
-.color {
-
-    justify-content: end;
-    /* background: none;  */
-    background-color: rgb(204, 163, 204);
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    width: 30px;
-    height: 30px;
-}
-.color:hover{
-    border: solid green 1px;
-}
-
-.colorInput {
-display: flex;
-flex-direction: row;
-align-items: center;
-margin-right: 3px;
-}
-.colorInput label {
-font-weight: bold;
-margin-right: 5px;
-}
-.nameInput label{
-  font-weight: bold;
-}
-
-
-
 .title {
     font-size: 22px;
     text-align: center;
 }
 
-.legend {
-    width: 20px;
-    display: inline-block;
-}
 
-.addCategoryBloc {
-display: flex;
-flex-direction: row;
+.item {
+    display: flex;
+    margin-top: 20px;
 }
-.addCategory {
-flex: 1;
-margin-left: 40px;
+.form {
+    flex: 2;
 }
-
 .instruction {
     flex: 3;
     margin-top: 10px;
 }
-
 .instructionTitle {
     font-size: 17px;
     font-style: italic;
@@ -72,21 +22,25 @@ margin-left: 40px;
     margin-bottom: 10px;
 }
 
-.listCategory {
-margin-top: 0;
+
+
+
+/* Поле с имеющимеся категориями и цветами */
+
+.inform {
+    margin-left: 10px;
 }
+.colorCategory {
+    display: flex;
 
-
-.nameInput__field {
-width: 170px;
 }
-
-.nameArrow {
-display: flex;
+.name {
+    flex: 1;
 }
-
-.nameInput {
-flex: 1;
+.nameColor {
+    flex: 3;
 }
-
-
+.legend {
+    width: 20px;
+    display: inline-block;
+}

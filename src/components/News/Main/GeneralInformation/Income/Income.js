@@ -64,8 +64,9 @@ const Income = (props) => {
                             <Form.Item 
                             label="Доход" 
                             name="name" 
+                          
                             style={{marginBottom: 0 }}>
-                                <Select>
+                                <Select >
                                     { props.data.map(a=>
                                             <Select.Option 
                                             //style={{backgroundColor: a.color}} 
@@ -79,6 +80,7 @@ const Income = (props) => {
                             <Form.Item style={{marginBottom: 0}}
                                 label="Сумма"
                                 name="income"
+                                hasFeedback
                                 rules={[{ required: true, message: 'Введите сумму!'}]}
                             >
                                 <Input type='number' onInput={funcValidNumber} step='0.01'/>

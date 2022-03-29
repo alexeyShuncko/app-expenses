@@ -1,15 +1,17 @@
 .buttons {
+  
     display: grid;
     text-align: center;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 20px;
-    margin: 0 50px;
+    margin: 30px 50px;
 
 }
 
 .navNewsitem {}
 
 .settingButton {
+    
     font-size: 17px;
     width: 200px;
     height: 65px;
