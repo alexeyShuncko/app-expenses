@@ -205,8 +205,8 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 category: [
                     ...state.category.map(a => {
-                        if (action.name.includes(a.nameRus)) {
-                            return ({ ...a, color: action.editColor[action.name.indexOf(a.nameRus)] })
+                        if (a.nameRus === action.name) {
+                            return ({ ...a, color: action.editColor })
                         }
                         else return a
                     })]
@@ -525,8 +525,8 @@ export const addTableSelect = (select) => {
 
 
 
-export const addEditColor = (editColor, name) => {
-    return { type: ADD_EDIT_COLOR, editColor, name }
+export const addEditColor = (name, editColor) => {
+    return { type: ADD_EDIT_COLOR, name, editColor}
 }
 export const addSelectDiagramm = (selectDiagramm) => {
     return { type: ADD_SELECT_DIAGRAMM, selectDiagramm }

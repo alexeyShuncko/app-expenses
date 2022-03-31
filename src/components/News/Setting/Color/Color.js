@@ -1,83 +1,113 @@
 import React from 'react';
 import s from './Color.module.css';
-import { Form, Field } from 'react-final-form';
-import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
+import { Button, Form, Input, Select, Space } from 'antd';
+
 
 
 const Color = (props) => {
+
+    const [form] = Form.useForm()
+   
+    const onColor = (value) => {
+        form.setFieldsValue({ color: props.diagramm.category.find(a=>a.nameRus===value).color })
+      }
 
     const returnSetting = () => {
         window.history.back()
     }
 
-    const onSubmit = (values) => {
-        if (String(props.diagramm.category.map(a => a.color)) === String(Object.values(values))) {
 
-            props.addText('Вы не изменили ни одного цвета ...')
-            props.addActivHedgehog(true)
-            ArrowFunc(null, null, 'buttonSetting')
+    const validator = (rule, value) => {
+        if (value && props.diagramm.category.find(a => a.color === value)) {
+            return Promise.reject(new Error(`Вы не изменили цвет!`))
         }
-        else if (String(props.diagramm.category.map(a => a.color)) !== String(Object.values(values))) {
-
-
-            props.addEditColor(Object.values(values), Object.keys(values))
-            props.addText(`Цвет изменен ...`)
-            props.addActivHedgehog(true)
-        }
+        return Promise.resolve()
     }
+
+
+    const onFinish = (values) => {
+
+        props.addEditColor(values.name, values.color)
+        props.addText(`Цвет категории "${values.name}" изменен...`)
+        props.addActivHedgehog(true)
+
+        form.resetFields()
+    }
+
+
 
     return (
         <div className={s.changeСolor}>
             <div className={s.title}>Изменение цвета категории</div>
-            <Form
-                onSubmit={onSubmit}
-                render={({ handleSubmit, form, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit} >
-                        <div className={s.changeСolorBloc}>
-                            <div className={s.changeСolor}>
-                                {props.diagramm.category.map(a =>
-                                    <div className={s.item} key={a.nameRus}>
-                                        <Field
-                                            name={a.nameRus}
-                                            defaultValue={a.color}
-                                            className={s.inputColorValue}
-                                            component="input"
-                                            type="color" />
-                                        <label className={s.itemName}> - {a.nameRus}</label>
-                                    </div>
-                                )}
-                            </div>
-                            <div className={s.instruction}>
-                                <div className={s.instructionTitle}>
-                                    Чтобы изменить цвет категории, следуйте ниже приведенным шагам:</div>
-                                <div>
-                                    <div>1) Нажмите на цветной квадрат рядом с названием категории</div>
-                                    <div>2) Выберите нужный Вам цвет</div>
-                                    <div>3) Нажмите в любое место экрана, кроме окна выбора цвета</div>
-                                    <div>(Можно изменить сразу несколько цветов...)</div>
-                                    <div>4) Нажмите кнопку "Изменить цвет"</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={s.button}>
-                            <button
-                                className='buttonSetting'
-                                type="submit"
-                                disabled={submitting || pristine}>
-                                Изменить цвет(-a)
-                            </button>
-                            <button
-                                type="button"
-                                onClick={returnSetting}>
-                                Назад к настройкам
-                            </button>
-                        </div>
 
-                    </form>
+            <div className={s.color}>
 
-                )}
-            />
+                <Form
+                    form={form}
+                    className={s.form}
+                    name="color"
+                    labelCol={{ span: 11 }}
+                    wrapperCol={{ span: 8 }}
+                    initialValues={{
+                        name: props.diagramm.category[0].nameRus, 
+                        color: props.diagramm.category[0].color 
+                    }}
+                    onFinish={onFinish}
+                    autoComplete="off">
 
+
+                    <Form.Item
+                        label="Категория"
+                        name='name'
+                        style={{ marginBottom: 10 }}>
+                        
+                        <Select onChange={onColor}>
+                            {props.diagramm.category.map(a =>
+                                <Select.Option value={a.nameRus}
+                                    key={a.nameRus}
+                                //style={{ backgroundColor: ` ${a.color}` }}
+                                >
+                                    {a.nameRus}
+                                </Select.Option >)}
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                    
+                        style={{ marginBottom: 10 }}
+                        label='Цвет'
+                        name='color'
+                        rules={[{ validator: validator }]}>
+                        <Input   type='color' className={s.square} />
+                    </Form.Item>
+
+
+                    <Form.Item wrapperCol={{ offset: 5 }} style={{ marginTop: 30 }}>
+                        <Space>
+                            <Button
+                                type="primary"
+                                htmlType="submit">
+                                Изменить цвет
+                            </Button>
+                            <Button type="primary" danger onClick={returnSetting}>
+                                Назад
+                            </Button>
+                        </Space>
+                    </Form.Item>
+
+                </Form>
+
+                <div className={s.instruction}>
+                    <div className={s.instructionTitle}>
+                        Чтобы изменить цвет категории, следуйте ниже приведенным шагам:</div>
+                    <div>
+                        <div>1) В поле "Название категории" выберите из выпадающего списка необходимую категорию</div>
+                        <div>2) Нажав на поле "Цвет", выберите нужный Вам цвет</div>
+                        <div>3) Нажмите в любое место экрана, кроме окна выбора цвета</div>
+                        <div>4) Нажмите кнопку "Изменить цвет"</div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

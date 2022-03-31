@@ -4,29 +4,10 @@
     text-align: center;
 }
 
-.mainRelativity {
-    margin: 20px;
-}
-
-.button button{
-    margin-top: 20px;
-    margin-right: 10px;
-}
-.nameArrow {
-display: flex;
-}
-
-
-/* Блок шагов инструкций */
-.RelativityBloc {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-}
 
 .instruction {
     flex: 3;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 .instructionTitle {
     font-size: 17px;
@@ -36,40 +17,13 @@ display: flex;
 }
 
 
-/* Поля ввода относительной величины */
-.relativityBloc { 
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-.relativityBloc label {
-    flex: 1;
-font-weight: bold;
-}
-.relativityBlocField {
-  
-width: 130px;
-}
-.relativityBlocField1 {
-    text-align: center;
-    width: 138px;
-    height: 21px;
-}
-
-
-
-
-
-.nameArrow {
-display: flex;
-align-items: flex-end;
-margin-left: 30px;
-}
-
-.relativityArrow{
-margin-top: 20px;
-}
-
-.relativityTotal {
+.relativity {
 display: flex;
 }
+
+.form {
+    margin-top: 50px;
+    flex: 2;
+}
+
+

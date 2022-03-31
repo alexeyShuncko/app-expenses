@@ -83,7 +83,7 @@ const Income = (props) => {
                                 hasFeedback
                                 rules={[{ required: true, message: 'Введите сумму!'}]}
                             >
-                                <Input type='number' onInput={funcValidNumber} step='0.01'/>
+                                <Input  type='number' onInput={funcValidNumber} step='0.01' />
                             </Form.Item>
                             <Form.Item style={{marginBottom: 10}}
                             label="Валюта" 

@@ -4,53 +4,24 @@
 }
 
 
-
-/* Блоки под названием  */
-.addSalaryDayBloc {
+.salaryDay {
     display: flex;
-    margin-top: 20px;
 }
-.addSalaryDay {
-    display: flex;
-    flex-direction: column;
+
+.form {
+    margin-top: 50px;
     flex: 1;
-    margin-left: 40px;
-    margin-top: 20px;
 }
-
-
-
-/* Поля ввода  */
-.income {
-display: flex;
-align-items: flex-end;
-margin-top: 20px;
-}
-.income label {
-margin-right: 5px;
-}
-
-
-/* Блок со стрелкой валидации */
-.nameArrow {
-display: flex;
-}
-
 
 
 .instruction {
-    flex: 3;
-    margin-top: 10px;
+    flex: 2;
+    margin-top: 30px;
 }
+
 .instructionTitle {
     font-size: 17px;
     font-style: italic;
     text-decoration: underline;
     margin-bottom: 10px;
-}
-
-/* Кнопки */
-.button button {
-    margin-top: 20px;
-    margin-right: 10px;
 }

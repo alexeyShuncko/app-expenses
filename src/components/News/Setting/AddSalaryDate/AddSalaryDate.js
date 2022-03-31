@@ -1,117 +1,86 @@
 import React from 'react';
 import s from './AddSalaryDate.module.css';
-import { Form, Field } from 'react-final-form';
-import ArrowValidate from '../../Arrow/ArrowValidate';
-import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
-import OffStyle from '../../helpers/ArrowFunc/Offstyle';
+import { Form, Select, Space, Button, DatePicker } from 'antd';
 
 
 const AddSalaryDate = (props) => {
 
-    const arrDate = () => {
-        let arrDay = []
-        for (let i = 1; i < 32; i++) {
-            arrDay.push(i)
-        }
-        return arrDay
-    }
-    let month = arrDate()
+    const [form] = Form.useForm()
 
     const returnSetting = () => {
         window.history.back()
     }
 
-    const onSubmit = (values) => {
+    const onFinish = (values) => {
+        props.addSalaryDay(values.name,values.date._d.getDate())
 
-        if (values.name && values.selectDay) {
-            const day = () => {
-                if (values.selectDay < 10) { return 0 + values.selectDay }
-                return values.selectDay
-            }
-            props.addSalaryDay(values.name, day())
-
-            props.addText(`${values.name} ${values.selectDay}-го числа, я запомнил  ...`)
-            props.addActivHedgehog(true)
-            OffStyle(['selectDay'])
-            values.selectDay = ''
-        }
-        else if (!values.selectDay) {
-            ArrowFunc('arrowSalaryDay', 'selectDay', null)
-            
-            props.addText(`Выберите дату, когда у вас ${values.name} ...`)
-            props.addActivHedgehog(true)
-        }
-
-
+        props.addText(`${values.name} ${values.date._d.getDate()}-го числа, я запомнил  ...`)
+        props.addActivHedgehog(true)
+        form.resetFields()
     }
 
     return (
         <div>
             <div className={s.title}>Добавление/изменение даты доходов</div>
-            <Form
-                onSubmit={onSubmit}
-                render={({ handleSubmit, form, submitting, pristine, values }) => (
-                    <form onSubmit={handleSubmit} >
-                        <div className={s.addSalaryDayBloc}>
-                            <div className={s.addSalaryDay}>
-                                <div className={s.income}>
-                                    <label className={s.itemName}> Доход - </label>
-                                    <Field
-                                        autoFocus='on'
-                                        defaultValue='Зарплата'
-                                        className={s.fieldName}
-                                        autoComplete="off"
-                                        name='name'
-                                        component="select" >
-                                        <option value='Зарплата'> Зарплата</option>
-                                        <option value='Аванс'>Аванс</option>
-                                    </Field>
-                                </div>
-                                <div className={s.nameArrow}>
-                                    <div className={s.income}>
-                                        <label className={s.itemName}> Дата - </label>
-                                        <Field
-                                            id='selectDay'
-                                            name='selectDay'
-                                            className={s.selectDay}
-                                            component="select">
-                                            <option />
-                                            {month.map(a =>
-                                                <option value={a} key={a}>{a}</option>)}
-                                        </Field>
-                                    </div>
 
-                                    <ArrowValidate arrowId='arrowSalaryDay' />
-                                </div>
 
-                            </div>
-                            <div className={s.instruction}>
-                                <div className={s.instructionTitle}>
-                                    Чтобы добавить/изменить дату доходов, следуйте ниже приведенным шагам:</div>
-                                <div>
-                                    <div>1) Выберите доход из выпадающего списка</div>
-                                    <div>2) Выберите дату из выпадающего списка</div>
-                                    <div>3) Нажмите кнопку "Добавить дату"</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={s.button}>
-                            <button
-                                className='buttonSalaryDay'
-                                type="submit"
-                                disabled={submitting || pristine}>
+            <div className={s.salaryDay}>
+                <Form className={s.form}
+                    form={form}
+                    name="deleteCategory"
+                    labelCol={{ span: 9 }}
+                    wrapperCol={{ span: 9 }}
+                    onFinish={onFinish}
+                    initialValues={{ name: 'Зарплата' }}
+                    //onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Доход"
+                        name='name'>
+                        <Select>
+                            <Select.Option value='Зарплата'>Зарплата</Select.Option >
+                            <Select.Option value='Аванс'>Аванс</Select.Option >
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Дата"
+                        name='date'
+                        rules={[{ required: true, message: 'Выберите дату!' }]}>
+                        <DatePicker />
+                    </Form.Item>
+
+
+                    <Form.Item
+                        style={{ marginTop: 30 }}
+                        wrapperCol={{ offset: 4 }}>
+                        <Space>
+                            <Button
+                                type="primary"
+                                htmlType="submit">
                                 Добавить дату
-                            </button>
-                            <button
-                                type="button"
-                                onClick={returnSetting}>
-                                Назад к настройкам
-                            </button>
-                        </div>
+                            </Button>
+                            <Button type="primary" danger onClick={returnSetting}>
+                                Назад
+                            </Button>
+                        </Space>
+                    </Form.Item>
 
-                    </form>
-                )}
-            />
+                </Form>
+
+
+                <div className={s.instruction}>
+                    <div className={s.instructionTitle}>
+                        Чтобы добавить/изменить дату доходов, следуйте ниже приведенным шагам:</div>
+                    <div>
+                        <div>1) Выберите доход из выпадающего списка</div>
+                        <div>2) Нажав на поле "Дата", выберите дату дохода</div>
+                        <div>3) Нажмите кнопку "Добавить дату"</div>
+                    </div>
+                </div>
+            </div>
+           
         </div>
 
     )

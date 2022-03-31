@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import s from './AboutApp.module.css';
 import { connect } from 'react-redux';
 import { addText, addActivHedgehog } from '../../../Redux/diagrammReducer';
-import { Button } from 'antd';
+import { Button, Form, Select } from 'antd';
 import DateAnt from '../helpers/Date/DateAnt';
 
 
@@ -146,7 +146,19 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                         <option>BYN</option>
                         <option>USD</option>
                         <option>EUR</option>
-                    </select> , явлюются выпадающими списками.
+                    </select> 
+                    
+                    <Form.Item className={s.list}
+                    style={{marginBottom: 0, marginRight: 5}}
+                    wrapperCol={{ span: 24}}> 
+                    <Select  defaultValue='Зарплата'>
+                            <Select.Option value='Зарплата'>Зарплата</Select.Option >
+                            <Select.Option value='Аванс'>Аванс</Select.Option >
+                        </Select>
+                    </Form.Item>
+                   
+                   
+                   , явлюются выпадающими списками.
                     Выбирая элемент из списка, вы меняете формат отображаемой информации.
                 </div>
 

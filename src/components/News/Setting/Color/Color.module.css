@@ -3,37 +3,24 @@
     text-align: center;
 }
 
-
-/* Каждая категория с цветом */
-.item {
+.color {
     display: flex;
-    align-items: center;
 }
-
-.inputColorValue {
-    background: none;
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    width: 25px;
-    height: 30px;
-}
-
-/* Блоки под названием  */
-.changeСolorBloc {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-}
-.changeСolor {
+.form { 
+    margin-top: 80px;
     flex: 1;
-    margin-left: 40px;
-    margin-top: 20px;
 }
+
+
+.square {
+    padding: 0px;
+    
+}
+
 
 .instruction {
-    flex: 3;
-    margin-top: 10px;
+    flex: 2;
+    margin-top: 30px;
 }
 .instructionTitle {
     font-size: 17px;
@@ -42,8 +29,5 @@
     margin-bottom: 10px;
 }
 
-/* Кнопки */
-.button button {
-    margin-top: 20px;
-    margin-right: 10px;
-}
+
+

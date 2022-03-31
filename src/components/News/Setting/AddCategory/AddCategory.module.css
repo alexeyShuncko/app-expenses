@@ -24,8 +24,10 @@
 
 
 
+.square {
+    padding: 1px;
+}
 
-/* Поле с имеющимеся категориями и цветами */
 
 .inform {
     margin-left: 10px;

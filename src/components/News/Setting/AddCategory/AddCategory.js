@@ -46,6 +46,13 @@ const AddCategory = (props) => {
         return Promise.resolve()
     }
 
+    const validatorColor =(rule, value)=> {
+        if (value && props.diagramm.category.find(a => a.color === value)) {
+            return Promise.reject(new Error(`Такой цвет уже есть!`))
+        }
+        return Promise.resolve()
+    }
+
 
     return (
         <div>
@@ -58,7 +65,7 @@ const AddCategory = (props) => {
                     labelCol={{ span: 9 }}
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
-
+initialValues={{color: '#006400'}}
                     validateMessages={validateMessages}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"   >
@@ -72,12 +79,14 @@ const AddCategory = (props) => {
                     </Form.Item>
 
                     <Form.Item
+                     wrapperCol={{ span: 5 }}
                         label="Цвет"
                         name="color"
                         hasFeedback
-                        rules={[{ required: true, message: 'Выберите цвет!' }]}
+                        rules={[{ required: true, message: 'Выберите цвет!' }, 
+                        { validator: validatorColor }]}
                     >
-                        <Input type='color' />
+                        <Input type='color' className={s.square}/>
                     </Form.Item>
 
                     <div className={s.inform}>
@@ -107,7 +116,7 @@ const AddCategory = (props) => {
 
                     <Form.Item 
                     style={{ marginTop: 30 }}
-                    wrapperCol={{ offset: 9 }}>
+                    wrapperCol={{ offset: 9}}>
                         <Space>
                             <Button
                                 type="primary"
@@ -130,11 +139,10 @@ const AddCategory = (props) => {
                     <div>
                         <div>1) В поле "Название категории" впишите название новой категории <br></br>
                             (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)</div>
-                        <div>2) Нажмите на чёрный прямоугольник в поле "Цвет"</div>
-                        <div>3) Выберите нужный тебе цвет <br></br>
-                            (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
-                        <div>4) Нажмите в любое место экрана, кроме окна выбора цвета</div>
-                        <div>5) Нажмите кнопку "Добавить"</div>
+                        <div>2) Нажав на поле "Цвет", выберите цвет новой категории</div>
+                        <div>(Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
+                        <div>3) Нажмите в любое место экрана, кроме окна выбора цвета</div>
+                        <div>4) Нажмите кнопку "Добавить"</div>
                     </div>
 
                 </div>

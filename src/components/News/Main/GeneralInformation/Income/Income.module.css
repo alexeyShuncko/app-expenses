@@ -69,8 +69,10 @@ width: 100px;
 }
 
 
-.formItemsField::-webkit-outer-spin-button,
-.formItemsField::-webkit-inner-spin-button {
+
+
+.arrowNum::-webkit-outer-spin-button,
+.arrowNum::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

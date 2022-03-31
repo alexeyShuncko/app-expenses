@@ -1,9 +1,5 @@
 import React from 'react';
 import s from './RenameCategory.module.css';
-
-import ArrowFunc from '../../helpers/ArrowFunc/ArrowFunc';
-import ArrowValidate from '../../Arrow/ArrowValidate';
-import OffStyle from '../../helpers/ArrowFunc/Offstyle';
 import { Button, Form, Input, Select, Space } from 'antd';
 
 
@@ -24,42 +20,6 @@ const RenameCategory = (props) => {
             props.addActivHedgehog(true)
         }
         e.target.value = e.target.value.replace(regex1, '')
-    }
-
-    const onSubmit = (values, form) => {
-
-        if (values.name
-            && !props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())
-            && values.favorite) {
-            props.renameCategory(values.favorite, values.name)
-
-            props.addText(`"${values.favorite}" переименована в  "${values.name}" ...`)
-            props.addActivHedgehog(true)
-
-            OffStyle(['nameCategory', 'favorite'])
-            props.nameCase(values.name) //добавление имени в винительном падеже ...
-            form.reset()
-        }
-
-        else if (!values.favorite) {
-
-            props.addText('Выберите категорию из списка ...')
-            props.addActivHedgehog(true)
-            ArrowFunc('arrowFavorite', 'favorite', 'buttonSetting')
-        }
-        else if (values.name && props.diagramm.category.map(a => a.nameRus.toLowerCase()).includes(values.name.toLowerCase())) {
-
-            props.addText('Категория ' + values.name + ' уже есть ...')
-            props.addActivHedgehog(true)
-            ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
-        }
-        else if (!values.name) {
-
-            props.addText('Впишите новое название категории ...')
-            props.addActivHedgehog(true)
-            ArrowFunc('arrowName', 'nameCategory', 'buttonSetting')
-        }
-
     }
 
 
@@ -88,7 +48,6 @@ const RenameCategory = (props) => {
             <div className={s.title}>Переименование категории</div>
             <div className={s.item}>
 
-
                 <Form className={s.form}
                     form={form}
                     name="renameCategory"
@@ -100,6 +59,7 @@ const RenameCategory = (props) => {
                     autoComplete="off"
                 >
                     <Form.Item
+                    style={{marginBottom: 10}}
                         label="Название категории"
                         name='select'>
                         <Select>
@@ -117,7 +77,7 @@ const RenameCategory = (props) => {
                         label="Новое название категории"
                         name="name"
                         hasFeedback
-                        rules={[{ required: true , message: 'Впишите новое название категории!'}, 
+                        rules={[{ required: true, message: 'Впишите новое название категории!' },
                         { validator: validator }]}>
                         <Input onInput={funcValidText} maxLength='14' />
                     </Form.Item>
