@@ -78,7 +78,9 @@ const Expenses = (props) => {
                                     key={a.nameRus}
                                     //hasFeedback 
                                     >
-                                    <Input  type='number' onInput={funcValidNumber} step='0.01' />
+                                    <Input 
+                                    //style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.5)` }}
+                                     type='number' onInput={funcValidNumber} step='0.01' />
                                 </Form.Item>)
                             }
 

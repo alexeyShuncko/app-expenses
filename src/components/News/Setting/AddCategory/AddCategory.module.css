@@ -14,6 +14,7 @@
 .instruction {
     flex: 3;
     margin-top: 10px;
+    padding: 0px;
 }
 .instructionTitle {
     font-size: 17px;

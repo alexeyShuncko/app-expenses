@@ -51,6 +51,7 @@ const DiagrammForm = (props) => {
                 за период:
             </div>
             <DateAnt
+                period={props.periodDiagramm}
                 s={props.todayS}
                 po={props.todayPo}
                 onChangeDate={onChangeDate}

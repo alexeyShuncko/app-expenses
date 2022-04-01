@@ -18,7 +18,7 @@ const DiagrammContainer = (props) => {
                 selectDiagrammStat={props.diagramm.selectDiagrammStat}
                 diagrammSelect={props.diagramm.diagrammSelect}
                 addSelectDiagrammStat={props.addSelectDiagrammStat}
-                // periodDiagramm={props.diagramm.period[2]}
+                periodDiagramm={props.diagramm.period[2]}
                 addPeriod={props.addPeriod}
                 addDiagrammSelect={props.addDiagrammSelect}
                 addText={props.addText}

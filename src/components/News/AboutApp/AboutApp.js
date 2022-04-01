@@ -130,7 +130,11 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                 <div className={s.aboutInformItem}>
                     - Информация во вкладке "Статистика", "График", "Диаграмма" по умолчанию
                     предоставлена за последние <span className={s.spanBold}>33 дня. </span>
-                    Изменить период вы можете нажав на поле даты <DateAnt /> и выбрав необходимую Вам дату.
+                    Изменить период вы можете нажав на поле даты 
+                    <DateAnt 
+                      period={props.diagramm.period[0]}
+                      s={props.diagramm.today.s} 
+                      po={props.diagramm.today.po}/> и выбрав необходимую Вам дату.
                 </div>
                 <div className={s.aboutInformItem}>
                     - Элементы со стрелкой рядом, такие как:

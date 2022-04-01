@@ -46,7 +46,7 @@ const AddCategory = (props) => {
         return Promise.resolve()
     }
 
-    const validatorColor =(rule, value)=> {
+    const validatorColor = (rule, value) => {
         if (value && props.diagramm.category.find(a => a.color === value)) {
             return Promise.reject(new Error(`Такой цвет уже есть!`))
         }
@@ -65,7 +65,7 @@ const AddCategory = (props) => {
                     labelCol={{ span: 9 }}
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
-initialValues={{color: '#006400'}}
+                    initialValues={{ color: '#006400' }}
                     validateMessages={validateMessages}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"   >
@@ -79,14 +79,14 @@ initialValues={{color: '#006400'}}
                     </Form.Item>
 
                     <Form.Item
-                     wrapperCol={{ span: 5 }}
+                        wrapperCol={{ span: 5 }}
                         label="Цвет"
                         name="color"
                         hasFeedback
-                        rules={[{ required: true, message: 'Выберите цвет!' }, 
+                        rules={[{ required: true, message: 'Выберите цвет!' },
                         { validator: validatorColor }]}
                     >
-                        <Input type='color' className={s.square}/>
+                        <Input type='color' className={s.square} />
                     </Form.Item>
 
                     <div className={s.inform}>
@@ -114,9 +114,9 @@ initialValues={{color: '#006400'}}
                     </div>
 
 
-                    <Form.Item 
-                    style={{ marginTop: 30 }}
-                    wrapperCol={{ offset: 9}}>
+                    <Form.Item
+                        style={{ marginTop: 30 }}
+                        wrapperCol={{ offset: 9 }}>
                         <Space>
                             <Button
                                 type="primary"
@@ -132,20 +132,18 @@ initialValues={{color: '#006400'}}
                 </Form>
 
 
-
-                <div className={s.instruction}>
+                <ol className={s.instruction}>
                     <div className={s.instructionTitle}>
-                        Чтобы добавить категорию, следуйте ниже приведенным шагам:</div>
-                    <div>
-                        <div>1) В поле "Название категории" впишите название новой категории <br></br>
-                            (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)</div>
-                        <div>2) Нажав на поле "Цвет", выберите цвет новой категории</div>
-                        <div>(Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)</div>
-                        <div>3) Нажмите в любое место экрана, кроме окна выбора цвета</div>
-                        <div>4) Нажмите кнопку "Добавить"</div>
+                        Чтобы добавить категорию, следуйте ниже приведенным шагам:
                     </div>
-
-                </div>
+                    <li> В поле "Название категории" впишите название новой категории</li>
+                        (Название не должно совпадать с уже имеющимися категориями и должно быть <br></br>
+                        длинною до 14 символов)
+                    <li> Нажав на поле "Цвет", выберите цвет новой категории</li>
+                    (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)
+                    <li> Нажмите в любое место экрана, кроме окна выбора цвета</li>
+                    <li> Нажмите кнопку "Добавить"</li>
+                </ol>
             </div>
         </div>
     )

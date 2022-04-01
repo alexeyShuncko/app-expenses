@@ -14,42 +14,10 @@
     margin: 0px 20px;
 }
 
-/* название таблицы */
 
-.statisticName {
-    display: flex;
-}
-
-.statisticNameDate {
-    font-weight: bold;
-    flex: 2;
-    text-align: center;
-}
-
-.statisticNameSumm {
-    font-weight: bold;
-    flex: 1;
-    text-align: center;
-}
-
-
-/* таблица */
-
-.table {
-    display: flex;
-}
-
-.tableTime {
-    flex: 2;
-    border: solid black 1px;
-    border-right: none;
-}
-
-.tableNum {
-    flex: 1;
-    text-align: center;
-    border: solid black 1px;
-}
+/* td {
+    padding: 0px !important
+} */
 
 
 

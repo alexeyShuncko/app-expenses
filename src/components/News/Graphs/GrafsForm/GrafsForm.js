@@ -49,6 +49,7 @@ const GrafsForm = (props) => {
             </div>
             <div>за период:</div>
             <DateAnt
+            period={props.periodGraf}
                 s={props.todayS}
                 po={props.todayPo}
                 onChangeDate={onChangeDate}

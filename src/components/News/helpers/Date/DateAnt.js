@@ -27,7 +27,8 @@ const DateAnt = (props) => {
                
                 onOpenChange={onOpenChange}
                 placement='bottomLeft'
-                defaultValue={[moment(props.s),moment(props.po)]}
+                defaultValue={[(props.period.S && moment(props.period.S))|| moment(props.s),
+                    (props.period.Po && moment(props.period.Po)) || moment(props.po)]}
                 disabledDate={disabledDate}
                 onChange={props.onChangeDate}/>
                         

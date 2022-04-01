@@ -1,9 +1,9 @@
 import React from "react";
 import s from './StatisticPeriod.module.css';
 import RelativityStatistic from './RelativityStatistic/RelativityStatistic';
-//import PeriodMaxMin from "../../helpers/DateSelect/PeriodMaxMin";
 import DateAnt from "../../helpers/Date/DateAnt";
 import { Select } from "antd";
+
 
 
 
@@ -12,15 +12,16 @@ const StatisticPeriod = (props) => {
 
     const diagramm = props.diagramm.category
 
-    !props.diagramm.activ.name && props.addActiv(diagramm[0].nameRus)
+    //let color = diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].color
+  
 
-    const onChangeDate =(data, dateString)=> {
-        props.addPeriod('table',dateString)
+    const onChangeDate = (data, dateString) => {
+        props.addPeriod('table', dateString)
         // props.addText('Период изменён ...')
         // props.addActivHedgehog(true) условие надо
     }
 
-    const handleChange =(value)=> {
+    const handleChange = (value) => {
         if (value !== props.diagramm.activ.name) {
             props.addActiv(value)
 
@@ -38,33 +39,37 @@ const StatisticPeriod = (props) => {
                             Выберите категорию :
                         </div>
 
-                        <Select 
-                        style={{ width: 120 }}
-                        onChange={handleChange}
-                        defaultValue= {diagramm[0].nameRus}>
-                           
+                        
+                            <Select
+                                style={{ width: 120, 
+                                    //backgroundColor: `rgba(${color.slice(4, -1)},0.6)`
+                                }}
+                                onChange={handleChange}
+                                defaultValue={props.diagramm.activ.name || diagramm[0].nameRus}>
+
                                 {diagramm.map(a =>
-                                <Select.Option  value={a.nameRus}
-                                    key={a.nameRus}
-                                    name={a.nameRus}
-                                    //style={{ backgroundColor: ` ${a.color}` }}
+                                    <Select.Option value={a.nameRus}
+                                        key={a.nameRus}
+                                        name={a.nameRus}
+                                        //style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.7)` }}
                                     >
-                                    {a.nameRus}
-                                </Select.Option >)}
-                        </Select>
+                                        {a.nameRus}
+                                    </Select.Option >)}
+                            </Select>
 
                     </div>
                 </div>
-               
-             <RelativityStatistic diagramm={props.diagramm} />
-              
+
+                <RelativityStatistic diagramm={props.diagramm} />
+
             </div>
             <div className={s.period}>
                 <div className={s.categoryStatisticName}>Выберите период : </div>
-                <DateAnt 
-                s={props.diagramm.today.s} 
-                po={props.diagramm.today.po}
-                onChangeDate={onChangeDate}/> 
+                <DateAnt
+                    period={props.tablePeriod}
+                    s={props.diagramm.today.s}
+                    po={props.diagramm.today.po}
+                    onChangeDate={onChangeDate} />
             </div>
         </div>
     )

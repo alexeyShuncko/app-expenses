@@ -17,8 +17,12 @@ const TotalTable = (props) => {
         setEditMode(false)
     }
 
+
     const selectChange = (e) => {
         props.addTableSelect(e.target.value)
+        e.target.value === 'расходов'
+        ? props.addText(`В таблице ваши расходы ...`) && props.addActivHedgehog(true)
+        : props.addText(`В таблице ваши доходы ...`) && props.addActivHedgehog(true)
     }
 
     return (
@@ -34,18 +38,21 @@ const TotalTable = (props) => {
                     <Button type='primary' onClick={activateEditMode}>Показать</Button>
                 </div>
                 : <div >
-                     <Button type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
+                     <Button style={{marginBottom: 17, marginTop: 17}}
+                     type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
                     {props.diagramm.tableSelect === 'расходов'
                         ? <TotalTableExpenses
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
+                            periodS={props.diagramm.period[0].S}
+                            periodPo={props.diagramm.period[0].Po}
                             diagramm={props.diagramm} />
                         : <TotalIncome
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
                             income={props.diagramm.income}
-                            periodS={props.diagramm.periodS}
-                            periodPo={props.diagramm.periodPo}
+                            periodS={props.diagramm.period[0].S}
+                            periodPo={props.diagramm.period[0].Po}
                             exchangeRates={props.diagramm.exchangeRates} />
                     }
                 </div>}

@@ -1,8 +1,10 @@
 
 .navNewsitem .active {
+ 
     font-size: 27px;
     color: green;
     font-weight: bold;
+
 }
 .navNewsitem a {
     font-size: 22px;

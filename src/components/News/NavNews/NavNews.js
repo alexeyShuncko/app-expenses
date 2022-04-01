@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -11,6 +12,8 @@ const NavNews = (props) => {
   return (
     <div>
     <nav className={s.navNews}>
+
+     
       <div className={s.navNewsitem}>
         <NavLink to="/main" className={(navData) => navData.isActive ? s.active : "" } >Главная</NavLink>
       </div>

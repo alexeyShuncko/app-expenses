@@ -19,6 +19,7 @@ const Statistic = (props) => {
             <div className={s.period}>
                 <StatisticPeriod
                     diagramm={props.diagramm}
+                    tablePeriod={props.diagramm.period[0]}
                     addActiv={props.addActiv}
                     addPeriod={props.addPeriod}
                     addText={props.addText}
