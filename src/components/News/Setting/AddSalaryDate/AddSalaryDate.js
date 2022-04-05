@@ -12,7 +12,16 @@ const AddSalaryDate = (props) => {
     }
 
     const onFinish = (values) => {
-        props.addSalaryDay(values.name,values.date._d.getDate())
+
+        const day = () => {
+            if (values.date._d.getDate() < 10) {
+                return `0${values.date._d.getDate()}`
+            }
+            else return values.date._d.getDate()
+
+
+        }
+        props.addSalaryDay(values.name, day())
 
         props.addText(`${values.name} ${values.date._d.getDate()}-го числа, я запомнил  ...`)
         props.addActivHedgehog(true)
@@ -80,7 +89,7 @@ const AddSalaryDate = (props) => {
                     </div>
                 </div>
             </div>
-           
+
         </div>
 
     )

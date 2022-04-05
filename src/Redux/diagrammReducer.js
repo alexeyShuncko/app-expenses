@@ -44,7 +44,7 @@ const ACTIV_HEDGEHOG = 'ACTIV_HEDGEHOG'
 let initialState = {
     category:
         [{
-            nameRus: 'Еда', nameRusСase: 'Еду', color: '#fde23e', idCategory: 10000,
+            nameRus: 'Еда', nameRusСase: 'Еду', color: 'rgb(253, 226, 62)', idCategory: 10000,
             data: [
                 { id: 10001, time: '2022-02-01', num: 100 },
                 { id: 10002, time: '2022-02-10', num: 20 },
@@ -54,15 +54,15 @@ let initialState = {
             ], summ: 217
         },
         {
-            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: '#2222d1', idCategory: 20000,
+            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: 'rgb(33, 33, 209)', idCategory: 20000,
             data: [{ id: 20001, time: '2022-02-08', num: 40 }], summ: 40
         },
         {
-            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: '#57d9ff', idCategory: 30000,
+            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: 'rgb(87, 217, 255)', idCategory: 30000,
             data: [{ id: 30001, time: '2022-02-11', num: 15 }], summ: 15
         },
         {
-            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: '#169928', idCategory: 40000,
+            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: 'rgb(22, 153, 40)', idCategory: 40000,
             data: [{ id: 40001, time: '2022-02-09', num: 25 }], summ: 25
         }
         ],
@@ -71,30 +71,27 @@ let initialState = {
         name: 'Еда'
     },
     income: {
-        data: [ 
-            {name: 'Другие', color:'#7a3232', data:[{ time: '2022-01-15', num: 50, id: 10000 }]},
-        {name: 'Зарплата',color:'#12911c', data:[
-            { time: '2022-02-04', num: 400, id: 20000 },
-            { time: '2022-03-01', num: 700, id: 20001 }]},
-        {name: 'Аванс', color:'#c98a2d', data:[{ time: '2022-03-05', num: 200, id: 30000 }]}
-        
-    ],
-        total: 700,
-        salary: { Date: { day: '01', month: '03' }},
-        prepayment: { Date: { day: '20', month: '03' }},
+        data: [
+            { name: 'Другие', color: 'rgb(224, 83, 118)', id: 10000, data: [] },
+            { name: 'Зарплата', color: 'rgb(18, 145, 28)', id: 20000, data: [] },
+            { name: 'Аванс', color: 'rgb(201, 138, 45)', id: 30000, data: [] }
+        ],
+        total: 0,
+        salary: { Date: { day: '', month: '' } },
+        prepayment: { Date: { day: '', month: '' } },
     },
 
-period: [
-    { name: 'table',  S: '', Po: ''},
-    { name: 'graf',  S: '', Po: ''},
-    { name: 'diagramm',  S: '', Po: ''}
-],
-  
+    period: [
+        { name: 'table', S: '', Po: '' },
+        { name: 'graf', S: '', Po: '' },
+        { name: 'diagramm', S: '', Po: '' }
+    ],
+
     tableSelect: 'расходов',
 
 
     selectDiagramm: 'BYN',
-   
+
     exchangeRates: {
         dollar: { Cur_OfficialRate: '2.5', Date: '' },
         euro: { Cur_OfficialRate: '2.9', Date: '' }
@@ -119,9 +116,9 @@ period: [
         s: '',
         po: ''
     },
-    today:{
-        s:'',
-        po:''
+    today: {
+        s: '',
+        po: ''
     },
     activHedgehog: ''
 }
@@ -154,8 +151,8 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state, activ: {
                     name: action.activ
-                    ? action.activ
-                    : state.category[0].nameRus,
+                        ? action.activ
+                        : state.category[0].nameRus,
                     id: action.activ
                         ? state.category.filter(a => a.nameRus === action.activ)[0].idCategory
                         : state.category[0].idCategory
@@ -163,33 +160,33 @@ const diagrammReduser = (state = initialState, action) => {
             }
 
 
-// Статистика
+        // Статистика
         case ADD_PERIOD:
-           
-                return {
-                    ...state,
-                    period: [ ...state.period.map(a => {
-                        if (a.name===action.key) {
-                            return ({
-                                ...a,
-                                S: action.period[0],
-                                Po: action.period[1],
-                            })
-                           
-                        }
-                        else return a
-                    })
-                ]        
-            }
-  
-            case ADD_TABLE_SELECT:
-                return {
-                    ...state,
-                    tableSelect: action.select
-                }
 
-        
-     
+            return {
+                ...state,
+                period: [...state.period.map(a => {
+                    if (a.name === action.key) {
+                        return ({
+                            ...a,
+                            S: action.period[0],
+                            Po: action.period[1],
+                        })
+
+                    }
+                    else return a
+                })
+                ]
+            }
+
+        case ADD_TABLE_SELECT:
+            return {
+                ...state,
+                tableSelect: action.select
+            }
+
+
+
 
         case ADD_SELECT_DIAGRAMM:
             return {
@@ -199,7 +196,7 @@ const diagrammReduser = (state = initialState, action) => {
             return {
                 ...state, selectDiagrammStat: action.selectDiagrammStat
             }
-     
+
         case ADD_EDIT_COLOR:
             return {
                 ...state,
@@ -292,46 +289,48 @@ const diagrammReduser = (state = initialState, action) => {
             }
 
 
- // График
+        // График
         case ADD_GRAF_SELECT_VALUTA:
             return {
                 ...state,
                 grafSelectValuta: action.select
             }
-            case  ADD_GRAF_SELECT:
-                return {
-                    ...state,
-                    grafSelect: action.select
-                }
+        case ADD_GRAF_SELECT:
+            return {
+                ...state,
+                grafSelect: action.select
+            }
 
 
-           
 
-// Диаграмма
+
+        // Диаграмма
 
         case ADD_PROBLEM_SELECT:
-                return {
-                    ...state,
-                    diagrammSelect: action.select
-                }
+            return {
+                ...state,
+                diagrammSelect: action.select
+            }
         case ADD_SALARY_DAY:
             return {
                 ...state,
                 income: {
                     ...state.income,
-                    salary:  {
+                    salary: {
                         Date: action.name === 'Зарплата'
-                        ? { ...state.income.salary.Date,
-                            day: action.day 
-                        }
-                        : {...state.income.salary.Date}  
+                            ? {
+                                ...state.income.salary.Date,
+                                day: action.day
+                            }
+                            : { ...state.income.salary.Date }
                     },
                     prepayment: {
                         Date: action.name === 'Аванс'
-                        ? { ...state.income.prepayment.Date,
-                            day: action.day 
-                        }
-                        : {...state.income.prepayment.Date}  
+                            ? {
+                                ...state.income.prepayment.Date,
+                                day: action.day
+                            }
+                            : { ...state.income.prepayment.Date }
                     }
                 }
             }
@@ -342,22 +341,23 @@ const diagrammReduser = (state = initialState, action) => {
                     ...state.income,
                     salary: {
                         Date: action.name === 'Зарплата'
-                       ? {
-                            ...state.income.salary.Date,
-                            month: action.month < 10
-                                ? `0${action.month}`
-                                : action.month
-                        }
-                        : {...state.income.salary.Date} 
+                            ? {
+                                ...state.income.salary.Date,
+                                month: action.month < 10
+                                    ? `0${action.month}`
+                                    : action.month
+                            }
+                            : { ...state.income.salary.Date }
                     },
                     prepayment: {
                         Date: action.name === 'Аванс'
-                       ? {   ...state.income.prepayment.Date,
-                            month: action.month < 10
-                                ? `0${action.month}`
-                                : action.month
-                        }
-                        : {...state.income.prepayment.Date} 
+                            ? {
+                                ...state.income.prepayment.Date,
+                                month: action.month < 10
+                                    ? `0${action.month}`
+                                    : action.month
+                            }
+                            : { ...state.income.prepayment.Date }
                     }
 
                 }
@@ -376,44 +376,49 @@ const diagrammReduser = (state = initialState, action) => {
                 }
             }
             let num = numValuta()
-           
-            state.income.data.find(a => a.name===action.name).data.push(
-                {time: action.time,
-                num: Number(num),
-                id:  state.income.data.find(a => a.name===action.name).data[0].id + 
-                state.income.data.find(a => a.name===action.name).data.length}
-                )
+
+          
             return {
                 ...state,
                 income: {
                     ...state.income,
-                    total: state.income.total + Number(num)
+                    data: state.income.data.map(a => {
+                        if (a.name === action.name) {
+                        a.data.push({
+                                time: action.time,
+                                num: Number(num),
+                                id: a.id + a.data.length
+                            })
+                        }
+                         return a
+                    }),
+                    total: Number(state.income.total) + Number(num)
                 }
             }
 
-            case  ADD_TODAY_S:
-                return {
-                    ...state,
-                    today: {
-                        ...state.today,
-                        s: action.date
-                    }
+        case ADD_TODAY_S:
+            return {
+                ...state,
+                today: {
+                    ...state.today,
+                    s: action.date
                 }
-                case  ADD_TODAY_PO:
-                    return {
-                        ...state,
-                    today: {
-                        ...state.today,
-                        po: action.date
-                    }
+            }
+        case ADD_TODAY_PO:
+            return {
+                ...state,
+                today: {
+                    ...state.today,
+                    po: action.date
                 }
+            }
 
-// Сообщение ежа
-                case  ACTIV_HEDGEHOG:
-                    return {
-                        ...state,
-                    activHedgehog:  action.activ
-                }
+        // Сообщение ежа
+        case ACTIV_HEDGEHOG:
+            return {
+                ...state,
+                activHedgehog: action.activ
+            }
 
 
 
@@ -428,13 +433,13 @@ const diagrammReduser = (state = initialState, action) => {
 
 
 export const addActivHedgehog = (activ) => {
-    
+
     let qqq = document.getElementById("myPopup")
-  
-    setTimeout(()=> {
+
+    setTimeout(() => {
         qqq.focus()
-    },500)
-   
+    }, 500)
+
     return { type: ACTIV_HEDGEHOG, activ }
 }
 
@@ -516,8 +521,8 @@ export const addActiv = (activ) => {
 }
 
 // Статистика
-export const addPeriod = (key,period) => {
-    return { type: ADD_PERIOD, key,period }
+export const addPeriod = (key, period) => {
+    return { type: ADD_PERIOD, key, period }
 }
 export const addTableSelect = (select) => {
     return { type: ADD_TABLE_SELECT, select }
@@ -526,7 +531,7 @@ export const addTableSelect = (select) => {
 
 
 export const addEditColor = (name, editColor) => {
-    return { type: ADD_EDIT_COLOR, name, editColor}
+    return { type: ADD_EDIT_COLOR, name, editColor }
 }
 export const addSelectDiagramm = (selectDiagramm) => {
     return { type: ADD_SELECT_DIAGRAMM, selectDiagramm }
@@ -558,13 +563,19 @@ export const getEuroUpdate = () => (dispatch) => {
 export const nameCase = (name) => (dispatch) => {
 
     getItem(name).then(data => {
+
         dispatch(addNameCase(data.В, name))
     })
 }
 export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
 
     getItem(name).then(data => {
-        dispatch(changeRelativity(data.Р, unit, prise, [data.Р, data.множественное.Р, name]))
+        console.log(data)
+        dispatch(changeRelativity(data.Р, unit, prise, [data.Р,
+        data.множественное
+            ? data.множественное.Р
+            : data.Р,
+            name]))
     })
 }
 

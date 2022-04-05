@@ -88,6 +88,7 @@ const TotalIncome = (props) => {
                 ? <div className={s.statisticTable}>
 
                     <Table
+                     rowClassName={s.row}
                         columns={columns}
                         dataSource={data}
                         size="small"

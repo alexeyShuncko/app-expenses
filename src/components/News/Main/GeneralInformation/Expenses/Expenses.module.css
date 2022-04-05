@@ -32,16 +32,7 @@ display: flex;
 }
 
 
-/* Кнопки */
-.formItemsButton {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 20px;
-     justify-content: flex-end; 
-}
-.formItemsButton button {
-    margin-right: 5px;
-}
+
 
 /* Общая кнопка */
 .buttonExpenses {
@@ -49,3 +40,5 @@ display: flex;
 justify-content: center;
 margin-bottom: 20px;
 }
+
+

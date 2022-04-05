@@ -45,29 +45,29 @@ const TotalTableExpenses = (props) => {
         {
             title: 'Категория',
             dataIndex: 'name',
-            key: 'name',
+            key: 'key',
             align:'center',
             sorter: (a, b) => a.name.length - b.name.length,
-            // render: (text, record, index) =>
-            // <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+              render: (text, record, index) =>
+              <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8}}>{text}</div>
         },
         {
             title: 'Дата',
             dataIndex: 'time',
-            key: 'time',
+            key: 'key',
             align:'center',
             sorter: (a, b) => moment(a.time) - moment(b.time),
-            // render: (text, record, index) =>
-            // <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+              render: (text, record, index) =>
+              <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8}}>{text}</div>
         },
         {
             title: 'Сумма',
             dataIndex: 'num',
-            key: 'num',
+            key: 'key',
             align:'center',
             sorter: (a, b) => a.num - b.num,
-            // render: (text, record, index) =>
-            // <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+              render: (text, record, index) =>
+              <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8}}>{text}</div>
         }
     ]
     const data = totalSort.map(a => ({ ...a, key: a.id }))
@@ -87,6 +87,7 @@ const TotalTableExpenses = (props) => {
                 ? <div className={s.statisticTable}>
 
                     <Table
+                     rowClassName={s.row}
                         columns={columns}
                         dataSource={data}
                         size="small"

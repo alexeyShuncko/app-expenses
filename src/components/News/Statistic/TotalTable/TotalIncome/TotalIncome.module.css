@@ -9,7 +9,10 @@
     border-bottom: solid 2px black;
 }
 
-
+.row > td{
+    padding: 0px !important
+    } 
+    
 
 /* Всего потрачено */
 .totalSumm {

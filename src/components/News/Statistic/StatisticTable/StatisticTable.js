@@ -35,7 +35,7 @@ const StatisticTable = (props) => {
             && b.time >= (props.diagramm.period[0].S || props.diagramm.today.s))
 
 
-    //let color = category.filter(a => a.idCategory === props.diagramm.activ.id)[0].color
+     let color = category.filter(a => a.idCategory === props.diagramm.activ.id)[0].color
 
 
 
@@ -43,20 +43,20 @@ const StatisticTable = (props) => {
         {
             title: 'Дата',
             dataIndex: 'time',
-            key: 'id',
+            key: 'key',
             align: 'center',
             sorter: (a, b) => moment(a.time) - moment(b.time),
-            // render: (text, record, index) =>
-            //     <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+              render: (text, record, index) =>
+                  <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         },
         {
             title: 'Сумма',
             dataIndex: 'num',
-            key: 'id',
+            key: 'key',
             align: 'center',
             sorter: (a, b) => a.num - b.num,
-            // render: (text, record, index) =>
-            //     <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+              render: (text, record, index) =>
+                  <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         }
     ]
     const data = filterTable.map(a => ({ ...a, key: a.id }))
@@ -85,6 +85,7 @@ const StatisticTable = (props) => {
                     {filterTable.length !== 0
                         ? <div>
                             <Table
+                             rowClassName={s.row}
                                 columns={columns}
                                 dataSource={data}
                                 size="small"

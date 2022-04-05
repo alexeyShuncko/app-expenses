@@ -1,5 +1,5 @@
 import { Button, Form, Select, Space } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import s from './DeleteCategory.module.css';
 
 
@@ -7,6 +7,9 @@ import s from './DeleteCategory.module.css';
 
 
 const DeleteCategory = (props) => {
+   
+
+    let [color, setColor ]= useState(props.diagramm.category[0].color)
 
     const [form] = Form.useForm()
 
@@ -16,7 +19,9 @@ const DeleteCategory = (props) => {
         window.history.back()
     }
 
-
+const onColorAdd =(value)=> {
+    setColor((props.diagramm.category.find(a=>a.nameRus===value).color))
+}
     const onFinish = (values) => {
         props.deleteCategory(values.select)
 
@@ -24,6 +29,7 @@ const DeleteCategory = (props) => {
         props.addActivHedgehog(true)
         props.addActiv('')
         form.resetFields()
+        setColor(props.diagramm.category[0].color)
     }
 
     return (
@@ -37,7 +43,7 @@ const DeleteCategory = (props) => {
                     form={form}
                     name="deleteCategory"
                     labelCol={{ span: 9 }}
-                    wrapperCol={{ span: 9 }}
+                    wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
                     initialValues={{ select: diagramm[0].nameRus }}
                     //onFinishFailed={onFinishFailed}
@@ -48,12 +54,14 @@ const DeleteCategory = (props) => {
                      labelCol={{ offset: 1 }}
                         name='select'>
                         <Select
-                            style={{ width: 120 }}
+                          onChange={onColorAdd}
+                       className={s.selectCateg}
+                       style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`}}
                         >
                             {diagramm.map(a =>
                                 <Select.Option value={a.nameRus}
                                     key={a.nameRus}
-                                //style={{ backgroundColor: ` ${a.color}` }}
+                                    style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)` }}
                                 >
                                     {a.nameRus}
                                 </Select.Option >)}
@@ -63,7 +71,7 @@ const DeleteCategory = (props) => {
 
                     <Form.Item
                         style={{ marginTop: 30 }}
-                        wrapperCol={{ offset: 8 }}>
+                        wrapperCol={{ offset: 10 }}>
                         <Space>
                             <Button
                                 type="primary"

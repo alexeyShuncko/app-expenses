@@ -20,8 +20,8 @@ align-items: center;
 
 /* Поле ЗП */
 .salaryValue {
-    display: flex;
-    align-items: flex-end;
+display: flex;
+align-items: center;   
 }
 
 .salaryName {

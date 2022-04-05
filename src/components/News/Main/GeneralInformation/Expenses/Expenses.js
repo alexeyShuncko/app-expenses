@@ -31,22 +31,30 @@ const Expenses = (props) => {
 
         const timer = DateFunc(new Date())
         let keyArray = []
-        let valueArray =[]
+        let valueArray = []
         for (let key in values) {
-            
+
             if (values[key]) {
                 keyArray.push(key)
                 valueArray.push(values[key])
             }
         }
 
-        let text = keyArray.map(a => diagramm.find(b => b.nameRus === a).nameRusСase).join(', ') 
-     
+        let text = keyArray.map(a => diagramm.find(b => b.nameRus === a).nameRusСase).join(', ')
+
         props.addText(`Расходы на  "${text}" добавлены ...`)
         props.addActivHedgehog(true)
 
         props.addDiagramm(keyArray, valueArray, timer)
         deActivateEditMode()
+    }
+
+
+    const onMouseOver = (e) => {
+        e.target.style.borderColor = diagramm.find(a => a.nameRus === e.target.name).color
+    }
+    const onMouseOut = (e) => {
+        e.target.style.borderColor = '#d9d9d9'
     }
 
     return (
@@ -64,8 +72,8 @@ const Expenses = (props) => {
 
                         <Form
                             name="expenses"
-                            labelCol={{ span: 8 }}
-                            wrapperCol={{ span: 16 }}
+                            labelCol={{ span: 10 }}
+                            wrapperCol={{ span: 14 }}
                             //initialValues={{}}
                             onFinish={onFinish}
                             //onFinishFailed={onFinishFailed}
@@ -76,11 +84,13 @@ const Expenses = (props) => {
                                     label={a.nameRusСase}
                                     name={a.nameRus}
                                     key={a.nameRus}
-                                    //hasFeedback 
-                                    >
-                                    <Input 
-                                    //style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.5)` }}
-                                     type='number' onInput={funcValidNumber} step='0.01' />
+                                //hasFeedback 
+                                >
+                                    <Input
+                                        name={a.nameRus}
+                                        onMouseOver={onMouseOver}
+                                        onMouseOut={onMouseOut}
+                                        type='number' onInput={funcValidNumber} step='0.01' />
                                 </Form.Item>)
                             }
 

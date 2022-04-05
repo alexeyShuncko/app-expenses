@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './RenameCategory.module.css';
 import { Button, Form, Input, Select, Space } from 'antd';
 
 
 const RenameCategory = (props) => {
+    let [color, setColor ]= useState(props.diagramm.category[0].color)
 
     const [form] = Form.useForm()
 
@@ -23,6 +24,13 @@ const RenameCategory = (props) => {
     }
 
 
+      
+    const onColor = (value) => {
+       
+        setColor((props.diagramm.category.find(a=>a.nameRus===value).color))
+      }
+
+
     const validator = (rule, value) => {
         if (value && props.diagramm.category.find(a => a.nameRus.toLowerCase() === value.toLowerCase())) {
             return Promise.reject(new Error(`Категория "${value}" уже есть!`))
@@ -40,6 +48,7 @@ const RenameCategory = (props) => {
 
         props.nameCase(values.name) //добавление имени в винительном падеже ...
         form.resetFields()
+        setColor(props.diagramm.category[0].color)
     }
 
 
@@ -62,11 +71,14 @@ const RenameCategory = (props) => {
                     style={{marginBottom: 10}}
                         label="Название категории"
                         name='select'>
-                        <Select>
+                        <Select
+                         className={s.selectCateg}
+                         style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`}}
+                         onChange={onColor}>
                             {diagramm.map(a =>
                                 <Select.Option value={a.nameRus}
                                     key={a.nameRus}
-                                //style={{ backgroundColor: ` ${a.color}` }}
+                                    style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)` }}
                                 >
                                     {a.nameRus}
                                 </Select.Option >)}
@@ -85,7 +97,7 @@ const RenameCategory = (props) => {
 
                     <Form.Item
                         style={{ marginTop: 30 }}
-                        wrapperCol={{ offset: 9 }}>
+                        wrapperCol={{ offset: 10 }}>
                         <Space>
                             <Button
                                 type="primary"

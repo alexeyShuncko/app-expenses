@@ -12,39 +12,41 @@ const Salary = (props) => {
     return (
 
         <div className={s.salary}>
-            {timer >= `2022-${props.diagramm.income.salary.Date.month}-${props.diagramm.income.salary.Date.day}`
-                ? <div className={s.salaryUpdate} >Вы получили зарплату!</div>
-                : null}
-                 {timer >= `2022-${props.diagramm.income.prepayment.Date.month}-${props.diagramm.income.prepayment.Date.day}`
-                ? <div className={s.salaryUpdate} >Вы получили аванс!</div>
-                : null}
+            {props.diagramm.income.salary.Date.day &&
+                timer >= `2022-${props.diagramm.income.salary.Date.month || timer.slice(5,7)  }-${props.diagramm.income.salary.Date.day}`
+                    ? <div className={s.salaryUpdate} >Вы получили зарплату!</div>
+                    : null}
+            {props.diagramm.income.prepayment.Date.day &&
+                timer >= `2022-${props.diagramm.income.prepayment.Date.month || timer.slice(5,7)}-${props.diagramm.income.prepayment.Date.day}`
+                    ? <div className={s.salaryUpdate} >Вы получили аванс!</div>
+                    : null}
 
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Доходы:</div>
                 <div>
-                   <HocValuta 
-                   value='salary' 
-                   exchangeRates={props.exchangeRates}
-                   salary={props.diagramm.income.total || 0}/>
+                    <HocValuta
+                        value='salary'
+                        exchangeRates={props.exchangeRates}
+                        salary={props.diagramm.income.total || 0} />
                 </div>
             </div>
 
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Расходы:</div>
-                <HocValuta 
-                value='salarySpent' 
-                exchangeRates={props.exchangeRates}
-                salary={props.diagramm.income.total || 0}
-                category={props.diagramm.category}/>
+                <HocValuta
+                    value='salarySpent'
+                    exchangeRates={props.exchangeRates}
+                    salary={props.diagramm.income.total || 0}
+                    category={props.diagramm.category} />
             </div>
 
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Баланс:</div>
-                <HocValuta 
-                value='salaryRemainder' 
-                exchangeRates={props.exchangeRates} 
-                salary={props.diagramm.income.total || 0}
-                category={props.diagramm.category}/>
+                <HocValuta
+                    value='salaryRemainder'
+                    exchangeRates={props.exchangeRates}
+                    salary={props.diagramm.income.total || 0}
+                    category={props.diagramm.category} />
             </div>
         </div>
     )

@@ -1,15 +1,20 @@
 import React from 'react';
 import s from './Color.module.css';
 import { Button, Form, Input, Select, Space } from 'antd';
+import Converter_V_HEX from '../../helpers/converter/converterHEX';
+import Converter_V_RGB from '../../helpers/converter/converter';
+import { useState } from 'react';
 
 
 
 const Color = (props) => {
-
+    let [color, setColor ]= useState(props.diagramm.category[0].color)
     const [form] = Form.useForm()
+    
    
     const onColor = (value) => {
-        form.setFieldsValue({ color: props.diagramm.category.find(a=>a.nameRus===value).color })
+        form.setFieldsValue({ color: Converter_V_HEX(props.diagramm.category.find(a=>a.nameRus===value).color) })
+        setColor((props.diagramm.category.find(a=>a.nameRus===value).color))
       }
 
     const returnSetting = () => {
@@ -17,8 +22,10 @@ const Color = (props) => {
     }
 
 
+
     const validator = (rule, value) => {
-        if (value && props.diagramm.category.find(a => a.color === value)) {
+        
+        if (props.diagramm.category.find(a => a.color === Converter_V_RGB(value))) {
             return Promise.reject(new Error(`Вы не изменили цвет!`))
         }
         return Promise.resolve()
@@ -26,14 +33,14 @@ const Color = (props) => {
 
 
     const onFinish = (values) => {
-
-        props.addEditColor(values.name, values.color)
+       
+        props.addEditColor(values.name, Converter_V_RGB(values.color))
         props.addText(`Цвет категории "${values.name}" изменен...`)
         props.addActivHedgehog(true)
-
+        setColor(props.diagramm.category[0].color)
         form.resetFields()
+        
     }
-
 
 
     return (
@@ -46,11 +53,11 @@ const Color = (props) => {
                     form={form}
                     className={s.form}
                     name="color"
-                    labelCol={{ span: 11 }}
-                    wrapperCol={{ span: 8 }}
+                    labelCol={{ span: 9 }}
+                    wrapperCol={{ span: 11 }}
                     initialValues={{
                         name: props.diagramm.category[0].nameRus, 
-                        color: props.diagramm.category[0].color 
+                        color: Converter_V_HEX(props.diagramm.category[0].color)
                     }}
                     onFinish={onFinish}
                     autoComplete="off">
@@ -61,11 +68,15 @@ const Color = (props) => {
                         name='name'
                         style={{ marginBottom: 10 }}>
                         
-                        <Select onChange={onColor}>
+                        <Select  
+                        className={s.selectCateg}
+                        style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`}}
+                        onChange={onColor}>
                             {props.diagramm.category.map(a =>
-                                <Select.Option value={a.nameRus}
-                                    key={a.nameRus}
-                                //style={{ backgroundColor: ` ${a.color}` }}
+                                <Select.Option 
+                                value={a.nameRus}
+                                key={a.nameRus}
+                                style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)` }}
                                 >
                                     {a.nameRus}
                                 </Select.Option >)}
@@ -73,8 +84,8 @@ const Color = (props) => {
                     </Form.Item>
 
                     <Form.Item
-                    
-                        style={{ marginBottom: 10 }}
+                    wrapperCol={{ span: 5 }}
+                       
                         label='Цвет'
                         name='color'
                         rules={[{ validator: validator }]}>
@@ -82,7 +93,7 @@ const Color = (props) => {
                     </Form.Item>
 
 
-                    <Form.Item wrapperCol={{ offset: 5 }} style={{ marginTop: 30 }}>
+                    <Form.Item wrapperCol={{ offset: 7 }} style={{ marginTop: 30 }}>
                         <Space>
                             <Button
                                 type="primary"

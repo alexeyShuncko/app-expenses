@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './AddCategory.module.css';
 import { Button, Form, Input, Space } from 'antd';
+import Converter_V_RGB from '../../helpers/converter/converter';
+
 
 
 const AddCategory = (props) => {
@@ -34,7 +36,8 @@ const AddCategory = (props) => {
         props.addText(`Категория "${values.addCategory}" добавлена ...`)
         props.addActivHedgehog(true)
 
-        props.addCategory(values.addCategory, values.color)
+        props.addCategory(values.addCategory, 
+            values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
         props.nameCase(values.addCategory) // добавление имени в винительном падеже
     }
 
@@ -47,7 +50,7 @@ const AddCategory = (props) => {
     }
 
     const validatorColor = (rule, value) => {
-        if (value && props.diagramm.category.find(a => a.color === value)) {
+        if (value && props.diagramm.category.find(a => a.color === Converter_V_RGB(value))) {
             return Promise.reject(new Error(`Такой цвет уже есть!`))
         }
         return Promise.resolve()
@@ -65,7 +68,7 @@ const AddCategory = (props) => {
                     labelCol={{ span: 9 }}
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
-                    initialValues={{ color: '#006400' }}
+                    initialValues={{ color: '#db2ebe' }}
                     validateMessages={validateMessages}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"   >

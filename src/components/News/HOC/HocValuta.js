@@ -83,14 +83,12 @@ const HocValuta = (props) => {
     return (
         <div className={s.salary}>
             <div 
-            className={s.salaryValue} 
-            onClick={props.value === 'salary' ? props.edit : null}>
+            className={s.salaryValue} >
                 {dataTotal}
             </div>
             <div className={s.salaryValuta}>
                 <select
                     className={s.fieldBynUsd}
-                   
                     defaultValue={editBYN}
                     onChange={activEditBYN} >
                     <option value="BYN">BYN</option>

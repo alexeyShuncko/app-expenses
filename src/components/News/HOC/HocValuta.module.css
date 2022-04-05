@@ -1,14 +1,17 @@
 .salary {
 display: flex;
-align-items: flex-end;
+align-items: center;
+
 }
 
 .salaryValue {
     margin-left: 5px;
+    font-size: 20px;
    
 }
 .salaryValuta { 
     margin-left: 3px;
+    font-size: 18px;
 }
 
 
