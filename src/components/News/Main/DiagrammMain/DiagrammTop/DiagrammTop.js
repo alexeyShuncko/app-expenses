@@ -28,35 +28,39 @@ const DiagrammTop = (props) => {
         )
     }  
     
-    let totalSumm = props.diagramm.category.map(a =>a && a.summ).reduce((acc, num) => acc + num, 0)
+    let totalSumm = props.diagramm.category
+    .map(a => a.data
+        .map(b => b.amount)
+        .reduce((acc, num) => acc + num, 0))
+    .reduce((acc, num) => acc + num, 0)
     
    const  data =()=> {
 
     if (props.selectDiagramm === 'USD') {
         return props.diagramm.category.map(a=> { return { 
-            'id': a.nameRus,  
-        "label": a.nameRus,
-        "value": Math.round(a.summ / props.dollar),
+            'id': a.name,  
+        "label": a.name,
+        "value": Math.round(a.data.map(b => b.amount).reduce((acc, num) => acc + num, 0) / props.dollar),
         "color": a.color}})
     }
     else if (props.selectDiagramm === 'BYN') {
         return props.diagramm.category.map(a=> { return { 
-            'id': a.nameRus,  
-        "label": a.nameRus,
-        "value": Math.round(a.summ),
+            'id': a.name,  
+        "label": a.name,
+        "value": Math.round(a.data.map(b => b.amount).reduce((acc, num) => acc + num, 0)),
         "color": a.color}})
     }
     else if (props.selectDiagramm === 'EUR') {
         return props.diagramm.category.map(a=> { return { 
-            'id': a.nameRus,  
-        "label": a.nameRus,
-        "value": Math.round(a.summ / props.euro),
+            'id': a.name,  
+        "label": a.name,
+        "value": Math.round(a.data.map(b => b.amount).reduce((acc, num) => acc + num, 0) / props.euro),
         "color": a.color}})
     }
     return props.diagramm.category.map(a=> { return { 
-        'id': a.nameRus,  
-    "label": a.nameRus,
-    "value": ((a.summ/totalSumm)*100).toFixed(1),
+        'id': a.name,  
+    "label": a.name,
+    "value": ((a.data.map(b => b.amount).reduce((acc, num) => acc + num, 0)/totalSumm)*100).toFixed(1),
     "color": a.color}})
          }
 

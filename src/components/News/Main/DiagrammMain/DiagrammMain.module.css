@@ -10,10 +10,10 @@
 }
 
 .diagrammMainDiagramm {
+margin-top: 50px;
   height: 370px;
   display: flex;
   justify-content: center;
-  flex-direction: row;
 }
 
 .select {

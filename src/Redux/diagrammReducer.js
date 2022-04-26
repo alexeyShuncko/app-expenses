@@ -1,8 +1,17 @@
-import { getDollar, getEuro, getItem } from './../API/api';
+
+import { getDollar, getEuro, getСategories, getItem, getSources, postIncomes, postExpenses } from './../API/api';
 
 
 const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
 const ADD_ACTIV = 'ADD_ACTIV'
+
+
+const ADD_SOURCE = 'ADD_SOURCE'
+const ADD_CATEGORIES = 'ADD_CATEGORIES'
+
+
+
+
 
 const ADD_PERIOD = 'ADD_PERIOD'
 const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
@@ -30,8 +39,6 @@ const ADD_PROBLEM_SELECT = 'ADD_PROBLEM_SELECT'
 const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
 const ADD_SALARY_MONTH = 'ADD_SALARY_MONTH'
 
-const ADD_INCOME = 'ADD_INCOME'
-
 // Сегодняшняя дата 
 
 const ADD_TODAY_S = 'ADD_TODAY_S'
@@ -44,37 +51,40 @@ const ACTIV_HEDGEHOG = 'ACTIV_HEDGEHOG'
 let initialState = {
     category:
         [{
-            nameRus: 'Еда', nameRusСase: 'Еду', color: 'rgb(253, 226, 62)', idCategory: 10000,
+            name: 'Еда', nameRusСase: 'Еду', color: 'rgb(253, 226, 62)', id: 1,
             data: [
-                { id: 10001, time: '2022-02-01', num: 100 },
-                { id: 10002, time: '2022-02-10', num: 20 },
-                { id: 10003, time: '2022-02-12', num: 20 },
-                { id: 10004, time: '2022-02-13', num: 25 },
-                { id: 10005, time: '2022-02-14', num: 52 }
+                { id: 10001, time: '2022-02-01', amount: 100 },
+                { id: 10002, time: '2022-02-10', amount: 20 },
+                { id: 10003, time: '2022-02-12', amount: 20 },
+                { id: 10004, time: '2022-02-13', amount: 25 },
+                { id: 10005, time: '2022-02-14', amount: 52 }
             ], summ: 217
         },
         {
-            nameRus: 'Алкоголь', nameRusСase: 'Алкоголь', color: 'rgb(33, 33, 209)', idCategory: 20000,
-            data: [{ id: 20001, time: '2022-02-08', num: 40 }], summ: 40
+            name: 'Алкоголь', nameRusСase: 'Алкоголь', color: 'rgb(33, 33, 209)', id: 2,
+            data: [{ id: 20001, time: '2022-02-08', amount: 40 }], summ: 40
         },
         {
-            nameRus: 'Квартира', nameRusСase: 'Квартиру', color: 'rgb(87, 217, 255)', idCategory: 30000,
-            data: [{ id: 30001, time: '2022-02-11', num: 15 }], summ: 15
+            name: 'Квартира', nameRusСase: 'Квартиру', color: 'rgb(87, 217, 255)', id: 3,
+            data: [{ id: 30001, time: '2022-02-11', amount: 15 }], summ: 15
         },
         {
-            nameRus: 'Транспорт', nameRusСase: 'Транспорт', color: 'rgb(22, 153, 40)', idCategory: 40000,
-            data: [{ id: 40001, time: '2022-02-09', num: 25 }], summ: 25
+            name: 'Транспорт', nameRusСase: 'Транспорт', color: 'rgb(22, 153, 40)', id: 4,
+            data: [{ id: 40001, time: '2022-02-09', amount: 25 }], summ: 25
         }
         ],
     activ: {
-        id: 10000,
+        id: 1,
         name: 'Еда'
     },
     income: {
         data: [
-            { name: 'Другие', color: 'rgb(224, 83, 118)', id: 10000, data: [] },
-            { name: 'Зарплата', color: 'rgb(18, 145, 28)', id: 20000, data: [] },
-            { name: 'Аванс', color: 'rgb(201, 138, 45)', id: 30000, data: [] }
+            { name: 'Другие', color: 'rgb(224, 83, 118)', id: 10000, 
+            data: [{ id: 1, created: '2022-02-09', amount: 25 }] },
+            { name: 'Зарплата', color: 'rgb(18, 145, 28)', id: 20000, 
+            data: [{ id: 2, created: '2022-02-09', amount: 25 }] },
+            { name: 'Аванс', color: 'rgb(201, 138, 45)', id: 30000, 
+            data: [{ id: 3, created: '2022-02-09', amount: 25 }] }
         ],
         total: 0,
         salary: { Date: { day: '', month: '' } },
@@ -88,8 +98,6 @@ let initialState = {
     ],
 
     tableSelect: 'расходов',
-
-
     selectDiagramm: 'BYN',
 
     exchangeRates: {
@@ -129,33 +137,15 @@ const diagrammReduser = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case ADD_DIAGRAMM:
-            return {
-                ...state,
-                category: [
-                    ...state.category.map(a => {
-                        if (action.name.includes(a.nameRus)) {
-                            return ({
-                                ...a,
-                                data: [...a.data, {
-                                    id: a.idCategory + (a.data.length + 1), time: action.time,
-                                    num: Number(action.value[action.name.indexOf(a.nameRus)])
-                                }],
-                                summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])
-                            })
-                        }
-                        else return a
-                    })]
-            }
         case ADD_ACTIV:
             return {
                 ...state, activ: {
                     name: action.activ
                         ? action.activ
-                        : state.category[0].nameRus,
+                        : state.category[0].name,
                     id: action.activ
-                        ? state.category.filter(a => a.nameRus === action.activ)[0].idCategory
-                        : state.category[0].idCategory
+                        ? state.category.filter(a => a.name === action.activ)[0].id
+                        : state.category[0].id
                 }
             }
 
@@ -363,39 +353,6 @@ const diagrammReduser = (state = initialState, action) => {
                 }
             }
 
-        case ADD_INCOME:
-            const numValuta = () => {
-                if (action.valuta === "BYN") {
-                    return action.num
-                }
-                else if (action.valuta === "USD") {
-                    return (action.num * state.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
-                }
-                else if (action.valuta === "EUR") {
-                    return (action.num * state.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
-                }
-            }
-            let num = numValuta()
-
-          
-            return {
-                ...state,
-                income: {
-                    ...state.income,
-                    data: state.income.data.map(a => {
-                        if (a.name === action.name) {
-                        a.data.push({
-                                time: action.time,
-                                num: Number(num),
-                                id: a.id + a.data.length
-                            })
-                        }
-                         return a
-                    }),
-                    total: Number(state.income.total) + Number(num)
-                }
-            }
-
         case ADD_TODAY_S:
             return {
                 ...state,
@@ -420,10 +377,19 @@ const diagrammReduser = (state = initialState, action) => {
                 activHedgehog: action.activ
             }
 
-
-
-
-
+        case ADD_SOURCE:
+            return {
+                ...state,
+                income: {
+                    ...state.income,
+                    data: action.data
+                }
+            }
+            case ADD_CATEGORIES:
+                return {
+                    ...state,
+                    category:  action.data 
+                }
         default:
             return state
     }
@@ -482,13 +448,6 @@ export const addSalaryMonth = (name, month) => {
 
 
 
-export const addIncome = (name, time, num, valuta) => {
-    return { type: ADD_INCOME, name, time, num, valuta }
-}
-
-
-
-
 export const addText = (text) => {
     return { type: ADD_TEXT, text }
 }
@@ -513,9 +472,9 @@ export const addDollar = (dollar, data) => {
 export const addEuro = (euro, data) => {
     return { type: ADD_EURO, euro, data }
 }
-export const addDiagramm = (name, value, time) => {
-    return { type: ADD_DIAGRAMM, name, value, time }
-}
+// export const addDiagramm = (name, value, time) => {
+//     return { type: ADD_DIAGRAMM, name, value, time }
+// }
 export const addActiv = (activ) => {
     return { type: ADD_ACTIV, activ }
 }
@@ -542,6 +501,45 @@ export const addSelectDiagrammStat = (selectDiagrammStat) => {
 export const addNameCase = (data, name) => {
     return { type: ADD_NAME_CASE, data, name }
 }
+
+
+
+export const addSource = (data) => {
+    return { type: ADD_SOURCE, data }
+}
+export const addCategories = (data) => {
+    return { type: ADD_CATEGORIES, data }
+}
+
+
+
+
+
+export const sources = () => (dispatch) => {
+    getSources()
+        .then(data =>
+            dispatch(addSource(data)))
+}
+
+export const addIncome = (created, amount,category) => (dispatch) => {
+   
+    postIncomes(created, amount,category)
+        .then(() => dispatch(sources()))
+}
+
+export const categories = () => (dispatch) => {
+    getСategories()
+        .then(data =>
+            dispatch(addCategories(data)))
+}
+
+export const addDiagramm = (data) => (dispatch) => {
+   
+    postExpenses(data)
+        .then(() => dispatch(categories()))
+}
+
+
 
 
 

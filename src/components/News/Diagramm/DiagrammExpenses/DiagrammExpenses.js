@@ -13,14 +13,14 @@ const DiagrammExpenses = (props) => {
         return {
             ...a,
             data: a.data.filter(
-                a => a.time <= (props.periodDiagramm.Po || props.todayPo) 
-                && a.time >= (props.periodDiagramm.S || props.todayS)
+                a => a.created <= (props.periodDiagramm.Po || props.todayPo) 
+                && a.created >= (props.periodDiagramm.S || props.todayS)
             )
         }
     })
 
 // суммарный расход за выбранный период
-    const totalDiag = diagramm.map(a => a.data.map(e => e.num).reduce((sum, current) => sum + current, 0))
+    const totalDiag = diagramm.map(a => a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0))
         .reduce((acc, num) => acc + num, 0)    
 
 
@@ -59,9 +59,9 @@ const DiagrammExpenses = (props) => {
         if (props.selectDiagramm === 'USD') {
             return diagramm.map(a => {
                 return {
-                    'id': a.nameRus,
-                    "label": a.nameRus,
-                    "value": ((a.data.map(e => e.num).reduce((sum, current) => sum + current, 0) / props.dollar)).toFixed(0),
+                    'id': a.name,
+                    "label": a.name,
+                    "value": ((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0) / props.dollar)).toFixed(0),
                     "color": a.color
                 }
             })
@@ -69,9 +69,9 @@ const DiagrammExpenses = (props) => {
         else if (props.selectDiagramm === 'BYN') {
             return diagramm.map(a => {
                 return {
-                    'id': a.nameRus,
-                    "label": a.nameRus,
-                    "value": a.data.map(e => e.num).reduce((sum, current) => sum + current, 0),
+                    'id': a.name,
+                    "label": a.name,
+                    "value": a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0),
                     "color": a.color
                 }
             })
@@ -79,18 +79,18 @@ const DiagrammExpenses = (props) => {
         else if (props.selectDiagramm === 'EUR') {
             return diagramm.map(a => {
                 return {
-                    'id': a.nameRus,
-                    "label": a.nameRus,
-                    "value": ((a.data.map(e => e.num).reduce((sum, current) => sum + current, 0)) / props.euro).toFixed(0),
+                    'id': a.name,
+                    "label": a.name,
+                    "value": ((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0)) / props.euro).toFixed(0),
                     "color": a.color
                 }
             })
         }
         return diagramm.map(a => {
             return {
-                'id': a.nameRus,
-                "label": a.nameRus,
-                "value": ((a.data.map(e => e.num).reduce((sum, current) => sum + current, 0) / totalDiag) * 100).toFixed(1),
+                'id': a.name,
+                "label": a.name,
+                "value": ((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0) / totalDiag) * 100).toFixed(1),
                 "color": a.color
             }
         })

@@ -1,5 +1,4 @@
 import React from 'react';
-//import './App.css';
 import ExpensesContainer from './components/News/ExpensesContainer';
 
 

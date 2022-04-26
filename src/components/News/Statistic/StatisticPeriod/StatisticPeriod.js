@@ -13,7 +13,7 @@ const StatisticPeriod = (props) => {
 
     const diagramm = props.diagramm.category
 
-    let color = diagramm.filter(a => a.idCategory === props.diagramm.activ.id)[0].color
+    let color = diagramm.find(a => a.id === props.diagramm.activ.id).color
 
 
     const onChangeDate = (data, dateString) => {
@@ -52,18 +52,18 @@ const StatisticPeriod = (props) => {
                                 backgroundColor: `rgba(${color.slice(4, -1)},0.6)`
                             }}
                             onChange={handleChange}
-                            defaultValue={props.diagramm.activ.name || diagramm[0].nameRus}
+                            defaultValue={props.diagramm.activ.name || diagramm[0].name}
                         >
 
                             {diagramm.map(a =>
-                                <Select.Option value={a.nameRus}
-                                    key={a.nameRus}
-                                    name={a.nameRus}
+                                <Select.Option value={a.name}
+                                    key={a.id}
+                                    name={a.name}
                                     style={{
                                         backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)`
                                     }}
                                 >
-                                    {a.nameRus}
+                                    {a.name}
                                 </Select.Option >)}
                         </Select>
 

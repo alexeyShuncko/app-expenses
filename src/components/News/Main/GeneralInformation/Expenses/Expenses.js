@@ -29,6 +29,8 @@ const Expenses = (props) => {
 
     const onFinish = (values) => {
 
+
+        console.log(values)
         const timer = DateFunc(new Date())
         let keyArray = []
         let valueArray = []
@@ -40,18 +42,29 @@ const Expenses = (props) => {
             }
         }
 
-        let text = keyArray.map(a => diagramm.find(b => b.nameRus === a).nameRusСase).join(', ')
+
+        let data = keyArray.map((a, index) => {
+
+            return {
+                "created": timer,
+                "amount": valueArray[index],
+                "currency": "BYN",
+                "category": props.diagramm.category.find(b => b.name === a).id
+            }
+        })
+
+        let text = keyArray.map(a => diagramm.find(b => b.name === a).name).join(', ')
 
         props.addText(`Расходы на  "${text}" добавлены ...`)
         props.addActivHedgehog(true)
 
-        props.addDiagramm(keyArray, valueArray, timer)
+        props.addDiagramm(data)
         deActivateEditMode()
     }
 
 
     const onMouseOver = (e) => {
-        e.target.style.borderColor = diagramm.find(a => a.nameRus === e.target.name).color
+        e.target.style.borderColor = diagramm.find(a => a.name === e.target.name).color
     }
     const onMouseOut = (e) => {
         e.target.style.borderColor = '#d9d9d9'
@@ -81,13 +94,13 @@ const Expenses = (props) => {
 
                             {diagramm.map(a =>
                                 <Form.Item style={{ marginBottom: 0 }}
-                                    label={a.nameRusСase}
-                                    name={a.nameRus}
-                                    key={a.nameRus}
+                                    label={a.name}
+                                    name={a.name}
+                                    key={a.name}
                                 //hasFeedback 
                                 >
                                     <Input
-                                        name={a.nameRus}
+                                        name={a.name}
                                         onMouseOver={onMouseOver}
                                         onMouseOut={onMouseOut}
                                         type='number' onInput={funcValidNumber} step='0.01' />

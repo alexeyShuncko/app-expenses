@@ -20,8 +20,8 @@ const StatisticTable = (props) => {
 
     const styles = {
         borderBottom: `solid 3px ${props.diagramm.category.filter(a => props.diagramm.activ.id
-            ? a.idCategory === props.diagramm.activ.id
-            : a.idCategory === props.diagramm.category[0].idCategory)[0].color}`
+            ? a.id === props.diagramm.activ.id
+            : a.id === props.diagramm.category[0].idCategory)[0].color}`
     }
 
 
@@ -29,32 +29,32 @@ const StatisticTable = (props) => {
 
     let filterTable = category
         .filter(a => props.diagramm.activ.id
-            ? a.idCategory === props.diagramm.activ.id
-            : a.nameRus === category[0].nameRus)[0].data
-        .filter(b => b.time <= (props.diagramm.period[0].Po || props.diagramm.today.po)
-            && b.time >= (props.diagramm.period[0].S || props.diagramm.today.s))
+            ? a.id === props.diagramm.activ.id
+            : a.name === category[0].name)[0].data
+        .filter(b => b.created <= (props.diagramm.period[0].Po || props.diagramm.today.po)
+            && b.created >= (props.diagramm.period[0].S || props.diagramm.today.s))
 
 
-     let color = category.filter(a => a.idCategory === props.diagramm.activ.id)[0].color
+     let color = category.filter(a => a.id === props.diagramm.activ.id)[0].color
 
 
 
     const columns = [
         {
             title: 'Дата',
-            dataIndex: 'time',
+            dataIndex: 'created',
             key: 'key',
             align: 'center',
-            sorter: (a, b) => moment(a.time) - moment(b.time),
+            sorter: (a, b) => moment(a.created) - moment(b.created),
               render: (text, record, index) =>
                   <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         },
         {
             title: 'Сумма',
-            dataIndex: 'num',
+            dataIndex: 'amount',
             key: 'key',
             align: 'center',
-            sorter: (a, b) => a.num - b.num,
+            sorter: (a, b) => a.amount - b.amount,
               render: (text, record, index) =>
                   <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         }
@@ -68,7 +68,7 @@ const StatisticTable = (props) => {
 
     let textMessage =
         `Нет расходов с ${dateS} по ${datePo} 
-    на "${props.diagramm.activ.name && category.filter(a => a.idCategory === props.diagramm.activ.id)[0].nameRusСase}" ...`
+    на "${props.diagramm.activ.name && category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusСase}" ...`
 
 
     return (
@@ -76,7 +76,8 @@ const StatisticTable = (props) => {
             <div>Таблица расходов по выбранной категории за выбранный период. </div>
             {!editMode
                 ? <div>
-                    <Button type='primary' onClick={activateEditMode}>Показать</Button>
+                    <Button type='primary' onClick={activateEditMode}
+                     style={{marginTop: 5}}>Показать</Button>
                 </div>
                 : <div >
                     <Button style={{ marginBottom: 17, marginTop: 17, }}
@@ -90,7 +91,7 @@ const StatisticTable = (props) => {
                                 dataSource={data}
                                 size="small"
                                 pagination={{
-                                    pageSize: '8'
+                                    pageSize: '9'
                                 }}
                                 bordered
                             />
@@ -98,7 +99,7 @@ const StatisticTable = (props) => {
                             <div className={s.statisticDateSumm} style={styles}>
                                 Потрачено на <span className={s.categorySumm}>
                                     {props.diagramm.activ.name &&
-                                        category.filter(a => a.idCategory === props.diagramm.activ.id)[0].nameRusСase}
+                                        category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusСase}
                                 </span>
                                 <div> с {dateS} по {datePo} </div>
                                 <div className={s.totalCategory}>

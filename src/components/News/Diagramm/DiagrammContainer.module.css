@@ -1,11 +1,11 @@
 /* блок диаграммы */
 .diagramm {
-margin-top: 20px;
+margin-top: 70px;
 margin-bottom: 40px;
 }
 
 
-/* Размерсамой диаграммы */
+/* Размер самой диаграммы */
 .pie {
     height: 400px;
     }

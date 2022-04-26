@@ -16,6 +16,7 @@ const GeneralInformation = (props) => {
                 diagramm={props.diagramm}
                 addText={props.addText} />
             <Income
+             diagramm={props.diagramm}
                 addActivHedgehog={props.addActivHedgehog}
                 data={props.data}
                 addText={props.addText}

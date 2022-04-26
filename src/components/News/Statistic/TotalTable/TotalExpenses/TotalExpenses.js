@@ -15,17 +15,17 @@ const TotalTableExpenses = (props) => {
     // фильтрую в зависимости от выбранного периода
     let result = category.map(a => {
         return {
-            nameRus: a.nameRus,
+            name: a.name,
             color: a.color,
-            data: a.data.filter(b => b.time >= (props.periodS || props.todayS)
-                && b.time <= (props.periodPo || props.todayPo))
+            data: a.data.filter(b => b.created >= (props.periodS || props.todayS)
+                && b.created <= (props.periodPo || props.todayPo))
         }
     })
 
 
     let newResult = result.map(a => a.data.map(d => {
         return {
-            name: a.nameRus, color: a.color, time: d.time, num: d.num, id: d.id
+            name: a.name, color: a.color, created: d.created, amount: d.amount, id: d.id
         }
     }))
 
@@ -38,7 +38,7 @@ const TotalTableExpenses = (props) => {
         newResult[5] ? newResult[5] : [])  // соединяю массивы ...........
 
 
-    let totalSort = total.sort((a, b) => a.time > b.time ? 1 : -1)            //сортировка по времени 
+    let totalSort = total.sort((a, b) => a.created > b.created ? 1 : -1)            //сортировка по времени 
 
 
     const columns = [
@@ -53,26 +53,26 @@ const TotalTableExpenses = (props) => {
         },
         {
             title: 'Дата',
-            dataIndex: 'time',
+            dataIndex: 'created',
             key: 'key',
             align:'center',
-            sorter: (a, b) => moment(a.time) - moment(b.time),
+            sorter: (a, b) => moment(a.created) - moment(b.created),
               render: (text, record, index) =>
               <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8}}>{text}</div>
         },
         {
             title: 'Сумма',
-            dataIndex: 'num',
+            dataIndex: 'amount',
             key: 'key',
             align:'center',
-            sorter: (a, b) => a.num - b.num,
+            sorter: (a, b) => a.amount - b.amount,
               render: (text, record, index) =>
               <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8}}>{text}</div>
         }
     ]
     const data = totalSort.map(a => ({ ...a, key: a.id }))
 
-    const totalSumm = total.map(a => a.num).reduce((sum, current) => sum + current, 0)
+    const totalSumm = total.map(a => a.amount).reduce((sum, current) => sum + current, 0)
 
     let dateS = DataTransformation(props.periodS || props.todayS)
     let datePo = DataTransformation(props.periodPo || props.todayPo)
@@ -92,7 +92,7 @@ const TotalTableExpenses = (props) => {
                         dataSource={data}
                         size="small"
                         pagination={{
-                            pageSize: '9'
+                            pageSize: '10'
                         }}
                         bordered
                     />

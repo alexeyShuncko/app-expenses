@@ -39,7 +39,7 @@ const GrafsExpenses = (props) => {
 
                 const data = DateFunc(new Date(i))
 
-                arrTime.push({ time: MonthFunc(data) })
+                arrTime.push({ created: MonthFunc(data) })
             }
             return arrTime
         }
@@ -49,7 +49,7 @@ const GrafsExpenses = (props) => {
 
             const data = DateFunc(new Date(i))
 
-            arrTime.push({ time: DataTransformation(data) })
+            arrTime.push({ created: DataTransformation(data) })
         }
         return arrTime
     }
@@ -59,18 +59,18 @@ const GrafsExpenses = (props) => {
 
     const data = props.category.map(a => {
         return {
-            'id': a.nameRus,
+            'id': a.name,
             'data': timer.map(t => {
                 return {
-                    'x': t.time,
-                    'y': a.data.filter(e => timer[0].time.length > 8
-                        ? DataTransformation(e.time) === t.time
-                        : MonthFunc(e.time) === t.time).length !== 0
+                    'x': t.created,
+                    'y': a.data.filter(e => timer[0].created.length > 8
+                        ? DataTransformation(e.created) === t.created
+                        : MonthFunc(e.created) === t.created).length !== 0
                         ? Math.round(a.data
-                            .filter(e => timer[0].time.length > 8
-                                ? DataTransformation(e.time) === t.time
-                                : MonthFunc(e.time) === t.time)
-                            .map(m => m.num)
+                            .filter(e => timer[0].created.length > 8
+                                ? DataTransformation(e.created) === t.created
+                                : MonthFunc(e.created) === t.created)
+                            .map(m => m.amount)
                             .reduce((acc, num) => acc + num, 0) / coefficient)
                         : 0
                 }

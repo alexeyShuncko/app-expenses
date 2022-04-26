@@ -27,15 +27,31 @@ const Income = (props) => {
     }
 
 
-    
+
     const onFinish = (values) => {
         const timer = DateFunc(new Date())
+
+        const numValuta = () => {
+            if (values.valuta === "BYN") {
+                return Number(values.income)
+            }
+            else if (values.valuta === "USD") {
+                return (Number(values.income) * props.diagramm.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
+            }
+            else if (values.valuta === "EUR") {
+                return (Number(values.income) * props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
+            }
+        }
+        let num = numValuta()
+
+        let category = props.diagramm.income.data.filter(a => a.name === values.name)[0].id
+
 
         props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
         props.addActivHedgehog(true)
 
         props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
-        props.addIncome(values.name, timer, Number(values.income), values.valuta)
+        props.addIncome(timer, num, category)
         deActivateEditMode()
     }
 
@@ -53,64 +69,64 @@ const Income = (props) => {
                     <div className={s.incomeName}>Доходы:</div>
                     <div className={s.formIncomeFild}>
 
-                        <Form 
+                        <Form
                             name="basic"
                             labelCol={{ span: 8 }}
-                            wrapperCol={{  span: 16 }}
+                            wrapperCol={{ span: 16 }}
                             initialValues={{ name: "Зарплата", valuta: "BYN" }}
                             onFinish={onFinish}
                             //onFinishFailed={onFinishFailed}
                             autoComplete="off"   >
 
-                            <Form.Item 
-                            label="Доход" 
-                            name="name" 
-                          
-                            style={{marginBottom: 0 }}>
+                            <Form.Item
+                                label="Доход"
+                                name="name"
+
+                                style={{ marginBottom: 0 }}>
                                 <Select >
-                                    { props.data.map(a=>
-                                            <Select.Option 
+                                    {props.data.map(a =>
+                                        <Select.Option
                                             //style={{backgroundColor: a.color}} 
                                             //value={a.name}
                                             key={a.name}>
                                             {a.name}
-                                            </Select.Option>)
+                                        </Select.Option>)
                                     }
                                 </Select>
                             </Form.Item>
-                            <Form.Item style={{marginBottom: 0}}
+                            <Form.Item style={{ marginBottom: 0 }}
                                 label="Сумма"
                                 name="income"
                                 hasFeedback
-                                rules={[{ required: true, message: 'Введите сумму!'}]}
+                                rules={[{ required: true, message: 'Введите сумму!' }]}
                             >
-                                <Input  type='number' onInput={funcValidNumber} step='0.01' />
+                                <Input type='number' onInput={funcValidNumber} step='0.01' />
                             </Form.Item>
-                            <Form.Item style={{marginBottom: 10}}
-                            label="Валюта" 
-                            name="valuta"
-                            wrapperCol={{ span: 8 }}>
+                            <Form.Item style={{ marginBottom: 10 }}
+                                label="Валюта"
+                                name="valuta"
+                                wrapperCol={{ span: 8 }}>
                                 <Select >
                                     <Select.Option value="BYN">BYN</Select.Option>
                                     <Select.Option value="USD">USD</Select.Option>
                                     <Select.Option value="EUR">EUR</Select.Option>
                                 </Select>
                             </Form.Item>
-                          
-                            <Form.Item  wrapperCol={{ offset: 8}}>
-                            <Space>
-                            <Button 
-                            type="primary" 
-                            htmlType="submit"
-                            >
-                                Добавить
-                            </Button>
-                            <Button type="primary" danger onClick={deActivateEditMode}>
-                                Назад
-                            </Button>
-                            </Space>
+
+                            <Form.Item wrapperCol={{ offset: 8 }}>
+                                <Space>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                    >
+                                        Добавить
+                                    </Button>
+                                    <Button type="primary" danger onClick={deActivateEditMode}>
+                                        Назад
+                                    </Button>
+                                </Space>
                             </Form.Item>
-                            
+
                         </Form>
                     </div>
                 </div>

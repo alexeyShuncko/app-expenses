@@ -35,7 +35,8 @@ const TotalTable = (props) => {
                 за выбранный период. </div>
             {!editMode
                 ? <div>
-                    <Button type='primary' onClick={activateEditMode}>Показать</Button>
+                    <Button type='primary' onClick={activateEditMode}
+                    style={{marginTop: 5}}>Показать</Button>
                 </div>
                 : <div >
                      <Button style={{marginBottom: 17, marginTop: 17}}

@@ -1,11 +1,12 @@
 .newsContainerItems {
     display: flex;
-    /* height: 150vh; */
-    background-color: rgb(204, 163, 204);
 }
 
 .newsContainerNav {
+  position: fixed;
   display: flex;
+  height: 95%;
+  width: 250px;
   flex-direction: column;
   flex:2;
   margin: 20px;
@@ -14,12 +15,13 @@
 }
 .NavNews {
   margin-left: 20px; 
-  margin-right: 40px; 
+  margin-right: 20px; 
   padding-bottom: 20px;
   border-bottom: solid 1px;
 }
 
 .newsContainerContent {
+  padding-left: 290px;
     flex:8;
     margin-top: 20px;
 }
@@ -29,7 +31,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: 70px;
   }
  
 

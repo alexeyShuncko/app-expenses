@@ -8,6 +8,7 @@
   /* анимация */
 .popup {
   position: relative;
+  width: 250px;
   display: inline-block;
  
 }

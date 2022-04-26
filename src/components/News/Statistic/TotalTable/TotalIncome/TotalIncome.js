@@ -17,8 +17,8 @@ const TotalIncome = (props) => {
             return {
                 name: a.name,
                 color: a.color,
-                data: a.data.filter(b => b.time >= (props.periodS || props.todayS)
-                    && b.time <= (props.periodPo || props.todayPo))
+                data: a.data.filter(b => b.created >= (props.periodS || props.todayS)
+                    && b.created <= (props.periodPo || props.todayPo))
             }
         })
 
@@ -26,7 +26,7 @@ const TotalIncome = (props) => {
 
     let newResult = result.map(a => a.data.map(d => {
         return {
-            name: a.name, time: d.time, num: d.num, id: d.id, color: a.color
+            name: a.name, created: d.created, amount: d.amount, id: d.id, color: a.color
         }
     }))
 
@@ -36,7 +36,7 @@ const TotalIncome = (props) => {
         newResult[2] ? newResult[2] : []
     )
 
-    let totalSort = total.sort((a, b) => a.time > b.time ? 1 : -1)
+    let totalSort = total.sort((a, b) => a.created > b.created ? 1 : -1)
 
   
 
@@ -52,19 +52,19 @@ const TotalIncome = (props) => {
         },
         {
             title: 'Дата',
-            dataIndex: 'time',
-            key: 'time',
+            dataIndex: 'created',
+            key: 'created',
             align:'center',
-            sorter: (a, b) => moment(a.time) - moment(b.time),
+            sorter: (a, b) => moment(a.created) - moment(b.created),
             render: (text, record, index) =>
             <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         },
         {
             title: 'Сумма',
-            dataIndex: 'num',
-            key: 'num',
+            dataIndex: 'amount',
+            key: 'amount',
             align:'center',
-            sorter: (a, b) => a.num - b.num,
+            sorter: (a, b) => a.amount - b.amount,
             render: (text, record, index) =>
             <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         }
@@ -72,7 +72,7 @@ const TotalIncome = (props) => {
  
     const data = totalSort.map(a=> ({...a, key: a.id}))
 
-    const totalSumm = total.map(a => a.num).reduce((sum, current) => sum + current, 0)
+    const totalSumm = total.map(a => a.amount).reduce((sum, current) => sum + current, 0)
 
     let dateS = DataTransformation(props.periodS || props.todayS)
     let datePo = DataTransformation(props.periodPo || props.todayPo)
@@ -93,7 +93,7 @@ const TotalIncome = (props) => {
                         dataSource={data}
                         size="small"
                         pagination={{
-                            pageSize: '9'
+                            pageSize: '10'
                         }}
                         bordered
                     />
