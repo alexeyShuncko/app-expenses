@@ -1,5 +1,10 @@
 
-import { getDollar, getEuro, getСategories, getItem, getSources, postIncomes, postExpenses } from './../API/api';
+import {
+    getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
+    postСategories, postExpenses, deleteСategories, putСategories, getSalary, postSalary,
+    getRelatiity,
+    postRelatiity
+} from './../API/api';
 
 
 const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
@@ -8,8 +13,8 @@ const ADD_ACTIV = 'ADD_ACTIV'
 
 const ADD_SOURCE = 'ADD_SOURCE'
 const ADD_CATEGORIES = 'ADD_CATEGORIES'
-
-
+const ADD_SALARY = 'ADD_SALARY'
+const ADD_RELATIV = 'ADD_RELATIV'
 
 
 
@@ -53,24 +58,24 @@ let initialState = {
         [{
             name: 'Еда', nameRusСase: 'Еду', color: 'rgb(253, 226, 62)', id: 1,
             data: [
-                { id: 10001, time: '2022-02-01', amount: 100 },
-                { id: 10002, time: '2022-02-10', amount: 20 },
-                { id: 10003, time: '2022-02-12', amount: 20 },
-                { id: 10004, time: '2022-02-13', amount: 25 },
-                { id: 10005, time: '2022-02-14', amount: 52 }
+                { id: 10001, created: '2022-04-01', amount: 100 },
+                { id: 10002, created: '2022-04-10', amount: 20 },
+                { id: 10003, created: '2022-04-12', amount: 20 },
+                { id: 10004, created: '2022-04-13', amount: 25 },
+                { id: 10005, created: '2022-04-14', amount: 45 }
             ], summ: 217
         },
         {
             name: 'Алкоголь', nameRusСase: 'Алкоголь', color: 'rgb(33, 33, 209)', id: 2,
-            data: [{ id: 20001, time: '2022-02-08', amount: 40 }], summ: 40
+            data: [{ id: 20001, created: '2022-04-08', amount: 40 }], summ: 40
         },
         {
             name: 'Квартира', nameRusСase: 'Квартиру', color: 'rgb(87, 217, 255)', id: 3,
-            data: [{ id: 30001, time: '2022-02-11', amount: 15 }], summ: 15
+            data: [{ id: 30001, created: '2022-04-11', amount: 15 }], summ: 15
         },
         {
             name: 'Транспорт', nameRusСase: 'Транспорт', color: 'rgb(22, 153, 40)', id: 4,
-            data: [{ id: 40001, time: '2022-02-09', amount: 25 }], summ: 25
+            data: [{ id: 40001, created: '2022-04-09', amount: 25 }], summ: 25
         }
         ],
     activ: {
@@ -79,16 +84,24 @@ let initialState = {
     },
     income: {
         data: [
-            { name: 'Другие', color: 'rgb(224, 83, 118)', id: 10000, 
-            data: [{ id: 1, created: '2022-02-09', amount: 25 }] },
-            { name: 'Зарплата', color: 'rgb(18, 145, 28)', id: 20000, 
-            data: [{ id: 2, created: '2022-02-09', amount: 25 }] },
-            { name: 'Аванс', color: 'rgb(201, 138, 45)', id: 30000, 
-            data: [{ id: 3, created: '2022-02-09', amount: 25 }] }
+            {
+                name: 'Другие', color: 'rgb(224, 83, 118)', id: 1,
+                data: [{ id: 1, created: '2022-04-12', amount: 10 }]
+            },
+            {
+                name: 'Зарплата', color: 'rgb(18, 145, 28)', id: 2,
+                data: [{ id: 2, created: '2022-04-09', amount: 15 }]
+            },
+            {
+                name: 'Аванс', color: 'rgb(201, 138, 45)', id: 3,
+                data: [{ id: 3, created: '2022-04-10', amount: 25 }]
+            }
         ],
-        total: 0,
-        salary: { Date: { day: '', month: '' } },
-        prepayment: { Date: { day: '', month: '' } },
+        salary: [
+            { id: 1, salary_day: '01', salary_month: '04' },
+            { id: 2,  salary_day: '02', salary_month: '04' }
+        ]
+     
     },
 
     period: [
@@ -136,6 +149,26 @@ const diagrammReduser = (state = initialState, action) => {
 
 
     switch (action.type) {
+
+
+        case ADD_DIAGRAMM:
+            return {
+                ...state,
+                category: [
+                    ...state.category.map(a => {
+                        if (action.name.includes(a.nameRus)) {
+                            return ({
+                                ...a,
+                                data: [...a.data, {
+                                    id: a.idCategory + (a.data.length + 1), time: action.time,
+                                    num: Number(action.value[action.name.indexOf(a.nameRus)])
+                                }],
+                                summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])
+                            })
+                        }
+                        else return a
+                    })]
+            }
 
         case ADD_ACTIV:
             return {
@@ -385,11 +418,22 @@ const diagrammReduser = (state = initialState, action) => {
                     data: action.data
                 }
             }
-            case ADD_CATEGORIES:
+        case ADD_CATEGORIES:
+            return {
+                ...state,
+                category: action.data
+            }
+            case ADD_SALARY:
                 return {
                     ...state,
-                    category:  action.data 
+                    income: {
+                        ...state.income,
+                        salary: action.salary
+                    }
                 }
+
+
+            
         default:
             return state
     }
@@ -511,6 +555,14 @@ export const addCategories = (data) => {
     return { type: ADD_CATEGORIES, data }
 }
 
+export const addSalary = (salary) => {
+    return { type: ADD_SALARY, salary }
+}
+export const addRelativ = (salary) => {
+    return { type: ADD_RELATIV, salary }
+}
+
+
 
 
 
@@ -521,9 +573,9 @@ export const sources = () => (dispatch) => {
             dispatch(addSource(data)))
 }
 
-export const addIncome = (created, amount,category) => (dispatch) => {
-   
-    postIncomes(created, amount,category)
+export const addIncome = (created, amount, category) => (dispatch) => {
+
+    postIncomes(created, amount, category)
         .then(() => dispatch(sources()))
 }
 
@@ -534,13 +586,70 @@ export const categories = () => (dispatch) => {
 }
 
 export const addDiagramm = (data) => (dispatch) => {
-   
+
     postExpenses(data)
         .then(() => dispatch(categories()))
 }
 
 
 
+
+
+
+
+// Настройки 
+
+// Добавление категории
+
+export const itemCategories = (name, color) => (dispatch) => {
+    getItem(name)
+        .then(data => postСategories(name, data.В, color))
+        .then(() => dispatch(categories()))
+}
+
+// Удаление категории
+
+export const deleteItemCategories = (id) => (dispatch) => {
+    deleteСategories(id)
+        .then(() => dispatch(categories()))
+}
+
+// Переименование категории
+
+export const updateItemCategories = (name, color, id) => (dispatch) => {
+    getItem(name)
+        .then(data => putСategories(name, data.В, color, id))
+        .then(() => dispatch(categories()))
+}
+
+// Изменение цвета категории
+
+export const updateColor = (name, nameRusСase, color, id) => (dispatch) => {
+     putСategories(name, nameRusСase, color, id)
+        .then(() => dispatch(categories()))
+}
+
+// Дата зарплаты
+
+export const salary = () => (dispatch) => {
+    getSalary()
+        .then(data =>
+            dispatch(addSalary(data)))
+}
+export const updateSalary = (day, month, id) => (dispatch) => {
+    postSalary(day, month, id)
+        .then(() => dispatch(salary()))
+}
+
+
+
+// Относительная величина 
+
+export const relativ = () => (dispatch) => {
+    getRelatiity()
+        .then(data =>
+            dispatch(addRelativ(data)))
+}
 
 
 
@@ -560,15 +669,13 @@ export const getEuroUpdate = () => (dispatch) => {
 
 export const nameCase = (name) => (dispatch) => {
 
-    getItem(name).then(data => {
-
-        dispatch(addNameCase(data.В, name))
-    })
+    getItem(name)
+        .then(data => dispatch(addNameCase(data.В, name)))
 }
+
 export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
 
     getItem(name).then(data => {
-        console.log(data)
         dispatch(changeRelativity(data.Р, unit, prise, [data.Р,
         data.множественное
             ? data.множественное.Р

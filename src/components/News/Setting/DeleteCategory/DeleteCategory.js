@@ -7,9 +7,9 @@ import s from './DeleteCategory.module.css';
 
 
 const DeleteCategory = (props) => {
-   
 
-    let [color, setColor ]= useState(props.diagramm.category[0].color)
+
+    let [color, setColor] = useState(props.diagramm.category[0].color)
 
     const [form] = Form.useForm()
 
@@ -19,11 +19,14 @@ const DeleteCategory = (props) => {
         window.history.back()
     }
 
-const onColorAdd =(value)=> {
-    setColor((props.diagramm.category.find(a=>a.nameRus===value).color))
-}
+    const onColorAdd = (value) => {
+        setColor((props.diagramm.category.find(a => a.name === value).color))
+    }
     const onFinish = (values) => {
-        props.deleteCategory(values.select)
+
+
+        props.deleteItemCategories(props.diagramm.category.find(a => a.name === values.select).id)
+        // props.deleteCategory(values.select)
 
         props.addText(`Категория "${values.select}" удалена ...`)
         props.addActivHedgehog(true)
@@ -45,25 +48,25 @@ const onColorAdd =(value)=> {
                     labelCol={{ span: 9 }}
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
-                    initialValues={{ select: diagramm[0].nameRus }}
+                    initialValues={{ select: diagramm[0].name }}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
                     <Form.Item
-                     label="Название категории"
-                     labelCol={{ offset: 1 }}
+                        label="Название категории"
+                        labelCol={{ offset: 1 }}
                         name='select'>
                         <Select
-                          onChange={onColorAdd}
-                       className={s.selectCateg}
-                       style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`}}
+                            onChange={onColorAdd}
+                            className={s.selectCateg}
+                            style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)` }}
                         >
                             {diagramm.map(a =>
-                                <Select.Option value={a.nameRus}
-                                    key={a.nameRus}
+                                <Select.Option value={a.name}
+                                    key={a.name}
                                     style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)` }}
                                 >
-                                    {a.nameRus}
+                                    {a.name}
                                 </Select.Option >)}
                         </Select>
                     </Form.Item>

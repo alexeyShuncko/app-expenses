@@ -4,17 +4,18 @@ import s from './RelativityStatistic.module.css';
 
 const RelativityStatistic = (props) => {
 
-    let data = props.diagramm.category.filter(a => a.id === props.diagramm.activ.id)
+    let data = props.diagramm.category.find(a => a.id === props.diagramm.activ.id)
 
-    let summ = data[0].data
-    .map(a=>a.amount)
+    let summ = data.data
+    .map(a=> a.amount)
     .reduce((acc, num) => acc + num, 0)
 
-    let amount = Number( summ / props.diagramm.relativity.price).toFixed(0).slice(-1)
+    let amount = Number(( summ / props.diagramm.relativity.price).toFixed(0).slice(-1))
     let amount11 = Number((summ / props.diagramm.relativity.price).toFixed(0).slice(-2))
 
+
     let bottle = ['бутылки', 'бутылок', 'бутылка']
-    let kg = ['киллограмма', 'киллограмм', 'киллограмм']
+    let kg = ['килограмма', 'килограмм', 'килограмм']
     let pack = ['пачки', 'пачек', 'пачка']
     let liter = ['литра', 'литров', 'литр']
     let two = ['пары', 'пар', 'пара']
@@ -23,7 +24,7 @@ const RelativityStatistic = (props) => {
     const obj = () => {
         if (props.diagramm.relativity.unit === 'бутылка')
             return bottle
-        else if (props.diagramm.relativity.unit === 'киллограмм')
+        else if (props.diagramm.relativity.unit === 'килограмм')
             return kg
         else if (props.diagramm.relativity.unit === 'пачка')
             return pack
@@ -64,7 +65,7 @@ const RelativityStatistic = (props) => {
                 <span className={s.boldValue}>{(summ / props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)} €</span>
             </div>
             <div 
-            style={{ borderBottom: `solid ${data[0].color}` }}
+            style={{ borderBottom: `solid ${data.color}` }}
             >
                 Или:<span className={s.boldValue} title='Относительная величина'>
                     {props.diagramm.relativity.unit === 'штука'

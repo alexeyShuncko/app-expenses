@@ -13,8 +13,8 @@ const Color = (props) => {
     
    
     const onColor = (value) => {
-        form.setFieldsValue({ color: Converter_V_HEX(props.diagramm.category.find(a=>a.nameRus===value).color) })
-        setColor((props.diagramm.category.find(a=>a.nameRus===value).color))
+        form.setFieldsValue({ color: Converter_V_HEX(props.diagramm.category.find(a=>a.name===value).color) })
+        setColor((props.diagramm.category.find(a=>a.name===value).color))
       }
 
     const returnSetting = () => {
@@ -34,7 +34,17 @@ const Color = (props) => {
 
     const onFinish = (values) => {
        
-        props.addEditColor(values.name, Converter_V_RGB(values.color))
+
+        props.updateColor(
+            values.name, 
+            props.diagramm.category.find(a => a.name === values.name).nameRusСase,
+            Converter_V_RGB(values.color),
+            props.diagramm.category.find(a => a.name === values.name).id,
+        )
+        // props.addEditColor(values.name, Converter_V_RGB(values.color))
+
+
+
         props.addText(`Цвет категории "${values.name}" изменен...`)
         props.addActivHedgehog(true)
         setColor(props.diagramm.category[0].color)
@@ -56,7 +66,7 @@ const Color = (props) => {
                     labelCol={{ span: 9 }}
                     wrapperCol={{ span: 11 }}
                     initialValues={{
-                        name: props.diagramm.category[0].nameRus, 
+                        name: props.diagramm.category[0].name, 
                         color: Converter_V_HEX(props.diagramm.category[0].color)
                     }}
                     onFinish={onFinish}
@@ -74,11 +84,11 @@ const Color = (props) => {
                         onChange={onColor}>
                             {props.diagramm.category.map(a =>
                                 <Select.Option 
-                                value={a.nameRus}
-                                key={a.nameRus}
+                                value={a.name}
+                                key={a.name}
                                 style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)` }}
                                 >
-                                    {a.nameRus}
+                                    {a.name}
                                 </Select.Option >)}
                         </Select>
                     </Form.Item>

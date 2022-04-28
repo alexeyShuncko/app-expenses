@@ -11,21 +11,27 @@ import Hedgehog from './Hedgehog/Hedgehog';
 import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
 import { DateFunc } from './helpers/DateFunc/DateFunc';
-import { addTodayS, addTodayPo, addText, addActivHedgehog } from './../../Redux/diagrammReducer';
+import { addTodayS, addTodayPo, addText, addActivHedgehog,
+    categories, sources, salary } from './../../Redux/diagrammReducer';
 import AboutApp from './AboutApp/AboutApp';
 
 
-const ExpensesContainer = ({ addActivHedgehog, addText, ...props }) => {
+const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary,  ...props }) => {
 
-    //let [init, setInit] = useState(false)
+    let [init, setInit] = useState(false)
 
 
-    // useEffect(() => {
-    //     !init &&
-    //         addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...')
-    //     addActivHedgehog(true)
-    //     setInit(true)
-    // }, [init, addActivHedgehog, addText])
+  
+
+     useEffect(() => {
+         !init &&
+             addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...')
+         addActivHedgehog(true)
+         setInit(true)
+         categories()
+         sources()
+      salary()
+     }, [init, addActivHedgehog, addText, categories,sources,salary ])
 
      const dateToday = new Date()
      if (props.diagramm.today.po !== DateFunc(dateToday)) {
@@ -70,6 +76,8 @@ let mapStateToProps = (state) => {
         diagramm: state.expenses
     }
 }
-export default connect(mapStateToProps, { addTodayS, addTodayPo, addText, addActivHedgehog })(ExpensesContainer)
+export default connect(mapStateToProps, { addTodayS, addTodayPo, addText, addActivHedgehog,
+    categories, sources, salary  })
+(ExpensesContainer)
 
 

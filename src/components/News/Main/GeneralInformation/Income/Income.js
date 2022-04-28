@@ -50,7 +50,21 @@ const Income = (props) => {
         props.addText(`Добавлено:  ${values.name} ${values.income} ${values.valuta} ...`)
         props.addActivHedgehog(true)
 
-        props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
+        // props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
+
+        const index = () => {
+           if (values.name === "Зарплата")  
+           return 0
+           else if (values.name === "Аванс")
+           return 1
+        }
+
+        props.updateSalary(
+           props.diagramm.income.salary[index()].salary_day,
+           (timer.slice(5, 7) + 1),
+            props.diagramm.income.salary[index()].id
+        )
+
         props.addIncome(timer, num, category)
         deActivateEditMode()
     }

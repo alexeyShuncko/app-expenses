@@ -29,13 +29,22 @@ const TotalTableExpenses = (props) => {
         }
     }))
 
-
+// Переделать циклом
     let total = newResult[0].concat(
         newResult[1] ? newResult[1] : [],
         newResult[2] ? newResult[2] : [],
         newResult[3] ? newResult[3] : [],
         newResult[4] ? newResult[4] : [],
-        newResult[5] ? newResult[5] : [])  // соединяю массивы ...........
+        newResult[5] ? newResult[5] : [],
+        newResult[6] ? newResult[6] : [],
+        newResult[7] ? newResult[7] : [],
+        newResult[8] ? newResult[8] : [],
+        newResult[9] ? newResult[9] : [],
+        newResult[10] ? newResult[10] : [],
+        newResult[11] ? newResult[11] : [],
+        newResult[12] ? newResult[12] : [],
+        newResult[13] ? newResult[13] : [])  // соединяю массивы ...........
+
 
 
     let totalSort = total.sort((a, b) => a.created > b.created ? 1 : -1)            //сортировка по времени 

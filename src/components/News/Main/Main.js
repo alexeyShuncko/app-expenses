@@ -9,38 +9,17 @@ import {
 } from '../../../Redux/diagrammReducer';
 import DiagrammMain from './DiagrammMain/DiagrammMain';
 import { addText, addIncome, addSalaryMonth, 
-    addActivHedgehog, sources, categories } from './../../../Redux/diagrammReducer';
-import { getIncomes, putSourcesId, postIncomes,
-     getIncomesId, putIncomesId,deleteIncomesId, getSources, postIncomesId, postSources, deleteSources,
-     putSources, putСategories, postExpenses
- } from '../../../API/api.js';
-import { Button } from 'antd';
-
+    addActivHedgehog} from './../../../Redux/diagrammReducer';
 
 
 
 const Main = (props) => {
 
-    const allFetch = () => {
-        // getSources()
-        //   putSources('Другие', 'rgb(224, 83, 118)', 3)
-    props.categories()
-     props.sources()
-// postIncomes('2022-04-25', 130, 1)
-// .then(getSources())
-// putСategories('Транспорт', 'rgb(22, 153, 40)',4)
-       
 
-// postExpenses('2022-04-26', 26, 1).then(()=> props.categories())
-     }
-
-
-
+  
 
     return (
         <div className={s.main}>
-
-            <Button onClick={allFetch}>Запрос</Button>
 
             <div className={s.mainInform}>
                 <GeneralInformation
@@ -81,7 +60,7 @@ export default connect(mapStateToProps,
     {
         addDiagramm, addActiv, addSelectDiagramm,
         addEditColor, getDollarUpdate, getEuroUpdate, addText, addIncome, 
-        addSalaryMonth, addActivHedgehog, sources, categories
+        addSalaryMonth, addActivHedgehog
     })(Main)
 
 

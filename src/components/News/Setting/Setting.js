@@ -10,7 +10,8 @@ import { connect } from 'react-redux';
 import {
     addCategory, deleteCategory, renameCategory,
     addEditColor, changeRelativity, addText, addActiv, nameCase,
-    nameCaseRelativity, addSalaryDay, addActivHedgehog
+    nameCaseRelativity, addSalaryDay, addActivHedgehog, itemCategories,
+    deleteItemCategories, updateItemCategories, updateColor, updateSalary
 } from './../../../Redux/diagrammReducer';
 import Color from './Color/Color';
 import Relativity from './Relativity/Relativity';
@@ -27,23 +28,33 @@ const Setting = (props) => {
 
             <Route path='/AddCategory'
                 element={<AddCategory diagramm={props.diagramm} addCategory={props.addCategory}
-                    addText={props.addText} nameCase={props.nameCase} addActivHedgehog={props.addActivHedgehog} />} />
+                    addText={props.addText} nameCase={props.nameCase} 
+                    addActivHedgehog={props.addActivHedgehog} 
+                    itemCategories={props.itemCategories}/>} />
             <Route path='/DeleteCategory'
                 element={<DeleteCategory diagramm={props.diagramm} deleteCategory={props.deleteCategory}
-                    addText={props.addText} addActiv={props.addActiv} addActivHedgehog={props.addActivHedgehog} />} />
+                    addText={props.addText} addActiv={props.addActiv} 
+                    addActivHedgehog={props.addActivHedgehog} 
+                    deleteItemCategories={props.deleteItemCategories}/>} />
             <Route path='/RenameCategory'
                 element={<RenameCategory diagramm={props.diagramm} renameCategory={props.renameCategory}
-                    addText={props.addText} nameCase={props.nameCase} addActivHedgehog={props.addActivHedgehog} />} />
+                    addText={props.addText} nameCase={props.nameCase} 
+                    addActivHedgehog={props.addActivHedgehog}
+                    updateItemCategories= {props.updateItemCategories} />} />
             <Route path='/Color'
                 element={<Color diagramm={props.diagramm} addEditColor={props.addEditColor}
-                    addText={props.addText} addActivHedgehog={props.addActivHedgehog} />} />
+                    addText={props.addText} 
+                    addActivHedgehog={props.addActivHedgehog} 
+                    updateColor={props.updateColor}/>} />
             <Route path='/Relativity'
                 element={<Relativity diagramm={props.diagramm} changeRelativity={props.changeRelativity}
                     addText={props.addText} nameCaseRelativity={props.nameCaseRelativity}
                     addActivHedgehog={props.addActivHedgehog} />} />
             <Route path='/AddSalaryDate'
                 element={<AddSalaryDate addSalaryDay={props.addSalaryDay} addText={props.addText}
-                    addActivHedgehog={props.addActivHedgehog} />} />
+                    addActivHedgehog={props.addActivHedgehog} 
+                    updateSalary={props.updateSalary}
+                    diagramm={props.diagramm}/>} />
 
 
         </Routes>
@@ -60,5 +71,6 @@ export default connect(mapStateToProps,
     {
         addCategory, deleteCategory, renameCategory,
         addEditColor, changeRelativity, addText,
-        addActiv, nameCase, nameCaseRelativity, addSalaryDay, addActivHedgehog
+        addActiv, nameCase, nameCaseRelativity, addSalaryDay, addActivHedgehog,
+        itemCategories, deleteItemCategories, updateItemCategories, updateColor, updateSalary
     })(Setting)

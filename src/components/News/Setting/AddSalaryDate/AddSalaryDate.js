@@ -18,10 +18,19 @@ const AddSalaryDate = (props) => {
                 return `0${values.date._d.getDate()}`
             }
             else return values.date._d.getDate()
-
-
         }
-        props.addSalaryDay(values.name, day())
+
+
+        const index = () => values.name === "Зарплата" ? 0 : 1
+
+        props.updateSalary(
+            day(),
+            props.diagramm.income.salary[index()].salary_month === '1'
+                ? props.diagramm.today.po.slice(5, 7)
+                : props.diagramm.income.salary[index],
+            props.diagramm.income.salary[index()].id
+        )
+        // props.addSalaryDay(values.name, day())
 
         props.addText(`${values.name} ${values.date._d.getDate()}-го числа, я запомнил  ...`)
         props.addActivHedgehog(true)
@@ -34,6 +43,8 @@ const AddSalaryDate = (props) => {
 
 
             <div className={s.salaryDay}>
+
+
                 <Form className={s.form}
                     form={form}
                     name="deleteCategory"
@@ -44,6 +55,15 @@ const AddSalaryDate = (props) => {
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
+                    {/* Поменять на !== */}
+                    {
+                        props.diagramm.income.salary[0].salary_month !== '1' &&
+                        <div>Зарплата: {props.diagramm.income.salary[0].salary_day}-го числа.</div>
+                    }
+                    {
+                        props.diagramm.income.salary[1].salary_month !== '1' &&
+                        <div style={{marginBottom: '20px'}} >Аванс: {props.diagramm.income.salary[1].salary_day}-го числа.</div>
+                    }
                     <Form.Item
                         label="Доход"
                         name='name'>
@@ -59,6 +79,7 @@ const AddSalaryDate = (props) => {
                         rules={[{ required: true, message: 'Выберите дату!' }]}>
                         <DatePicker />
                     </Form.Item>
+
 
 
                     <Form.Item

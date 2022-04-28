@@ -28,9 +28,7 @@ const Expenses = (props) => {
     }
 
     const onFinish = (values) => {
-
-
-        console.log(values)
+        
         const timer = DateFunc(new Date())
         let keyArray = []
         let valueArray = []
@@ -94,7 +92,7 @@ const Expenses = (props) => {
 
                             {diagramm.map(a =>
                                 <Form.Item style={{ marginBottom: 0 }}
-                                    label={a.name}
+                                    label={a.nameRusСase}
                                     name={a.name}
                                     key={a.name}
                                 //hasFeedback 

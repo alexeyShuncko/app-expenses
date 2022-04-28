@@ -18,12 +18,12 @@ const Salary = (props) => {
     return (
 
         <div className={s.salary}>
-            {props.diagramm.income.salary.Date.day &&
-                timer >= `2022-${props.diagramm.income.salary.Date.month || timer.slice(5, 7)}-${props.diagramm.income.salary.Date.day}`
+            {props.diagramm.income.salary[0].salary_day &&
+                timer >= `2022-0${props.diagramm.income.salary[0].salary_month || timer.slice(5, 7)}-${props.diagramm.income.salary[0].salary_day}`
                 ? <div className={s.salaryUpdate} >Вы получили зарплату!</div>
                 : null}
-            {props.diagramm.income.prepayment.Date.day &&
-                timer >= `2022-${props.diagramm.income.prepayment.Date.month || timer.slice(5, 7)}-${props.diagramm.income.prepayment.Date.day}`
+            {props.diagramm.income.salary[1].salary_day &&
+                timer >= `2022-0${props.diagramm.income.salary[1].salary_month || timer.slice(5, 7)}-${props.diagramm.income.salary[1].salary_day}`
                 ? <div className={s.salaryUpdate} >Вы получили аванс!</div>
                 : null}
 

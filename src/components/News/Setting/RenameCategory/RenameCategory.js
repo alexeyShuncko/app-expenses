@@ -27,12 +27,12 @@ const RenameCategory = (props) => {
       
     const onColor = (value) => {
        
-        setColor((props.diagramm.category.find(a=>a.nameRus===value).color))
+        setColor((props.diagramm.category.find(a=>a.name===value).color))
       }
 
 
     const validator = (rule, value) => {
-        if (value && props.diagramm.category.find(a => a.nameRus.toLowerCase() === value.toLowerCase())) {
+        if (value && props.diagramm.category.find(a => a.name.toLowerCase() === value.toLowerCase())) {
             return Promise.reject(new Error(`Категория "${value}" уже есть!`))
         }
         return Promise.resolve()
@@ -41,12 +41,20 @@ const RenameCategory = (props) => {
 
 
     const onFinish = (values) => {
-        props.renameCategory(values.select, values.name)
+
+        props.updateItemCategories(
+            values.name, 
+            props.diagramm.category.find(a => a.name === values.select).color,
+            props.diagramm.category.find(a => a.name === values.select).id,
+        )
+
+
+        // props.renameCategory(values.select, values.name)
 
         props.addText(`"${values.select}" переименована в  "${values.name}" ...`)
         props.addActivHedgehog(true)
 
-        props.nameCase(values.name) //добавление имени в винительном падеже ...
+        // props.nameCase(values.name) //добавление имени в винительном падеже ...
         form.resetFields()
         setColor(props.diagramm.category[0].color)
     }
@@ -63,7 +71,7 @@ const RenameCategory = (props) => {
                     labelCol={{ span: 11 }}
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
-                    initialValues={{ select: diagramm[0].nameRus }}
+                    initialValues={{ select: diagramm[0].name }}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
@@ -76,11 +84,11 @@ const RenameCategory = (props) => {
                          style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`}}
                          onChange={onColor}>
                             {diagramm.map(a =>
-                                <Select.Option value={a.nameRus}
-                                    key={a.nameRus}
+                                <Select.Option value={a.name}
+                                    key={a.name}
                                     style={{ backgroundColor: `rgba(${a.color.slice(4, -1)},0.6)` }}
                                 >
-                                    {a.nameRus}
+                                    {a.name}
                                 </Select.Option >)}
                         </Select>
                     </Form.Item>

@@ -44,10 +44,8 @@ const Relativity = (props) => {
     const onFinish = (values) => {
 
         props.nameCaseRelativity(values.name, values.select, values.price)
-
-        setTimeout(()=> {
         props.addText(`Относительная величина "${values.name}" добавлена ...`)
-        props.addActivHedgehog(true)},500 )
+        props.addActivHedgehog(true)
 
         form.resetFields()
     }

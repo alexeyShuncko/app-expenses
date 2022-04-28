@@ -25,13 +25,13 @@ const HocValuta = (props) => {
     const data = () => {
         if (editBYN === 'BYN') {
             if (props.value === 'salary') {
-                return props.salary
+                return props.salary.toFixed(2)
             }
             else if (props.value === 'salarySpent') {
                 return summ.toFixed(2)
             }
             else if (props.value === 'salaryRemainder') {
-                return (props.salary - summ.toFixed(2))
+                return (props.salary - summ).toFixed(2)
             }
             else if (props.value === 'statisticTable') {
                 return statisticTable.toFixed(2)
@@ -50,7 +50,7 @@ const HocValuta = (props) => {
                     props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
             }
             else if (props.value === 'salaryRemainder') {
-                return (summ / props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
+                return ((props.salary - summ )/ props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
             }
             else if (props.value === 'statisticTable') {
                 return (statisticTable / props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
@@ -68,7 +68,7 @@ const HocValuta = (props) => {
                     props.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
             }
             else if (props.value === 'salaryRemainder') {
-                return (summ /
+                return ((props.salary - summ ) /
                     props.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
             }
             else if (props.value === 'statisticTable') {

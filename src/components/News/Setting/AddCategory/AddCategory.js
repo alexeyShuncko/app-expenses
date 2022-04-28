@@ -36,14 +36,18 @@ const AddCategory = (props) => {
         props.addText(`Категория "${values.addCategory}" добавлена ...`)
         props.addActivHedgehog(true)
 
-        props.addCategory(values.addCategory, 
+
+        props.itemCategories(values.addCategory, 
             values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
-        props.nameCase(values.addCategory) // добавление имени в винительном падеже
+
+        // props.addCategory(values.addCategory, 
+        //     values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
+        // props.nameCase(values.addCategory) // добавление имени в винительном падеже
     }
 
 
     const validator = (rule, value) => {
-        if (value && props.diagramm.category.find(a => a.nameRus.toLowerCase() === value.toLowerCase())) {
+        if (value && props.diagramm.category.find(a => a.name.toLowerCase() === value.toLowerCase())) {
             return Promise.reject(new Error(`Категория "${value}" уже есть!`))
         }
         return Promise.resolve()
@@ -98,14 +102,14 @@ const AddCategory = (props) => {
                         <ul>
                             {props.diagramm.category.map(a =>
 
-                                <li key={a.nameRus} >
+                                <li key={a.name} >
                                     <div className={s.colorCategory}>
                                         <span className={s.name}>
-                                            {a.nameRus}
+                                            {a.name}
                                         </span>
                                         <span className={s.nameColor}>
                                             <span
-                                                key={a.nameRus}
+                                                key={a.name}
                                                 className={s.legend}
                                                 style={{ backgroundColor: ` ${a.color}` }}>&nbsp;
                                             </span>
