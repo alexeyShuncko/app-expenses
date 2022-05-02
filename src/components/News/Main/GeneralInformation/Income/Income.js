@@ -52,17 +52,14 @@ const Income = (props) => {
 
         // props.addSalaryMonth(values.name, (Number(timer.slice(5, 7)) + 1))
 
-        const index = () => {
-           if (values.name === "Зарплата")  
-           return 0
-           else if (values.name === "Аванс")
-           return 1
-        }
+        const index = () =>  values.name === "Зарплата" ? 2 : 1 
+          
+        
 
         props.updateSalary(
-           props.diagramm.income.salary[index()].salary_day,
-           (timer.slice(5, 7) + 1),
-            props.diagramm.income.salary[index()].id
+           props.diagramm.income.salary.find(a=> a.source === index()).salary_day,
+           (Number(timer.slice(5, 7)) + 1),
+            props.diagramm.income.salary.find(a=> a.source === index()).source
         )
 
         props.addIncome(timer, num, category)

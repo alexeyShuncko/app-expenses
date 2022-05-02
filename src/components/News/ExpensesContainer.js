@@ -12,11 +12,11 @@ import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
 import { DateFunc } from './helpers/DateFunc/DateFunc';
 import { addTodayS, addTodayPo, addText, addActivHedgehog,
-    categories, sources, salary } from './../../Redux/diagrammReducer';
+    categories, sources, salary, relativ } from './../../Redux/diagrammReducer';
 import AboutApp from './AboutApp/AboutApp';
 
 
-const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary,  ...props }) => {
+const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary, relativ,  ...props }) => {
 
     let [init, setInit] = useState(false)
 
@@ -31,7 +31,8 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
          categories()
          sources()
       salary()
-     }, [init, addActivHedgehog, addText, categories,sources,salary ])
+      relativ()
+     }, [init, addActivHedgehog, addText, categories,sources,salary,relativ ])
 
      const dateToday = new Date()
      if (props.diagramm.today.po !== DateFunc(dateToday)) {
@@ -77,7 +78,7 @@ let mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps, { addTodayS, addTodayPo, addText, addActivHedgehog,
-    categories, sources, salary  })
+    categories, sources, salary, relativ  })
 (ExpensesContainer)
 
 

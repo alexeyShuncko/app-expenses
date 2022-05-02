@@ -14,16 +14,18 @@ const Salary = (props) => {
             .reduce((sum, cur) => sum + cur, 0))
         .reduce((sum, cur) => sum + cur, 0)
 
+        const getMount = (mount) => String(mount).length > 1 ? mount : `0${mount}`
+
+
+
 
     return (
 
         <div className={s.salary}>
-            {props.diagramm.income.salary[0].salary_day &&
-                timer >= `2022-0${props.diagramm.income.salary[0].salary_month || timer.slice(5, 7)}-${props.diagramm.income.salary[0].salary_day}`
+            {timer >= `2022-${getMount(props.diagramm.income.salary.find(a => a.source === 2).salary_month)}-${getMount(props.diagramm.income.salary.find(a => a.source === 2).salary_day)}`
                 ? <div className={s.salaryUpdate} >Вы получили зарплату!</div>
                 : null}
-            {props.diagramm.income.salary[1].salary_day &&
-                timer >= `2022-0${props.diagramm.income.salary[1].salary_month || timer.slice(5, 7)}-${props.diagramm.income.salary[1].salary_day}`
+            {timer >= `2022-${getMount(props.diagramm.income.salary.find(a => a.source === 1).salary_month)}-${getMount(props.diagramm.income.salary.find(a => a.source === 1).salary_day)}`
                 ? <div className={s.salaryUpdate} >Вы получили аванс!</div>
                 : null}
 

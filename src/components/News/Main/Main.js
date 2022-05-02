@@ -8,7 +8,7 @@ import {
     getDollarUpdate, getEuroUpdate
 } from '../../../Redux/diagrammReducer';
 import DiagrammMain from './DiagrammMain/DiagrammMain';
-import { addText, addIncome, addSalaryMonth, 
+import { addText, addIncome, addSalaryMonth, updateSalary,
     addActivHedgehog} from './../../../Redux/diagrammReducer';
 
 
@@ -33,6 +33,7 @@ const Main = (props) => {
                     addIncome={props.addIncome}
                     addSalaryMonth={props.addSalaryMonth}
                     addActivHedgehog={props.addActivHedgehog}
+                    updateSalary={props.updateSalary} 
                 />
             </div>
 
@@ -60,7 +61,7 @@ export default connect(mapStateToProps,
     {
         addDiagramm, addActiv, addSelectDiagramm,
         addEditColor, getDollarUpdate, getEuroUpdate, addText, addIncome, 
-        addSalaryMonth, addActivHedgehog
+        addSalaryMonth, addActivHedgehog, updateSalary
     })(Main)
 
 

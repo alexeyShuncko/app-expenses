@@ -1,7 +1,7 @@
 
 import {
     getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
-    postСategories, postExpenses, deleteСategories, putСategories, getSalary, postSalary,
+    postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
     getRelatiity,
     postRelatiity
 } from './../API/api';
@@ -98,8 +98,8 @@ let initialState = {
             }
         ],
         salary: [
-            { id: 1, salary_day: '01', salary_month: '04' },
-            { id: 2,  salary_day: '02', salary_month: '04' }
+            { source: 1, salary_day: '01', salary_month: '04' },
+            { source: 2,  salary_day: '02', salary_month: '04' }
         ]
      
     },
@@ -637,11 +637,11 @@ export const salary = () => (dispatch) => {
             dispatch(addSalary(data)))
 }
 export const updateSalary = (day, month, id) => (dispatch) => {
-    postSalary(day, month, id)
+    putSalary(day, month, id)
         .then(() => dispatch(salary()))
 }
 
-
+  putSalary('01', '13', 1)
 
 // Относительная величина 
 

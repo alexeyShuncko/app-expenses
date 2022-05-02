@@ -21,16 +21,19 @@ const AddSalaryDate = (props) => {
         }
 
 
-        const index = () => values.name === "Зарплата" ? 0 : 1
+        const index = () => values.name === "Зарплата" ? 2 : 1
+
 
         props.updateSalary(
             day(),
-            props.diagramm.income.salary[index()].salary_month === '1'
+            props.diagramm.income.salary.find(a => a.source === index()).salary_month > 12
                 ? props.diagramm.today.po.slice(5, 7)
-                : props.diagramm.income.salary[index],
-            props.diagramm.income.salary[index()].id
+                : props.diagramm.income.salary.find(a => a.source === index()).salary_month,
+            props.diagramm.income.salary.find(a => a.source === index()).source
         )
         // props.addSalaryDay(values.name, day())
+    
+
 
         props.addText(`${values.name} ${values.date._d.getDate()}-го числа, я запомнил  ...`)
         props.addActivHedgehog(true)
@@ -55,15 +58,15 @@ const AddSalaryDate = (props) => {
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
-                    {/* Поменять на !== */}
                     {
-                        props.diagramm.income.salary[0].salary_month !== '1' &&
-                        <div>Зарплата: {props.diagramm.income.salary[0].salary_day}-го числа.</div>
+                        props.diagramm.income.salary.find(a=> a.source === 1).salary_month < 13 &&
+                        <div  >Аванс: {props.diagramm.income.salary.find(a=> a.source === 1).salary_day}-го числа.</div>
                     }
                     {
-                        props.diagramm.income.salary[1].salary_month !== '1' &&
-                        <div style={{marginBottom: '20px'}} >Аванс: {props.diagramm.income.salary[1].salary_day}-го числа.</div>
+                        props.diagramm.income.salary.find(a=>a.source === 2).salary_month < 13 &&
+                        <div style={{marginBottom: '20px'}}>Зарплата: {props.diagramm.income.salary.find(a=>a.source === 2).salary_day}-го числа.</div>
                     }
+                   
                     <Form.Item
                         label="Доход"
                         name='name'>

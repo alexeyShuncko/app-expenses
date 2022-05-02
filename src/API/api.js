@@ -122,11 +122,11 @@ export const postExpenses = async (data) => {
 // Дата зарплаты и аванса
 
 export const getSalary = async () => {
-    const response = await axios.get(`http://37.228.117.77/api/set-day/`);
+    const response = await axios.get(`http://37.228.117.77/api/set-data/`);
     return response.data;
 }
-export const postSalary = async (day, month, id) => {
-    const response = await axios.post(`http://37.228.117.77/api/set-day/`, {
+export const putSalary = async (day, month, id) => {
+    const response = await axios.put(`http://37.228.117.77/api/set-data/`, {
         "salary_day": day,
         "salary_month": month,
         "source": id
