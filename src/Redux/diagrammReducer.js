@@ -99,9 +99,9 @@ let initialState = {
         ],
         salary: [
             { source: 1, salary_day: '01', salary_month: '04' },
-            { source: 2,  salary_day: '02', salary_month: '04' }
+            { source: 2, salary_day: '02', salary_month: '04' }
         ]
-     
+
     },
 
     period: [
@@ -119,10 +119,10 @@ let initialState = {
     },
     relativity:
     {
-        name: 'пива',
-        unit: 'бутылка',
-        price: 4.59,
-        case: ['пива', 'пив', 'пиво']
+        name: 'сахара',
+        unit: 'килограмм',
+        price: 2.02,
+        case: ['сахара', 'сахаров', 'сахара']
     },
     text: 'Привет...',
     grafSelectValuta: 'BYN',
@@ -423,17 +423,25 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 category: action.data
             }
-            case ADD_SALARY:
-                return {
-                    ...state,
-                    income: {
-                        ...state.income,
-                        salary: action.salary
-                    }
+        case ADD_SALARY:
+            return {
+                ...state,
+                income: {
+                    ...state.income,
+                    salary: action.salary
                 }
-
+            }
+            // case ADD_RELATIV:
+            //     return {
+            //         ...state,
+            //         income: {
+            //             ...state.income,
+            //             salary: action.salary
+            //         }
+            //     }
 
             
+
         default:
             return state
     }
@@ -625,7 +633,7 @@ export const updateItemCategories = (name, color, id) => (dispatch) => {
 // Изменение цвета категории
 
 export const updateColor = (name, nameRusСase, color, id) => (dispatch) => {
-     putСategories(name, nameRusСase, color, id)
+    putСategories(name, nameRusСase, color, id)
         .then(() => dispatch(categories()))
 }
 
@@ -641,7 +649,7 @@ export const updateSalary = (day, month, id) => (dispatch) => {
         .then(() => dispatch(salary()))
 }
 
-  putSalary('01', '13', 1)
+//   putSalary('01', '13', 1)
 
 // Относительная величина 
 
@@ -650,6 +658,9 @@ export const relativ = () => (dispatch) => {
         .then(data =>
             dispatch(addRelativ(data)))
 }
+
+
+// postRelatiity("Сахар", "килограмм", 2.9)
 
 
 

@@ -11,34 +11,35 @@ import Hedgehog from './Hedgehog/Hedgehog';
 import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
 import { DateFunc } from './helpers/DateFunc/DateFunc';
-import { addTodayS, addTodayPo, addText, addActivHedgehog,
-    categories, sources, salary, relativ } from './../../Redux/diagrammReducer';
+import {
+    addTodayS, addTodayPo, addText, addActivHedgehog,
+    categories, sources, salary, relativ
+} from './../../Redux/diagrammReducer';
 import AboutApp from './AboutApp/AboutApp';
 
 
-const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary, relativ,  ...props }) => {
+const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary, relativ, ...props }) => {
 
     let [init, setInit] = useState(false)
 
+    useEffect(() => {
+        if (!init) {
+            addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...') 
+            addActivHedgehog(true) 
+            setInit(true) 
+            categories()  
+            sources() 
+            salary() 
+            relativ() 
+        }     
+    }, []
+    )
 
-  
-
-     useEffect(() => {
-         !init &&
-             addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...')
-         addActivHedgehog(true)
-         setInit(true)
-         categories()
-         sources()
-      salary()
-      relativ()
-     }, [init, addActivHedgehog, addText, categories,sources,salary,relativ ])
-
-     const dateToday = new Date()
-     if (props.diagramm.today.po !== DateFunc(dateToday)) {
-         props.addTodayPo(DateFunc(dateToday))
-         props.addTodayS(DateFunc(new Date(dateToday.setDate(dateToday.getDate() - 31))))
-     }
+    const dateToday = new Date()
+    if (props.diagramm.today.po !== DateFunc(dateToday)) {
+        props.addTodayPo(DateFunc(dateToday))
+        props.addTodayS(DateFunc(new Date(dateToday.setDate(dateToday.getDate() - 31))))
+    }
 
 
     return (
@@ -47,7 +48,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
             <div className={s.newsContainerNav}>
                 <div className={s.NavNews}><NavNews /></div>
                 <div className={s.hedgehog} >
-                <Hedgehog
+                    <Hedgehog
                         addActivHedgehog={addActivHedgehog}
                         text={props.diagramm.text}
                         activHedgehog={props.diagramm.activHedgehog} />
@@ -55,7 +56,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
             </div>
 
             <div className={s.newsContainerContent}>
-          
+
                 <div>
                     <Routes>
                         <Route path='/main' element={<Main />} />
@@ -77,8 +78,10 @@ let mapStateToProps = (state) => {
         diagramm: state.expenses
     }
 }
-export default connect(mapStateToProps, { addTodayS, addTodayPo, addText, addActivHedgehog,
-    categories, sources, salary, relativ  })
-(ExpensesContainer)
+export default connect(mapStateToProps, {
+    addTodayS, addTodayPo, addText, addActivHedgehog,
+    categories, sources, salary, relativ
+})
+    (ExpensesContainer)
 
 

@@ -1,29 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './DollarRate.module.css';
 import { DataTransformation } from '../../../helpers/DataTransformation/DataTransformation';
 
 
 const DollarRate = (props) => {
 
+    let [rates, setRates] = useState(false)
+
 
     useEffect(() => {
-        if (props.exchangeRates.dollar.Date === '') { 
-            props.getDollarUpdate() 
+        if (!rates && props.exchangeRates.dollar.Date === '') {
+            setRates(true)
+            props.getDollarUpdate()
             props.getEuroUpdate()
         }
-        else return null
-    })
+    }, [])
 
 
     return (
         <div className={s.dollarRate}>
             <div className={s.dollar}>Курсы валют по НБРБ
-                <div> 
+                <div>
                     на {DataTransformation(props.exchangeRates.dollar.Date)} :
                 </div>
             </div>
-            <div>1 USD = {props.exchangeRates.dollar.Cur_OfficialRate} BYN</div>
-            <div>1 EUR = {props.exchangeRates.euro.Cur_OfficialRate} BYN</div>
+            <div className={s.rates}>1 USD = {props.exchangeRates.dollar.Cur_OfficialRate} BYN</div>
+            <div className={s.rates}>1 EUR = {props.exchangeRates.euro.Cur_OfficialRate} BYN</div>
         </div>
     )
 
