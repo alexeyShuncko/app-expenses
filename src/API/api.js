@@ -140,21 +140,17 @@ export const putSalary = async (day, month, id) => {
 
 // Относительная величина 
 
-export const getRelatiity = async () => {
+export const getRelativity = async () => {
     const response = await axios.get(`http://37.228.117.77/api/relativity/`);
     return response.data;
 }
 
-export const postRelatiity = async (name, unit, price) => {
+export const postRelativity = async (name, unit, price, padej) => {
     const response = await axios.post(`http://37.228.117.77/api/relativity/`,   {
         "name": name,
         "value": unit,
         "amount": price,
-        "case": {
-            "name1": "сахара", 
-            "name2": "сахаров",
-            "name3": "сахар"
-        }
+        "case": padej
     });
     return response;
 }

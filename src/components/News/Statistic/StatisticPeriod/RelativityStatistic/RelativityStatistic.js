@@ -10,8 +10,8 @@ const RelativityStatistic = (props) => {
     .map(a=> a.amount)
     .reduce((acc, num) => acc + num, 0)
 
-    let amount = Number(( summ / props.diagramm.relativity.price).toFixed(0).slice(-1))
-    let amount11 = Number((summ / props.diagramm.relativity.price).toFixed(0).slice(-2))
+    let amount = Number(( summ / props.diagramm.relativity.amount).toFixed(0).slice(-1))
+    let amount11 = Number((summ / props.diagramm.relativity.amount).toFixed(0).slice(-2))
 
 
     let bottle = ['бутылки', 'бутылок', 'бутылка']
@@ -22,17 +22,17 @@ const RelativityStatistic = (props) => {
     
 
     const obj = () => {
-        if (props.diagramm.relativity.unit === 'бутылка')
+        if (props.diagramm.relativity.value === 'бутылка')
             return bottle
-        else if (props.diagramm.relativity.unit === 'килограмм')
+        else if (props.diagramm.relativity.value === 'килограмм')
             return kg
-        else if (props.diagramm.relativity.unit === 'пачка')
+        else if (props.diagramm.relativity.value === 'пачка')
             return pack
-        else if (props.diagramm.relativity.unit === 'литр')
+        else if (props.diagramm.relativity.value === 'литр')
             return liter
-        else if (props.diagramm.relativity.unit === 'пара')
+        else if (props.diagramm.relativity.value === 'пара')
             return two
-        else if (props.diagramm.relativity.unit === 'штука')
+        else if (props.diagramm.relativity.value === 'штука')
             return props.diagramm.relativity.case
     }
 
@@ -40,12 +40,12 @@ const RelativityStatistic = (props) => {
         if (amount <= 4
             && amount >= 2
             && !(amount11 <= 19 && amount11 >= 11))
-            return obj()[0]
+            return obj()[0] || obj().name1
 
         else if (amount >= 5 || amount === 0 || (amount11 <= 19 && amount11 >= 11))
-            return obj()[1]
+            return obj()[1] || obj().name2
 
-        else return obj()[2]
+        else return obj()[2] || obj().name3
     }
     let unitRus = unit()
 
@@ -68,10 +68,10 @@ const RelativityStatistic = (props) => {
             style={{ borderBottom: `solid ${data.color}` }}
             >
                 Или:<span className={s.boldValue} title='Относительная величина'>
-                    {props.diagramm.relativity.unit === 'штука'
-                        ? (summ / props.diagramm.relativity.price).toFixed(0) + ' ' +
+                    {props.diagramm.relativity.value === 'штука'
+                        ? (summ / props.diagramm.relativity.amount).toFixed(0) + ' ' +
                         unitRus 
-                        : (summ / props.diagramm.relativity.price).toFixed(0) + ' ' +
+                        : (summ / props.diagramm.relativity.amount).toFixed(0) + ' ' +
                         unitRus + ' ' +
                         props.diagramm.relativity.name}
                 </span>

@@ -8,7 +8,7 @@ import locale from 'antd/lib/locale/ru_RU';
 
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 
@@ -16,11 +16,11 @@ import { ConfigProvider } from 'antd';
 ReactDOM.render(
 
   <ConfigProvider  locale={locale}>
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
 
   </ConfigProvider>
   ,

@@ -2,8 +2,8 @@
 import {
     getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
     postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
-    getRelatiity,
-    postRelatiity
+    getRelativity,
+    postRelativity
 } from './../API/api';
 
 
@@ -120,8 +120,8 @@ let initialState = {
     relativity:
     {
         name: 'сахара',
-        unit: 'килограмм',
-        price: 2.02,
+        value: 'килограмм',
+        amount: 2.02,
         case: ['сахара', 'сахаров', 'сахара']
     },
     text: 'Привет...',
@@ -431,16 +431,13 @@ const diagrammReduser = (state = initialState, action) => {
                     salary: action.salary
                 }
             }
-            // case ADD_RELATIV:
-            //     return {
-            //         ...state,
-            //         income: {
-            //             ...state.income,
-            //             salary: action.salary
-            //         }
-            //     }
+        case ADD_RELATIV:
+            return {
+                ...state,
+                relativity: action.data
+            }
 
-            
+
 
         default:
             return state
@@ -566,8 +563,8 @@ export const addCategories = (data) => {
 export const addSalary = (salary) => {
     return { type: ADD_SALARY, salary }
 }
-export const addRelativ = (salary) => {
-    return { type: ADD_RELATIV, salary }
+export const addRelativ = (data) => {
+    return { type: ADD_RELATIV, data }
 }
 
 
@@ -577,8 +574,7 @@ export const addRelativ = (salary) => {
 
 export const sources = () => (dispatch) => {
     getSources()
-        .then(data =>
-            dispatch(addSource(data)))
+        .then(data => dispatch(addSource(data)))
 }
 
 export const addIncome = (created, amount, category) => (dispatch) => {
@@ -589,8 +585,7 @@ export const addIncome = (created, amount, category) => (dispatch) => {
 
 export const categories = () => (dispatch) => {
     getСategories()
-        .then(data =>
-            dispatch(addCategories(data)))
+        .then(data => dispatch(addCategories(data)))
 }
 
 export const addDiagramm = (data) => (dispatch) => {
@@ -649,22 +644,30 @@ export const updateSalary = (day, month, id) => (dispatch) => {
         .then(() => dispatch(salary()))
 }
 
-//   putSalary('01', '13', 1)
+
 
 // Относительная величина 
 
 export const relativ = () => (dispatch) => {
-    getRelatiity()
-        .then(data =>
-            dispatch(addRelativ(data)))
+    getRelativity()
+        .then(data => dispatch(addRelativ(data)))
+}
+export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
+
+    getItem(name)
+        .then(data => postRelativity(data.Р, unit, prise, {
+            "name1": data.Р,
+            "name2": data.множественное
+                ? data.множественное.Р
+                : data.Р,
+            "name3": name
+        }))
+        .then(() => dispatch(relativ()))
 }
 
 
-// postRelatiity("Сахар", "килограмм", 2.9)
 
-
-
-
+// Валюта
 export const getDollarUpdate = () => (dispatch) => {
 
     getDollar().then(data => {
@@ -678,22 +681,17 @@ export const getEuroUpdate = () => (dispatch) => {
     })
 }
 
-export const nameCase = (name) => (dispatch) => {
 
+
+
+
+
+export const nameCase = (name) => (dispatch) => {
     getItem(name)
         .then(data => dispatch(addNameCase(data.В, name)))
 }
 
-export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
 
-    getItem(name).then(data => {
-        dispatch(changeRelativity(data.Р, unit, prise, [data.Р,
-        data.множественное
-            ? data.множественное.Р
-            : data.Р,
-            name]))
-    })
-}
 
 
 
