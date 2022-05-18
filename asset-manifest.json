@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/app-expenses/static/css/main.06e54dd5.css",
+    "main.js": "/app-expenses/static/js/main.bd891007.js",
+    "static/media/hedgehog.png": "/app-expenses/static/media/hedgehog.b690a7d15d886542133e.png",
+    "index.html": "/app-expenses/index.html",
+    "main.06e54dd5.css.map": "/app-expenses/static/css/main.06e54dd5.css.map",
+    "main.bd891007.js.map": "/app-expenses/static/js/main.bd891007.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.06e54dd5.css",
+    "static/js/main.bd891007.js"
+  ]
+}
