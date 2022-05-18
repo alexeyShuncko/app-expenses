@@ -28,7 +28,8 @@ const DiagrammExpenses = (props) => {
     let datePo = DataTransformation(props.periodDiagramm.Po || props.todayPo)
 
     let textMessage =
-        `Нет расходов с ${dateS} по ${datePo} ...`
+        `У Вас нет расходов ...`
+        // с ${dateS} по ${datePo}
 
 // Слой в центре диаграммы
     const CenteredMetric = ({ dataWithArc, centerX, centerY }) => {
