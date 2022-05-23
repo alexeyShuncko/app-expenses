@@ -23,7 +23,7 @@ const Hedgehog = (props) => {
     }
 
     return (
-        <div className={s.popup}  >
+        <div className={s.popup} >
             <span
                 tabIndex='2'
                 onBlur={hedgOff}

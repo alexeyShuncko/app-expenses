@@ -52,9 +52,10 @@ const RelativityStatistic = (props) => {
 
     return (
         <div>
-            <span> Потрачено
-                <div>За всё время:
-                    <span className={s.boldValue}>{summ.toFixed(2)} рублей.</span>
+          
+            <span > Потрачено
+                <div >За всё время:
+                    <span  className={s.boldValue}>{summ.toFixed(2)} рублей.</span>
                 </div>
 
             </span>

@@ -23,11 +23,11 @@ export const getItem = async (text) => {
 
 // Доходы
 export const getSources = async () => {
-    const response = await axios.get(`http://37.228.117.77/api/sources/`);
+    const response = await axios.get(`https://shkoders.at.by/api/sources/`);
     return response.data;
 }
 export const postSources = async (name, color) => {
-    const response = await axios.post(`http://37.228.117.77/api/sources/`, {
+    const response = await axios.post(`https://shkoders.at.by/api/sources/`, {
         'name': name,
         'color': color
     });
@@ -37,16 +37,16 @@ export const postSources = async (name, color) => {
 
 // Отдельный доход
 export const getSourcesId = async (id) => {
-    const response = await axios.get(`http://37.228.117.77/api/sources/${id}/`);
+    const response = await axios.get(`https://shkoders.at.by/api/sources/${id}/`);
     return response;
 }
 export const deleteSources = async (id) => {
-    const response = await axios.delete(`http://37.228.117.77/api/sources/${id}/`);
+    const response = await axios.delete(`https://shkoders.at.by/api/sources/${id}/`);
     return response;
 }
 
 export const putSources = async (name, color, id) => {
-    const response = await axios.put(`http://37.228.117.77/api/sources/${id}/`, {
+    const response = await axios.put(`https://shkoders.at.by/api/sources/${id}/`, {
         'name': name,
         'color': color
     });
@@ -56,11 +56,11 @@ export const putSources = async (name, color, id) => {
 // Записи в доходе
 
 export const getIncomes = async (id) => {
-    const response = await axios.get(`http://37.228.117.77/api/incomes/`);
+    const response = await axios.get(`https://shkoders.at.by/api/incomes/`);
     return response;
 }
 export const postIncomes = async (created, amount, category) => {
-    const response = await axios.post(`http://37.228.117.77/api/incomes/`, {
+    const response = await axios.post(`https://shkoders.at.by/api/incomes/`, {
         "created": created,
         "amount": amount,
         "category": category
@@ -72,11 +72,11 @@ export const postIncomes = async (created, amount, category) => {
 
 // Расходы
 export const getСategories = async () => {
-    const response = await axios.get(`http://37.228.117.77/api/categories/`);
+    const response = await axios.get(`https://shkoders.at.by/api/categories/`);
     return response.data;
 }
 export const postСategories = async (name, nameRusСase, color) => {
-    const response = await axios.post(`http://37.228.117.77/api/categories/`, {
+    const response = await axios.post(`https://shkoders.at.by/api/categories/`, {
         'name': name,
         'nameRusСase': nameRusСase,
         'color': color
@@ -86,16 +86,16 @@ export const postСategories = async (name, nameRusСase, color) => {
 
 // Отдельный расход
 export const getСategoriesId = async (id) => {
-    const response = await axios.get(`http://37.228.117.77/api/categories/${id}/`);
+    const response = await axios.get(`https://shkoders.at.by/api/categories/${id}/`);
     return response;
 }
 export const deleteСategories = async (id) => {
-    const response = await axios.delete(`http://37.228.117.77/api/categories/${id}/`);
+    const response = await axios.delete(`https://shkoders.at.by/api/categories/${id}/`);
     return response;
 }
 
 export const putСategories = async (name, nameRusСase, color, id) => {
-    const response = await axios.put(`http://37.228.117.77/api/categories/${id}/`, {
+    const response = await axios.put(`https://shkoders.at.by/api/categories/${id}/`, {
         'name': name,
         'nameRusСase': nameRusСase,
         'color': color
@@ -106,11 +106,11 @@ export const putСategories = async (name, nameRusСase, color, id) => {
 // Записи в доходе
 
 export const getExpenses = async (id) => {
-    const response = await axios.get(`http://37.228.117.77/api/expenses/`);
+    const response = await axios.get(`https://shkoders.at.by/api/expenses/`);
     return response;
 }
 export const postExpenses = async (data) => {
-    const response = await axios.post(`http://37.228.117.77/api/expenses/`, {
+    const response = await axios.post(`https://shkoders.at.by/api/expenses/`, {
         'data': data
     });
     return response;
@@ -122,11 +122,11 @@ export const postExpenses = async (data) => {
 // Дата зарплаты и аванса
 
 export const getSalary = async () => {
-    const response = await axios.get(`http://37.228.117.77/api/set-data/`);
+    const response = await axios.get(`https://shkoders.at.by/api/set-data/`);
     return response.data;
 }
 export const putSalary = async (day, month, id) => {
-    const response = await axios.put(`http://37.228.117.77/api/set-data/`, {
+    const response = await axios.put(`https://shkoders.at.by/api/set-data/`, {
         "salary_day": day,
         "salary_month": month,
         "source": id
@@ -141,12 +141,12 @@ export const putSalary = async (day, month, id) => {
 // Относительная величина 
 
 export const getRelativity = async () => {
-    const response = await axios.get(`http://37.228.117.77/api/relativity/`);
+    const response = await axios.get(`https://shkoders.at.by/api/relativity/`);
     return response.data;
 }
 
 export const postRelativity = async (name, unit, price, padej) => {
-    const response = await axios.post(`http://37.228.117.77/api/relativity/`,   {
+    const response = await axios.post(`https://shkoders.at.by/api/relativity/`,   {
         "name": name,
         "value": unit,
         "amount": price,
@@ -155,3 +155,11 @@ export const postRelativity = async (name, unit, price, padej) => {
     return response;
 }
 
+
+// export const qqqq = async () => {
+//     const response = await axios.get(`https://shkoders.at.by/`);
+//     return response.data;
+// }
+
+
+// console.log(qqqq())
