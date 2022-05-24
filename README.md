@@ -16,4 +16,4 @@
     <li>Ant Design - для визуального оформления</li>
     <li>Nivo - для работы с диаграммами и графиками</li>
 </ul>
-<h2>Серверная часть приложения <a href="https://github.com/Asnaeb26/expenses">GitHub</a></h2>
+<h2>Серверная часть приложения <a href="https://github.com/Asnaeb26/expenses">GitHub/Python</a></h2>
