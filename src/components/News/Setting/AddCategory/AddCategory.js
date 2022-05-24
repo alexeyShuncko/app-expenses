@@ -33,12 +33,16 @@ const AddCategory = (props) => {
     const onFinish = (values) => {
 
         form.resetFields()
-        props.addText(`Категория "${values.addCategory}" добавлена ...`)
+
+        let name = values.addCategory.slice(0,1).toUpperCase() + values.addCategory.slice(1).toLowerCase()
+
+        props.addText(`Категория "${name}" добавлена ...`)
         props.addActivHedgehog(true)
 
+        
 
-        props.itemCategories(values.addCategory, 
-            values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
+         props.itemCategories(name, 
+             values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
 
         // props.addCategory(values.addCategory, 
         //     values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
@@ -47,10 +51,14 @@ const AddCategory = (props) => {
 
 
     const validator = (rule, value) => {
+        const regex1 = /[A-Za-z]/
         if (value && props.diagramm.category.find(a => a.name.toLowerCase() === value.toLowerCase())) {
             return Promise.reject(new Error(`Категория "${value}" уже есть!`))
         }
-        return Promise.resolve()
+        else if (regex1.test(value)) {
+            return Promise.reject(new Error(`Только русский язык!`))
+        }
+       else return Promise.resolve()
     }
 
     const validatorColor = (rule, value) => {
@@ -144,8 +152,8 @@ const AddCategory = (props) => {
                         Чтобы добавить категорию, следуйте ниже приведенным шагам:
                     </div>
                     <li> В поле "Название категории" впишите название новой категории</li>
-                        (Название не должно совпадать с уже имеющимися категориями и должно быть <br></br>
-                        длинною до 14 символов)
+                        (Название не должно совпадать с уже имеющимися категориями, должно быть <br></br>
+                        длинною до 14 символов и на русском языке)
                     <li> Нажав на поле "Цвет", выберите цвет новой категории</li>
                     (Цвет не должен совпадать с уже используемыми цветами, для визуального отличия категорий)
                     <li> Нажмите в любое место экрана, кроме окна выбора цвета</li>

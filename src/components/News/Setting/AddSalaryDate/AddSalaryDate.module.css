@@ -9,10 +9,26 @@
 }
 
 .form {
-    margin-top: 50px;
+    margin-top: 20px;
     flex: 1;
 }
 
+/* Даты аванса и зарплаты */
+.dateItem {
+display: flex;
+margin-bottom: 10px;
+font-size: 16px;
+justify-content: end;
+
+}
+.dateItem div {
+    margin-right: 5px;
+}
+
+.dateSalary {
+    margin-bottom: 30px;
+    margin-right: 150px;
+}
 
 .instruction {
     flex: 2;

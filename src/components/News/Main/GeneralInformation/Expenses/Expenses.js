@@ -28,8 +28,7 @@ const Expenses = (props) => {
     }
 
     const onFinish = (values) => {
-        
-        const timer = DateFunc(new Date())
+
         let keyArray = []
         let valueArray = []
         for (let key in values) {
@@ -40,24 +39,31 @@ const Expenses = (props) => {
             }
         }
 
+        if (keyArray.length === 0) {
+            props.addText(`Вы не ввели ни одного расхода ...`)
+            props.addActivHedgehog(true)
+        }
+        else {
+            const timer = DateFunc(new Date())
 
-        let data = keyArray.map((a, index) => {
+            let data = keyArray.map((a, index) => {
 
-            return {
-                "created": timer,
-                "amount": valueArray[index],
-                "currency": "BYN",
-                "category": props.diagramm.category.find(b => b.name === a).id
-            }
-        })
+                return {
+                    "created": timer,
+                    "amount": valueArray[index],
+                    "currency": "BYN",
+                    "category": props.diagramm.category.find(b => b.name === a).id
+                }
+            })
 
-        let text = keyArray.map(a => diagramm.find(b => b.name === a).name).join(', ')
+            let text = keyArray.map(a => diagramm.find(b => b.name === a).name).join(', ')
 
-        props.addText(`Расходы на  "${text}" добавлены ...`)
-        props.addActivHedgehog(true)
+            props.addText(`Расходы на  "${text}" добавлены ...`)
+            props.addActivHedgehog(true)
 
-        props.addDiagramm(data)
-        deActivateEditMode()
+            props.addDiagramm(data)
+            deActivateEditMode()
+        }
     }
 
 

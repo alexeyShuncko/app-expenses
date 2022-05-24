@@ -32,18 +32,24 @@ const RenameCategory = (props) => {
 
 
     const validator = (rule, value) => {
+        const regex1 = /[A-Za-z]/
         if (value && props.diagramm.category.find(a => a.name.toLowerCase() === value.toLowerCase())) {
             return Promise.reject(new Error(`Категория "${value}" уже есть!`))
         }
-        return Promise.resolve()
+        else if (regex1.test(value)) {
+            return Promise.reject(new Error(`Только русский язык!`))
+        }
+        else return Promise.resolve()
     }
 
 
 
     const onFinish = (values) => {
 
+        let name = values.name.slice(0,1).toUpperCase() + values.name.slice(1).toLowerCase()
+
         props.updateItemCategories(
-            values.name, 
+            name, 
             props.diagramm.category.find(a => a.name === values.select).color,
             props.diagramm.category.find(a => a.name === values.select).id,
         )
@@ -51,7 +57,7 @@ const RenameCategory = (props) => {
 
         // props.renameCategory(values.select, values.name)
 
-        props.addText(`"${values.select}" переименована в  "${values.name}" ...`)
+        props.addText(`"${values.select}" переименована в  "${name}" ...`)
         props.addActivHedgehog(true)
 
         // props.nameCase(values.name) //добавление имени в винительном падеже ...
@@ -127,7 +133,8 @@ const RenameCategory = (props) => {
                     <div>
                         <div>1) Выберите категорию из выпадающего списка "Название категории"</div>
                         <div>2) В поле "Новое название категории" впишите новое название категории<br></br>
-                            (Название не должно совпадать с уже имеющимися категориями и должно быть длинною до 14 символов)
+                            (Название не должно совпадать с уже имеющимися категориями,<br></br>
+                             должно быть длинною до 14 символов и на русском языке)
                         </div>
                         <div>3) Нажмите кнопку "Переименовать"</div>
                     </div>
