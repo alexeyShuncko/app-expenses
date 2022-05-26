@@ -13,19 +13,20 @@ import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 
 
+
 ReactDOM.render(
 
   <ConfigProvider  locale={locale}>
     <HashRouter>
+     
       <Provider store={store}>
         <App />
       </Provider>
+      
     </HashRouter>
 
   </ConfigProvider>
   ,
-
-
 
   document.getElementById('root')
 );

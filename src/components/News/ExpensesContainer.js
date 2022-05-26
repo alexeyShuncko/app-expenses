@@ -16,6 +16,7 @@ import {
     categories, sources, salary, relativ
 } from './../../Redux/diagrammReducer';
 import AboutApp from './AboutApp/AboutApp';
+import Login from './NavNews/Login/Login';
 
 
 const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary, relativ, ...props }) => {
@@ -46,7 +47,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
         <div className={s.newsContainerItems}  >
 
             <div className={s.newsContainerNav}>
-                <div className={s.NavNews}><NavNews /></div>
+                <NavNews />
                 <div className={s.hedgehog} >
                     <Hedgehog
                         addActivHedgehog={addActivHedgehog}
@@ -65,7 +66,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
                         <Route path='/diagramm' element={<DiagrammContainer />} />
                         <Route path='/setting/*' element={<Setting />} />
                         <Route path='/about' element={<AboutApp />} />
-                        {/* <Route path='/' element={<Error />} /> */}
+                        <Route path='/' element={<Login />} /> 
                     </Routes>
                 </div>
             </div>

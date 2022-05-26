@@ -6,8 +6,6 @@ import { Select } from "antd";
 
 
 
-
-
 const StatisticPeriod = (props) => {
 
 
@@ -70,8 +68,8 @@ const StatisticPeriod = (props) => {
                     </div>
                 </div>
 
-                <RelativityStatistic diagramm={props.diagramm} />
-
+  <RelativityStatistic diagramm={props.diagramm} />
+     
             </div>
             <div className={s.period}>
                 <div className={s.categoryStatisticName}>Выберите период : </div>

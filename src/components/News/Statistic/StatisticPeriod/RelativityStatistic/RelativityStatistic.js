@@ -2,15 +2,16 @@ import React from "react";
 import s from './RelativityStatistic.module.css';
 
 
+
 const RelativityStatistic = (props) => {
 
     let data = props.diagramm.category.find(a => a.id === props.diagramm.activ.id)
 
     let summ = data.data
-    .map(a=> a.amount)
-    .reduce((acc, num) => acc + num, 0)
+        .map(a => a.amount)
+        .reduce((acc, num) => acc + num, 0)
 
-    let amount = Number(( summ / props.diagramm.relativity.amount).toFixed(0).slice(-1))
+    let amount = Number((summ / props.diagramm.relativity.amount).toFixed(0).slice(-1))
     let amount11 = Number((summ / props.diagramm.relativity.amount).toFixed(0).slice(-2))
 
 
@@ -19,7 +20,7 @@ const RelativityStatistic = (props) => {
     let pack = ['пачки', 'пачек', 'пачка']
     let liter = ['литра', 'литров', 'литр']
     let two = ['пары', 'пар', 'пара']
-    
+
 
     const obj = () => {
         if (props.diagramm.relativity.value === 'бутылка')
@@ -52,10 +53,9 @@ const RelativityStatistic = (props) => {
 
     return (
         <div>
-          
             <span > Потрачено
-                <div >За всё время:
-                    <span  className={s.boldValue}>{summ.toFixed(2)} рублей.</span>
+                <div id="qqq">За всё время:
+                    <span className={s.boldValue}>{summ.toFixed(2)} рублей.</span>
                 </div>
 
             </span>
@@ -65,18 +65,19 @@ const RelativityStatistic = (props) => {
             <div>Или:
                 <span className={s.boldValue}>{(summ / props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)} €</span>
             </div>
-            <div 
-            style={{ borderBottom: `solid ${data.color}` }}
+            <div
+                style={{ borderBottom: `solid ${data.color}` }}
             >
                 Или:<span className={s.boldValue} title='Относительная величина'>
                     {props.diagramm.relativity.value === 'штука'
                         ? (summ / props.diagramm.relativity.amount).toFixed(0) + ' ' +
-                        unitRus 
+                        unitRus
                         : (summ / props.diagramm.relativity.amount).toFixed(0) + ' ' +
                         unitRus + ' ' +
                         props.diagramm.relativity.name}
                 </span>
             </div>
+
         </div>
 
 

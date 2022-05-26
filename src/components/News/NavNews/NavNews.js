@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Login from './Login/Login';
 
 import s from './NavNews.module.css';
 
@@ -34,7 +35,7 @@ const NavNews = (props) => {
       </div>
 
     </nav>
-   
+  
     </div>
   )
 }
