@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import GrafsExpenses from './GrafsExpenses/GrafsExpenses';
 import GrafsForm from './GrafsForm/GrafsForm';
 import { addPeriod, addGrafSelectValuta, 
-    addText, addGrafSelect, addActivHedgehog } from './../../../Redux/diagrammReducer';
+    addText, addGrafSelect, addActivHedgehog } from './../../Redux/diagrammReducer';
 import GrafsIncome from './GrafIncome/GrafsIncome';
 
 

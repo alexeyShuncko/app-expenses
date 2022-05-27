@@ -3,7 +3,7 @@ import s from './Statistic.module.css';
 import TotalTable from './TotalTable/TotalTable';
 import {
     addActiv, addPeriod, addText, addTableSelect, addActivHedgehog
-} from '../../../Redux/diagrammReducer';
+} from '../../Redux/diagrammReducer';
 import { connect } from 'react-redux';
 import StatisticTable from "./StatisticTable/StatisticTable";
 import StatisticPeriod from "./StatisticPeriod/StatisticPeriod";

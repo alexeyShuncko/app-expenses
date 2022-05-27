@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import s from './AboutApp.module.css';
 import { connect } from 'react-redux';
-import { addText, addActivHedgehog } from '../../../Redux/diagrammReducer';
+import { addText, addActivHedgehog } from '../../Redux/diagrammReducer';
 import { Button, Form, Select } from 'antd';
 import DateAnt from '../helpers/Date/DateAnt';
 

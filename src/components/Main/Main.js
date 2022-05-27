@@ -6,10 +6,10 @@ import {
     addDiagramm, addActiv,
     addSelectDiagramm, addEditColor,
     getDollarUpdate, getEuroUpdate
-} from '../../../Redux/diagrammReducer';
+} from '../../Redux/diagrammReducer';
 import DiagrammMain from './DiagrammMain/DiagrammMain';
 import { addText, addIncome, addSalaryMonth, updateSalary,
-    addActivHedgehog} from './../../../Redux/diagrammReducer';
+    addActivHedgehog} from './../../Redux/diagrammReducer';
 
 
 

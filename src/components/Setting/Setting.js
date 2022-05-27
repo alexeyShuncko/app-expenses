@@ -12,7 +12,7 @@ import {
     addEditColor, changeRelativity, addText, addActiv, nameCase,
     nameCaseRelativity, addSalaryDay, addActivHedgehog, itemCategories,
     deleteItemCategories, updateItemCategories, updateColor, updateSalary
-} from './../../../Redux/diagrammReducer';
+} from './../../Redux/diagrammReducer';
 import Color from './Color/Color';
 import Relativity from './Relativity/Relativity';
 import AddSalaryDate from './AddSalaryDate/AddSalaryDate';

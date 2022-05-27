@@ -1,0 +1,11 @@
+.list {
+    display: grid;
+    grid-template-columns: 2fr 1fr 6fr;
+    font-size: 20px
+}
+
+
+
+.profile {
+
+}

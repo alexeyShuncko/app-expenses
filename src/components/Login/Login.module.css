@@ -1,0 +1,8 @@
+.shadow {
+  position: absolute;
+  width: 550px;
+  margin: 150px 450px 0px 450px;
+  padding-top: 30px;
+  border: solid 1px black;
+  border-radius: 30px;
+}

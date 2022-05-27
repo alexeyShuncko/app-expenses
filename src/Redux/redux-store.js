@@ -1,12 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux"
 import  thunkMiddleware from "redux-thunk"
 import diagrammReduser from "./diagrammReducer";
+import profileReducer from "./profileReducer";
 
 
 let reducers = combineReducers(
     {
-      
-        expenses: diagrammReduser 
+        expenses: diagrammReduser,
+        profile: profileReducer 
     }
 )
 

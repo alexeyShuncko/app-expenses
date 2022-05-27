@@ -1,6 +1,13 @@
 import axios from "axios";
 
 
+const instance = axios.create({
+    baseURL: 'https://shkoders.at.by/api/',
+     headers: {
+         'Authorization': localStorage.getItem('key')
+     }
+})
+
 
 export const getDollar = async () => {
     const response = await axios.get('https://www.nbrb.by/api/exrates/rates/431');
@@ -23,7 +30,7 @@ export const getItem = async (text) => {
 
 // Доходы
 export const getSources = async () => {
-    const response = await axios.get(`https://shkoders.at.by/api/sources/`);
+    const response = await instance.get(`sources/`);
     return response.data;
 }
 export const postSources = async (name, color) => {
@@ -156,10 +163,37 @@ export const postRelativity = async (name, unit, price, padej) => {
 }
 
 
-// export const qqqq = async () => {
-//     const response = await axios.get(`https://shkoders.at.by/`);
-//     return response.data;
-// }
+
+// Создание новой учётной записи
+ export const createUser = async () => {
+     const response = await axios.post(`https://shkoders.at.by/`, {
+
+     });
+     return response.data;
+ }
 
 
-// console.log(qqqq())
+// Получение токена
+export const createToken = async () => {
+    const response = await axios.post(`https://shkoders.at.by/`, {
+
+    });
+    return response.data;
+}
+
+// Логинизация
+export const postDataUser = async (name, password) => {
+    const response = await axios.post(`https://shkoders.at.by/`, {
+        'name': name,
+         'password': password
+    });
+    return response.data;
+}
+
+// Изменение данных пользователя
+export const updateDataUser = async () => {
+    const response = await axios.put(`https://shkoders.at.by/`, {
+
+    });
+    return response.data;
+}

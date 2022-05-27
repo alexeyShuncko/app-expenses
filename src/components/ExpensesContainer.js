@@ -14,9 +14,9 @@ import { DateFunc } from './helpers/DateFunc/DateFunc';
 import {
     addTodayS, addTodayPo, addText, addActivHedgehog,
     categories, sources, salary, relativ
-} from './../../Redux/diagrammReducer';
+} from './../Redux/diagrammReducer';
 import AboutApp from './AboutApp/AboutApp';
-import Login from './NavNews/Login/Login';
+import Profile from './Profile/Profile';
 
 
 const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary, relativ, ...props }) => {
@@ -25,8 +25,8 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
 
     useEffect(() => {
         if (!init) {
-            addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...') 
-            addActivHedgehog(true) 
+            // addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...') 
+            // addActivHedgehog(true) 
             setInit(true) 
             categories()  
             sources() 
@@ -60,13 +60,14 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
 
                 <div>
                     <Routes>
-                        <Route path='/main' element={<Main />} />
+                        <Route path='/' element={<Main />} />
                         <Route path='/statistic' element={<Statistic />} />
                         <Route path='/graphs' element={<Grafs />} />
                         <Route path='/diagramm' element={<DiagrammContainer />} />
                         <Route path='/setting/*' element={<Setting />} />
                         <Route path='/about' element={<AboutApp />} />
-                        <Route path='/' element={<Login />} /> 
+                         <Route path='/profile' element={<Profile />} />
+
                     </Routes>
                 </div>
             </div>

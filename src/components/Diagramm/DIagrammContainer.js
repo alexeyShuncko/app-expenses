@@ -3,7 +3,7 @@ import s from './DiagrammContainer.module.css';
 import DiagrammExpenses from "./DiagrammExpenses/DiagrammExpenses";
 import { connect } from 'react-redux';
 import { addActivHedgehog, addPeriod,
-    addSelectDiagrammStat, addText, addDiagrammSelect } from './../../../Redux/diagrammReducer';
+    addSelectDiagrammStat, addText, addDiagrammSelect } from './../../Redux/diagrammReducer';
 import DiagrammForm from './DiagrammForm/DiagrammForm';
 import DiagrammIncome from "./DiagrammIncome/DiagrammIncome";
 

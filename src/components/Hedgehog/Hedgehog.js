@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from './Hedgehog.module.css';
-import hedgehog from '../../../image/hedgehog.png';
+import hedgehog from '../../image/hedgehog.png';
 import { useNavigate } from 'react-router-dom';
 
 
