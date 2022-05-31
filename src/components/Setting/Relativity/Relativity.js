@@ -63,7 +63,6 @@ const Relativity = (props) => {
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
                     initialValues={{ select: 'штука' }}
-                    //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
 

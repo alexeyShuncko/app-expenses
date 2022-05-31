@@ -10,7 +10,7 @@ const ButtonLogin = (props) => {
 
   const redirect = (e) => {
     
-    e.target.innerHTML === 'Войти'
+    e.currentTarget.innerText === 'Войти'
       ? props.updateLogin('login')
       : props.updateLogin('registr')
   }

@@ -1,6 +1,6 @@
-import { createToken, createUser, getDataUser, postDataUser } from "../API/api"
+// import { createToken, createUser, getDataUser, postDataUser } from "../API/api"
 
-const ADD_USER = 'ADD_USER'
+const ADD_USER = 'ADD_USER' 
 const ADD_ACTION_USER = 'ADD_ACTION_USER'
 const ADD_LOGIN = 'ADD_LOGIN'
 
@@ -12,9 +12,10 @@ let initialState = {
        {name: 'Валера', email:'@awdawd',password:'1'},
        {name: 'Илья', email:'@awdawd',password:'2'},
        {name: 'Алексей', email:'@awdawd',password:'3'},
+       {name: '1', email:'@awdawd',password:'3'}
 ],
-actionUser: '',
-login: false
+actionUser: {name: 'Валера', email:'@awdawd',password:'1'},
+login: true
 }
 
 
@@ -63,7 +64,7 @@ export const updateLogin = (data,) => {
 
 
 export const registration = (name, password, email) => (dispatch) => {
-    console.log(name, password, email)
+    console.log(`Пользователь зарегистрирован: имя - ${name},пароль -${password}, email - ${email}`)
     // createUser(name, password, email)
     //     .then(data => dispatch(addActionUser(data)))
     //     .then(() => createToken(name, password, email))
@@ -72,7 +73,7 @@ export const registration = (name, password, email) => (dispatch) => {
 }
 
 export const login = (name, password) => (dispatch) => {
-    console.log(name, password)
+    console.log(`Выполнен вход: имя - ${name},пароль -${password}` )
     // postDataUser(name, password)
     //.then(() => updateLogin(true) )
 }

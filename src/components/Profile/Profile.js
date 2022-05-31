@@ -7,8 +7,11 @@ import { updateLogin } from './../../Redux/profileReducer';
 
 const Profile = (props) => {
 
-    const updateProfile = () => {
+    
 
+    const updateProfile = (e) => {
+     
+        console.log(e.currentTarget.name)
     }
 
     const Logout = () => {
@@ -19,11 +22,14 @@ const Profile = (props) => {
         'Email',
         'Пароль'
     ]
-    const www = Object.values(props.actionUser)
+    const www = props.actionUser && Object.values(props.actionUser)
 
+
+   
 
     return (
         <div className={s.profile}>
+          
             <div>
                 <div style={{ fontSize: '30px', marginBottom: '20px' }}>
                     Информация о пользователе:
@@ -32,9 +38,16 @@ const Profile = (props) => {
                     {user.map((a, index) =>
                         <li className={s.list} key={a.length}>
                             <div>
-                                {a}: {www.length !== 0 && www[index]}
+                                {a}: {www && www[index]}
                             </div>
-                            <Button type='primary' size="small" onClick={updateProfile}>Изменить</Button></li>)
+                            <Button
+                                type='primary'
+                                name={a}
+                                size="small"
+                                onClick={updateProfile}>
+                                Изменить
+                            </Button>
+                        </li>)
                     }
                 </ul>
 

@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux"
-import  thunkMiddleware from "redux-thunk"
+import  thunk from "redux-thunk"
 import diagrammReduser from "./diagrammReducer";
 import profileReducer from "./profileReducer";
 
@@ -11,7 +11,7 @@ let reducers = combineReducers(
     }
 )
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(reducers, applyMiddleware(thunk));
 
 export default store
 window.store = store

@@ -26,13 +26,15 @@ const DeleteCategory = (props) => {
 
 
         props.deleteItemCategories(props.diagramm.category.find(a => a.name === values.select).id)
-        // props.deleteCategory(values.select)
 
         props.addText(`Категория "${values.select}" удалена ...`)
         props.addActivHedgehog(true)
-        props.addActiv('')
+        
         form.resetFields()
         setColor(props.diagramm.category[0].color)
+        if (props.diagramm.activ.name === values.select) {
+            props.addActiv('Еда')
+        }
     }
 
     return (

@@ -3,7 +3,7 @@ import s from './DollarRate.module.css';
 import { DataTransformation } from '../../../helpers/DataTransformation/DataTransformation';
 
 
-const DollarRate = (props) => {
+const DollarRate = ({getDollarUpdate,getEuroUpdate, ...props}) => {
 
     let [rates, setRates] = useState(false)
 
@@ -11,10 +11,10 @@ const DollarRate = (props) => {
     useEffect(() => {
         if (!rates && props.exchangeRates.dollar.Date === '') {
             setRates(true)
-            props.getDollarUpdate()
-            props.getEuroUpdate()
+            getDollarUpdate()
+            getEuroUpdate()
         }
-    }, [])
+    }, [setRates,getDollarUpdate,getEuroUpdate,props.exchangeRates.dollar.Date,rates ])
 
 
     return (

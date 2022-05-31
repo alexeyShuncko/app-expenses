@@ -41,12 +41,10 @@ const Color = (props) => {
             Converter_V_RGB(values.color),
             props.diagramm.category.find(a => a.name === values.name).id,
         )
-        // props.addEditColor(values.name, Converter_V_RGB(values.color))
-
-
 
         props.addText(`Цвет категории "${values.name}" изменен...`)
         props.addActivHedgehog(true)
+        
         setColor(props.diagramm.category[0].color)
         form.resetFields()
         

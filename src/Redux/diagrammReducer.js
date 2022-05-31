@@ -1,4 +1,3 @@
-
 import {
     getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
     postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
@@ -7,50 +6,41 @@ import {
 } from './../API/api';
 
 
-const ADD_DIAGRAMM = 'ADD_DIAGRAMM'
+// ГЛАВНАЯ
+// Диаграмма
+const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
+// Добавление курса валют
+const ADD_DOLLAR = 'ADD_DOLLAR'
+const ADD_EURO = 'ADD_EURO'
+
+// СТАТИСТИКА
 const ADD_ACTIV = 'ADD_ACTIV'
+const ADD_PERIOD = 'ADD_PERIOD'
+const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
 
+// ГРАФИК
+const ADD_GRAF_SELECT_VALUTA = 'ADD_GRAF_SELECT_VALUTA'
+const ADD_GRAF_SELECT = 'ADD_DIAGRAMM_SELECT'
 
+// ДИАГРАММА
+const ADD_PROBLEM_SELECT = 'ADD_PROBLEM_SELECT'
+const ADD_SELECT_DIAGRAMM_STAT = 'ADD_SELECT_DIAGRAMM_STAT'
+
+// Работа с сервером
 const ADD_SOURCE = 'ADD_SOURCE'
 const ADD_CATEGORIES = 'ADD_CATEGORIES'
 const ADD_SALARY = 'ADD_SALARY'
 const ADD_RELATIV = 'ADD_RELATIV'
 
-
-
-const ADD_PERIOD = 'ADD_PERIOD'
-const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
-
-const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
-
-const ADD_EDIT_COLOR = 'ADD_EDIT_COLOR'
-const ADD_DOLLAR = 'ADD_DOLLAR'
-const ADD_EURO = 'ADD_EURO'
-const ADD_SELECT_DIAGRAMM_STAT = 'ADD_SELECT_DIAGRAMM_STAT'
-const ADD_CATEGORY = 'ADD_CATEGORY'
-const DELETE_CATEGORY = 'DELETE_CATEGORY'
-const RENAME_CATEGORY = 'RENAME_CATEGORY'
-const CHANGE_RELATIVITY = 'CHANGE_RELATIVITY'
-const ADD_TEXT = 'ADD_TEXT'
-const ADD_NAME_CASE = 'ADD_NAME_CASE'
-
-// Графики
-const ADD_GRAF_SELECT_VALUTA = 'ADD_GRAF_SELECT_VALUTA'
-const ADD_GRAF_SELECT = 'ADD_DIAGRAMM_SELECT'
-
-// Диаграмма
-const ADD_PROBLEM_SELECT = 'ADD_PROBLEM_SELECT'
-
-const ADD_SALARY_DAY = 'ADD_SALARY_DAY'
-const ADD_SALARY_MONTH = 'ADD_SALARY_MONTH'
-
-// Сегодняшняя дата 
-
+// Сегодняшняя дата -33дня
 const ADD_TODAY_S = 'ADD_TODAY_S'
 const ADD_TODAY_PO = 'ADD_TODAY_PO'
 
 // Сообщение ежа
+const ADD_TEXT = 'ADD_TEXT'
 const ACTIV_HEDGEHOG = 'ACTIV_HEDGEHOG'
+
+
 
 
 let initialState = {
@@ -101,18 +91,14 @@ let initialState = {
             { source: 1, salary_day: '01', salary_month: '04' },
             { source: 2, salary_day: '02', salary_month: '04' }
         ]
-
     },
-
     period: [
         { name: 'table', S: '', Po: '' },
         { name: 'graf', S: '', Po: '' },
         { name: 'diagramm', S: '', Po: '' }
     ],
-
     tableSelect: 'расходов',
     selectDiagramm: 'BYN',
-
     exchangeRates: {
         dollar: { Cur_OfficialRate: '2.5', Date: '' },
         euro: { Cur_OfficialRate: '2.9', Date: '' }
@@ -144,93 +130,18 @@ let initialState = {
     activHedgehog: ''
 }
 
-
 const diagrammReduser = (state = initialState, action) => {
-
 
     switch (action.type) {
 
-
-        case ADD_DIAGRAMM:
-            return {
-                ...state,
-                category: [
-                    ...state.category.map(a => {
-                        if (action.name.includes(a.nameRus)) {
-                            return ({
-                                ...a,
-                                data: [...a.data, {
-                                    id: a.idCategory + (a.data.length + 1), time: action.time,
-                                    num: Number(action.value[action.name.indexOf(a.nameRus)])
-                                }],
-                                summ: a.summ + Number(action.value[action.name.indexOf(a.nameRus)])
-                            })
-                        }
-                        else return a
-                    })]
-            }
-
-        case ADD_ACTIV:
-            return {
-                ...state, activ: {
-                    name: action.activ
-                        ? action.activ
-                        : state.category[0].name,
-                    id: action.activ
-                        ? state.category.filter(a => a.name === action.activ)[0].id
-                        : state.category[0].id
-                }
-            }
-
-
-        // Статистика
-        case ADD_PERIOD:
-
-            return {
-                ...state,
-                period: [...state.period.map(a => {
-                    if (a.name === action.key) {
-                        return ({
-                            ...a,
-                            S: action.period[0],
-                            Po: action.period[1],
-                        })
-
-                    }
-                    else return a
-                })
-                ]
-            }
-
-        case ADD_TABLE_SELECT:
-            return {
-                ...state,
-                tableSelect: action.select
-            }
-
-
-
-
+        // ГЛАВНАЯ
+        // Диаграмма
         case ADD_SELECT_DIAGRAMM:
             return {
                 ...state, selectDiagramm: action.selectDiagramm
             }
-        case ADD_SELECT_DIAGRAMM_STAT:
-            return {
-                ...state, selectDiagrammStat: action.selectDiagrammStat
-            }
 
-        case ADD_EDIT_COLOR:
-            return {
-                ...state,
-                category: [
-                    ...state.category.map(a => {
-                        if (a.nameRus === action.name) {
-                            return ({ ...a, color: action.editColor })
-                        }
-                        else return a
-                    })]
-            }
+        // Курсы валют 
         case ADD_DOLLAR:
             return {
                 ...state,
@@ -253,66 +164,46 @@ const diagrammReduser = (state = initialState, action) => {
                     }
                 }
             }
-        case ADD_CATEGORY:
+
+        // СТАТИСТИКА
+        //   Выбор категории
+        case ADD_ACTIV:
+
             return {
-                ...state,
-                category: [...state.category, {
-                    nameRus: `${action.name[0].toUpperCase() + action.name.slice(1)}`,
-                    nameRusСase: '',
-                    color: action.color,
-                    idCategory: state.category[0].idCategory * (state.category.length + 1),
-                    data: [],
-                    summ: 0
-                }]
-            }
-        case ADD_NAME_CASE:
-            return {
-                ...state,
-                category: [...state.category.map(a => {
-                    if (a.nameRus.toLowerCase() === action.name.toLowerCase()) {
-                        return ({ ...a, nameRusСase: `${action.data[0].toUpperCase() + action.data.slice(1)}` })
-                    }
-                    return a
+                ...state, activ: {
+                    name: action.activ,
+                    id: state.category.find(a => a.name === action.activ)
+                        ? state.category.find(a => a.name === action.activ).id
+                        : state.activ.id
                 }
-                )]
             }
 
-        case DELETE_CATEGORY:
+        //   Выбор периода
+        case ADD_PERIOD:
+
             return {
                 ...state,
-                category: [...state.category.filter(a => a.nameRus !== action.name)]
-            }
-        case RENAME_CATEGORY:
-            return {
-                ...state,
-                category: [...state.category.map(a => {
-                    if (a.nameRus === action.name) {
+                period: [...state.period.map(a => {
+                    if (a.name === action.key) {
                         return ({
                             ...a,
-                            nameRus: `${action.rename[0].toUpperCase() + action.rename.slice(1)}`
+                            S: action.period[0],
+                            Po: action.period[1],
                         })
                     }
                     else return a
-                })]
-            }
-        case CHANGE_RELATIVITY:
-            return {
-                ...state,
-                relativity: {
-                    name: action.name,
-                    unit: action.unit,
-                    price: Number(action.price),
-                    case: action.array
-                }
-            }
-        case ADD_TEXT:
-            return {
-                ...state,
-                text: action.text
+                })
+                ]
             }
 
+        // Таблица
+        case ADD_TABLE_SELECT:
+            return {
+                ...state,
+                tableSelect: action.select
+            }
 
-        // График
+        // ГРАФИК
         case ADD_GRAF_SELECT_VALUTA:
             return {
                 ...state,
@@ -324,68 +215,19 @@ const diagrammReduser = (state = initialState, action) => {
                 grafSelect: action.select
             }
 
-
-
-
-        // Диаграмма
+        // ДИАГРАММА
+        case ADD_SELECT_DIAGRAMM_STAT:
+            return {
+                ...state, selectDiagrammStat: action.selectDiagrammStat
+            }
 
         case ADD_PROBLEM_SELECT:
             return {
                 ...state,
                 diagrammSelect: action.select
             }
-        case ADD_SALARY_DAY:
-            return {
-                ...state,
-                income: {
-                    ...state.income,
-                    salary: {
-                        Date: action.name === 'Зарплата'
-                            ? {
-                                ...state.income.salary.Date,
-                                day: action.day
-                            }
-                            : { ...state.income.salary.Date }
-                    },
-                    prepayment: {
-                        Date: action.name === 'Аванс'
-                            ? {
-                                ...state.income.prepayment.Date,
-                                day: action.day
-                            }
-                            : { ...state.income.prepayment.Date }
-                    }
-                }
-            }
-        case ADD_SALARY_MONTH:
-            return {
-                ...state,
-                income: {
-                    ...state.income,
-                    salary: {
-                        Date: action.name === 'Зарплата'
-                            ? {
-                                ...state.income.salary.Date,
-                                month: action.month < 10
-                                    ? `0${action.month}`
-                                    : action.month
-                            }
-                            : { ...state.income.salary.Date }
-                    },
-                    prepayment: {
-                        Date: action.name === 'Аванс'
-                            ? {
-                                ...state.income.prepayment.Date,
-                                month: action.month < 10
-                                    ? `0${action.month}`
-                                    : action.month
-                            }
-                            : { ...state.income.prepayment.Date }
-                    }
 
-                }
-            }
-
+        //  Сегодняшняя дата -33 дня
         case ADD_TODAY_S:
             return {
                 ...state,
@@ -409,7 +251,14 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 activHedgehog: action.activ
             }
+        case ADD_TEXT:
+            return {
+                ...state,
+                text: action.text
+            }
 
+        // РАБОТА С СЕРВЕРОМ
+        // Доходы
         case ADD_SOURCE:
             return {
                 ...state,
@@ -418,11 +267,15 @@ const diagrammReduser = (state = initialState, action) => {
                     data: action.data
                 }
             }
+
+        // Расходы
         case ADD_CATEGORIES:
             return {
                 ...state,
                 category: action.data
             }
+
+        // Дата ЗП            
         case ADD_SALARY:
             return {
                 ...state,
@@ -431,13 +284,13 @@ const diagrammReduser = (state = initialState, action) => {
                     salary: action.salary
                 }
             }
+
+        // Относительная величина            
         case ADD_RELATIV:
             return {
                 ...state,
                 relativity: action.data
             }
-
-
 
         default:
             return state
@@ -447,15 +300,43 @@ const diagrammReduser = (state = initialState, action) => {
 
 
 
-export const addActivHedgehog = (activ) => {
 
-    let qqq = document.getElementById("myPopup")
+// Главная
+export const addSelectDiagramm = (selectDiagramm) => {
+    return { type: ADD_SELECT_DIAGRAMM, selectDiagramm }
+}
+export const addDollar = (dollar, data) => {
+    return { type: ADD_DOLLAR, dollar, data }
+}
+export const addEuro = (euro, data) => {
+    return { type: ADD_EURO, euro, data }
+}
 
-    setTimeout(() => {
-        qqq.focus()
-    }, 500)
+// Статистика
+export const addActiv = (activ) => {
+    return { type: ADD_ACTIV, activ }
+}
+export const addPeriod = (key, period) => {
+    return { type: ADD_PERIOD, key, period }
+}
+export const addTableSelect = (select) => {
+    return { type: ADD_TABLE_SELECT, select }
+}
 
-    return { type: ACTIV_HEDGEHOG, activ }
+// График
+export const addGrafSelectValuta = (select) => {
+    return { type: ADD_GRAF_SELECT_VALUTA, select }
+}
+export const addGrafSelect = (select) => {
+    return { type: ADD_GRAF_SELECT, select }
+}
+
+// Диаграмма
+export const addDiagrammSelect = (select) => {
+    return { type: ADD_PROBLEM_SELECT, select }
+}
+export const addSelectDiagrammStat = (selectDiagrammStat) => {
+    return { type: ADD_SELECT_DIAGRAMM_STAT, selectDiagrammStat }
 }
 
 // Сегодняшняя дата 
@@ -466,93 +347,19 @@ export const addTodayPo = (date) => {
     return { type: ADD_TODAY_PO, date }
 }
 
+// Сообщение ежа
+export const addActivHedgehog = (activ) => {
 
+    let qqq = document.getElementById("myPopup")
+    setTimeout(() => qqq.focus(), 500)
 
-// Графики
-export const addGrafSelectValuta = (select) => {
-    return { type: ADD_GRAF_SELECT_VALUTA, select }
+    return { type: ACTIV_HEDGEHOG, activ }
 }
-export const addGrafSelect = (select) => {
-    return { type: ADD_GRAF_SELECT, select }
-}
-
-
-
-
-// Диаграмма
-export const addDiagrammSelect = (select) => {
-    return { type: ADD_PROBLEM_SELECT, select }
-}
-
-
-
-
-export const addSalaryDay = (name, day) => {
-    return { type: ADD_SALARY_DAY, name, day }
-}
-export const addSalaryMonth = (name, month) => {
-    return { type: ADD_SALARY_MONTH, name, month }
-}
-
-
-
-
 export const addText = (text) => {
     return { type: ADD_TEXT, text }
 }
 
-export const changeRelativity = (name, unit, price, array) => {
-    return { type: CHANGE_RELATIVITY, name, unit, price, array }
-}
-
-export const addCategory = (name, color) => {
-    return { type: ADD_CATEGORY, name, color }
-}
-export const deleteCategory = (name) => {
-    return { type: DELETE_CATEGORY, name }
-}
-export const renameCategory = (name, rename) => {
-    return { type: RENAME_CATEGORY, name, rename }
-}
-
-export const addDollar = (dollar, data) => {
-    return { type: ADD_DOLLAR, dollar, data }
-}
-export const addEuro = (euro, data) => {
-    return { type: ADD_EURO, euro, data }
-}
-// export const addDiagramm = (name, value, time) => {
-//     return { type: ADD_DIAGRAMM, name, value, time }
-// }
-export const addActiv = (activ) => {
-    return { type: ADD_ACTIV, activ }
-}
-
-// Статистика
-export const addPeriod = (key, period) => {
-    return { type: ADD_PERIOD, key, period }
-}
-export const addTableSelect = (select) => {
-    return { type: ADD_TABLE_SELECT, select }
-}
-
-
-
-export const addEditColor = (name, editColor) => {
-    return { type: ADD_EDIT_COLOR, name, editColor }
-}
-export const addSelectDiagramm = (selectDiagramm) => {
-    return { type: ADD_SELECT_DIAGRAMM, selectDiagramm }
-}
-export const addSelectDiagrammStat = (selectDiagrammStat) => {
-    return { type: ADD_SELECT_DIAGRAMM_STAT, selectDiagrammStat }
-}
-export const addNameCase = (data, name) => {
-    return { type: ADD_NAME_CASE, data, name }
-}
-
-
-
+// Работа с сервером
 export const addSource = (data) => {
     return { type: ADD_SOURCE, data }
 }
@@ -572,38 +379,29 @@ export const addRelativ = (data) => {
 
 
 
+// Доходы
 export const sources = () => (dispatch) => {
     getSources()
         .then(data => dispatch(addSource(data)))
 }
-
+// Добавление отдельного дохода
 export const addIncome = (created, amount, category) => (dispatch) => {
-
     postIncomes(created, amount, category)
         .then(() => dispatch(sources()))
 }
-
+// Расходы
 export const categories = () => (dispatch) => {
     getСategories()
-        .then(data => dispatch(addCategories(data)))
+        .then(data => dispatch(addCategories(data.sort((a, b) => a.id - b.id))))
 }
-
+// Добавление отдельного расхода\дов
 export const addDiagramm = (data) => (dispatch) => {
-
     postExpenses(data)
         .then(() => dispatch(categories()))
 }
 
-
-
-
-
-
-
-// Настройки 
-
+// НАСТРОЙКИ
 // Добавление категории
-
 export const itemCategories = (name, color) => (dispatch) => {
     getItem(name)
         .then(data => postСategories(name, data.В, color))
@@ -611,49 +409,40 @@ export const itemCategories = (name, color) => (dispatch) => {
 }
 
 // Удаление категории
-
 export const deleteItemCategories = (id) => (dispatch) => {
     deleteСategories(id)
         .then(() => dispatch(categories()))
 }
 
 // Переименование категории
-
-export const updateItemCategories = (name, color, id) => (dispatch) => {
+export const updateItemCategories = (name, color, id, activID) => (dispatch) => {
     getItem(name)
         .then(data => putСategories(name, data.В, color, id))
         .then(() => dispatch(categories()))
 }
 
 // Изменение цвета категории
-
 export const updateColor = (name, nameRusСase, color, id) => (dispatch) => {
     putСategories(name, nameRusСase, color, id)
         .then(() => dispatch(categories()))
 }
 
 // Дата зарплаты
-
 export const salary = () => (dispatch) => {
     getSalary()
-        .then(data =>
-            dispatch(addSalary(data)))
+        .then(data => dispatch(addSalary(data)))
 }
 export const updateSalary = (day, month, id) => (dispatch) => {
     putSalary(day, month, id)
         .then(() => dispatch(salary()))
 }
 
-
-
-// Относительная величина 
-
+// Относительная величина
 export const relativ = () => (dispatch) => {
     getRelativity()
         .then(data => dispatch(addRelativ(data)))
 }
 export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
-
     getItem(name)
         .then(data => postRelativity(data.Р, unit, prise, {
             "name1": data.Р,
@@ -665,34 +454,15 @@ export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
         .then(() => dispatch(relativ()))
 }
 
-
-
-// Валюта
+// Курсы валюты
 export const getDollarUpdate = () => (dispatch) => {
-
-    getDollar().then(data => {
-        dispatch(addDollar(data.Cur_OfficialRate, data.Date))
-    })
+    getDollar()
+    .then(data => dispatch(addDollar(data.Cur_OfficialRate, data.Date)))
 }
 export const getEuroUpdate = () => (dispatch) => {
-
-    getEuro().then(data => {
-        dispatch(addEuro(data.Cur_OfficialRate, data.Date))
-    })
+    getEuro()
+    .then(data => dispatch(addEuro(data.Cur_OfficialRate, data.Date)))
 }
-
-
-
-
-
-
-export const nameCase = (name) => (dispatch) => {
-    getItem(name)
-        .then(data => dispatch(addNameCase(data.В, name)))
-}
-
-
-
 
 
 export default diagrammReduser

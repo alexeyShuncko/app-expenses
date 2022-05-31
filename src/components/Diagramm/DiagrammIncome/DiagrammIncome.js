@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie'
-import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
+// import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
 import Message from '../../helpers/Message/Message';
 
 
@@ -30,8 +30,8 @@ const diagramm = props.income.map(a => {
 
    
       
-    let dateS = DataTransformation(props.periodDiagramm.S || props.todayS)
-    let datePo = DataTransformation(props.periodDiagramm.Po || props.todayPo)
+    // let dateS = DataTransformation(props.periodDiagramm.S || props.todayS)
+    // let datePo = DataTransformation(props.periodDiagramm.Po || props.todayPo)
 
     let textMessage =
         `У Вас нет доходов ...`

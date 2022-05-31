@@ -3,8 +3,9 @@ import s from './RenameCategory.module.css';
 import { Button, Form, Input, Select, Space } from 'antd';
 
 
+
 const RenameCategory = (props) => {
-    let [color, setColor ]= useState(props.diagramm.category[0].color)
+    const [color, setColor ]= useState(props.diagramm.category[0].color)
 
     const [form] = Form.useForm()
 
@@ -48,21 +49,22 @@ const RenameCategory = (props) => {
 
         let name = values.name.slice(0,1).toUpperCase() + values.name.slice(1).toLowerCase()
 
+       
         props.updateItemCategories(
             name, 
             props.diagramm.category.find(a => a.name === values.select).color,
             props.diagramm.category.find(a => a.name === values.select).id,
+            props.diagramm.activ.id
         )
-
-
-        // props.renameCategory(values.select, values.name)
 
         props.addText(`"${values.select}" переименована в  "${name}" ...`)
         props.addActivHedgehog(true)
 
-        // props.nameCase(values.name) //добавление имени в винительном падеже ...
         form.resetFields()
         setColor(props.diagramm.category[0].color)
+        if (props.diagramm.activ.name === values.select) {
+            props.addActiv(name)
+        }
     }
 
 
@@ -77,7 +79,7 @@ const RenameCategory = (props) => {
                     labelCol={{ span: 11 }}
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
-                    initialValues={{ select: diagramm[0].name }}
+                    initialValues={{ select: props.diagramm.category[0].name}}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
@@ -88,7 +90,8 @@ const RenameCategory = (props) => {
                         <Select
                          className={s.selectCateg}
                          style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`}}
-                         onChange={onColor}>
+                         onChange={onColor}
+                         >
                             {diagramm.map(a =>
                                 <Select.Option value={a.name}
                                     key={a.name}

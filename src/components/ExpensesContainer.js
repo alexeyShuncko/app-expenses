@@ -1,39 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import s from './ExpensesContainer.module.css';
 import NavNews from './NavNews/NavNews';
 import { Route, Routes } from 'react-router';
 import Main from './Main/Main';
+
 import Statistic from './Statistic/Statistic';
-import Setting from './Setting/Setting';
-import { connect } from 'react-redux';
-import Hedgehog from './Hedgehog/Hedgehog';
-// import Error from './helpers/Error/Error';
 import Grafs from './Graphs/Graphs';
 import DiagrammContainer from './Diagramm/DIagrammContainer';
+import Setting from './Setting/Setting';
+import AboutApp from './AboutApp/AboutApp';
+import Profile from './Profile/Profile';
+
 import { DateFunc } from './helpers/DateFunc/DateFunc';
 import {
     addTodayS, addTodayPo, addText, addActivHedgehog,
     categories, sources, salary, relativ
 } from './../Redux/diagrammReducer';
-import AboutApp from './AboutApp/AboutApp';
-import Profile from './Profile/Profile';
+import { connect } from 'react-redux';
+import Hedgehog from './Hedgehog/Hedgehog';
+
+
+
+// Возможная ленивая загрузка
+
+// const Statistic = lazy(() => import('./Statistic/Statistic'))
+// const Grafs = lazy(() => import('./Graphs/Graphs'))
+// const DiagrammContainer = lazy(() => import('./Diagramm/DIagrammContainer'))
 
 
 const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, salary, relativ, ...props }) => {
 
-    let [init, setInit] = useState(false)
-
     useEffect(() => {
-        if (!init) {
-            // addText('Привет...Чтобы моё собщение исчезло, кликните вне сообщения...') 
-            // addActivHedgehog(true) 
-            setInit(true) 
-            categories()  
-            sources() 
-            salary() 
-            relativ() 
-        }     
-    }, []
+
+        //addText(`Привет, ${props.profile.actionUser.name} ...Чтобы моё собщение исчезло, кликните вне сообщения...`)
+        //addActivHedgehog(true)
+        categories()
+        sources()
+        salary()
+        relativ()
+    },
+        [categories, sources, salary, relativ, addText, addActivHedgehog,props.profile.actionUser]
     )
 
     const dateToday = new Date()
@@ -57,8 +63,8 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
             </div>
 
             <div className={s.newsContainerContent}>
-
                 <div>
+                    {/* <Suspense fallback={null}> */}
                     <Routes>
                         <Route path='/' element={<Main />} />
                         <Route path='/statistic' element={<Statistic />} />
@@ -66,9 +72,9 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
                         <Route path='/diagramm' element={<DiagrammContainer />} />
                         <Route path='/setting/*' element={<Setting />} />
                         <Route path='/about' element={<AboutApp />} />
-                         <Route path='/profile' element={<Profile />} />
-
+                        <Route path='/profile' element={<Profile />} />
                     </Routes>
+                    {/* </Suspense> */}
                 </div>
             </div>
 
@@ -77,7 +83,8 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
 }
 let mapStateToProps = (state) => {
     return {
-        diagramm: state.expenses
+        diagramm: state.expenses,
+        profile: state.profile
     }
 }
 export default connect(mapStateToProps, {

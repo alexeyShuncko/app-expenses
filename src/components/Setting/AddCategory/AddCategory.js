@@ -25,10 +25,6 @@ const AddCategory = (props) => {
     }
 
 
-    const validateMessages = {
-        required: 'Напишите название категории!',
-    }
-
 
     const onFinish = (values) => {
 
@@ -39,14 +35,8 @@ const AddCategory = (props) => {
         props.addText(`Категория "${name}" добавлена ...`)
         props.addActivHedgehog(true)
 
-        
-
          props.itemCategories(name, 
              values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
-
-        // props.addCategory(values.addCategory, 
-        //     values.color.indexOf('#') >=0 ? Converter_V_RGB(values.color) : values.color)
-        // props.nameCase(values.addCategory) // добавление имени в винительном падеже
     }
 
 
@@ -81,7 +71,6 @@ const AddCategory = (props) => {
                     wrapperCol={{ span: 10 }}
                     onFinish={onFinish}
                     initialValues={{ color: '#db2ebe' }}
-                    validateMessages={validateMessages}
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"   >
 
@@ -89,7 +78,8 @@ const AddCategory = (props) => {
                         label="Название категории"
                         name="addCategory"
                         hasFeedback
-                        rules={[{ required: true }, { validator: validator }]}>
+                        rules={[{ required: true, message: 'Напишите название категории!' },
+                         { validator: validator }]}>
                         <Input onInput={funcValidText} maxLength='14' />
                     </Form.Item>
 

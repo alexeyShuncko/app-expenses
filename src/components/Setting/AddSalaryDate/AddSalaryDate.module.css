@@ -18,7 +18,7 @@
 display: flex;
 margin-bottom: 10px;
 font-size: 16px;
-justify-content: end;
+justify-content: flex-end;
 
 }
 .dateItem div {

@@ -3,12 +3,11 @@ import s from './Main.module.css';
 import GeneralInformation from './GeneralInformation/GeneralInformation';
 import { connect } from 'react-redux';
 import {
-    addDiagramm, addActiv,
-    addSelectDiagramm, addEditColor,
+    addDiagramm, addActiv, addSelectDiagramm, 
     getDollarUpdate, getEuroUpdate
 } from '../../Redux/diagrammReducer';
 import DiagrammMain from './DiagrammMain/DiagrammMain';
-import { addText, addIncome, addSalaryMonth, updateSalary,
+import { addText, addIncome, updateSalary,
     addActivHedgehog} from './../../Redux/diagrammReducer';
 
 
@@ -31,7 +30,6 @@ const Main = (props) => {
                     getDollarUpdate={props.getDollarUpdate}
                     addText={props.addText}
                     addIncome={props.addIncome}
-                    addSalaryMonth={props.addSalaryMonth}
                     addActivHedgehog={props.addActivHedgehog}
                     updateSalary={props.updateSalary} 
                 />
@@ -43,7 +41,7 @@ const Main = (props) => {
                     addText={props.addText}
                     addSelectDiagramm={props.addSelectDiagramm}
                     diagramm={props.diagramm}
-                    addEditColor={props.addEditColor} />
+                   />
             </div>
 
 
@@ -58,10 +56,8 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,
-    {
-        addDiagramm, addActiv, addSelectDiagramm,
-        addEditColor, getDollarUpdate, getEuroUpdate, addText, addIncome, 
-        addSalaryMonth, addActivHedgehog, updateSalary
+    { addDiagramm, addActiv, addSelectDiagramm, getDollarUpdate, getEuroUpdate,
+         addText, addIncome, addActivHedgehog, updateSalary
     })(Main)
 
 

@@ -22,6 +22,11 @@ const Login = (props) => {
     
   }
 
+  const validator =(_,value)=> {
+    if (!props.profile.users.find(a=> a.name === value)) {
+return Promise.reject(new Error('Такого имени нет в природе)'))
+    }
+    return Promise.resolve()  } 
 
 
 // Ошибки после сабмита
@@ -55,6 +60,9 @@ const Login = (props) => {
               {
                 required: true,
                 message: 'Введите логин!',
+              },
+              {
+                validator:validator
               }
             ]}
           >
