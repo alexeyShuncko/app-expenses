@@ -5,6 +5,7 @@ import { DataTransformation } from "../../../helpers/DataTransformation/DataTran
 import Message from "../../../helpers/Message/Message";
 import { Table } from "antd";
 import moment from 'moment';
+import Converter_V_RGB from "../../../helpers/converter/converter";
 
 
 
@@ -48,7 +49,7 @@ const TotalIncome = (props) => {
             align:'center',
             sorter: (a, b) => a.name.length - b.name.length,
             render: (text, record, index) =>
-            <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+            <div style={{ backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         },
         {
             title: 'Дата',
@@ -57,7 +58,7 @@ const TotalIncome = (props) => {
             align:'center',
             sorter: (a, b) => moment(a.created) - moment(b.created),
             render: (text, record, index) =>
-            <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+            <div style={{ backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         },
         {
             title: 'Сумма',
@@ -66,7 +67,7 @@ const TotalIncome = (props) => {
             align:'center',
             sorter: (a, b) => a.amount - b.amount,
             render: (text, record, index) =>
-            <div style={{ backgroundColor: `rgba(${record.color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+            <div style={{ backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         }
     ]
  

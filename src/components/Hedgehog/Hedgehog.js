@@ -10,10 +10,14 @@ const Hedgehog = (props) => {
     let [count, setCount] = useState(0)
     let navigate = useNavigate()
 
+    
+
     const hedgOff = () => {
-        if (count === 0) {
+        if (props.category[0].data.length === 0 && props.category[1].data.length === 0
+            && props.category[2].data.length === 0 && props.category[3].data.length === 0
+            && count === 0 ) {
             navigate('/about')
-            setCount(+1)
+            setCount(1)
         }
         props.addActivHedgehog(false)
     }

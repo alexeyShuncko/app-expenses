@@ -3,14 +3,18 @@ import s from './Profile.module.css';
 import { connect } from 'react-redux';
 import { Button } from "antd";
 import { updateLogin } from './../../Redux/profileReducer';
+import { addActivHedgehog,addText } from './../../Redux/diagrammReducer';
 
 
 const Profile = (props) => {
 
-    
+
 
     const updateProfile = (e) => {
-     
+
+        props.addText(`Функционал в стадии разработки ...`)
+        props.addActivHedgehog(true)
+
         console.log(e.currentTarget.name)
     }
 
@@ -19,17 +23,17 @@ const Profile = (props) => {
     }
     const user = [
         'Имя',
-        'Email',
-        'Пароль'
+        'Email'
     ]
     const www = props.actionUser && Object.values(props.actionUser)
 
 
-   
+
+    
 
     return (
         <div className={s.profile}>
-          
+
             <div>
                 <div style={{ fontSize: '30px', marginBottom: '20px' }}>
                     Информация о пользователе:
@@ -38,7 +42,7 @@ const Profile = (props) => {
                     {user.map((a, index) =>
                         <li className={s.list} key={a.length}>
                             <div>
-                                {a}: {www && www[index]}
+                                {a}: {www && www[index + 1]}
                             </div>
                             <Button
                                 type='primary'
@@ -65,4 +69,4 @@ let mapStateToProps = (state) => {
         actionUser: state.profile.actionUser
     }
 }
-export default connect(mapStateToProps, { updateLogin })(Profile)
+export default connect(mapStateToProps, { updateLogin, addText, addActivHedgehog })(Profile)

@@ -98,7 +98,7 @@ const Expenses = (props) => {
 
                             {diagramm.map(a =>
                                 <Form.Item style={{ marginBottom: 0 }}
-                                    label={a.nameRusСase}
+                                    label={a.nameRusCase}
                                     name={a.name}
                                     key={a.name}
                                 //hasFeedback 

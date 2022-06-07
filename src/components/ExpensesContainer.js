@@ -32,14 +32,16 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
 
     useEffect(() => {
 
-        //addText(`Привет, ${props.profile.actionUser.name} ...Чтобы моё собщение исчезло, кликните вне сообщения...`)
-        //addActivHedgehog(true)
+        addText(`Здравствуйте, "${props.profile.actionUser.username}"... Чтобы моё собщение исчезло, кликните вне сообщения...`)
+        addActivHedgehog(true)
         categories()
         sources()
-        salary()
+        //salary()
         relativ()
     },
-        [categories, sources, salary, relativ, addText, addActivHedgehog,props.profile.actionUser]
+        [categories,
+            sources, salary, relativ, addText, addActivHedgehog, props.profile.actionUser
+        ]
     )
 
     const dateToday = new Date()
@@ -56,6 +58,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
                 <NavNews />
                 <div className={s.hedgehog} >
                     <Hedgehog
+                        category={props.diagramm.category}
                         addActivHedgehog={addActivHedgehog}
                         text={props.diagramm.text}
                         activHedgehog={props.diagramm.activHedgehog} />

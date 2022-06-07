@@ -37,7 +37,7 @@ const Color = (props) => {
 
         props.updateColor(
             values.name, 
-            props.diagramm.category.find(a => a.name === values.name).nameRusСase,
+            props.diagramm.category.find(a => a.name === values.name).nameRusCase,
             Converter_V_RGB(values.color),
             props.diagramm.category.find(a => a.name === values.name).id,
         )

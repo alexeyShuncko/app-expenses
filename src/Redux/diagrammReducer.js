@@ -1,7 +1,7 @@
 import {
     getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
     postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
-    getRelativity,
+    getRelativity, 
     postRelativity
 } from './../API/api';
 
@@ -39,7 +39,6 @@ const ADD_TODAY_PO = 'ADD_TODAY_PO'
 // Сообщение ежа
 const ADD_TEXT = 'ADD_TEXT'
 const ACTIV_HEDGEHOG = 'ACTIV_HEDGEHOG'
-
 
 
 
@@ -88,8 +87,8 @@ let initialState = {
             }
         ],
         salary: [
-            { source: 1, salary_day: '01', salary_month: '04' },
-            { source: 2, salary_day: '02', salary_month: '04' }
+            { source: 1, salary_day: '01', salary_month: '13' }, //зарплата
+            { source: 2, salary_day: '02', salary_month: '13' } // аванс
         ]
     },
     period: [
@@ -296,9 +295,6 @@ const diagrammReduser = (state = initialState, action) => {
             return state
     }
 }
-
-
-
 
 
 // Главная

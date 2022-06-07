@@ -6,8 +6,6 @@ import { Form, Button, Space } from 'antd';
 
 const ButtonLogin = (props) => {
 
-  
-
   const redirect = (e) => {
     
     e.currentTarget.innerText === 'Войти'
@@ -16,7 +14,7 @@ const ButtonLogin = (props) => {
   }
 
   return (
-
+    <div  className={s.container}>
 
     <div className={s.shadow}>
       <Form
@@ -43,6 +41,7 @@ const ButtonLogin = (props) => {
         </Form.Item>
 
       </Form>
+    </div>
     </div>
   )
 }

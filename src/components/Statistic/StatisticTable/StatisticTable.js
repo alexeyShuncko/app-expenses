@@ -5,6 +5,7 @@ import Message from "../../helpers/Message/Message";
 import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
 import { Button, Table } from "antd";
 import moment from 'moment';
+import Converter_V_RGB from "../../helpers/converter/converter";
 
 
 const StatisticTable = (props) => {
@@ -35,7 +36,7 @@ const StatisticTable = (props) => {
             && b.created >= (props.diagramm.period[0].S || props.diagramm.today.s))
 
 
-     let color = category.filter(a => a.id === props.diagramm.activ.id)[0].color
+     let color = Converter_V_RGB(category.filter(a => a.id === props.diagramm.activ.id)[0].color)
 
 
 
@@ -68,7 +69,7 @@ const StatisticTable = (props) => {
 
     let textMessage =
         `Нет расходов с ${dateS} по ${datePo} 
-    на "${props.diagramm.activ.name && category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusСase}" ...`
+    на "${props.diagramm.activ.name && category.find(a => a.id === props.diagramm.activ.id).nameRusCase}" ...`
 
 
     return (
@@ -99,7 +100,7 @@ const StatisticTable = (props) => {
                             <div className={s.statisticDateSumm} style={styles}>
                                 Потрачено на <span className={s.categorySumm}>
                                     {props.diagramm.activ.name &&
-                                        category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusСase}
+                                        category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusCase}
                                 </span>
                                 <div> с {dateS} по {datePo} </div>
                                 <div className={s.totalCategory}>

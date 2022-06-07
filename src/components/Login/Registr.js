@@ -2,7 +2,7 @@
 import React from 'react';
 import s from './Login.module.css';
 import { Form, Input, Button, Space } from 'antd';
-import { addUser, registration } from './../../Redux/profileReducer';
+import { registration } from './../../Redux/profileReducer';
 import { connect } from 'react-redux';
 
 
@@ -10,21 +10,77 @@ const Registr = (props) => {
 
 
   const onFinish = (values) => {
-
-    props.updateLogin('login')
-
-    props.addUser(values.username, values.password, values.email)
     props.registration(values.username, values.password, values.email)
   }
 
 
-
+  
   const ret = () => {
     props.updateLogin(false)
   }
 
+
+  function checkPassword(value) {
+    var password = value; // Получаем пароль из формы
+    var s_letters = "qwertyuiopasdfghjklzxcvbnm"; // Буквы в нижнем регистре
+    var b_letters = "QWERTYUIOPLKJHGFDSAZXCVBNM"; // Буквы в верхнем регистре
+    var digits = "0123456789"; // Цифры
+    var specials = "!@#$%^&*()_-+=\|/.,:;[]{}"; // Спецсимволы
+    var is_s = false; // Есть ли в пароле буквы в нижнем регистре
+    var is_b = false; // Есть ли в пароле буквы в верхнем регистре
+    var is_d = false; // Есть ли в пароле цифры
+    var is_sp = false; // Есть ли в пароле спецсимволы
+    for (var i = 0; i < password.length; i++) {
+      /* Проверяем каждый символ пароля на принадлежность к тому или иному типу */
+      if (!is_s && s_letters.indexOf(password[i]) !== -1) is_s = true;
+      else if (!is_b && b_letters.indexOf(password[i]) !== -1) is_b = true;
+      else if (!is_d && digits.indexOf(password[i]) !== -1) is_d = true;
+      else if (!is_sp && specials.indexOf(password[i]) !== -1) is_sp = true;
+    }
+    var rating = 0;
+    var text = "";
+    if (is_s) rating++; // Если в пароле есть символы в нижнем регистре, то увеличиваем рейтинг сложности
+    if (is_b) rating++; // Если в пароле есть символы в верхнем регистре, то увеличиваем рейтинг сложности
+    if (is_d) rating++; // Если в пароле есть цифры, то увеличиваем рейтинг сложности
+    if (is_sp) rating++; // Если в пароле есть спецсимволы, то увеличиваем рейтинг сложности
+    /* Далее идёт анализ длины пароля и полученного рейтинга, и на основании этого готовится текстовое описание сложности пароля */
+    if (password.length < 6 && rating < 3) text = "Простой";
+    else if (password.length < 6 && rating >= 3) text = "Средний";
+    else if (password.length >= 8 && rating < 3) text = "Средний";
+    else if (password.length >= 8 && rating >= 3) text = "Сложный";
+    else if (password.length >= 6 && rating === 1) text = "Простой";
+    else if (password.length >= 6 && rating > 1 && rating < 4) text = "Средний";
+    else if (password.length >= 6 && rating === 4) text = "Сложный";
+    return text; // Форму не отправляем
+  }
+
+
+  const validator = (_, value) => {
+
+const reg = /[^0-9]/
+
+    if (value.length < 8) {
+      return Promise.reject(new Error('Пароль слишком короткий, минимум 8 символов!'))
+    }
+    else if (!reg.test(value)) {
+      return Promise.reject(new Error('Пароль не должен состоять только из цифр!'))
+    }
+
+    else if ( checkPassword(value) === 'Простой') {
+      return Promise.reject(new Error('Недостаточно сложный пароль!'))
+    } 
+    else if ( checkPassword(value) === 'Средний') {
+      return Promise.reject(new Error('Недостаточно сложный пароль!'))
+    }
+
+
+   
+   else return Promise.resolve()
+  }
+ 
+
   return (
-    <div>
+    <div className={s.container}>
 
       <div className={s.shadow}>
         <Form
@@ -37,7 +93,7 @@ const Registr = (props) => {
           autoComplete="off"
         >
           <Form.Item
-
+            hasFeedback
             style={{ marginBottom: 10, }}
             label="Логин"
             name="username"
@@ -52,6 +108,7 @@ const Registr = (props) => {
           </Form.Item>
 
           <Form.Item
+            hasFeedback
             style={{ marginBottom: 10 }}
             label="Пароль"
             name="password"
@@ -60,12 +117,16 @@ const Registr = (props) => {
                 required: true,
                 message: 'Введите пароль!',
               },
+              {
+                validator: validator
+              }
             ]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item
+          hasFeedback
             style={{ marginBottom: 10 }}
             label="Повторите пароль"
             name="passwordTu"
@@ -89,6 +150,7 @@ const Registr = (props) => {
             <Input.Password />
           </Form.Item>
           <Form.Item
+          hasFeedback
             label="Email"
             name="email"
             rules={[
@@ -134,4 +196,4 @@ let mapStateToProps = (state) => {
     profile: state.profile
   }
 }
-export default connect(mapStateToProps, { addUser, registration })(Registr);
+export default connect(mapStateToProps, { registration })(Registr);

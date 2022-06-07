@@ -23,7 +23,6 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
     }
 
 
-
     return (
         <div className={s.about}>
 
@@ -193,4 +192,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addText, addActivHedgehog })(AboutApp) 
+export default connect(mapStateToProps, { addText, addActivHedgehog})(AboutApp) 

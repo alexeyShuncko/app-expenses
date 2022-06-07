@@ -1,68 +1,74 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import s from './Login.module.css';
 import { Checkbox, Form, Input, Button, Space } from 'antd';
-import { useNavigate } from 'react-router';
 import { connect } from 'react-redux';
-import { addActionUser, login } from './../../Redux/profileReducer';
+import { addActionUser, getUser, login } from './../../Redux/profileReducer';
 
 
-const Login = (props) => {
+
+const Login = ({getUser,...props}) => {
 
 
-  const navigate = useNavigate()
+  const [form] = Form.useForm()
+
+  // Массив имён пользователей
+  useEffect(() => {
+    getUser()
+  },[getUser])
+
+
 
   const onFinish = (values) => {
 
-    props.updateLogin(true)
-    props.login(values.username, values.password)
-    
-    props.addActionUser(props.profile.users.find(a=> a.name === values.username))
-    navigate('/')
-    
-  }
 
-  const validator =(_,value)=> {
-    if (!props.profile.users.find(a=> a.name === value)) {
-return Promise.reject(new Error('Такого имени нет в природе)'))
+    if (!props.profile.users.map(a => a.username).includes(values.username)) {
+      form.setFields([{ errors: [`Пользователь с таким именем не зарегистрирован!`], name: 'username' }])
     }
-    return Promise.resolve()  } 
+    else if (values.username === 'test' && values.password !== props.profile.test.password) {
+      form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }])
+    }
 
+    else {
+      props.addActionUser(props.profile.users.find(a=> a.username === values.username))
+      props.login(values.username, values.password)
+    }
 
-// Ошибки после сабмита
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   }
 
-  const ret =()=> {
+
+
+  const ret = () => {
     props.updateLogin(false)
   }
 
   return (
-    <div  >
+    <div className={s.container}>
+      <div className={s.test}>Для просмотра тестового аккаунта: <br></br>
+        Логин: test<br></br>
+        Пароль: test1234Q</div>
+      <div className={s.shadow}>
 
-      <div  className={s.shadow}>
         <Form
-        size='large'
+          form={form}
+          size='large'
           name="login"
-          labelCol={{ span: 8}}
-          wrapperCol={{span: 12}}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 12 }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
-          
-            style={{ marginBottom: 10,  }}
+
+            style={{ marginBottom: 10, }}
             label="Логин"
             name="username"
+
+
             rules={[
               {
                 required: true,
                 message: 'Введите логин!',
-              },
-              {
-                validator:validator
               }
             ]}
           >
@@ -70,7 +76,7 @@ return Promise.reject(new Error('Такого имени нет в природ�
           </Form.Item>
 
           <Form.Item
-           style={{ marginBottom: 10 }}
+            style={{ marginBottom: 20 }}
             label="Пароль"
             name="password"
             rules={[
@@ -83,7 +89,7 @@ return Promise.reject(new Error('Такого имени нет в природ�
             <Input.Password />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="remember"
             valuePropName="checked"
             wrapperCol={{
@@ -92,7 +98,7 @@ return Promise.reject(new Error('Такого имени нет в природ�
             }}
           >
             <Checkbox>Запомнить меня</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item
             wrapperCol={{
@@ -101,15 +107,15 @@ return Promise.reject(new Error('Такого имени нет в природ�
             }}
           >
             <Space>
-            <Button type="primary" htmlType="submit">
-              Войти
-            </Button>
-            <Button type="primary" danger onClick={ret}>
-              Назад
-            </Button>
+              <Button type="primary" htmlType="submit">
+                Войти
+              </Button>
+              <Button type="primary" danger onClick={ret}>
+                Назад
+              </Button>
             </Space>
           </Form.Item>
-         
+
         </Form>
       </div>
 
@@ -120,7 +126,7 @@ return Promise.reject(new Error('Такого имени нет в природ�
 
 let mapStateToProps = (state) => {
   return {
-      profile: state.profile
+    profile: state.profile
   }
 }
-export default connect(mapStateToProps, {addActionUser, login}) (Login);
+export default connect(mapStateToProps, { addActionUser, getUser, login })(Login);

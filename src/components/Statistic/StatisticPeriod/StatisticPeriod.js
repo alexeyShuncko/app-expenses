@@ -3,6 +3,7 @@ import s from './StatisticPeriod.module.css';
 import RelativityStatistic from './RelativityStatistic/RelativityStatistic';
 import DateAnt from "../../helpers/Date/DateAnt";
 import { Select } from "antd";
+import Converter_V_RGB from "../../helpers/converter/converter";
 
 
 
@@ -11,7 +12,8 @@ const StatisticPeriod = (props) => {
 
     const diagramm = props.diagramm.category
 
-    let color = diagramm.find(a => a.id === props.diagramm.activ.id).color
+    let color = Converter_V_RGB(diagramm.find(a => a.id === props.diagramm.activ.id).color)
+    
 
 
     const onChangeDate = (data, dateString) => {
