@@ -56,7 +56,7 @@ const Expenses = (props) => {
                 }
             })
 
-            let text = keyArray.map(a => diagramm.find(b => b.name === a).name).join(', ')
+            let text = keyArray.map(a => diagramm.find(b => b.name === a).nameRusCase).join(', ')
 
             props.addText(`Расходы на  "${text}" добавлены ...`)
             props.addActivHedgehog(true)

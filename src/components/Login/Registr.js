@@ -8,9 +8,12 @@ import { connect } from 'react-redux';
 
 const Registr = (props) => {
 
+  const [form] = Form.useForm()
 
+  
   const onFinish = (values) => {
     props.registration(values.username, values.password, values.email)
+    .catch(() =>  form.setFields([{ errors: [`Слишком распространённый пароль!`], name: 'password' }]))
   }
 
 
@@ -21,24 +24,24 @@ const Registr = (props) => {
 
 
   function checkPassword(value) {
-    var password = value; // Получаем пароль из формы
-    var s_letters = "qwertyuiopasdfghjklzxcvbnm"; // Буквы в нижнем регистре
-    var b_letters = "QWERTYUIOPLKJHGFDSAZXCVBNM"; // Буквы в верхнем регистре
-    var digits = "0123456789"; // Цифры
-    var specials = "!@#$%^&*()_-+=\|/.,:;[]{}"; // Спецсимволы
-    var is_s = false; // Есть ли в пароле буквы в нижнем регистре
-    var is_b = false; // Есть ли в пароле буквы в верхнем регистре
-    var is_d = false; // Есть ли в пароле цифры
-    var is_sp = false; // Есть ли в пароле спецсимволы
-    for (var i = 0; i < password.length; i++) {
+    let password = value; // Получаем пароль из формы
+    let s_letters = "qwertyuiopasdfghjklzxcvbnm"; // Буквы в нижнем регистре
+    let b_letters = "QWERTYUIOPLKJHGFDSAZXCVBNM"; // Буквы в верхнем регистре
+    let digits = "0123456789"; // Цифры
+    let specials = "!@#$%^&*()_-+=\|/.,:;[]{}"; // Спецсимволы
+    let is_s = false; // Есть ли в пароле буквы в нижнем регистре
+    let is_b = false; // Есть ли в пароле буквы в верхнем регистре
+    let is_d = false; // Есть ли в пароле цифры
+    let is_sp = false; // Есть ли в пароле спецсимволы
+    for (let i = 0; i < password.length; i++) {
       /* Проверяем каждый символ пароля на принадлежность к тому или иному типу */
       if (!is_s && s_letters.indexOf(password[i]) !== -1) is_s = true;
       else if (!is_b && b_letters.indexOf(password[i]) !== -1) is_b = true;
       else if (!is_d && digits.indexOf(password[i]) !== -1) is_d = true;
       else if (!is_sp && specials.indexOf(password[i]) !== -1) is_sp = true;
     }
-    var rating = 0;
-    var text = "";
+    let rating = 0;
+    let text = "";
     if (is_s) rating++; // Если в пароле есть символы в нижнем регистре, то увеличиваем рейтинг сложности
     if (is_b) rating++; // Если в пароле есть символы в верхнем регистре, то увеличиваем рейтинг сложности
     if (is_d) rating++; // Если в пароле есть цифры, то увеличиваем рейтинг сложности
@@ -66,15 +69,12 @@ const reg = /[^0-9]/
       return Promise.reject(new Error('Пароль не должен состоять только из цифр!'))
     }
 
-    else if ( checkPassword(value) === 'Простой') {
-      return Promise.reject(new Error('Недостаточно сложный пароль!'))
-    } 
-    else if ( checkPassword(value) === 'Средний') {
-      return Promise.reject(new Error('Недостаточно сложный пароль!'))
-    }
-
-
-   
+      else if ( checkPassword(value) === 'Простой') {
+        return Promise.reject(new Error('Недостаточно сложный пароль!'))
+      } 
+      else if ( checkPassword(value) === 'Средний') {
+        return Promise.reject(new Error('Недостаточно сложный пароль!'))
+      }
    else return Promise.resolve()
   }
  
@@ -84,6 +84,7 @@ const reg = /[^0-9]/
 
       <div className={s.shadow}>
         <Form
+        form={form}
           size='large'
           name="login"
           labelCol={{ span: 8 }}

@@ -36,7 +36,7 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
         addActivHedgehog(true)
         categories()
         sources()
-        //salary()
+        salary()
         relativ()
     },
         [categories,

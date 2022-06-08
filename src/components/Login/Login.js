@@ -28,15 +28,17 @@ const Login = ({getUser,...props}) => {
     else if (values.username === 'test' && values.password !== props.profile.test.password) {
       form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }])
     }
-
     else {
       props.addActionUser(props.profile.users.find(a=> a.username === values.username))
       props.login(values.username, values.password)
+      .catch(()=>  form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }]))
+     
     }
 
   }
 
 
+ 
 
   const ret = () => {
     props.updateLogin(false)

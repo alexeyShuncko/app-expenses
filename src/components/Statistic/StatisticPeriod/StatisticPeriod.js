@@ -24,7 +24,7 @@ const StatisticPeriod = (props) => {
 
     const handleChange = (value) => {
         if (value !== props.diagramm.activ.name) {
-            props.addActiv(value)
+            props.addActiv(props.diagramm.category.find(a=> a.name === value))
 
             props.addText(`Категория "${value}" выбрана  ...`)
             props.addActivHedgehog(true)

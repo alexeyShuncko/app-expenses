@@ -12,6 +12,7 @@ import StatisticPeriod from "./StatisticPeriod/StatisticPeriod";
 
 const Statistic = (props) => {
 
+   
 
     return (
         <div className={s.statistic}>

@@ -1,6 +1,7 @@
 import {
     createToken, createUser, postDataUser, postRelativity, postSources, Users,
-    postСategories
+    postСategories,
+    postSalary
 } from "../API/api"
 
 const ADD_USERS = 'ADD_USERS'
@@ -45,12 +46,10 @@ const profileReducer = (state = initialState, action) => {
                 login: action.data
             }
 
-
         default:
             return state
     }
 }
-
 
 
 export const addUsers = (data) => {
@@ -73,12 +72,15 @@ export const getUser = () => (dispatch) => {
 
 
 export const registration = (name, password, email) => (dispatch) => {
-    createUser(name, password, email)
+
+    return new Promise((resolve, reject)=> {
+        createUser(name, password, email)
         .then(data => dispatch(addActionUser(data)))
         .then(() => createToken(name, password, email))
         .then(data => {
             localStorage.removeItem('key')
-            localStorage.setItem('key', data.access)})
+            localStorage.setItem('key', data.access)
+        })
         .then(() => dispatch(updateLogin('login')))
         .then(() => {
 
@@ -89,27 +91,60 @@ export const registration = (name, password, email) => (dispatch) => {
             })
 
             postSources('Зарплата', 'rgb(18, 145, 28)')
-            postSources('Аванс', 'rgb(201, 138, 45)')
-            postSources('Другие', 'rgb(224, 83, 118)')
+                .then(() => postSources('Другие', 'rgb(224, 83, 118)'))
+                .then(() => postSources('Аванс', 'rgb(201, 138, 45)'))
 
             postСategories('Еда', 'Еду', 'rgb(253, 226, 62)')
             postСategories('Алкоголь', 'Алкоголь', 'rgb(33, 33, 209)')
             postСategories('Квартира', 'Квартиру', 'rgb(87, 217, 255)')
             postСategories('Транспорт', 'Транспорт', 'rgb(22, 153, 40)')
+
+            postSalary(1, 13, 1)
+                .then(() => postSalary(1, 13, 3))
+
         })
+        .catch(()=> reject())
+    })
+    
 }
 
 export const login = (name, password) => (dispatch) => {
 
-    if (name === 'test') {
+    if (name === 'test') 
+    {return new Promise(()=> {
         localStorage.removeItem('key')
         localStorage.setItem('key', token)
+        postDataUser(localStorage.getItem('key'))
+            .then(() => dispatch(updateLogin(true)))
+
+    })
+       
     }
-    postDataUser(localStorage.getItem('key'))
-        .then(() => dispatch(updateLogin(true)))
+    else
+    //    if (localStorage.getItem('key') === token || !localStorage.getItem('key')) 
+    {
+        return new Promise((resolve, reject)=> {
+            createToken(name, password)
+            .then(data => {
+                localStorage.removeItem('key')
+                localStorage.setItem('key', data.access)
+            })
+            .then(() => {
+                postDataUser(localStorage.getItem('key'))
+                    .then(() => dispatch(updateLogin(true)))
+            })
+             .catch(()=> reject())
+        })
+      
+          
+    }
+    //   else {
+    //     postDataUser(localStorage.getItem('key'))
+    //     .then(() => dispatch(updateLogin(true)))
+    //   } 
+
+
 }
-
-
 
 
 

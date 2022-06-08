@@ -63,7 +63,7 @@ const RenameCategory = (props) => {
         form.resetFields()
         setColor(props.diagramm.category[0].color)
         if (props.diagramm.activ.name === values.select) {
-            props.addActiv(name)
+            props.addActiv(props.diagramm.category.find(a => a.name === values.select))
         }
     }
 

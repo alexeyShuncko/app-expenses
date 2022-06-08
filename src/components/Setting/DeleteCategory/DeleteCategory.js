@@ -24,17 +24,25 @@ const DeleteCategory = (props) => {
     }
     const onFinish = (values) => {
 
+        if (props.diagramm.category.length === 1) {
 
-        props.deleteItemCategories(props.diagramm.category.find(a => a.name === values.select).id)
-
-        props.addText(`Категория "${values.select}" удалена ...`)
-        props.addActivHedgehog(true)
-        
-        form.resetFields()
-        setColor(props.diagramm.category[0].color)
-        if (props.diagramm.activ.name === values.select) {
-            props.addActiv('Еда')
+            props.addText(`Последнюю категорию нельзя удалять ...`)
+            props.addActivHedgehog(true)
         }
+
+        else {
+            props.deleteItemCategories(props.diagramm.category.find(a => a.name === values.select).id)
+
+            props.addText(`Категория "${values.select}" удалена ...`)
+            props.addActivHedgehog(true)
+
+            form.resetFields()
+            setColor(props.diagramm.category[0].color)
+            if (props.diagramm.activ.name === values.select) {
+                props.addActiv(props.diagramm.category[0])
+            }
+        }
+
     }
 
     return (

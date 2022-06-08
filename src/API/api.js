@@ -1,13 +1,12 @@
 import axios from "axios";
 
 
+
 let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU4OTEwMTg1LCJqdGkiOiJhN2UxODgyYzVhOGU0YzAxYTBjNjRjYTk1YzdiMjNkYiIsInVzZXJfaWQiOjJ9._kZ92ITOOrlRdZtOqZK2oh3chllGqjmvg72CyY6KwHw'
 
+
 const instance = axios.create({
-    baseURL: 'https://shkoders.at.by/',
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem('key') ? localStorage.getItem('key') : token}`
-    }
+    baseURL: 'https://shkoders.at.by/'
 })
 
 
@@ -32,14 +31,25 @@ export const getItem = async (text) => {
 
 // Доходы
 export const getSources = async () => {
-    const response = await instance.get(`api/sources/`);
+    const response = await instance.get(`api/sources/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
     return response.data;
 }
 export const postSources = async (name, color) => {
     const response = await instance.post(`api/sources/`, {
         'name': name,
         'color': color
-    });
+    },
+        {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('key')}`
+            }
+        }
+    );
     return response;
 }
 
@@ -50,7 +60,12 @@ export const getSourcesId = async (id) => {
     return response;
 }
 export const deleteSources = async (id) => {
-    const response = await instance.delete(`api/sources/${id}/`);
+    const response = await instance.delete(`api/sources/${id}/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
     return response;
 }
 
@@ -61,6 +76,7 @@ export const putSources = async (name, color, id) => {
     });
     return response;
 }
+
 
 // Записи в доходе
 
@@ -73,6 +89,11 @@ export const postIncomes = async (created, amount, category) => {
         "created": created,
         "amount": amount,
         "category": category
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
     });
     return response;
 }
@@ -81,7 +102,12 @@ export const postIncomes = async (created, amount, category) => {
 
 // Расходы
 export const getСategories = async () => {
-    const response = await instance.get(`api/categories/`);
+    const response = await instance.get(`api/categories/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
     return response.data;
 }
 export const postСategories = async (name, nameRusCase, color) => {
@@ -89,7 +115,13 @@ export const postСategories = async (name, nameRusCase, color) => {
         'name': name,
         'nameRusCase': nameRusCase,
         'color': color
-    });
+    },
+        {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('key')}`
+            }
+        }
+    );
     return response;
 }
 
@@ -99,7 +131,12 @@ export const getСategoriesId = async (id) => {
     return response.data;
 }
 export const deleteСategories = async (id) => {
-    const response = await instance.delete(`api/categories/${id}/`);
+    const response = await instance.delete(`api/categories/${id}/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
     return response;
 }
 
@@ -108,11 +145,17 @@ export const putСategories = async (name, nameRusCase, color, id) => {
         'name': name,
         'nameRusCase': nameRusCase,
         'color': color
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
     });
     return response;
 }
 
-// Записи в доходе
+
+// Записи в расходе
 
 export const getExpenses = async (id) => {
     const response = await instance.get(`api/expenses/`);
@@ -121,6 +164,11 @@ export const getExpenses = async (id) => {
 export const postExpenses = async (data) => {
     const response = await instance.post(`api/expenses/`, {
         'data': data
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
     });
     return response;
 }
@@ -131,34 +179,63 @@ export const postExpenses = async (data) => {
 // Дата зарплаты и аванса
 
 export const getSalary = async () => {
-    const response = await instance.get(`api/set-data/`);
+    const response = await instance.get(`api/set-date/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
     return response.data;
 }
-export const putSalary = async (day, month, id) => {
-    const response = await instance.put(`api/set-data/`, {
+export const putSalary = async (day, month, source, id) => {
+    const response = await instance.put(`api/set-date/${id}/`, {
         "salary_day": day,
         "salary_month": month,
-        "source": id
+        "source": source,
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
     });
     return response;
 }
 export const postSalary = async (day, month, id) => {
-    const response = await instance.post(`api/set-data/`, {
+    const response = await instance.post(`api/set-date/`, {
         "salary_day": day,
         "salary_month": month,
         "source": id
-    });
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    }
+    );
     return response;
 }
-
-
+export const deleteSalary = async (id) => {
+    const response = await instance.delete(`api/set-date/${id}/`, 
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    }
+    );
+    return response;
+}
 
 
 
 // Относительная величина 
 
 export const getRelativity = async () => {
-    const response = await instance.get(`api/relativity/`);
+    const response = await instance.get(`api/relativity/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
     return response.data;
 }
 
@@ -168,7 +245,13 @@ export const postRelativity = async (name, unit, price, padej) => {
         "value": unit,
         "amount": price,
         "case": padej
-    });
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    }
+    );
     return response;
 }
 
@@ -176,7 +259,7 @@ export const postRelativity = async (name, unit, price, padej) => {
 
 // Создание новой учётной записи
 export const createUser = async (username, password, email) => {
-    const response = await axios.post(`https://shkoders.at.by/auth/users/`, {
+    const response = await instance.post(`auth/users/`, {
         'username': username,
         'password': password,
         'email': email
@@ -195,26 +278,29 @@ export const createToken = async (username, password, email) => {
     return response.data;
 }
 
+// createToken('123', '123Qq123Qq', 'email')
+// .then((data)=> localStorage.setItem('key', data.access))
 // Верификация
 export const postDataUser = async (token) => {
     const response = await instance.post(`auth/jwt/verify/ `, {
-        token
+        'token': token
     });
     return response.data;
 }
 
 // Изменение данных пользователя
-export const updateDataUser = async () => {
-    const response = await instance.put(`https://shkoders.at.by/`, {
+// export const updateDataUser = async () => {
+//     const response = await instance.put(`https://shkoders.at.by/`, {
 
-    });
-    return response.data;
-}
+//     });
+//     return response.data;
+// }
 
 
 // Получение списка юзеров
 export const Users = async (token) => {
-    const response = await axios.get(`https://shkoders.at.by/api/users/`,{
+    const response = await instance.get(`api/users/`, 
+    {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -224,9 +310,6 @@ export const Users = async (token) => {
 }
 
 
-//     postSalary(1, 13, 1)
-//     postSalary(1, 13, 3) 
- 
 
- 
+
 

@@ -1,7 +1,7 @@
 import {
     getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
     postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
-    getRelativity, 
+    getRelativity,
     postRelativity
 } from './../API/api';
 
@@ -67,10 +67,7 @@ let initialState = {
             data: [{ id: 40001, created: '2022-04-09', amount: 25 }], summ: 25
         }
         ],
-    activ: {
-        id: 1,
-        name: 'Еда'
-    },
+    activ: '',
     income: {
         data: [
             {
@@ -88,7 +85,7 @@ let initialState = {
         ],
         salary: [
             { source: 1, salary_day: '01', salary_month: '13' }, //зарплата
-            { source: 2, salary_day: '02', salary_month: '13' } // аванс
+            { source: 3, salary_day: '02', salary_month: '13' } // аванс
         ]
     },
     period: [
@@ -169,12 +166,7 @@ const diagrammReduser = (state = initialState, action) => {
         case ADD_ACTIV:
 
             return {
-                ...state, activ: {
-                    name: action.activ,
-                    id: state.category.find(a => a.name === action.activ)
-                        ? state.category.find(a => a.name === action.activ).id
-                        : state.activ.id
-                }
+                ...state, activ: action.data
             }
 
         //   Выбор периода
@@ -309,8 +301,8 @@ export const addEuro = (euro, data) => {
 }
 
 // Статистика
-export const addActiv = (activ) => {
-    return { type: ADD_ACTIV, activ }
+export const addActiv = (data) => {
+    return { type: ADD_ACTIV, data }
 }
 export const addPeriod = (key, period) => {
     return { type: ADD_PERIOD, key, period }
@@ -388,8 +380,12 @@ export const addIncome = (created, amount, category) => (dispatch) => {
 // Расходы
 export const categories = () => (dispatch) => {
     getСategories()
-        .then(data => dispatch(addCategories(data.sort((a, b) => a.id - b.id))))
+        .then(data => {
+            dispatch(addCategories(data.sort((a, b) => a.id - b.id)))
+            dispatch(addActiv(data[0]))
+        }) 
 }
+
 // Добавление отдельного расхода\дов
 export const addDiagramm = (data) => (dispatch) => {
     postExpenses(data)
@@ -428,8 +424,8 @@ export const salary = () => (dispatch) => {
     getSalary()
         .then(data => dispatch(addSalary(data)))
 }
-export const updateSalary = (day, month, id) => (dispatch) => {
-    putSalary(day, month, id)
+export const updateSalary = (day, month, id, user) => (dispatch) => {
+    putSalary(day, month, id, user)
         .then(() => dispatch(salary()))
 }
 
@@ -453,11 +449,11 @@ export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
 // Курсы валюты
 export const getDollarUpdate = () => (dispatch) => {
     getDollar()
-    .then(data => dispatch(addDollar(data.Cur_OfficialRate, data.Date)))
+        .then(data => dispatch(addDollar(data.Cur_OfficialRate, data.Date)))
 }
 export const getEuroUpdate = () => (dispatch) => {
     getEuro()
-    .then(data => dispatch(addEuro(data.Cur_OfficialRate, data.Date)))
+        .then(data => dispatch(addEuro(data.Cur_OfficialRate, data.Date)))
 }
 
 
