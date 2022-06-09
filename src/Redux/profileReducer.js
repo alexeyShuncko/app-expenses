@@ -65,8 +65,11 @@ export const updateLogin = (data,) => {
 
 
 export const getUser = () => (dispatch) => {
+    return new Promise((resolve, reject)=> {
     Users(token)
         .then(data => dispatch(addUsers(data)))
+        .catch(()=> reject())
+    })
 }
 
 

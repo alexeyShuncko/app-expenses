@@ -13,9 +13,9 @@ const Login = ({getUser,...props}) => {
   const [form] = Form.useForm()
 
   // Массив имён пользователей
-  useEffect(() => {
-    getUser()
-  },[getUser])
+  // useEffect(() => {
+  //   getUser()
+  // },[getUser])
 
 
 

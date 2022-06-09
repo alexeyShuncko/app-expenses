@@ -19,3 +19,9 @@
   height: 100vh;
   justify-content: center;
 }
+
+.err {
+  /* margin-top: 10vh; */
+      margin-left: 25vw;
+      font-size: 30px;
+}
