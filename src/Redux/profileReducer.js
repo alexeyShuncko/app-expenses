@@ -7,6 +7,7 @@ import {
 const ADD_USERS = 'ADD_USERS'
 const ADD_ACTION_USER = 'ADD_ACTION_USER'
 const ADD_LOGIN = 'ADD_LOGIN'
+const ADD_FIRST_LOGIN = 'ADD_FIRST_LOGIN'
 
 
 let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU5MDk2MzE0LCJqdGkiOiJmYzFkNGIxNmUyNWM0MWZhOGEzOTAyNGFlNTQ1Njc5YiIsInVzZXJfaWQiOjJ9.6sD-_UjVeEyD3ruPbdoYOUkW-tFVSTaS55CqMSJulks'
@@ -18,7 +19,8 @@ let initialState = {
     login: false,
     test: {
         password: 'test1234Q'
-    }
+    },
+    firstLogin: false
 }
 
 
@@ -45,6 +47,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 login: action.data
             }
+        case ADD_FIRST_LOGIN:
+            return {
+                ...state,
+                firstLogin: action.data
+            }
+
 
         default:
             return state
@@ -52,23 +60,32 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
+
+
 export const addUsers = (data) => {
     return { type: ADD_USERS, data }
 }
-export const addActionUser = (data,) => {
+export const addActionUser = (data) => {
     return { type: ADD_ACTION_USER, data }
 }
-export const updateLogin = (data,) => {
+export const updateLogin = (data) => {
     return { type: ADD_LOGIN, data }
 }
+export const addFirstLogin = (data) => {
+    return { type: ADD_FIRST_LOGIN, data }
+}
+
+
 
 
 
 export const getUser = () => (dispatch) => {
     return new Promise((resolve, reject) => {
         Users(token)
-            .then(data => {resolve()
-                dispatch(addUsers(data))})
+            .then(data => {
+                resolve()
+                dispatch(addUsers(data))
+            })
             .catch(() => {
                 reject()
             })
@@ -87,6 +104,8 @@ export const registration = (name, password, email) => (dispatch) => {
                 localStorage.removeItem('key')
                 localStorage.setItem('key', data.access)
             })
+            .then(() => dispatch(getUser()))
+            .then(() => dispatch(addFirstLogin(true)))
             .then(() => dispatch(updateLogin('login')))
             .then(() => {
 
@@ -122,12 +141,13 @@ export const login = (name, password) => (dispatch) => {
             localStorage.setItem('key', token)
             postDataUser(localStorage.getItem('key'))
                 .then(() => dispatch(updateLogin(true)))
+                .then(() => dispatch(addFirstLogin(false)))
                 .catch(() => createToken(name, password)
-                .then(data => {
-                    token = data.access
-                    dispatch(login(name, password)) 
-                })   )
-                  
+                    .then(data => {
+                        token = data.access
+                        dispatch(login(name, password))
+                    }))
+
         })
     }
     else {
@@ -141,6 +161,7 @@ export const login = (name, password) => (dispatch) => {
                     postDataUser(localStorage.getItem('key'))
                         .then(() => dispatch(updateLogin(true)))
                 })
+                .then(() => dispatch(addFirstLogin(false)))
                 .catch(() => reject())
         })
     }
@@ -149,10 +170,12 @@ export const verification = () => (dispatch) => {
 
     return new Promise((resolve, reject) => {
         postDataUser(localStorage.getItem('key'))
-        .then(() => {
-            resolve()})
-        .catch((data) => {
-            dispatch(updateLogin('login'))})
+            .then(() => {
+                resolve()
+            })
+            .catch((data) => {
+                dispatch(updateLogin('login'))
+            })
     })
 
 }

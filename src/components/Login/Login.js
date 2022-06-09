@@ -7,7 +7,7 @@ import { addActionUser, getUser, login } from './../../Redux/profileReducer';
 
 
 
-const Login = ({getUser,...props}) => {
+const Login = ({ getUser, ...props }) => {
 
 
   const [form] = Form.useForm()
@@ -23,22 +23,17 @@ const Login = ({getUser,...props}) => {
       form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }])
     }
     else {
-      
-       if (values.remember) {
-         localStorage.setItem('remember', true)
-         localStorage.setItem('user', JSON.stringify(props.profile.users.find(a=> a.username === values.username)))
-         console.log( JSON.parse(localStorage.getItem('user')))
-       }
-       props.profile.users && props.addActionUser(props.profile.users.find(a=> a.username === values.username))
+
+      if (values.remember) {
+        localStorage.setItem('remember', true)
+        localStorage.setItem('user', JSON.stringify(props.profile.users.find(a => a.username === values.username)))
+      }
+      props.profile.users && props.addActionUser(props.profile.users.find(a => a.username === values.username))
       props.login(values.username, values.password)
-      .catch(()=>  form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }]))
-     
+        .catch(() => form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }]))
+
     }
-
   }
-
-
-
 
   const ret = () => {
     props.updateLogin(false)
@@ -46,10 +41,19 @@ const Login = ({getUser,...props}) => {
 
   return (
     <div className={s.container}>
+
       <div className={s.test}>Для просмотра тестового аккаунта: <br></br>
-        Логин: test<br></br>
-        Пароль: test1234Q</div>
+        <span className={s.passLog}>Логин:</span> test<br></br>
+        <span className={s.passLog}>Пароль:</span> test1234Q
+      </div>
+
       <div className={s.shadow}>
+
+       { props.profile.firstLogin 
+       && <div className={s.firstLogin}>
+         Вы успешно зарегистрировались!<br></br>
+        Введите данные для входа в поля ниже.
+        </div>}
 
         <Form
           form={form}

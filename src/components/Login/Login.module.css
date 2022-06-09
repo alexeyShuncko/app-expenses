@@ -9,18 +9,30 @@
 .test {
   align-self: center;
   font-size: 20px;
-
+ 
 }
 
 .container {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   justify-content: center;
 }
 
 .err {
       margin-left: 22vw;
       font-size: 30px;
+}
+
+.passLog {
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.firstLogin {
+text-align: center;
+font-size: 16px;
+margin-bottom: 10px;
+
 }

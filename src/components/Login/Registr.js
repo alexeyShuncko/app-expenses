@@ -62,17 +62,17 @@ const Registr = (props) => {
 
 const reg = /[^0-9]/
 
-    if (value.length < 8) {
+    if (value && value.length < 8) {
       return Promise.reject(new Error('Пароль слишком короткий, минимум 8 символов!'))
     }
     else if (!reg.test(value)) {
       return Promise.reject(new Error('Пароль не должен состоять только из цифр!'))
     }
 
-      else if ( checkPassword(value) === 'Простой') {
+      else if ( value && checkPassword(value) === 'Простой') {
         return Promise.reject(new Error('Недостаточно сложный пароль!'))
       } 
-      else if ( checkPassword(value) === 'Средний') {
+      else if ( value && checkPassword(value) === 'Средний') {
         return Promise.reject(new Error('Недостаточно сложный пароль!'))
       }
    else return Promise.resolve()

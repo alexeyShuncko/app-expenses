@@ -13,23 +13,25 @@ const ButtonLogin = ({ getUser, verification, ...props }) => {
 
   const [err, setErr] = useState(false)
 
-   useEffect(() => {
-     getUser()
-       .catch(() => setErr(true))
-   }, [getUser])
+  let data = props.profile.users
+
+  useEffect(() => {
+    if (!data) {
+      getUser()
+      .catch(() => setErr(true))
+    }
+  }, [getUser, data])
 
   const redirect = (e) => {
-let text =  e.currentTarget.innerText
-    verification()
-    .then( () => {
-     text === 'Войти'
-      ? localStorage.getItem('remember') && localStorage.getItem('key')
-        ? props.updateLogin(true)
-        : props.updateLogin('login')
-      : props.updateLogin('registr')
-    })
 
-    
+    e.currentTarget.innerText === 'Войти'
+      ? localStorage.getItem('remember') && localStorage.getItem('key')
+        ? verification()
+          .then(() => { props.updateLogin(true) })
+        : props.updateLogin('login')
+
+      : props.updateLogin('registr')
+
   }
 
   return (
