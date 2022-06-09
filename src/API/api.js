@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 
-let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU4OTEwMTg1LCJqdGkiOiJhN2UxODgyYzVhOGU0YzAxYTBjNjRjYTk1YzdiMjNkYiIsInVzZXJfaWQiOjJ9._kZ92ITOOrlRdZtOqZK2oh3chllGqjmvg72CyY6KwHw'
+// let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU4OTEwMTg1LCJqdGkiOiJhN2UxODgyYzVhOGU0YzAxYTBjNjRjYTk1YzdiMjNkYiIsInVzZXJfaWQiOjJ9._kZ92ITOOrlRdZtOqZK2oh3chllGqjmvg72CyY6KwHw'
 
 
 const instance = axios.create({
@@ -278,14 +278,13 @@ export const createToken = async (username, password, email) => {
     return response.data;
 }
 
-// createToken('123', '123Qq123Qq', 'email')
-// .then((data)=> localStorage.setItem('key', data.access))
+
 // Верификация
 export const postDataUser = async (token) => {
     const response = await instance.post(`auth/jwt/verify/ `, {
         'token': token
     });
-    return response.data;
+    return response;
 }
 
 // Изменение данных пользователя

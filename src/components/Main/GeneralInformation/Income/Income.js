@@ -53,7 +53,7 @@ const Income = (props) => {
 
         const index = () =>  values.name === "Зарплата" ? 1 : 3
           
-
+        props.diagramm.income.salary.find(a=> a.source === index()).salary_month < 13 &&
         props.updateSalary(
            props.diagramm.income.salary.find(a=> a.source === index()).salary_day,
            (Number(timer.slice(5, 7)) + 1),

@@ -14,10 +14,10 @@ const  App =(props)=>  {
   if (!props.login){
     return <ButtonLogin updateLogin={props.updateLogin}/>
   }
-  else if (props.login === 'login') {
+  else if (props.login === 'login' ) {
     return <Login updateLogin={props.updateLogin}/>
   }
-  else if (props.login === 'registr') {
+  else if (props.login === 'registr' ) {
     return <Registr updateLogin={props.updateLogin}/>
   }
   else if (props.login) {

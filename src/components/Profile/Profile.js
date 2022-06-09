@@ -20,13 +20,15 @@ const Profile = (props) => {
 
     const Logout = () => {
         props.updateLogin(false)
+        localStorage.clear()
     }
     const user = [
         'Имя',
         'Email'
     ]
-    const www = props.actionUser && Object.values(props.actionUser)
-
+    const www = localStorage.getItem('remember')
+    ? Object.values(JSON.parse(localStorage.getItem('user'))) 
+    : (props.actionUser && Object.values(props.actionUser))
 
 
     

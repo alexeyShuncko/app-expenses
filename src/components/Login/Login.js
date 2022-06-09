@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import s from './Login.module.css';
 import { Checkbox, Form, Input, Button, Space } from 'antd';
 import { connect } from 'react-redux';
@@ -12,24 +12,24 @@ const Login = ({getUser,...props}) => {
 
   const [form] = Form.useForm()
 
-  // Массив имён пользователей
-  // useEffect(() => {
-  //   getUser()
-  // },[getUser])
-
-
 
   const onFinish = (values) => {
 
 
-    if (!props.profile.users.map(a => a.username).includes(values.username)) {
+    if (props.profile.users && !props.profile.users.map(a => a.username).includes(values.username)) {
       form.setFields([{ errors: [`Пользователь с таким именем не зарегистрирован!`], name: 'username' }])
     }
     else if (values.username === 'test' && values.password !== props.profile.test.password) {
       form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }])
     }
     else {
-      props.addActionUser(props.profile.users.find(a=> a.username === values.username))
+      
+       if (values.remember) {
+         localStorage.setItem('remember', true)
+         localStorage.setItem('user', JSON.stringify(props.profile.users.find(a=> a.username === values.username)))
+         console.log( JSON.parse(localStorage.getItem('user')))
+       }
+       props.profile.users && props.addActionUser(props.profile.users.find(a=> a.username === values.username))
       props.login(values.username, values.password)
       .catch(()=>  form.setFields([{ errors: [`Неверный пароль!`], name: 'password' }]))
      
@@ -38,7 +38,7 @@ const Login = ({getUser,...props}) => {
   }
 
 
- 
+
 
   const ret = () => {
     props.updateLogin(false)
@@ -78,7 +78,7 @@ const Login = ({getUser,...props}) => {
           </Form.Item>
 
           <Form.Item
-            style={{ marginBottom: 20 }}
+            style={{ marginBottom: 10 }}
             label="Пароль"
             name="password"
             rules={[
@@ -91,7 +91,7 @@ const Login = ({getUser,...props}) => {
             <Input.Password />
           </Form.Item>
 
-          {/* <Form.Item
+          <Form.Item
             name="remember"
             valuePropName="checked"
             wrapperCol={{
@@ -100,7 +100,7 @@ const Login = ({getUser,...props}) => {
             }}
           >
             <Checkbox>Запомнить меня</Checkbox>
-          </Form.Item> */}
+          </Form.Item>
 
           <Form.Item
             wrapperCol={{

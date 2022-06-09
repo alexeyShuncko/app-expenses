@@ -24,10 +24,14 @@ const AddSalaryDate = (props) => {
         const index = () => values.name === "Зарплата" ? 1 : 3
 
 
+
         props.updateSalary(
             day(),
             props.diagramm.income.salary.find(a => a.source === index()).salary_month > 12
-                ? props.diagramm.today.po.slice(5, 7)
+                ? props.diagramm.income.data.find(a => a.name === values.name)
+                    .data.find(a => a.created.slice(5, 7) === props.diagramm.today.po.slice(5, 7))
+                    ? Number(props.diagramm.today.po.slice(5, 7)) + 1
+                    : props.diagramm.today.po.slice(5, 7)
                 : props.diagramm.income.salary.find(a => a.source === index()).salary_month,
             props.diagramm.income.salary.find(a => a.source === index()).source,
             props.diagramm.income.salary.find(a => a.source === index()).id
@@ -45,8 +49,8 @@ const AddSalaryDate = (props) => {
         props.addActivHedgehog(true)
     }
 
-    const deleteSalary =()=> {
-        props.updateSalary(1, 13, 1,  props.diagramm.income.salary.find(a => a.source === 1).id)
+    const deleteSalary = () => {
+        props.updateSalary(1, 13, 1, props.diagramm.income.salary.find(a => a.source === 1).id)
         props.addText(`Дата Зарплаты удалена ...`)
         props.addActivHedgehog(true)
     }
@@ -69,32 +73,32 @@ const AddSalaryDate = (props) => {
                     //onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
-                      <div className={s.dateSalary}>
-                    {
-                        props.diagramm.income.salary.find(a => a.source === 3).salary_month < 13 &&
-                        <div className={s.dateItem}>
-                            <div>
-                                Аванс: {props.diagramm.income.salary.find(a => a.source === 3).salary_day}-го числа.</div>
-                            <Button  type="primary" danger size='small' onClick={deleteDate}>
-                                Удалить
-                            </Button>
-                        </div>
+                    <div className={s.dateSalary}>
+                        {
+                            props.diagramm.income.salary.find(a => a.source === 3).salary_month < 13 &&
+                            <div className={s.dateItem}>
+                                <div>
+                                    Аванс: {props.diagramm.income.salary.find(a => a.source === 3).salary_day}-го числа.</div>
+                                <Button type="primary" danger size='small' onClick={deleteDate}>
+                                    Удалить
+                                </Button>
+                            </div>
 
-                    }
-                    {
-                        props.diagramm.income.salary.find(a => a.source === 1).salary_month < 13 &&
-                        <div className={s.dateItem}>
-                            <div>
-                                Зарплата: {props.diagramm.income.salary.find(a => a.source === 1).salary_day}-го числа.
+                        }
+                        {
+                            props.diagramm.income.salary.find(a => a.source === 1).salary_month < 13 &&
+                            <div className={s.dateItem}>
+                                <div>
+                                    Зарплата: {props.diagramm.income.salary.find(a => a.source === 1).salary_day}-го числа.
                                 </div>
                                 <Button type="primary" danger size='small' onClick={deleteSalary}>
-                                Удалить
-                            </Button>
-                        </div>
+                                    Удалить
+                                </Button>
+                            </div>
 
-                    }
+                        }
                     </div>
-                  
+
 
                     <Form.Item
                         label="Доход"
@@ -139,14 +143,14 @@ const AddSalaryDate = (props) => {
                         <div>1) Выберите доход из выпадающего списка</div>
                         <div>2) Нажав на поле "Дата", выберите дату дохода</div>
                         <div>3) Нажмите кнопку "Добавить дату"</div>
-                        {(props.diagramm.income.salary.find(a => a.source === 1).salary_month < 13 || 
-                        props.diagramm.income.salary.find(a => a.source === 3).salary_month < 13) &&
-                            <div>* Если вы хотите удалить напоминание о дате дохода, нажмите кнопку "Удалить" 
-                            рядом с нужным доходом</div>
+                        {(props.diagramm.income.salary.find(a => a.source === 1).salary_month < 13 ||
+                            props.diagramm.income.salary.find(a => a.source === 3).salary_month < 13) &&
+                            <div>* Если вы хотите удалить напоминание о дате дохода, нажмите кнопку "Удалить"
+                                рядом с нужным доходом</div>
                         }
-                        
+
                     </div>
-                  
+
                 </div>
             </div>
 

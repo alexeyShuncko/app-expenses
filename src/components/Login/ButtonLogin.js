@@ -3,26 +3,33 @@ import React, { useEffect, useState } from 'react';
 import s from './Login.module.css';
 import { Form, Button, Space } from 'antd';
 import { connect } from 'react-redux';
-import { getUser } from './../../Redux/profileReducer';
-import  setting  from './../../image/Settings.gif';
+import { getUser, verification } from './../../Redux/profileReducer';
+import setting from './../../image/Settings.gif';
 
 
 
-const ButtonLogin = ({ getUser, ...props }) => {
+const ButtonLogin = ({ getUser, verification, ...props }) => {
 
 
   const [err, setErr] = useState(false)
 
-  useEffect(() => {
-    getUser()
-      .catch(() => setErr(true))
-  }, [getUser])
+   useEffect(() => {
+     getUser()
+       .catch(() => setErr(true))
+   }, [getUser])
 
   const redirect = (e) => {
-
-    e.currentTarget.innerText === 'Войти'
-      ? props.updateLogin('login')
+let text =  e.currentTarget.innerText
+    verification()
+    .then( () => {
+     text === 'Войти'
+      ? localStorage.getItem('remember') && localStorage.getItem('key')
+        ? props.updateLogin(true)
+        : props.updateLogin('login')
       : props.updateLogin('registr')
+    })
+
+    
   }
 
   return (
@@ -58,7 +65,7 @@ const ButtonLogin = ({ getUser, ...props }) => {
           </div>
           : <div className={s.err}>
             Ведутся работы на сервере, попробуйте зайти позже...
-            <img alt='крутилка' src={setting}/>
+            <img alt='крутилка' src={setting} />
           </div>
       }
     </div>
@@ -71,4 +78,4 @@ let mapStateToProps = (state) => {
     profile: state.profile
   }
 }
-export default connect(mapStateToProps, { getUser })(ButtonLogin);
+export default connect(mapStateToProps, { getUser, verification })(ButtonLogin);

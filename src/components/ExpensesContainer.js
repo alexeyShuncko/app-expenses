@@ -32,8 +32,11 @@ const ExpensesContainer = ({ addActivHedgehog, addText, categories, sources, sal
 
     useEffect(() => {
 
-        addText(`Здравствуйте, "${props.profile.actionUser.username}"... Чтобы моё собщение исчезло, кликните вне сообщения...`)
+        addText(`Здравствуйте, "${localStorage.getItem('remember')
+        ? JSON.parse(localStorage.getItem('user')).username
+        : props.profile.actionUser.username}"... Чтобы моё собщение исчезло, кликните вне сообщения...`)
         addActivHedgehog(true)
+        
         categories()
         sources()
         salary()
