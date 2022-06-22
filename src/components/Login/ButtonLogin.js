@@ -54,6 +54,7 @@ const ButtonLogin = ({ getUser, verification, ...props }) => {
                 }}
               >
                 <Space>
+                 
                   <Button type="primary" onClick={redirect}>
                     Войти
                   </Button>
