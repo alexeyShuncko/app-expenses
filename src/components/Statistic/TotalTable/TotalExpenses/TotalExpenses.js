@@ -102,7 +102,7 @@ const TotalTableExpenses = (props) => {
                         dataSource={data}
                         size="small"
                         pagination={{
-                            pageSize: '10'
+                            pageSize: '9'
                         }}
                         bordered
                     />

@@ -15,5 +15,6 @@
     <li>React Router - для навигации внутри приложения</li>
     <li>Ant Design - для визуального оформления</li>
     <li>Nivo - для работы с диаграммами и графиками</li>
+    <li>JWT - для аутентификации пользователя</li>
 </ul>
 <h2>Серверная часть приложения <a href="https://github.com/Asnaeb26/expenses">GitHub/Python</a></h2>
