@@ -35,7 +35,8 @@ const DiagrammContainer = (props) => {
                             periodDiagramm={props.diagramm.period[2]}
                             selectDiagramm={props.diagramm.selectDiagrammStat}
                             dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} 
+                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
+                            ruble={props.diagramm.exchangeRates.ruble.Cur_OfficialRate}  
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}/>
                         : <DiagrammIncome
@@ -43,7 +44,8 @@ const DiagrammContainer = (props) => {
                             periodDiagramm={props.diagramm.period[2]}
                             selectDiagramm={props.diagramm.selectDiagrammStat}
                             dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate} 
+                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
+                            ruble={props.diagramm.exchangeRates.ruble.Cur_OfficialRate} 
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}/>
                     }

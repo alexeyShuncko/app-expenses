@@ -78,6 +78,25 @@ const HocValuta = (props) => {
                 return (statisticTotal / props.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
             }
         }
+        else if (editBYN === 'RUB') {
+            if (props.value === 'salary') {
+                return ((props.salary / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+            }
+            else if (props.value === 'salarySpent') {
+                return (summ /
+                    (props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+            }
+            else if (props.value === 'salaryRemainder') {
+                return ((props.salary - summ ) /
+                    (props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+            }
+            else if (props.value === 'statisticTable') {
+                return ((statisticTable / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+            }
+            else if (props.value === 'statisticTotal') {
+                return ((statisticTotal / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+            }
+        }
     }
     let dataTotal = data()
 
@@ -102,6 +121,7 @@ const HocValuta = (props) => {
                     <option value="BYN">BYN</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
+                    <option value="RUB">RUB</option>
                 </select>
             </div>
         </div>

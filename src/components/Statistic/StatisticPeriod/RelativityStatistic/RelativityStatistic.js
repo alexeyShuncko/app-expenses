@@ -5,7 +5,7 @@ import s from './RelativityStatistic.module.css';
 
 const RelativityStatistic = (props) => {
 
-    let data = props.diagramm.category.find(a => a.id === props.diagramm.activ.id)
+    let data = props.diagramm.category.find(a => a.id === props.diagramm.activ.id) || props.diagramm.category[0]
 
     let summ = data.data
         .map(a => a.amount)
@@ -64,6 +64,9 @@ const RelativityStatistic = (props) => {
             </div>
             <div>Или:
                 <span className={s.boldValue}>{(summ / props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)} €</span>
+            </div>
+            <div>Или:
+                <span className={s.boldValue}>{((summ / props.diagramm.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)} ₽</span>
             </div>
             <div
                 style={{ borderBottom: `solid ${data.color}` }}

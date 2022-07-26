@@ -51,7 +51,7 @@ const diagramm = props.income.map(a => {
                 textAnchor="middle"
                 dominantBaseline="central"
                 style={{
-                    fontSize: String(total).length <= 3 ? '62px' : '54px',
+                    fontSize: String(total).length <= 3 ? '62px' : '42px',
                     fontWeight: 600,
                 }}
             >
@@ -87,6 +87,16 @@ const diagramm = props.income.map(a => {
                     'id': a.name,
                     "label": a.name,
                     "value": ((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0)) / props.euro).toFixed(0)
+                }
+            })
+        }
+        else if (props.selectDiagramm === 'RUB') {
+            return diagramm.map(a => {
+                return {
+                    'id': a.name,
+                    "label": a.name,
+                    "value": 
+    (((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0)) / props.ruble)*100).toFixed(0)
                 }
             })
         }
@@ -172,7 +182,7 @@ const diagramm = props.income.map(a => {
                 //         }
                 //     }
                 // }
-                arcLabelsSkipAngle={12}             //угол при котором не отображаются значения диаграммы
+                arcLabelsSkipAngle={props.selectDiagramm !== 'RUB' ? 16 : 20}              //угол при котором не отображаются значения диаграммы
                 arcLabelsTextColor="black" // цвет значений диаграммы
                 legends={[
                     {

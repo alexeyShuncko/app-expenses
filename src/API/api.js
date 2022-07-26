@@ -16,7 +16,11 @@ export const getDollar = async () => {
 }
 
 export const getEuro = async () => {
-    const response = await axios.get('https://www.nbrb.by/api/exrates/rates/EUR?parammode=2 ');
+    const response = await axios.get('https://www.nbrb.by/api/exrates/rates/EUR?parammode=2');
+    return response.data;
+}
+export const getRuble = async () => {
+    const response = await axios.get('https://www.nbrb.by/api/exrates/rates/RUB?parammode=2');
     return response.data;
 }
 
@@ -98,6 +102,15 @@ export const postIncomes = async (created, amount, category) => {
     return response;
 }
 
+export const deleteIncomes = async (id) => {
+    const response = await instance.delete(`api/incomes/${id}/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
+    return response;
+}
 
 
 // Расходы

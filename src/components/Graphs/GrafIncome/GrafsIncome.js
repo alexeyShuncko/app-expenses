@@ -22,6 +22,9 @@ const GrafsIncome = (props) => {
         else if (props.grafSelectValuta === "EUR") {
             return props.euro
         }
+        else if (props.grafSelectValuta === "RUB") {
+            return props.ruble/100
+        }
     }
 
     let coefficient = coefficientFunc()
@@ -129,7 +132,7 @@ const GrafsIncome = (props) => {
                         tickPadding: 5,
                         tickRotation: 0,
                         legend: 'Заработанная сумма денег',
-                        legendOffset: -55,
+                        legendOffset: -65,
                         legendPosition: 'middle'
                     }}
                     colors={color}

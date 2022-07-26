@@ -12,6 +12,7 @@ const DiagrammTop = (props) => {
         dataWithArc.forEach(datum => {
         total += Number(datum.value)
     })
+
         return (
             <text
                 x={centerX}
@@ -19,11 +20,13 @@ const DiagrammTop = (props) => {
                 textAnchor="middle"
                 dominantBaseline="central"
                 style={{
-                    fontSize: String(total).length <= 3 ? '52px' : '44px',
+                    fontSize: String(total).length < 3  ? '52px' : '40px',
                     fontWeight: 600,
                 }}
             >
-                {Math.round(total)}
+                {props.selectDiagramm !== 'RUB' 
+                ? Math.round(total)
+            : Math.round(total) + 'т.р.'} 
             </text>
         )
     }  
@@ -55,6 +58,14 @@ const DiagrammTop = (props) => {
             'id': a.name,  
         "label": a.name,
         "value": Math.round(a.data.map(b => b.amount).reduce((acc, num) => acc + num, 0) / props.euro),
+        "color": a.color}})
+    }
+    else if (props.selectDiagramm === 'RUB') {
+        return props.diagramm.category.map(a=> { return { 
+            'id': a.name,  
+        "label": a.name,
+        "value": 
+        ((a.data.map(b => b.amount).reduce((acc, num) => acc + num, 0) / props.ruble)/10).toFixed(1),
         "color": a.color}})
     }
     return props.diagramm.category.map(a=> { return { 
@@ -227,7 +238,7 @@ return (
     //         }
     //     }
     // }
-        arcLabelsSkipAngle={12}             //угол при котором не отображаются значения диаграммы
+        arcLabelsSkipAngle={props.selectDiagramm !== 'RUB' ? 16 : 20}             //угол при котором не отображаются значения диаграммы
         arcLabelsTextColor="black" // цвет значений диаграммы
         
         // arcLabelsTextColor={{

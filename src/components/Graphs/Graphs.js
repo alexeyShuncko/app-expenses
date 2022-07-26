@@ -31,6 +31,7 @@ const Grafs = (props) => {
             category={props.expenses.category}
             dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
             euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
+            ruble={props.expenses.exchangeRates.ruble.Cur_OfficialRate}
             grafSelectValuta={props.expenses.grafSelectValuta}
             periodGraf={props.expenses.period[1]}
             todayPo={props.expenses.today.po}
@@ -40,6 +41,7 @@ const Grafs = (props) => {
             income={props.expenses.income}
             dollar={props.expenses.exchangeRates.dollar.Cur_OfficialRate}
             euro={props.expenses.exchangeRates.euro.Cur_OfficialRate}
+            ruble={props.expenses.exchangeRates.ruble.Cur_OfficialRate}
             grafSelectValuta={props.expenses.grafSelectValuta}
             periodGraf={props.expenses.period[1]}
             todayPo={props.expenses.today.po}

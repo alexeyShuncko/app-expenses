@@ -11,8 +11,16 @@ const StatisticPeriod = (props) => {
 
 
     const diagramm = props.diagramm.category
+    const funColor =()=> {
 
-    let color = Converter_V_RGB(diagramm.find(a => a.id === props.diagramm.activ.id).color)
+        if (diagramm.find(a => a.id === props.diagramm.activ.id)) {
+            return diagramm.find(a => a.id === props.diagramm.activ.id).color
+        }
+        else 
+        return diagramm[0].color
+    }
+
+    let color = Converter_V_RGB(funColor())
     
 
 

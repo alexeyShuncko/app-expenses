@@ -22,6 +22,9 @@ const GrafsExpenses = (props) => {
         else if (props.grafSelectValuta === "EUR") {
             return props.euro
         }
+        else if (props.grafSelectValuta === "RUB") {
+            return props.ruble/100
+        }
     }
 
     let coefficient = coefficientFunc()
@@ -97,7 +100,7 @@ const GrafsExpenses = (props) => {
                         top: props.category.length < 7 ? 50 : 5,
                         right: props.category.length < 7 ? 40 : 160,
                         bottom: 120,
-                        left: 60
+                        left: 80
                     }}
                     xScale={{ type: 'point' }}
                     yScale={{
@@ -125,7 +128,7 @@ const GrafsExpenses = (props) => {
                         tickPadding: 5,
                         tickRotation: 0,
                         legend: 'Потраченная сумма денег',
-                        legendOffset: -45,
+                        legendOffset: -65,
                         legendPosition: 'middle'
                     }}
                     colors={color}

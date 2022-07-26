@@ -33,7 +33,8 @@ const DiagrammMain = (props) => {
                 diagramm={props.diagramm} 
                 selectDiagramm={props.diagramm.selectDiagramm}
                 dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}/>
+                euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
+                ruble={props.diagramm.exchangeRates.ruble.Cur_OfficialRate}/>
               
             </div>
 

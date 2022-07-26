@@ -4,6 +4,7 @@ import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
 import { Button, Form, Input, Select, Space } from 'antd';
 
 
+
 const Income = (props) => {
 
     let [editMode, setEditMode] = useState(false)
@@ -40,6 +41,9 @@ const Income = (props) => {
             }
             else if (values.valuta === "EUR") {
                 return (Number(values.income) * props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
+            }
+            else if (values.valuta === "RUB") {
+                return ((Number(values.income) * props.diagramm.exchangeRates.ruble.Cur_OfficialRate)/100).toFixed(2)
             }
         }
         let num = numValuta()
@@ -120,6 +124,7 @@ const Income = (props) => {
                                     <Select.Option value="BYN">BYN</Select.Option>
                                     <Select.Option value="USD">USD</Select.Option>
                                     <Select.Option value="EUR">EUR</Select.Option>
+                                    <Select.Option value="RUB">RUB</Select.Option>
                                 </Select>
                             </Form.Item>
 

@@ -2,7 +2,8 @@ import {
     getDollar, getEuro, getСategories, getItem, getSources, postIncomes,
     postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
     getRelativity,
-    postRelativity
+    postRelativity,
+    getRuble
 } from './../API/api';
 
 
@@ -11,7 +12,7 @@ import {
 const ADD_SELECT_DIAGRAMM = 'ADD_SELECT_DIAGRAMM'
 // Добавление курса валют
 const ADD_DOLLAR = 'ADD_DOLLAR'
-const ADD_EURO = 'ADD_EURO'
+
 
 // СТАТИСТИКА
 const ADD_ACTIV = 'ADD_ACTIV'
@@ -97,7 +98,8 @@ let initialState = {
     selectDiagramm: 'BYN',
     exchangeRates: {
         dollar: { Cur_OfficialRate: '2.5', Date: '' },
-        euro: { Cur_OfficialRate: '2.9', Date: '' }
+        euro: { Cur_OfficialRate: '2.9', Date: '' },
+        ruble: { Cur_OfficialRate: '4.45', Date: '' },
     },
     relativity:
     {
@@ -138,28 +140,26 @@ const diagrammReduser = (state = initialState, action) => {
             }
 
         // Курсы валют 
+        
         case ADD_DOLLAR:
             return {
                 ...state,
                 exchangeRates: {
                     dollar: {
-                        Cur_OfficialRate: action.dollar,
-                        Date: action.data.slice(0, -9)
+                        Cur_OfficialRate: action.data[0].Cur_OfficialRate,
+                        Date: action.data[0].Date.slice(0, -9)
                     },
-                    euro: { ...state.exchangeRates.euro }
+                    euro:  {
+                        Cur_OfficialRate: action.data[1].Cur_OfficialRate,
+                        Date: action.data[1].Date.slice(0, -9)
+                    },
+                    ruble: {
+                        Cur_OfficialRate: action.data[2].Cur_OfficialRate,
+                        Date: action.data[2].Date.slice(0, -9)
+                    },
                 }
             }
-        case ADD_EURO:
-            return {
-                ...state,
-                exchangeRates: {
-                    dollar: { ...state.exchangeRates.dollar },
-                    euro: {
-                        Cur_OfficialRate: action.euro,
-                        Date: action.data.slice(0, -9)
-                    }
-                }
-            }
+
 
         // СТАТИСТИКА
         //   Выбор категории
@@ -293,12 +293,11 @@ const diagrammReduser = (state = initialState, action) => {
 export const addSelectDiagramm = (selectDiagramm) => {
     return { type: ADD_SELECT_DIAGRAMM, selectDiagramm }
 }
-export const addDollar = (dollar, data) => {
-    return { type: ADD_DOLLAR, dollar, data }
+export const addDollar = ( data) => {
+    return { type: ADD_DOLLAR, data }
 }
-export const addEuro = (euro, data) => {
-    return { type: ADD_EURO, euro, data }
-}
+
+
 
 // Статистика
 export const addActiv = (data) => {
@@ -370,7 +369,8 @@ export const addRelativ = (data) => {
 // Доходы
 export const sources = () => (dispatch) => {
     getSources()
-        .then(data => dispatch(addSource(data)))
+        .then(data => {
+            dispatch(addSource(data))})
 }
 // Добавление отдельного дохода
 export const addIncome = (created, amount, category) => (dispatch) => {
@@ -447,13 +447,14 @@ export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
 }
 
 // Курсы валюты
-export const getDollarUpdate = () => (dispatch) => {
-    getDollar()
-        .then(data => dispatch(addDollar(data.Cur_OfficialRate, data.Date)))
-}
-export const getEuroUpdate = () => (dispatch) => {
-    getEuro()
-        .then(data => dispatch(addEuro(data.Cur_OfficialRate, data.Date)))
+
+export const getValute = () => (dispatch) => {
+    return new Promise((resolve, reject) => {
+    Promise.all([ getDollar(), getEuro(),getRuble() ])
+    .then((values)=> {
+        dispatch(addDollar(values))
+        resolve()})
+    })
 }
 
 

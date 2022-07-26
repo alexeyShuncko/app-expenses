@@ -16,7 +16,7 @@ const GeneralInformation = (props) => {
                 diagramm={props.diagramm}
                 addText={props.addText} />
             <Income
-             diagramm={props.diagramm}
+                diagramm={props.diagramm}
                 addActivHedgehog={props.addActivHedgehog}
                 data={props.data}
                 addText={props.addText}
@@ -30,8 +30,7 @@ const GeneralInformation = (props) => {
                 addText={props.addText} />
 
             <DollarRate
-                getEuroUpdate={props.getEuroUpdate}
-                getDollarUpdate={props.getDollarUpdate}
+                getValute={props.getValute}
                 exchangeRates={props.exchangeRates} />
         </div>
     )

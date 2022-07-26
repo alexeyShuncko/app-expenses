@@ -22,7 +22,7 @@ const StatisticTable = (props) => {
     const styles = {
         borderBottom: `solid 3px ${props.diagramm.category.filter(a => props.diagramm.activ.id
             ? a.id === props.diagramm.activ.id
-            : a.id === props.diagramm.category[0].idCategory)[0].color}`
+            : a)[0].color}`
     }
 
 
@@ -35,9 +35,15 @@ const StatisticTable = (props) => {
         .filter(b => b.created <= (props.diagramm.period[0].Po || props.diagramm.today.po)
             && b.created >= (props.diagramm.period[0].S || props.diagramm.today.s))
 
+            const funColor =()=> {
 
-     let color = Converter_V_RGB(category.filter(a => a.id === props.diagramm.activ.id)[0].color)
-
+                if (category.find(a => a.id === props.diagramm.activ.id)) {
+                    return category.find(a => a.id === props.diagramm.activ.id).color
+                }
+                else 
+                return category[0].color
+            }
+     let color = Converter_V_RGB(funColor())
 
 
     const columns = [
