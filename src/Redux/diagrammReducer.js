@@ -3,7 +3,8 @@ import {
     postСategories, postExpenses, deleteСategories, putСategories, getSalary, putSalary,
     getRelativity,
     postRelativity,
-    getRuble
+    getRuble,
+    deleteRecording
 } from './../API/api';
 
 
@@ -456,6 +457,24 @@ export const getValute = () => (dispatch) => {
         resolve()})
     })
 }
+
+
+export const deleteAppRecording = (category,id) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        deleteRecording(category,id)
+        .then(data=> {
+            if (category === 'expenses') {
+                dispatch(categories())
+            }
+            else {
+                dispatch(sources())
+            }
+            resolve()
+        })
+})
+}
+
+
 
 
 export default diagrammReduser

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://alexeyshuncko.github.io/app-expenses",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@nivo/bar": "^0.79.1",
     "@nivo/bump": "^0.79.1",
     "@nivo/core": "^0.79.0",

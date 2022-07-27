@@ -23,3 +23,15 @@
     align-items: center;
 }
 
+.delete {
+    cursor: pointer;
+    position: absolute;
+    top: 2%;
+    left: 110%;
+    color: rgb(238, 76, 76);
+    font-size: 20px;
+}
+.delete:hover {
+    font-size: 24px;
+    top: 1%;
+}

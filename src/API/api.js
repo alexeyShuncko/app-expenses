@@ -102,15 +102,7 @@ export const postIncomes = async (created, amount, category) => {
     return response;
 }
 
-export const deleteIncomes = async (id) => {
-    const response = await instance.delete(`api/incomes/${id}/`,
-    {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('key')}`
-        }
-    });
-    return response;
-}
+
 
 
 // Расходы
@@ -323,5 +315,14 @@ export const Users = async (token) => {
 
 
 
+// Универсальный запрос на удаление расхода/дохода
 
-
+export const deleteRecording = async (category,id) => {
+    const response = await instance.delete(`api/${category}/${id}/`,
+    {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('key')}`
+        }
+    });
+    return response;
+}

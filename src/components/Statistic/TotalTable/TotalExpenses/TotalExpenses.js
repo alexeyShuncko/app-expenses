@@ -6,6 +6,7 @@ import Message from "../../../helpers/Message/Message";
 import moment from 'moment';
 import { Table } from "antd";
 import Converter_V_RGB from "../../../helpers/converter/converter";
+import {CloseCircleOutlined} from '@ant-design/icons';
 
 
 const TotalTableExpenses = (props) => {
@@ -50,6 +51,11 @@ const TotalTableExpenses = (props) => {
 
     let totalSort = total.sort((a, b) => a.created > b.created ? 1 : -1)            //сортировка по времени 
 
+const deleteHandler =(e)=> {
+    props.setVisible(true)
+    props.setIdDelet(e.currentTarget.parentNode.id)
+}
+ 
 
     const columns = [
         {
@@ -77,9 +83,22 @@ const TotalTableExpenses = (props) => {
             align:'center',
             sorter: (a, b) => a.amount - b.amount,
               render: (text, record, index) =>
-              <div style={{ backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, padding: 8}}>{text}</div>
-        }
+              <div 
+              style={{ 
+            backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, 
+            padding: 8,
+            position: 'relative'
+              }}>
+                {text}
+                <div id={record.id} className={s.delete}>
+                <CloseCircleOutlined   title="Удалить запись" onClick={deleteHandler}/>
+                </div>
+                </div>
+        },  
     ]
+
+
+
     const data = totalSort.map(a => ({ ...a, key: a.id }))
 
     const totalSumm = total.map(a => a.amount).reduce((sum, current) => sum + current, 0)
@@ -90,6 +109,9 @@ const TotalTableExpenses = (props) => {
     let textMessage =
         `Нет расходов с ${dateS} по ${datePo} ...`
 
+
+
+
     return (
         <div className={s.statisticDateTable}>
 
@@ -97,6 +119,7 @@ const TotalTableExpenses = (props) => {
                 ? <div className={s.statisticTable}>
 
                     <Table
+                   
                      rowClassName={s.row}
                         columns={columns}
                         dataSource={data}
@@ -120,6 +143,7 @@ const TotalTableExpenses = (props) => {
                     <Message textMessage={textMessage} idMessage='messageTableTotal' />
                 </div>
             }
+          
         </div>
     )
 }

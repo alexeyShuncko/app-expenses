@@ -6,7 +6,7 @@ import Message from "../../../helpers/Message/Message";
 import { Table } from "antd";
 import moment from 'moment';
 import Converter_V_RGB from "../../../helpers/converter/converter";
-
+import {CloseCircleOutlined} from '@ant-design/icons';
 
 
 const TotalIncome = (props) => {
@@ -39,7 +39,12 @@ const TotalIncome = (props) => {
 
     let totalSort = total.sort((a, b) => a.created > b.created ? 1 : -1)
 
-  
+    const deleteHandler =(e)=> {
+        props.setVisible(true)
+        props.setIdDelet(e.currentTarget.parentNode.id)
+        }
+         
+         
 
     const columns = [
         {
@@ -67,7 +72,12 @@ const TotalIncome = (props) => {
             align:'center',
             sorter: (a, b) => a.amount - b.amount,
             render: (text, record, index) =>
-            <div style={{ backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+            <div style={{ backgroundColor: `rgba(${Converter_V_RGB(record.color).slice(4, -1)},0.6)`, padding: 8 }}>
+                {text}
+                <div id={record.id} className={s.delete}>
+                <CloseCircleOutlined   title="Удалить запись" onClick={deleteHandler}/>
+                </div>
+                </div>
         }
     ]
  

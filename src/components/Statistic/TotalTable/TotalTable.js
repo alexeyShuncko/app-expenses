@@ -3,11 +3,14 @@ import s from './TotalTable.module.css';
 import TotalTableExpenses from "./TotalExpenses/TotalExpenses";
 import TotalIncome from "./TotalIncome/TotalIncome";
 import { Button } from 'antd';
+import MyModal from "../../helpers/Modal";
 
 
 const TotalTable = (props) => {
 
-    let [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false)
+    const [visible, setVisible] = useState(false);
+    const [idDelet, setIdDelet] = useState('');
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -21,8 +24,8 @@ const TotalTable = (props) => {
     const selectChange = (e) => {
         props.addTableSelect(e.target.value)
         e.target.value === 'расходов'
-        ? props.addText(`В таблице ваши расходы ...`) && props.addActivHedgehog(true)
-        : props.addText(`В таблице ваши доходы ...`) && props.addActivHedgehog(true)
+            ? props.addText(`В таблице ваши расходы ...`) && props.addActivHedgehog(true)
+            : props.addText(`В таблице ваши доходы ...`) && props.addActivHedgehog(true)
     }
 
     return (
@@ -33,22 +36,30 @@ const TotalTable = (props) => {
                     <option>доходов</option>
                 </select>
                 за выбранный период. </div>
+
             {!editMode
                 ? <div>
                     <Button type='primary' onClick={activateEditMode}
-                    style={{marginTop: 5}}>Показать</Button>
+                        style={{ marginTop: 5 }}>Показать</Button>
                 </div>
                 : <div >
-                     <Button style={{marginBottom: 17, marginTop: 17}}
-                     type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
+                    <Button style={{ marginBottom: 17, marginTop: 17 }}
+                        type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
+
                     {props.diagramm.tableSelect === 'расходов'
                         ? <TotalTableExpenses
+                        setIdDelet={setIdDelet}
+                        setVisible={setVisible}
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
                             periodS={props.diagramm.period[0].S}
                             periodPo={props.diagramm.period[0].Po}
-                            diagramm={props.diagramm} />
+                            diagramm={props.diagramm}
+                           />
                         : <TotalIncome
+                        setIdDelet={setIdDelet}
+                        setVisible={setVisible}
+                           
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
                             income={props.diagramm.income}
@@ -56,9 +67,19 @@ const TotalTable = (props) => {
                             periodPo={props.diagramm.period[0].Po}
                             exchangeRates={props.diagramm.exchangeRates} />
                     }
-                </div>}
-        </div>
 
+                </div>}
+            <MyModal
+             addText={props.addText}
+             addActivHedgehog={props.addActivHedgehog}
+            select={props.diagramm.tableSelect}
+            deleteAppRecording={props.deleteAppRecording}
+            idDelet={idDelet}
+            setVisible={setVisible}
+            visible={visible}
+                title={'Удаление записи.'}
+                modalText={'Вы действительно хотите удалить запись?'} />
+        </div>
     )
 }
 
