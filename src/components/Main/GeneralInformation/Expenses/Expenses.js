@@ -7,7 +7,6 @@ import { Button, Form, Input, Space, Select } from 'antd';
 const Expenses = (props) => {
 
     const [editMode, setEditMode] = useState(false)
-    const [store, setStore] = useState({})
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -114,8 +113,8 @@ const Expenses = (props) => {
             </Form.Item>
         ))
 
-
-    !store['suffix0'] && diagramm.map((a, index) => store[`suffix${index}`] = "BYN")
+const store ={}
+     diagramm.map((a, index) => store[`suffix${index}`] = "BYN")
 
     return (
         <div className={s.expenses}>
