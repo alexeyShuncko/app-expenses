@@ -6,7 +6,8 @@ import { Button, Form, Input, Space, Select } from 'antd';
 
 const Expenses = (props) => {
 
-    let [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false)
+    const [store, setStore] = useState({})
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -29,17 +30,21 @@ const Expenses = (props) => {
 
     const onFinish = (values) => {
 
-        console.log(values);
+
+        const arrSuffics = Object.keys(store)
 
         let keyArray = []
         let valueArray = []
+        let valutaArray = []
         for (let key in values) {
 
-            if (values[key]) {
+            if (values[key] && !arrSuffics.includes(key)) {
                 keyArray.push(key)
                 valueArray.push(values[key])
+                valutaArray.push(values[arrSuffics[diagramm.indexOf(diagramm.find(a => a.name === key))]])
             }
         }
+
 
         if (keyArray.length === 0) {
             props.addText(`Вы не ввели ни одного расхода ...`)
@@ -48,11 +53,27 @@ const Expenses = (props) => {
         else {
             const timer = DateFunc(new Date())
 
+            const converterValute = (arr, index) => {
+                if (valutaArray[index] === "BYN") {
+                    return arr[index]
+                }
+                else if (valutaArray[index] === "USD") {
+                    return (arr[index] * props.diagramm.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
+                }
+                else if (valutaArray[index] === "EUR") {
+                    return (arr[index] * props.diagramm.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
+                }
+                else if (valutaArray[index] === "RUB") {
+                    return ((arr[index] / 100) * props.diagramm.exchangeRates.ruble.Cur_OfficialRate).toFixed(2)
+                }
+            }
+
+
             let data = keyArray.map((a, index) => {
 
                 return {
                     "created": timer,
-                    "amount": valueArray[index],
+                    "amount": converterValute(valueArray, index),
                     "currency": "BYN",
                     "category": props.diagramm.category.find(b => b.name === a).id
                 }
@@ -62,7 +83,7 @@ const Expenses = (props) => {
 
             props.addText(`Расходы на  "${text}" добавлены ...`)
             props.addActivHedgehog(true)
-
+          
             props.addDiagramm(data)
             deActivateEditMode()
         }
@@ -77,34 +98,34 @@ const Expenses = (props) => {
     }
 
 
-    const suffixSelector =  
-      diagramm.map((a, index)=> (
-        <Form.Item name={`suffix${index}`} noStyle key={a.name}>
-        <Select
-            style={{
-                width: 70,
-            }}
-        >
-            <Select.Option value="BYN">BYN</Select.Option>
-            <Select.Option value="USD">USD</Select.Option>
-            <Select.Option value="EUR">EUR</Select.Option>
-            <Select.Option value="RUB">RUB</Select.Option>
-        </Select>
-    </Form.Item>
-      ))      
-        
+    const suffixSelector =
+        diagramm.map((a, index) => (
+            <Form.Item name={`suffix${index}`} noStyle key={a.name}>
+                <Select
+                    style={{
+                        width: 70,
+                    }}
+                >
+                    <Select.Option value="BYN">BYN</Select.Option>
+                    <Select.Option value="USD">USD</Select.Option>
+                    <Select.Option value="EUR">EUR</Select.Option>
+                    <Select.Option value="RUB">RUB</Select.Option>
+                </Select>
+            </Form.Item>
+        ))
 
 
+    !store['suffix0'] && diagramm.map((a, index) => store[`suffix${index}`] = "BYN")
 
     return (
         <div className={s.expenses}>
 
             {!editMode
                 ? <div className={s.buttonExpenses}>
-                    <Button type="primary" 
-                    size='large' 
-                    danger 
-                    onClick={activateEditMode}>Добавить расходы</Button>
+                    <Button type="primary"
+                        size='large'
+                        danger
+                        onClick={activateEditMode}>Добавить расходы</Button>
                 </div>
 
                 :
@@ -116,18 +137,16 @@ const Expenses = (props) => {
                             name="expenses"
                             labelCol={{ span: 8 }}
                             wrapperCol={{ span: 16 }}
-                            initialValues={{suffix0: "BYN"}}
+                            initialValues={store}
                             onFinish={onFinish}
                             //onFinishFailed={onFinishFailed}
                             autoComplete="off">
 
-                            {diagramm.map((a, index )=>
-
+                            {diagramm.map((a, index) =>
                                 <Form.Item style={{ marginBottom: 0 }}
                                     label={a.nameRusCase}
                                     name={a.name}
                                     key={a.name}
-                                   
                                 //hasFeedback 
                                 >
                                     <Input
@@ -136,11 +155,9 @@ const Expenses = (props) => {
                                         onMouseOver={onMouseOver}
                                         onMouseOut={onMouseOut}
                                         type='number' onInput={funcValidNumber} step='0.01' />
-
                                 </Form.Item>
                             )
                             }
-
 
                             <Form.Item wrapperCol={{ offset: 8 }} style={{ marginTop: 10 }}>
                                 <Space>
@@ -154,12 +171,10 @@ const Expenses = (props) => {
                                     </Button>
                                 </Space>
                             </Form.Item>
-
                         </Form>
                     </div>
                 </div>
             }
-
         </div>
     )
 }
