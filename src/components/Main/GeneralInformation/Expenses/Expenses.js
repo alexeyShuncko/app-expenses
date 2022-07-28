@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import s from './Expenses.module.css';
 import { DateFunc } from '../../../helpers/DateFunc/DateFunc';
-import { Button, Form, Input, Space } from 'antd';
+import { Button, Form, Input, Space, Select } from 'antd';
 
 
 const Expenses = (props) => {
@@ -28,6 +28,8 @@ const Expenses = (props) => {
     }
 
     const onFinish = (values) => {
+
+        console.log(values);
 
         let keyArray = []
         let valueArray = []
@@ -74,12 +76,35 @@ const Expenses = (props) => {
         e.target.style.borderColor = '#d9d9d9'
     }
 
+
+    const suffixSelector =  
+      diagramm.map((a, index)=> (
+        <Form.Item name={`suffix${index}`} noStyle key={a.name}>
+        <Select
+            style={{
+                width: 70,
+            }}
+        >
+            <Select.Option value="BYN">BYN</Select.Option>
+            <Select.Option value="USD">USD</Select.Option>
+            <Select.Option value="EUR">EUR</Select.Option>
+            <Select.Option value="RUB">RUB</Select.Option>
+        </Select>
+    </Form.Item>
+      ))      
+        
+
+
+
     return (
         <div className={s.expenses}>
 
             {!editMode
                 ? <div className={s.buttonExpenses}>
-                    <Button type="primary" size='large' danger onClick={activateEditMode}>Добавить расходы</Button>
+                    <Button type="primary" 
+                    size='large' 
+                    danger 
+                    onClick={activateEditMode}>Добавить расходы</Button>
                 </div>
 
                 :
@@ -89,26 +114,31 @@ const Expenses = (props) => {
 
                         <Form
                             name="expenses"
-                            labelCol={{ span: 10 }}
-                            wrapperCol={{ span: 14 }}
-                            //initialValues={{}}
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{ span: 16 }}
+                            initialValues={{suffix0: "BYN"}}
                             onFinish={onFinish}
                             //onFinishFailed={onFinishFailed}
                             autoComplete="off">
 
-                            {diagramm.map(a =>
+                            {diagramm.map((a, index )=>
+
                                 <Form.Item style={{ marginBottom: 0 }}
                                     label={a.nameRusCase}
                                     name={a.name}
                                     key={a.name}
+                                   
                                 //hasFeedback 
                                 >
                                     <Input
+                                        addonAfter={suffixSelector[index]}
                                         name={a.name}
                                         onMouseOver={onMouseOver}
                                         onMouseOut={onMouseOut}
                                         type='number' onInput={funcValidNumber} step='0.01' />
-                                </Form.Item>)
+
+                                </Form.Item>
+                            )
                             }
 
 
