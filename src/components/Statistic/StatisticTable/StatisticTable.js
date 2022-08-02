@@ -12,6 +12,7 @@ import { coefficientFunc } from "../../helpers/CoefficientFunc";
 const StatisticTable = (props) => {
 
     const [editMode, setEditMode] = useState(false)
+    const [totalValuta, setTotalValuta] = useState('BYN')
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -22,7 +23,7 @@ const StatisticTable = (props) => {
 
 
     const coefficient = coefficientFunc(
-        props.diagramm.tableSelectValuta, 
+        totalValuta, 
         props.diagramm.exchangeRates.dollar.Cur_OfficialRate, 
         props.diagramm.exchangeRates.euro.Cur_OfficialRate, 
         props.diagramm.exchangeRates.ruble.Cur_OfficialRate, 
@@ -120,7 +121,7 @@ const StatisticTable = (props) => {
                                 <div> с {dateS} по {datePo} </div>
                                 <div className={s.totalCategory}>
                                     <HocValuta
-                                    tableValuta={props.tableValuta}
+                                    tableValuta={setTotalValuta}
                                         value='statisticTable'
                                         filterTable={filterTable}
                                         exchangeRates={props.diagramm.exchangeRates} />

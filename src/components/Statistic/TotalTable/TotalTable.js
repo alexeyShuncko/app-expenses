@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import s from './TotalTable.module.css';
 import TotalTableExpenses from "./TotalExpenses/TotalExpenses";
-import TotalIncome from "./TotalIncome/TotalIncome";
 import { Button } from 'antd';
 import MyModal from "../../helpers/Modal";
 
@@ -46,30 +45,15 @@ const TotalTable = (props) => {
                     <Button style={{ marginBottom: 17, marginTop: 17 }}
                         type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
 
-                    {props.diagramm.tableSelect === 'расходов'
-                        ? <TotalTableExpenses
+                         <TotalTableExpenses
                         setIdDelet={setIdDelet}
                         setVisible={setVisible}
-                        tableTotalValuta={props.tableTotalValuta}
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
                             periodS={props.diagramm.period[0].S}
                             periodPo={props.diagramm.period[0].Po}
                             diagramm={props.diagramm}
                            />
-                        : <TotalIncome
-                        setIdDelet={setIdDelet}
-                        setVisible={setVisible}
-                        tableTotalValuta={props.tableTotalValuta}
-                        diagramm={props.diagramm}
-                            todayPo={props.diagramm.today.po}
-                            todayS={props.diagramm.today.s}
-                            income={props.diagramm.income}
-                            periodS={props.diagramm.period[0].S}
-                            periodPo={props.diagramm.period[0].Po}
-                            exchangeRates={props.diagramm.exchangeRates} />
-                    }
-
                 </div>}
             <MyModal
              addText={props.addText}

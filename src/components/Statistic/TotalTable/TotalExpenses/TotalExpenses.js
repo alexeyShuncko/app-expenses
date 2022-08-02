@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import s from './TotalExpenses.module.css';
 import HocValuta from "../../../HOC/HocValuta";
 import { DataTransformation } from "../../../helpers/DataTransformation/DataTransformation";
@@ -12,7 +12,13 @@ import { coefficientFunc } from "../../../helpers/CoefficientFunc";
 
 const TotalTableExpenses = (props) => {
 
-    const category = props.diagramm.category
+   const [totalValuta, setTotalValuta] = useState('BYN')
+
+   
+
+    const category = props.diagramm.tableSelect === 'расходов' 
+    ? props.diagramm.category 
+    : props.diagramm.income.data
 
 
     // фильтрую в зависимости от выбранного периода
@@ -58,7 +64,7 @@ const deleteHandler =(e)=> {
 }
 
 const coefficient = coefficientFunc(
-    props.diagramm.tableTotalSelectValuta, 
+    totalValuta, 
     props.diagramm.exchangeRates.dollar.Cur_OfficialRate, 
     props.diagramm.exchangeRates.euro.Cur_OfficialRate, 
     props.diagramm.exchangeRates.ruble.Cur_OfficialRate, 
@@ -67,7 +73,7 @@ const coefficient = coefficientFunc(
 
     const columns = [
         {
-            title: 'Категория',
+            title: props.diagramm.tableSelect === 'расходов' ? 'Категория' : 'Доход',
             dataIndex: 'name',
             key: 'key',
             align:'center',
@@ -127,7 +133,6 @@ const coefficient = coefficientFunc(
                 ? <div className={s.statisticTable}>
 
                     <Table
-                   
                      rowClassName={s.row}
                         columns={columns}
                         dataSource={data}
@@ -142,7 +147,7 @@ const coefficient = coefficientFunc(
                             Всего потрачено с {dateS} по {datePo}:
                         </div>
                         <HocValuta
-                        tableTotalValuta={props.tableTotalValuta}
+                        tableTotalValuta={setTotalValuta}
                             value='statisticTotal'
                             totalSumm={totalSumm}
                             exchangeRates={props.diagramm.exchangeRates} />
