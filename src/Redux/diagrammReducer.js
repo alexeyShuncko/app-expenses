@@ -19,6 +19,8 @@ const ADD_DOLLAR = 'ADD_DOLLAR'
 const ADD_ACTIV = 'ADD_ACTIV'
 const ADD_PERIOD = 'ADD_PERIOD'
 const ADD_TABLE_SELECT = 'ADD_TABLE_SELECT'
+const TABLE_VALUTA = 'TABLE_VALUTA'
+const TABLE_TOTAL_VALUTA = 'TABLE_TOTAL_VALUTA'
 
 // ГРАФИК
 const ADD_GRAF_SELECT_VALUTA = 'ADD_GRAF_SELECT_VALUTA'
@@ -126,7 +128,9 @@ let initialState = {
         s: '',
         po: ''
     },
-    activHedgehog: ''
+    activHedgehog: '',
+    tableSelectValuta: 'BYN', 
+    tableTotalSelectValuta: 'BYN', 
 }
 
 const diagrammReduser = (state = initialState, action) => {
@@ -194,6 +198,17 @@ const diagrammReduser = (state = initialState, action) => {
                 ...state,
                 tableSelect: action.select
             }
+        case TABLE_VALUTA:
+                return {
+                    ...state,
+                    tableSelectValuta: action.valuta
+                }
+        case TABLE_TOTAL_VALUTA:
+                return {
+                     ...state,
+                    tableTotalSelectValuta: action.valuta
+                    }
+
 
         // ГРАФИК
         case ADD_GRAF_SELECT_VALUTA:
@@ -310,6 +325,13 @@ export const addPeriod = (key, period) => {
 export const addTableSelect = (select) => {
     return { type: ADD_TABLE_SELECT, select }
 }
+export const tableValuta = (valuta) => {
+    return { type: TABLE_VALUTA, valuta }
+}
+export const tableTotalValuta = (valuta) => {
+    return { type: TABLE_TOTAL_VALUTA, valuta }
+}
+
 
 // График
 export const addGrafSelectValuta = (select) => {

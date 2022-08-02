@@ -7,6 +7,7 @@ import { Table } from "antd";
 import moment from 'moment';
 import Converter_V_RGB from "../../../helpers/converter/converter";
 import {CloseCircleOutlined} from '@ant-design/icons';
+import { coefficientFunc } from "../../../helpers/CoefficientFunc";
 
 
 const TotalIncome = (props) => {
@@ -44,7 +45,12 @@ const TotalIncome = (props) => {
         props.setIdDelet(e.currentTarget.parentNode.id)
         }
          
-         
+        const coefficient = coefficientFunc(
+            props.diagramm.tableTotalSelectValuta, 
+            props.diagramm.exchangeRates.dollar.Cur_OfficialRate, 
+            props.diagramm.exchangeRates.euro.Cur_OfficialRate, 
+            props.diagramm.exchangeRates.ruble.Cur_OfficialRate, 
+            ) 
 
     const columns = [
         {
@@ -81,7 +87,7 @@ const TotalIncome = (props) => {
         }
     ]
  
-    const data = totalSort.map(a=> ({...a, key: a.id}))
+    const data = totalSort.map(a=> ({...a, key: a.id, amount: (a.amount/coefficient).toFixed(2)}))
 
     const totalSumm = total.map(a => a.amount).reduce((sum, current) => sum + current, 0)
 
@@ -113,6 +119,7 @@ const TotalIncome = (props) => {
                             Всего заработано с {dateS} по {datePo}:
                         </div>
                         <HocValuta
+                         tableTotalValuta={props.tableTotalValuta}
                             value='statisticTotal'
                             totalSumm={totalSumm}
                             exchangeRates={props.exchangeRates} />

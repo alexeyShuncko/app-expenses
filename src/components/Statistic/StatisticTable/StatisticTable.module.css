@@ -1,7 +1,7 @@
 
 /* Общий контейнер */
 .statisticDateTable {
-    margin-bottom: 20px;
+   
     text-align: center;
     margin-right: 10px;
 }
@@ -19,7 +19,6 @@
     padding: 0px !important
     } 
     
-
 
 /* Потрачено на ... */
 .statisticDateSumm {

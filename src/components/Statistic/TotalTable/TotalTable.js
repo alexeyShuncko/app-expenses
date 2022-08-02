@@ -50,6 +50,7 @@ const TotalTable = (props) => {
                         ? <TotalTableExpenses
                         setIdDelet={setIdDelet}
                         setVisible={setVisible}
+                        tableTotalValuta={props.tableTotalValuta}
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
                             periodS={props.diagramm.period[0].S}
@@ -59,7 +60,8 @@ const TotalTable = (props) => {
                         : <TotalIncome
                         setIdDelet={setIdDelet}
                         setVisible={setVisible}
-                           
+                        tableTotalValuta={props.tableTotalValuta}
+                        diagramm={props.diagramm}
                             todayPo={props.diagramm.today.po}
                             todayS={props.diagramm.today.s}
                             income={props.diagramm.income}

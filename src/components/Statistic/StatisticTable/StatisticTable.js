@@ -6,11 +6,12 @@ import { DataTransformation } from "../../helpers/DataTransformation/DataTransfo
 import { Button, Table } from "antd";
 import moment from 'moment';
 import Converter_V_RGB from "../../helpers/converter/converter";
+import { coefficientFunc } from "../../helpers/CoefficientFunc";
 
 
 const StatisticTable = (props) => {
 
-    let [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false)
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -18,6 +19,15 @@ const StatisticTable = (props) => {
     const deActivateEditMode = () => {
         setEditMode(false)
     }
+
+
+    const coefficient = coefficientFunc(
+        props.diagramm.tableSelectValuta, 
+        props.diagramm.exchangeRates.dollar.Cur_OfficialRate, 
+        props.diagramm.exchangeRates.euro.Cur_OfficialRate, 
+        props.diagramm.exchangeRates.ruble.Cur_OfficialRate, 
+        )
+
 
     const styles = {
         borderBottom: `solid 3px ${props.diagramm.category.filter(a => props.diagramm.activ.id
@@ -66,9 +76,8 @@ const StatisticTable = (props) => {
                   <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         }
     ]
-    const data = filterTable.map(a => ({ ...a, key: a.id }))
+    const data = filterTable.map(a => ({ ...a, key: a.id, amount: (a.amount/coefficient).toFixed(2) }))
 
-    
 
     let dateS = DataTransformation(props.diagramm.period[0].S || props.diagramm.today.s)
     let datePo = DataTransformation(props.diagramm.period[0].Po || props.diagramm.today.po)
@@ -111,6 +120,7 @@ const StatisticTable = (props) => {
                                 <div> с {dateS} по {datePo} </div>
                                 <div className={s.totalCategory}>
                                     <HocValuta
+                                    tableValuta={props.tableValuta}
                                         value='statisticTable'
                                         filterTable={filterTable}
                                         exchangeRates={props.diagramm.exchangeRates} />

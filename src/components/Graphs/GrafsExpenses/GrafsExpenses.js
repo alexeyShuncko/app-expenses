@@ -5,6 +5,7 @@ import { DataTransformation } from '../../helpers/DataTransformation/DataTransfo
 import { DateFunc } from '../../helpers/DateFunc/DateFunc';
 import { MonthFunc } from '../../helpers/DataTransformation/MonthFunc';
 import Message from '../../helpers/Message/Message';
+import { coefficientFunc } from '../../helpers/CoefficientFunc';
 //import { ResponsiveBump } from '@nivo/bump'
 
 
@@ -12,22 +13,7 @@ import Message from '../../helpers/Message/Message';
 const GrafsExpenses = (props) => {
 
 
-    let coefficientFunc = () => {
-        if (props.grafSelectValuta === "BYN") {
-            return 1
-        }
-        else if (props.grafSelectValuta === "USD") {
-            return props.dollar
-        }
-        else if (props.grafSelectValuta === "EUR") {
-            return props.euro
-        }
-        else if (props.grafSelectValuta === "RUB") {
-            return props.ruble/100
-        }
-    }
-
-    let coefficient = coefficientFunc()
+    let coefficient = coefficientFunc(props.grafSelectValuta, props.dollar, props.euro, props.ruble)
 
 
     let grafS = new Date(props.periodGraf.S || props.todayS)

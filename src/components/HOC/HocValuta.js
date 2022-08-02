@@ -20,7 +20,7 @@ const HocValuta = (props) => {
             .reduce((acc, num) => acc + num, 0))
         .reduce((acc, num) => acc + num, 0)
 
-     
+
 
     const data = () => {
         if (editBYN === 'BYN') {
@@ -53,10 +53,10 @@ const HocValuta = (props) => {
                 return ((props.salary - summ )/ props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
             }
             else if (props.value === 'statisticTable') {
-                return (statisticTable / props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
+                return (statisticTable / props.exchangeRates.dollar.Cur_OfficialRate).toFixed()
             }
             else if (props.value === 'statisticTotal') {
-                return (statisticTotal / props.exchangeRates.dollar.Cur_OfficialRate).toFixed(2)
+                return (statisticTotal / props.exchangeRates.dollar.Cur_OfficialRate).toFixed()
             }
         }
         else if (editBYN === 'EUR') {
@@ -72,10 +72,10 @@ const HocValuta = (props) => {
                     props.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
             }
             else if (props.value === 'statisticTable') {
-                return (statisticTable / props.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
+                return (statisticTable / props.exchangeRates.euro.Cur_OfficialRate).toFixed()
             }
             else if (props.value === 'statisticTotal') {
-                return (statisticTotal / props.exchangeRates.euro.Cur_OfficialRate).toFixed(2)
+                return (statisticTotal / props.exchangeRates.euro.Cur_OfficialRate).toFixed()
             }
         }
         else if (editBYN === 'RUB') {
@@ -91,10 +91,10 @@ const HocValuta = (props) => {
                     (props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
             }
             else if (props.value === 'statisticTable') {
-                return ((statisticTable / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+                return ((statisticTable / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed()
             }
             else if (props.value === 'statisticTotal') {
-                return ((statisticTotal / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed(2)
+                return ((statisticTotal / props.exchangeRates.ruble.Cur_OfficialRate)*100).toFixed()
             }
         }
     }
@@ -103,6 +103,12 @@ const HocValuta = (props) => {
     const activEditBYN = (e) => {
         if (e.target.value !== editBYN)
             setEditBYN(e.target.value)
+        if (props.value === 'statisticTable') {
+                props.tableValuta(e.target.value)
+            }
+        if (props.value === 'statisticTotal') {
+                props.tableTotalValuta(e.target.value)
+            }
 
     }
 
