@@ -3,7 +3,7 @@ import s from './StatisticTable.module.css';
 import HocValuta from "../../HOC/HocValuta";
 import Message from "../../helpers/Message/Message";
 import { DataTransformation } from "../../helpers/DataTransformation/DataTransformation";
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import moment from 'moment';
 import Converter_V_RGB from "../../helpers/converter/converter";
 import { coefficientFunc } from "../../helpers/CoefficientFunc";
@@ -11,23 +11,15 @@ import { coefficientFunc } from "../../helpers/CoefficientFunc";
 
 const StatisticTable = (props) => {
 
-    const [editMode, setEditMode] = useState(false)
     const [totalValuta, setTotalValuta] = useState('BYN')
-
-    const activateEditMode = () => {
-        setEditMode(true)
-    }
-    const deActivateEditMode = () => {
-        setEditMode(false)
-    }
 
 
     const coefficient = coefficientFunc(
-        totalValuta, 
-        props.diagramm.exchangeRates.dollar.Cur_OfficialRate, 
-        props.diagramm.exchangeRates.euro.Cur_OfficialRate, 
-        props.diagramm.exchangeRates.ruble.Cur_OfficialRate, 
-        )
+        totalValuta,
+        props.diagramm.exchangeRates.dollar.Cur_OfficialRate,
+        props.diagramm.exchangeRates.euro.Cur_OfficialRate,
+        props.diagramm.exchangeRates.ruble.Cur_OfficialRate,
+    )
 
 
     const styles = {
@@ -46,15 +38,15 @@ const StatisticTable = (props) => {
         .filter(b => b.created <= (props.diagramm.period[0].Po || props.diagramm.today.po)
             && b.created >= (props.diagramm.period[0].S || props.diagramm.today.s))
 
-            const funColor =()=> {
+    const funColor = () => {
 
-                if (category.find(a => a.id === props.diagramm.activ.id)) {
-                    return category.find(a => a.id === props.diagramm.activ.id).color
-                }
-                else 
-                return category[0].color
-            }
-     let color = Converter_V_RGB(funColor())
+        if (category.find(a => a.id === props.diagramm.activ.id)) {
+            return category.find(a => a.id === props.diagramm.activ.id).color
+        }
+        else
+            return category[0].color
+    }
+    let color = Converter_V_RGB(funColor())
 
 
     const columns = [
@@ -64,8 +56,8 @@ const StatisticTable = (props) => {
             key: 'key',
             align: 'center',
             sorter: (a, b) => moment(a.created) - moment(b.created),
-              render: (text, record, index) =>
-                  <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+            render: (text, record, index) =>
+                <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         },
         {
             title: 'Сумма',
@@ -73,11 +65,11 @@ const StatisticTable = (props) => {
             key: 'key',
             align: 'center',
             sorter: (a, b) => a.amount - b.amount,
-              render: (text, record, index) =>
-                  <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
+            render: (text, record, index) =>
+                <div style={{ backgroundColor: `rgba(${color.slice(4, -1)},0.6)`, padding: 8 }}>{text}</div>
         }
     ]
-    const data = filterTable.map(a => ({ ...a, key: a.id, amount: (a.amount/coefficient).toFixed(2) }))
+    const data = filterTable.map(a => ({ ...a, key: a.id, amount: (a.amount / coefficient).toFixed(2) }))
 
 
     let dateS = DataTransformation(props.diagramm.period[0].S || props.diagramm.today.s)
@@ -91,50 +83,41 @@ const StatisticTable = (props) => {
     return (
         <div className={s.statisticDateTable}>
             <div>Таблица расходов по выбранной категории за выбранный период. </div>
-            {!editMode
+
+
+            {filterTable.length !== 0
                 ? <div>
-                    <Button type='primary' onClick={activateEditMode}
-                     style={{marginTop: 5}}>Показать</Button>
+                    <Table
+                        rowClassName={s.row}
+                        columns={columns}
+                        dataSource={data}
+                        size="small"
+                        pagination={{
+                            pageSize: '10'
+                        }}
+                        bordered
+                    />
+
+                    <div className={s.statisticDateSumm} style={styles}>
+                        Потрачено на <span className={s.categorySumm}>
+                            {props.diagramm.activ.name &&
+                                category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusCase}
+                        </span>
+                        <div> с {dateS} по {datePo} </div>
+                        <div className={s.totalCategory}>
+                            <HocValuta
+                                tableValuta={setTotalValuta}
+                                value='statisticTable'
+                                filterTable={filterTable}
+                                exchangeRates={props.diagramm.exchangeRates} />
+                        </div>
+
+                    </div>
                 </div>
-                : <div >
-                    <Button style={{ marginBottom: 17, marginTop: 17, }}
-                        type='primary' danger onClick={deActivateEditMode}>Убрать</Button>
-
-                    {filterTable.length !== 0
-                        ? <div>
-                            <Table
-                             rowClassName={s.row}
-                                columns={columns}
-                                dataSource={data}
-                                size="small"
-                                pagination={{
-                                    pageSize: '9'
-                                }}
-                                bordered
-                            />
-
-                            <div className={s.statisticDateSumm} style={styles}>
-                                Потрачено на <span className={s.categorySumm}>
-                                    {props.diagramm.activ.name &&
-                                        category.filter(a => a.id === props.diagramm.activ.id)[0].nameRusCase}
-                                </span>
-                                <div> с {dateS} по {datePo} </div>
-                                <div className={s.totalCategory}>
-                                    <HocValuta
-                                    tableValuta={setTotalValuta}
-                                        value='statisticTable'
-                                        filterTable={filterTable}
-                                        exchangeRates={props.diagramm.exchangeRates} />
-                                </div>
-
-                            </div>
-                        </div>
-                        : <div>
-                            <Message textMessage={textMessage} idMessage='messageTable' />
-                        </div>
-                    }
-                </div>}
-
+                : <div>
+                    <Message textMessage={textMessage} idMessage='messageTable' />
+                </div>
+            }
         </div>
     )
 }

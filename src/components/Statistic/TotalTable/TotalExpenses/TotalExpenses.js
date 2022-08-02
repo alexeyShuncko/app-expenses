@@ -14,7 +14,6 @@ const TotalTableExpenses = (props) => {
 
    const [totalValuta, setTotalValuta] = useState('BYN')
 
-   
 
     const category = props.diagramm.tableSelect === 'расходов' 
     ? props.diagramm.category 
@@ -125,7 +124,6 @@ const coefficient = coefficientFunc(
 
 
 
-
     return (
         <div className={s.statisticDateTable}>
 
@@ -138,7 +136,7 @@ const coefficient = coefficientFunc(
                         dataSource={data}
                         size="small"
                         pagination={{
-                            pageSize: '9'
+                            pageSize: '11'
                         }}
                         bordered
                     />

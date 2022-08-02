@@ -23,7 +23,6 @@ const StatisticPeriod = (props) => {
     let color = Converter_V_RGB(funColor())
     
 
-
     const onChangeDate = (data, dateString) => {
         props.addPeriod('table', dateString)
         // props.addText('Период изменён ...')
@@ -38,8 +37,6 @@ const StatisticPeriod = (props) => {
             props.addActivHedgehog(true)
         }
     }
-
-   
 
 
     return (
@@ -60,7 +57,7 @@ const StatisticPeriod = (props) => {
                                 backgroundColor: `rgba(${color.slice(4, -1)},0.6)`
                             }}
                             onChange={handleChange}
-                            defaultValue={props.diagramm.activ.name || diagramm[0].name}
+                            value={props.diagramm.activ.name || diagramm[0].name}
                         >
 
                             {diagramm.map(a =>

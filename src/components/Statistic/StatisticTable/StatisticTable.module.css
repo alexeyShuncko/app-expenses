@@ -1,17 +1,16 @@
 
 /* Общий контейнер */
 .statisticDateTable {
-   
     text-align: center;
-    margin-right: 10px;
 }
-
+.statisticDateTable>div {
+margin-bottom: 3px;
+}
 
 /* блок таблицы */
 .statisticTable {
     display: flex;
     flex-direction: column;
-    margin: 0px 20px;
 }
 
 
@@ -22,7 +21,7 @@
 
 /* Потрачено на ... */
 .statisticDateSumm {
-    margin-top: 10px;
+    
 }
 
 .categorySumm {
