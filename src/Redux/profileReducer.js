@@ -14,7 +14,7 @@ let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIi
 
 
 let initialState = {
-    users: '',
+    users: [{username:'test'}],
     actionUser: '',
     login: false,
     test: {
