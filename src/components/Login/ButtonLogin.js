@@ -16,7 +16,7 @@ const ButtonLogin = ({ getUser, verification, ...props }) => {
   let data = props.profile.users
 
   useEffect(() => {
-    if (!data) {
+    if (data.length < 2) {
       getUser()
       .catch(() => setErr(true))
     }
