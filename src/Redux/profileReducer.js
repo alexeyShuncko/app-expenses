@@ -10,11 +10,11 @@ const ADD_LOGIN = 'ADD_LOGIN'
 const ADD_FIRST_LOGIN = 'ADD_FIRST_LOGIN'
 
 
-let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYzNjc4NzAyLCJqdGkiOiI0YzA2YTAyMTQxMDc0NGNkYTIyOTBkYjQ0ZGI3MDBlYyIsInVzZXJfaWQiOjJ9.F0XiqQ8KfYI75Tfqf5wEJPMqPoS5qmsf0FzYMNgDBU4'
+let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1MTUxMzY3LCJqdGkiOiIyNjdlN2IwMzcxYzA0MTZkOTUyZGY2OWRlODQ2YjE1ZSIsInVzZXJfaWQiOjV9.Rd72Ld_vccqg1ezDAvJ2gA6_FuPWgfwoax7sTjr6f_k'
 
 
 let initialState = {
-    users: [{username:'test'}],
+    users: [{username:'testUser'}],
     actionUser: '',
     login: false,
     test: {

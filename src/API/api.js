@@ -219,6 +219,9 @@ export const postSalary = async (day, month, id) => {
     );
     return response;
 }
+
+
+
 export const deleteSalary = async (id) => {
     const response = await instance.delete(`api/set-date/${id}/`, 
     {

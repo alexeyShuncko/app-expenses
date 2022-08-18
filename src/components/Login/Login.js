@@ -43,7 +43,7 @@ const Login = ({ getUser, ...props }) => {
     <div className={s.container}>
 
       <div className={s.test}>Для просмотра тестового аккаунта: <br></br>
-        <span className={s.passLog}>Логин:</span> test<br></br>
+        <span className={s.passLog}>Логин:</span> testUser<br></br>
         <span className={s.passLog}>Пароль:</span> test1234Q
       </div>
 
