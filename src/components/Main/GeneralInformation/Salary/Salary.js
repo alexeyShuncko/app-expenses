@@ -22,12 +22,12 @@ const Salary = (props) => {
     return (
 
         <div className={s.salary}>
-            {/* {timer >= `2022-${getMount(props.diagramm.income.salary.find(a => a.source === 1).salary_month)}-${getMount(props.diagramm.income.salary.find(a => a.source === 1).salary_day)}`
+            {timer >= `2022-${getMount(props.diagramm.income.salary.find(a => a.source === 1).salary_month)}-${getMount(props.diagramm.income.salary.find(a => a.source === 1).salary_day)}`
                 ? <div className={s.salaryUpdate} >Вы получили зарплату!</div>
                 : null}
             {timer >= `2022-${getMount(props.diagramm.income.salary.find(a => a.source === 3).salary_month)}-${getMount(props.diagramm.income.salary.find(a => a.source === 3).salary_day)}`
                 ? <div className={s.salaryUpdate} >Вы получили аванс!</div>
-                : null} */}
+                : null}
 
             <div className={s.salaryValue}>
                 <div className={s.salaryName}>Доходы:</div>
