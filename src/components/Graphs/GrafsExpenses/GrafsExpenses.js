@@ -6,7 +6,6 @@ import { DateFunc } from '../../helpers/DateFunc/DateFunc';
 import { MonthFunc } from '../../helpers/DataTransformation/MonthFunc';
 import Message from '../../helpers/Message/Message';
 import { coefficientFunc } from '../../helpers/CoefficientFunc';
-//import { ResponsiveBump } from '@nivo/bump'
 
 
 
@@ -136,122 +135,22 @@ const GrafsExpenses = (props) => {
                             // "background": "#ffffff",
                             // "textColor": "#333333",
                             "axis": {               //оси
-                                // "domain": { 
-                                //      "line": {
-                                //        "stroke": "#777777",
-                                //         "strokeWidth": 1
-                                // }
-                                // },
                                 "legend": {
                                     "text": {
                                         "fontSize": 18,
                                         "fill": "#000"
                                     }
                                 },
-                                //  "ticks": {
-                                //      "line": {
-                                //          "stroke": "#777777",
-                                //          "strokeWidth": 1
-                                //      },
-                                //      "text": {
-                                //          "fontSize": 11,
-                                //          "fill": "#333333"
-                                //      }
-                                //  }
                             },
-                            // "grid": {
-                            //     "line": {
-                            //         "stroke": "#dddddd",
-                            //         "strokeWidth": 1
-                            //     }
-                            // },
+                          
                             "legends": {
-                                //       "title": {
-                                //            "text": {
-                                //                "fontSize": 20,
-                                //                //"fill": "#333333"
-                                //           }
-                                //    },
                                 "text": {
                                     "fontSize": 16,
                                 },
-                                //   "ticks": {
-                                //       "line": {},
-                                //       "text": {
-                                //           "fontSize": 10,
-                                //           "fill": "#333333"
-                                //   }
-                                //   }
                             },
-                            //  "annotations": {
-                            //      "text": {
-                            //          "fontSize": 25,
-                            //          "fill": "#333333",
-                            //          "outlineWidth": 2,
-                            //          "outlineColor": "#ffffff",
-                            //          "outlineOpacity": 1
-                            //      },
-                            //      "link": {
-                            //          "stroke": "#000000",
-                            //          "strokeWidth": 1,
-                            //          "outlineWidth": 2,
-                            //          "outlineColor": "#ffffff",
-                            //          "outlineOpacity": 1
-                            //      },
-                            //      "outline": {
-                            //          "stroke": "#000000",
-                            //          "strokeWidth": 2,
-                            //          "outlineWidth": 2,
-                            //          "outlineColor": "#ffffff",
-                            //          "outlineOpacity": 1
-                            //      },
-                            //  "symbol": {
-                            //          "fill": "#000000",
-                            //          "outlineWidth": 2,
-                            //          "outlineColor": "#ffffff",
-                            //          "outlineOpacity": 1
-                            //      }
-                            //  },
-
-                            //       "tooltip": {        // настройка подсказок всплывающих
-                            //           "container": {
-                            //               "background": "#ffffff",
-                            //               "color": "#333333",
-                            //               "fontSize": 16
-                            //           },
-                            //           "basic": {},
-                            //           "chip": {},
-                            //           "table": {},
-                            //           "tableCell": {},
-                            //           "tableCellValue": {}
-                            //       }
                         }
                     }
-                    // sliceTooltip={({ slice }) => {    // кастомная всплывающая подсказка по всем категориям
-                    //     return (
-                    //         <div
-                    //             style={{
-                    //                 background: 'white',
-                    //                 padding: '9px 12px',
-                    //                 border: '1px solid #ccc',
-                    //             }}
-                    //         >
-                    //             <div>{slice.points.serieId}</div>
-                    //             {slice.points.map(point => (
-                    //                 <div
-                    //                     key={point.id}
-                    //                     style={{
-                    //                         color: point.serieColor,
-                    //                         padding: '3px 0',
-                    //                     }}
-                    //                 >
-                    //                     <strong>{point.serieId}</strong> {point.data.yFormatted}
-                    //                 </div>
-                    //             ))}
-
-                    //         </div>
-                    //     )
-                    // }}
+                   
                     legends={[
                         {
                             anchor: props.category.length < 7 ? 'top' : 'right',
@@ -281,43 +180,7 @@ const GrafsExpenses = (props) => {
                     ]
                     }
                 />
-//   <ResponsiveBump
-//      data={data}
-//      xOuterPadding={0.25}
-//      colors={color}
-//      activeLineWidth={6}
-//      inactiveLineWidth={2}
-//      inactiveOpacity={0.15}
-//      startLabelTextColor={{ from: 'color', modifiers: [] }}
-//      endLabelPadding={17}
-//      endLabelTextColor={{ from: 'color', modifiers: [] }}
-//      pointSize={7}
-//      activePointSize={14}
-//      inactivePointSize={7}
-//      pointColor='#ffffff'
-//      pointBorderWidth={3}
-//      activePointBorderWidth={3}
-//      pointBorderColor={{ from: 'serie.color' }}
-//      axisTop={null}
-//      axisBottom={{
-//          tickSize: 0,
-//          tickPadding: 0,
-//          tickRotation: -90,
-//          legend: 'Дата',
-//          legendPosition: 'middle',
-//          legendOffset: 70
-//      }}
-//      axisLeft={{
-//          tickSize: 5,
-//          tickPadding: 5,
-//          tickRotation: 0,
-//          legend: 'Сумма потраченных денег',
-//          legendPosition: 'middle',
-//          legendOffset: -46
-//      }}
-//      margin={{ top: 40, right: 100, bottom: 80, left: 60 }}
-//      axisRight={null}
-//  /> 
+
             }
 
         </div>
