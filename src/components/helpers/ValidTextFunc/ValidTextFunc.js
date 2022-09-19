@@ -1,4 +1,3 @@
-import React from 'react';
 import s from '../../Hedgehog/Hedgehog.module.css';
 import HedgehogFunc from '../HedgehodFunc/HedgehogFunc';
 import connect from './../../Main/Main';
