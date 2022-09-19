@@ -1,4 +1,3 @@
-
 import React from 'react';
 import s from './Login.module.css';
 import { Checkbox, Form, Input, Button, Space } from 'antd';
@@ -8,6 +7,7 @@ import { addActionUser, getUser, login } from './../../Redux/profileReducer';
 
 
 const Login = ({ getUser, ...props }) => {
+
 
 
   const [form] = Form.useForm()
@@ -39,21 +39,86 @@ const Login = ({ getUser, ...props }) => {
     props.updateLogin(false)
   }
 
+
+  const handlerClickCopy = (e) => {
+    
+  if (e.target.id === 'LoginCopy') {
+    form.setFields([{ value: 'testUser', name: 'username' }])
+    let elGreen = document.getElementById('copyLoginSuccses')
+    let el = document.getElementById('copyLogin')
+    el.style.opacity = 0
+    elGreen.style.opacity = 1
+  }
+  else if (e.target.id === 'PasswordCopy') {
+    form.setFields([{ value: 'test1234Q', name: 'password' }])
+    let elGreen = document.getElementById('copyPassSuccses')
+    let el = document.getElementById('copyPass')
+    el.style.opacity = 0
+    elGreen.style.opacity = 1
+  }
+   
+  }
+  const handlerMouseCopy = (e) => {
+  
+    if (e.target.id === 'LoginCopy') {
+     let el = document.getElementById('copyLogin')
+     
+     el.style.opacity = 1
+    }
+    else if (e.target.id === 'PasswordCopy') {
+      
+      let el = document.getElementById('copyPass')
+      el.style.opacity = 1
+    }
+     
+    }
+    const handlerMouseOut = (e) => {
+  
+      if (e.target.id === 'LoginCopy') {
+        let el = document.getElementById('copyLogin')
+        let elGreen = document.getElementById('copyLoginSuccses')
+        el.style.opacity = 0
+        elGreen.style.opacity = 0
+      }
+      else if (e.target.id === 'PasswordCopy') {
+        let el = document.getElementById('copyPass')
+        let elGreen = document.getElementById('copyPassSuccses')
+        el.style.opacity = 0
+        elGreen.style.opacity = 0
+      }
+       
+      }
+
+
   return (
     <div className={s.container}>
 
-      <div className={s.test}>Для просмотра тестового аккаунта: <br></br>
-        <span className={s.passLog}>Логин:</span> testUser<br></br>
-        <span className={s.passLog}>Пароль:</span> test1234Q
+      <div 
+      className={s.test}   
+      onClick={handlerClickCopy}
+      onMouseOver={handlerMouseCopy}
+      onMouseOut={handlerMouseOut}
+      >Для просмотра тестового аккаунта: <br></br>
+        <div className={s.passLog}>Логин:
+        <span id="LoginCopy" className={s.testData}>testUser</span>
+        <span className={s.popup} id="copyLogin">Копировать и вставить</span>
+        <span className={s.popupGreen} id="copyLoginSuccses">Успешно скопировано</span>
+        </div>
+
+        <div className={s.passLog}>Пароль: 
+        <span  className={s.testData} id='PasswordCopy'> test1234Q</span>
+        <span className={s.popup} id="copyPass">Копировать и вставить</span>
+        <span className={s.popupGreen} id="copyPassSuccses">Успешно скопировано</span>
+        </div>
       </div>
 
       <div className={s.shadow}>
 
-       { props.profile.firstLogin 
-       && <div className={s.firstLogin}>
-         Вы успешно зарегистрировались!<br></br>
-        Введите данные для входа в поля ниже.
-        </div>}
+        {props.profile.firstLogin
+          && <div className={s.firstLogin}>
+            Вы успешно зарегистрировались!<br></br>
+            Введите данные для входа в поля ниже.
+          </div>}
 
         <Form
           form={form}
@@ -69,8 +134,6 @@ const Login = ({ getUser, ...props }) => {
             style={{ marginBottom: 10, }}
             label="Логин"
             name="username"
-
-
             rules={[
               {
                 required: true,
