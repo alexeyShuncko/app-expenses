@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './Login.module.css';
 import { Checkbox, Form, Input, Button, Space } from 'antd';
 import { connect } from 'react-redux';
@@ -8,6 +8,18 @@ import { addActionUser, getUser, login } from './../../Redux/profileReducer';
 
 const Login = ({ getUser, ...props }) => {
 
+  const [edit, setEdit] = useState({})
+
+  useEffect(() => {
+
+    let loginGreen = document.getElementById('copyLoginSuccses')
+    let loginCopy = document.getElementById('copyLogin')
+    let passGreen = document.getElementById('copyPassSuccses')
+    let passCopy = document.getElementById('copyPass')
+
+    setEdit({ loginCopy, loginGreen, passCopy, passGreen })
+
+  }, [])
 
 
   const [form] = Form.useForm()
@@ -41,74 +53,65 @@ const Login = ({ getUser, ...props }) => {
 
 
   const handlerClickCopy = (e) => {
-    
-  if (e.target.id === 'LoginCopy') {
-    form.setFields([{ value: 'testUser', name: 'username' }])
-    let elGreen = document.getElementById('copyLoginSuccses')
-    let el = document.getElementById('copyLogin')
-    el.style.opacity = 0
-    elGreen.style.opacity = 1
-  }
-  else if (e.target.id === 'PasswordCopy') {
-    form.setFields([{ value: 'test1234Q', name: 'password' }])
-    let elGreen = document.getElementById('copyPassSuccses')
-    let el = document.getElementById('copyPass')
-    el.style.opacity = 0
-    elGreen.style.opacity = 1
-  }
-   
-  }
-  const handlerMouseCopy = (e) => {
-  
+
+    const { loginCopy, loginGreen, passCopy, passGreen } = edit
+
     if (e.target.id === 'LoginCopy') {
-     let el = document.getElementById('copyLogin')
-     
-     el.style.opacity = 1
+      form.setFields([{ value: e.target.innerHTML, name: 'username' }])
+      loginCopy.style.opacity = 0
+      loginGreen.style.opacity = 1
+
     }
     else if (e.target.id === 'PasswordCopy') {
-      
-      let el = document.getElementById('copyPass')
-      el.style.opacity = 1
-    }
+      form.setFields([{ value: e.target.innerHTML, name: 'password' }])
+      passCopy.style.opacity = 0
+      passGreen.style.opacity = 1
      
     }
-    const handlerMouseOut = (e) => {
-  
-      if (e.target.id === 'LoginCopy') {
-        let el = document.getElementById('copyLogin')
-        let elGreen = document.getElementById('copyLoginSuccses')
-        el.style.opacity = 0
-        elGreen.style.opacity = 0
-      }
-      else if (e.target.id === 'PasswordCopy') {
-        let el = document.getElementById('copyPass')
-        let elGreen = document.getElementById('copyPassSuccses')
-        el.style.opacity = 0
-        elGreen.style.opacity = 0
-      }
-       
-      }
+
+  }
+
+  const handlerMouseOver = (e) => {
+    const { loginCopy, passCopy } = edit
+    if (e.target.id === 'LoginCopy') {
+      loginCopy.style.opacity = 1
+    } else if (e.target.id === 'PasswordCopy') {
+      passCopy.style.opacity = 1
+    }
+  }
+
+  const handlerMouseOut = (e) => {
+
+    const { loginCopy, loginGreen, passCopy, passGreen } = edit
+    if (e.target.id === 'LoginCopy') {
+      loginCopy.style.opacity = 0
+      loginGreen.style.opacity = 0
+    } else if (e.target.id === 'PasswordCopy') {
+      passCopy.style.opacity = 0
+      passGreen.style.opacity = 0
+    }
+  }
 
 
   return (
     <div className={s.container}>
 
-      <div 
-      className={s.test}   
-      onClick={handlerClickCopy}
-      onMouseOver={handlerMouseCopy}
-      onMouseOut={handlerMouseOut}
-      >Для просмотра тестового аккаунта: <br></br>
+      <div
+        className={s.test}
+        onClick={handlerClickCopy}
+        onMouseOver={handlerMouseOver}
+        onMouseOut={handlerMouseOut}
+      >Для просмотра тестового аккаунта: 
         <div className={s.passLog}>Логин:
-        <span id="LoginCopy" className={s.testData}>testUser</span>
-        <span className={s.popup} id="copyLogin">Копировать и вставить</span>
-        <span className={s.popupGreen} id="copyLoginSuccses">Успешно скопировано</span>
+          <span id="LoginCopy" className={s.testData}>testUser</span>
+          <span className={s.popup} id="copyLogin">Копировать и вставить</span>
+          <span className={s.popupGreen} id="copyLoginSuccses">Успешно скопировано</span>
         </div>
 
-        <div className={s.passLog}>Пароль: 
-        <span  className={s.testData} id='PasswordCopy'> test1234Q</span>
-        <span className={s.popup} id="copyPass">Копировать и вставить</span>
-        <span className={s.popupGreen} id="copyPassSuccses">Успешно скопировано</span>
+        <div className={s.passLog}>Пароль:
+          <span className={s.testData} id='PasswordCopy'> test1234Q</span>
+          <span className={s.popup} id="copyPass">Копировать и вставить</span>
+          <span className={s.popupGreen} id="copyPassSuccses">Успешно скопировано</span>
         </div>
       </div>
 
