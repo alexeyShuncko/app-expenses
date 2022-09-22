@@ -2,6 +2,7 @@ import React from 'react';
 import { ResponsivePie } from '@nivo/pie'
 // import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
 import Message from '../../helpers/Message/Message';
+import s from '../DiagrammContainer.module.css';
 
 
 
@@ -11,7 +12,17 @@ const DiagrammIncome = (props) => {
 
 
 // объект расходов за выбранный период
-const diagramm = props.income.map(a => {
+const diagramm = props.diagrammSelect === "доходов" 
+? props.income.map(a => {
+    return {
+        ...a,
+        data: a.data.filter(
+            a => a.created <= (props.periodDiagramm.Po || props.todayPo) 
+            && a.created >= (props.periodDiagramm.S || props.todayS)
+        )
+    }
+})
+: props.category.map(a => {
     return {
         ...a,
         data: a.data.filter(
@@ -22,11 +33,11 @@ const diagramm = props.income.map(a => {
 })
 
 
+
+
 // суммарный расход за выбранный период
     const totalDiag = diagramm.map(a => a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0))
         .reduce((acc, num) => acc + num, 0)    
-
-
 
    
       
@@ -34,7 +45,7 @@ const diagramm = props.income.map(a => {
     // let datePo = DataTransformation(props.periodDiagramm.Po || props.todayPo)
 
     let textMessage =
-        `У Вас нет доходов ...`
+        `У Вас нет ${props.diagrammSelect} ...`
         // с ${dateS} по ${datePo} 
         
 // Слой в центре диаграммы
@@ -104,15 +115,17 @@ const diagramm = props.income.map(a => {
             return {
                 'id': a.name,
                 "label": a.name,
-                "value": ((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0) / totalDiag) * 100).toFixed(1)
+                "value": ((a.data.map(e => e.amount).reduce((sum, current) => sum + current, 0) / totalDiag) * 100).toFixed(1),
             }
         })
     }
 
-    const color = props.income.map(a=> a.color)
 
+    const color = diagramm.map(a => a.color)
+    
     return (
-        totalDiag === 0
+      <div className={s.block}>
+       {totalDiag === 0
             ? <Message textMessage={textMessage} idMessage='messageDiagrammTotal' />
             : <ResponsivePie
                 data={data()}
@@ -210,6 +223,8 @@ const diagramm = props.income.map(a => {
                     }
                 ]}
             />
+}
+</div>
     )
 
 }

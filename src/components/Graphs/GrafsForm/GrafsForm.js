@@ -8,9 +8,10 @@ import s from './GrafsForm.module.css';
 const GrafsForm = (props) => {
 
     const activGrafSelect = (e) => {
+        let str = props.grafSelect
         props.addGrafSelectValuta(e.target.value)
 
-        props.addText(`Расходы на графике в ${e.target.value} ...`)
+        props.addText(`${str.slice(0,1).toUpperCase()}${str.slice(1, str.length - 2)}ы на графике в ${e.target.value} ...`)
         props.addActivHedgehog(true)
     }
 

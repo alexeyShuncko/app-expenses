@@ -1,9 +1,10 @@
 import React from "react";
 import s from './DiagrammContainer.module.css';
-import DiagrammExpenses from "./DiagrammExpenses/DiagrammExpenses";
 import { connect } from 'react-redux';
-import { addActivHedgehog, addPeriod,
-    addSelectDiagrammStat, addText, addDiagrammSelect } from './../../Redux/diagrammReducer';
+import {
+    addActivHedgehog, addPeriod,
+    addSelectDiagrammStat, addText, addDiagrammSelect
+} from './../../Redux/diagrammReducer';
 import DiagrammForm from './DiagrammForm/DiagrammForm';
 import DiagrammIncome from "./DiagrammIncome/DiagrammIncome";
 
@@ -24,32 +25,22 @@ const DiagrammContainer = (props) => {
                 addText={props.addText}
                 todayPo={props.diagramm.today.po}
                 todayS={props.diagramm.today.s}
-                addActivHedgehog={props.addActivHedgehog}/>
-                
-            <div className={s.diagramm}>
-                <div className={s.pie}>
-                    {props.diagramm.diagrammSelect === 'расходов'
-                        ? <DiagrammExpenses
+                addActivHedgehog={props.addActivHedgehog} />
 
-                            diagramm={props.diagramm.category}
-                            periodDiagramm={props.diagramm.period[2]}
-                            selectDiagramm={props.diagramm.selectDiagrammStat}
-                            dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
-                            ruble={props.diagramm.exchangeRates.ruble.Cur_OfficialRate}  
-                            todayPo={props.diagramm.today.po}
-                            todayS={props.diagramm.today.s}/>
-                        : <DiagrammIncome
-                            income={props.diagramm.income.data}
-                            periodDiagramm={props.diagramm.period[2]}
-                            selectDiagramm={props.diagramm.selectDiagrammStat}
-                            dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
-                            euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
-                            ruble={props.diagramm.exchangeRates.ruble.Cur_OfficialRate} 
-                            todayPo={props.diagramm.today.po}
-                            todayS={props.diagramm.today.s}/>
-                    }
-                </div>
+            <div className={s.diagramm}>
+
+                <DiagrammIncome
+                    diagrammSelect={props.diagramm.diagrammSelect}
+                    income={props.diagramm.income.data}
+                    category={props.diagramm.category}
+                    periodDiagramm={props.diagramm.period[2]}
+                    selectDiagramm={props.diagramm.selectDiagrammStat}
+                    dollar={props.diagramm.exchangeRates.dollar.Cur_OfficialRate}
+                    euro={props.diagramm.exchangeRates.euro.Cur_OfficialRate}
+                    ruble={props.diagramm.exchangeRates.ruble.Cur_OfficialRate}
+                    todayPo={props.diagramm.today.po}
+                    todayS={props.diagramm.today.s} />
+
             </div>
         </div>)
 }

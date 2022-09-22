@@ -1,5 +1,21 @@
 .diagrammMain {
   margin-top: 10px;
+  animation: start 1s;
+ 
+}
+.diagrammMain::-webkit-scrollbar {
+width: 0;
+}
+
+@keyframes start {
+  0%{
+    translate: -150px;
+opacity: 0;
+  }
+  100%{
+    opacity: 1;
+    translate: 0;
+  }
 }
 
 .diagrammMainName {

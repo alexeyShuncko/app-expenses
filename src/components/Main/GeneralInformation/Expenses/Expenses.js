@@ -117,7 +117,7 @@ const store ={}
      diagramm.map((a, index) => store[`suffix${index}`] = "BYN")
 
     return (
-        <div className={s.expenses}>
+        <div>
 
             {!editMode
                 ? <div className={s.buttonExpenses}>
@@ -128,9 +128,9 @@ const store ={}
                 </div>
 
                 :
-                <div>
+                <div className={s.formBlock}>
                     <div className={s.formExpensesName}>Расходы на :</div>
-                    <div className={s.formExpensesFild}>
+                    <div>
 
                         <Form
                             name="expenses"

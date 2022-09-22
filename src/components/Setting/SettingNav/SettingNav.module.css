@@ -5,14 +5,26 @@
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 20px;
     margin: 30px 50px;
-
+   
 }
 
-.navNewsitem {}
-
-.settingButton {
+.buttons div {
+   
     
-    font-size: 17px;
-    width: 200px;
-    height: 65px;
+    animation: start 0.5s ;
+    animation-delay: calc(0.3s*var(--i)); 
+    
 }
+@keyframes start {
+    0%{
+
+translate: 0 500px;
+opacity: 0;
+    }
+    100%{
+       
+        translate: 0 0;
+        opacity: 1
+    }
+}
+

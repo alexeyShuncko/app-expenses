@@ -6,92 +6,40 @@
     margin-bottom: 10px;
 }
 
-
-/* Блок со стрелкой валидации */
-.nameArrow {
-    display: flex;
+.formIncomeFild {
+    /* translate: -50px; */
+/* margin-right: 50px; */
+    animation: vis 0.7s;
+    /* transition: translate 0.7s; */
+}
+@keyframes vis {
+    0% {
+        opacity: 0;
+        translate: 0 -100px;
     }
-    
-
-.incomeBloc {
-flex: 9;
-display: flex;
-flex-direction: column;
+    100% {
+        opacity: 1; 
+        translate: 0px;
+    }
 }
 
-.incomeItem {  
-display: flex;
-}
-
-.incomeItem label{
-flex: 2;
-
-}
-
-
-
-/* Переключатель валюты */
-
-.fieldBynUsd {
-    background-color: rgb(204, 163, 204);
-    border-color: rgb(204, 163, 204);
-    border-radius: 10px;
-    text-align: center;
-    margin-left: 10px;
-}
-
-.fieldBynUsd:hover {
-    border-color: green;
-}
-
-.fieldBynUsd:focus {
-    border-color: green;
-}
-
-
-
-
-.formExpenses {
-    margin-top: 20px;
-    margin-left: 10px;  
-}
-.formIncomeFild{
- margin-bottom: 20px;
-}
-
-.fieldName {
-    width: 108px;
-    text-align: center;
-}
-
-.formItemsField {
-width: 100px;
-}
-
-
-
-
-.arrowNum::-webkit-outer-spin-button,
-.arrowNum::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-
-/* Кнопки */
-.formItemsButton {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
-     justify-content: flex-end; 
-}
-.formItemsButton button {
-    margin-right: 5px;
-}
 
 /* Общая кнопка */
 .incomeButton {
+
 display: flex;
 justify-content: center;
 margin: 20px 0px;
+animation: visButton 0.7s;
+}
+
+@keyframes visButton {
+    0% {
+        opacity: 0;
+        translate: 0 100px;
+    }
+    100% {
+        opacity: 1; 
+        translate: 0px;
+    }
 }

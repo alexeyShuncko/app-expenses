@@ -4,18 +4,16 @@
 
 .newsContainerNav {
   position: fixed;
+ height: 95vh;
   display: flex;
-  height: 95%;
-  width: 250px;
   flex-direction: column;
-  flex:2;
   margin: 20px;
   border-right: solid 1px;
   
 }
 
 .newsContainerContent {
-  padding-left: 290px;
+ padding-left: 285px;
     flex:8;
     margin-top: 20px;
 }

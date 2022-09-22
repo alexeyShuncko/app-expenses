@@ -5,6 +5,9 @@ import { Button } from 'antd';
 
 const SettingNav = (props) => {
 
+
+
+
     let settingArr = [
         { name: 'Добавить категорию расходов', path: '/setting/AddCategory' },
         { name: 'Удалить категорию расходов', path: '/setting/DeleteCategory' },
@@ -15,10 +18,10 @@ const SettingNav = (props) => {
     ]
 
     return (
-        <div className={s.buttons}>
+        <div className={s.buttons} id="blockSetting">
             {
-                settingArr.map(a =>
-                    <div className={s.navNewsitem} key={a.name}>
+                settingArr.map((a, i) =>
+                    <div className={s.navNewsitem} style={{'--i':i}} key={a.name}>
                         <NavLink to={a.path} >
                             <Button type='primary' size='large'>{a.name}</Button>
                         </NavLink>

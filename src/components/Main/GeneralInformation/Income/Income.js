@@ -71,7 +71,7 @@ const Income = (props) => {
 
 
     return (
-        <div className={s.expenses}>
+        <div>
 
             {!editMode
                 ? <div className={s.incomeButton}>
@@ -79,9 +79,9 @@ const Income = (props) => {
                 </div>
 
                 :
-                <div>
+                <div className={s.formIncomeFild}>
                     <div className={s.incomeName}>Доходы:</div>
-                    <div className={s.formIncomeFild}>
+                    <div >
 
                         <Form
                             name="basic"
