@@ -2,13 +2,14 @@
     display: flex;
     margin-right: 20px;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 
 /* Выбор категории и периода */
 .period {
     flex: 2;
-    animation: vis 0.7s ;
+    animation: vis var(--time);
 }
 
 @keyframes vis {
@@ -32,12 +33,12 @@ display: flex;
 
 .tableCategory {
 flex: 1;
-animation: visCenter 0.7s;
+animation: visCenter var(--time);
 }
 
 .tableDate {
 flex: 2;
-animation: vis 0.7s ;
+animation: vis var(--time) ;
 }
 
 
