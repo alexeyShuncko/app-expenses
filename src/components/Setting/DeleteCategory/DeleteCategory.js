@@ -101,8 +101,6 @@ const DeleteCategory = (props) => {
 
 
                 <div className={s.instruction}>
-                    <div className={s.instructionTitle}>
-                        Чтобы удалить категорию, следуйте ниже приведенным шагам:</div>
                     <div>
                         <div>1) В поле "Название категории" выберите из выпадающего списка необходимую категорию</div>
                         <div>2) Нажмите кнопку "Удалить"</div>

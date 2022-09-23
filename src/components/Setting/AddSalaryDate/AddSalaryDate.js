@@ -56,7 +56,7 @@ const AddSalaryDate = (props) => {
     }
 
     return (
-        <div>
+        <div className={s.container}>
             <div className={s.title}>Добавление/изменение даты доходов</div>
 
 
@@ -137,8 +137,6 @@ const AddSalaryDate = (props) => {
 
 
                 <div className={s.instruction}>
-                    <div className={s.instructionTitle}>
-                        Чтобы добавить/изменить дату доходов, следуйте ниже приведенным шагам:</div>
                     <div>
                         <div>1) Выберите доход из выпадающего списка</div>
                         <div>2) Нажав на поле "Дата", выберите дату дохода</div>

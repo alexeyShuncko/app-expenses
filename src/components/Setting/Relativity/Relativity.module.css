@@ -2,20 +2,15 @@
 .title {
     font-size: 22px;
     text-align: center;
+    animation: var(--animTitle), var(--animRelativ);
 }
 
 
 .instruction {
-    flex: 3;
+    flex: 5;
     margin-top: 20px;
+    animation: var(--animInf);
 }
-.instructionTitle {
-    font-size: 17px;
-    font-style: italic;
-    text-decoration: underline;
-    margin-bottom: 10px;
-}
-
 
 .relativity {
 display: flex;
@@ -23,7 +18,8 @@ display: flex;
 
 .form {
     margin-top: 50px;
-    flex: 2;
+    flex: 3;
+    animation: var(--animForm);
 }
 
 

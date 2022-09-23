@@ -1,26 +1,55 @@
 .about {
-  margin: 40px;
+  margin: 30px 40px;
   font-size: 18px;
 }
 
 
 .aboutDescript {
   margin-bottom: 30px;
+  animation: descriptAbout var(--time);
+}
+@keyframes descriptAbout {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
-
-.aboutInform {
-
-}
 
 .aboutInformItem {
-margin-top: 20px;
-font-weight:normal
+  animation: mainAbout var(--time);
+}
+@keyframes mainAbout {
+  0% {
+    translate: calc(-90px*var(--i));
+    opacity: 0.5;
+  }
+
+  50% {
+    translate: calc(8px*var(--i));
+  }
+
+  100% {
+    translate: 0;
+    opacity: 1;
+  }
+}
+
+
+
+
+.aboutInformItem {
+  margin-top: 20px;
+  font-weight: normal
 }
 
 
 .spanBold {
   font-weight: bold;
+
 }
 
 
@@ -32,24 +61,35 @@ font-weight:normal
   font-size: 18px;
   margin: 0px 4px;
   font-weight: bold;
-  }
-  
-  .select:hover {
-      border-color:green;
-  }
-  .select:focus {
-      outline: none;
-  }
+}
+
+.select:hover {
+  border-color: green;
+}
+
+.select:focus {
+  outline: none;
+}
 
 
 
-  .page {
-margin-left: 40px;
-margin-top: 20px;
-font-size: 16px;
+.page {
+  margin-left: 40px;
+  margin-top: 20px;
+  font-size: 16px;
+  animation: pageAbout var(--time);
+}
+
+@keyframes pageAbout {
+  0% {
+opacity: 0;
   }
+  100%{
+    opacity: 1;
+  }
+}
 
 
-  .list {
-display: inline-block;
-  }
+.list {
+  display: inline-block;
+}

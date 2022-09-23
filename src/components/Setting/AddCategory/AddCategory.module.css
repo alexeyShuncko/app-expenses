@@ -1,6 +1,8 @@
+
 .title {
     font-size: 22px;
     text-align: center;
+    animation: var(--animTitle), var(--animAdd);
 }
 
 
@@ -8,20 +10,20 @@
     display: flex;
     margin-top: 20px;
 }
+
 .form {
     flex: 2;
+    animation: var(--animForm);
 }
+
 .instruction {
     flex: 3;
-    margin-top: 10px;
     padding: 0px;
+    margin-top: 10px;
+  animation: var(--animInf);
 }
-.instructionTitle {
-    font-size: 17px;
-    font-style: italic;
-    text-decoration: underline;
-    margin-bottom: 10px;
-}
+
+
 
 
 
@@ -32,17 +34,22 @@
 
 .inform {
     margin-left: 10px;
+
 }
+
 .colorCategory {
     display: flex;
 
 }
+
 .name {
     flex: 1;
 }
+
 .nameColor {
     flex: 3;
 }
+
 .legend {
     width: 20px;
     display: inline-block;

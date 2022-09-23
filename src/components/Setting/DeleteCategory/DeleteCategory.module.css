@@ -1,6 +1,7 @@
 .title {
     font-size: 22px;
     text-align: center;
+    animation: var(--animTitle), var(--animDelete);
 }
 
 
@@ -9,8 +10,9 @@
     margin-top: 20px;
     }
     
-    .form {
+.form {
     flex: 1;
+    animation: var(--animForm)
     }
 
 
@@ -19,12 +21,7 @@
 .instruction {
     flex: 2;
     margin-top: 10px;
-}
-.instructionTitle {
-    font-size: 17px;
-    font-style: italic;
-    text-decoration: underline;
-    margin-bottom: 10px;
+    animation: var(--animInf);
 }
 
 .selectCateg > div {

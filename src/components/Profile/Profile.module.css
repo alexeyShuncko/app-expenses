@@ -1,11 +1,41 @@
 .list {
     display: grid;
     grid-template-columns: 2fr 1fr 6fr;
-    font-size: 20px
+    font-size: 20px;
+
+}
+
+.list:nth-child(1) {
+    animation: profName var(--time);
+}
+
+@keyframes profName {
+    0% {
+        translate: -50px;
+        opacity: 0;
+    }
+
+    100% {
+        translate: 0;
+        opacity: 1;
+    }
+}
+
+.list:nth-child(2) {
+    animation: profEmail var(--time);
 }
 
 
+@keyframes profEmail {
+    0% {
+        translate: 50px;
+        opacity: 0;
+    }
 
-.profile {
-
+    100% {
+        translate: 0;
+        opacity: 1;
+    }
 }
+
+.profile {}

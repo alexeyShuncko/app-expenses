@@ -123,14 +123,22 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
 
                                 </ul>
                             </div>
+                            <div className={s.page}>
+                                <span className={s.spanBold}>"Учётная запись" -</span> на этой вкладке представлены:
+                                <ul>
+                                    <li>Ваше имя, с возможностью его изменения.</li>
+                                    <li>Ваш емаил, с возможностью его изменения.</li>
+                                    <li>Кнопка выхода из учётной записи (логаут).</li>
+                                </ul>
+                            </div>
                         </div>
                     }
 
                 </div>
             </div>
             <div className={s.aboutInform}>
-                <span className={s.spanBold}>Основные тонкости:</span>
-                <div className={s.aboutInformItem}>
+                <div className={s.spanBold}>Основные тонкости:</div>
+                <div className={s.aboutInformItem} style={{'--i': 1}}>
                     - Информация во вкладке "Статистика", "График", "Диаграмма" по умолчанию
                     предоставлена за последние <span className={s.spanBold}>33 дня. </span>
                     Изменить период вы можете нажав на поле даты 
@@ -139,7 +147,7 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                       s={props.diagramm.today.s} 
                       po={props.diagramm.today.po}/> и выбрав необходимую Вам дату.
                 </div>
-                <div className={s.aboutInformItem}>
+                <div className={s.aboutInformItem} style={{'--i': 2}}>
                     - Элементы со стрелкой рядом, такие как:
                     <select
                         className={s.select}
@@ -170,17 +178,17 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                     Выбирая элемент из списка, вы меняете формат отображаемой информации.
                 </div>
 
-                <div className={s.aboutInformItem}>
+                <div className={s.aboutInformItem} style={{'--i': 3}}>
                     - Ёж в левом нижнем углу является Вашим помощником, коментирующим Ваши действия в приложении.
                     Сообщение ежа исчезает при нажатии вне сообщения.
                     Увидеть последнее сообщение можно, нажав на самого ежа.
                 </div>
-                <div className={s.aboutInformItem}>
+                <div className={s.aboutInformItem} style={{'--i': 4}}>
                     - Во вкладке "Настройки" Вы можете добавить дату зарплаты и/или аванса,
                     и приложение будет автоматически напоминать Вам о получении зарплаты и/или аванса
                     на вкладке "Главная". По умолчанию даты не установлены.
                 </div>
-                <div className={s.aboutInformItem}>
+                <div className={s.aboutInformItem} style={{'--i': 5}}>
                     - Удаление записей возможно во вкладке "Статистика", по нажатию красного крестика 
                     рядом со строками общей таблицы.
                 </div>

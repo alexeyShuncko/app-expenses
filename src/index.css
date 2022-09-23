@@ -16,3 +16,101 @@ code {
 body {
   background-color:  rgb(204, 163, 204);
 }
+
+:root {
+  --time: 0.7s;
+  --animInf: settingInf var(--time);
+  --animForm: settingForm var(--time);
+  --animTitle: title var(--time);
+  --animAdd: addTrans var(--time);
+  --animDelete: deleteTrans var(--time);
+  --animRename: renameTrans var(--time);
+  --animColor: colorTrans var(--time);
+  --animRelativ: relativTrans var(--time);
+  --animDate: dateTrans var(--time);
+}
+
+
+
+@keyframes settingInf {
+  0% {
+      translate: -100px;
+      opacity: 0;
+  }
+  100% {
+      translate: 0;
+      opacity: 1;
+  }
+}
+@keyframes settingForm {
+  0% {
+      translate: 100px;
+      opacity: 0;
+  }
+  100% {
+      translate: 0;
+      opacity: 1;
+  }
+}
+@keyframes title {
+  0% {
+      font-size: 30px;
+      color: white;
+  }
+  100% {
+      font-size: 22px;
+      color: black
+  }
+}
+
+/* Перемещение названия для каждой настройки */
+@keyframes addTrans {
+  0% {
+      translate: -180px 40px;
+  }
+  100% {
+      translate: 0;
+  }
+}
+@keyframes deleteTrans {
+  0% {
+      translate: 0px 40px;
+  }
+  100% {
+      translate: 0;
+  }
+}
+@keyframes renameTrans {
+  0% {
+      translate: 180px 40px;
+  }
+  100% {
+      translate: 0;
+  }
+}
+@keyframes colorTrans {
+  0% {
+      translate: -180px 90px;
+  }
+  100% {
+      translate: 0;
+  }
+}
+@keyframes relativTrans {
+  0% {
+      translate: 0px 90px;
+  }
+  100% {
+      translate: 0;
+  }
+}
+@keyframes dateTrans {
+  0% {
+      translate: 180px 90px;
+  }
+  100% {
+      translate: 0;
+  }
+}
+/* ============================= */
+

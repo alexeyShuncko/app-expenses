@@ -1,22 +1,22 @@
 .title {
     font-size: 22px;
     text-align: center;
+    animation: var(--animTitle), var(--animColor);
 }
 
 .color {
     display: flex;
 }
 .form { 
-    margin-top: 80px;
+    margin-top: 20px;
     flex: 1;
+    animation: var(--animForm);
 }
 
 
 .square {
     padding: 0px;
-    
 }
-
 
 .selectCateg > div {
     background: none !important;
@@ -30,13 +30,5 @@
 .instruction {
     flex: 2;
     margin-top: 30px;
+    animation: var(--animInf);
 }
-.instructionTitle {
-    font-size: 17px;
-    font-style: italic;
-    text-decoration: underline;
-    margin-bottom: 10px;
-}
-
-
-

@@ -1,6 +1,10 @@
 .title {
+    margin:0 auto;
+    width: 550px;
     font-size: 22px;
     text-align: center;
+    animation: var(--animTitle), var(--animDate);
+    
 }
 
 
@@ -11,6 +15,7 @@
 .form {
     margin-top: 20px;
     flex: 1;
+    animation: var(--animForm);
 }
 
 /* Даты аванса и зарплаты */
@@ -33,11 +38,6 @@ justify-content: flex-end;
 .instruction {
     flex: 2;
     margin-top: 30px;
+    animation: var(--animInf);
 }
 
-.instructionTitle {
-    font-size: 17px;
-    font-style: italic;
-    text-decoration: underline;
-    margin-bottom: 10px;
-}
