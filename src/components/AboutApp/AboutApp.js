@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './AboutApp.module.css';
 import { connect } from 'react-redux';
 import { addText, addActivHedgehog } from '../../Redux/diagrammReducer';
@@ -9,7 +9,14 @@ import DateAnt from '../helpers/Date/DateAnt';
 const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
 
 
-    let [edit, setEdit] = useState(false)
+    const [edit, setEdit] = useState(false)
+    const [arrTest, setArrTest] = useState([])
+
+
+    useEffect(() => {
+        funcArr()
+    }, [])
+
 
     const aboutFunc = () => {
         //addText('Вот более подробная информация ...')
@@ -23,6 +30,26 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
     }
 
 
+
+    // Побуквенный вывод
+    const strTest = 'Основные тонкости: '
+
+    const funcArr = () => {
+        let arr = []
+        for (let letter = 0; letter < strTest.length; letter++) {
+            const element = strTest[letter];
+
+            setTimeout(() => {
+                setArrTest([...arr, element])
+                arr.push(element)
+            }, 100 * (letter + 7))
+        }
+    }
+
+
+
+
+
     return (
         <div className={s.about}>
 
@@ -31,15 +58,15 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                 а также для подробного отображения статистики по ним.
                 Вся информация представлена в виде таблиц, диаграмм, графиков
                 для удобства просмотра и анализа доходов и расходов за разные периоды времени.
-                Основной единицей измерения доходов/расходов является беллоруский рубль  
+                Основной единицей измерения доходов/расходов является беллоруский рубль
                 <span className={s.spanBold}> (BYN)</span>.
                 <div>
                     {!edit
                         ? <Button type='primary' onClick={aboutFunc} >Подробнее ...</Button>
-                       
+
                         : <div>
                             <Button type='primary' danger onClick={aboutFuncOff} >Меньше подробностей ...</Button>
-                          
+
                             <div className={s.page}>
                                 <span className={s.spanBold}>"Главная" -</span> на этой вкладке представлены:
                                 <ul>
@@ -71,7 +98,7 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                                     </li>
                                     <li>Таблица расходов/доходов по всем категориям/доходам за выбранный
                                         период времени. Отображается при нажатой кнопке "Показать".
-                                        Рядом с каждой строкой таблицы красный крестик, нажав на который 
+                                        Рядом с каждой строкой таблицы красный крестик, нажав на который
                                         произойдет удаление этой записи.
                                         Сумма расходов/доходов в таблице в бел.руб. Итоговая сумма  расходов/доходов
                                         за выбранный период по умолчанию в бел.руб.
@@ -137,17 +164,20 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                 </div>
             </div>
             <div className={s.aboutInform}>
-                <div className={s.spanBold}>Основные тонкости:</div>
-                <div className={s.aboutInformItem} style={{'--i': 1}}>
+                <div className={s.spanBold}>
+
+                    <span>{arrTest.join('')}</span>
+                    <span className={s.cursor}>|</span>
+                </div>
+                <div className={s.aboutInformItem} style={{ '--i': 1 }}>
                     - Информация во вкладке "Статистика", "График", "Диаграмма" по умолчанию
                     предоставлена за последние <span className={s.spanBold}>33 дня. </span>
-                    Изменить период вы можете нажав на поле даты 
-                    <DateAnt 
-                      period={props.diagramm.period[0]}
-                      s={props.diagramm.today.s} 
-                      po={props.diagramm.today.po}/> и выбрав необходимую Вам дату.
+                    Изменить период вы можете нажав на поле даты <DateAnt
+                        period={props.diagramm.period[0]}
+                        s={props.diagramm.today.s}
+                        po={props.diagramm.today.po} /> и выбрав необходимую Вам дату.
                 </div>
-                <div className={s.aboutInformItem} style={{'--i': 2}}>
+                <div className={s.aboutInformItem} style={{ '--i': 2 }}>
                     - Элементы со стрелкой рядом, такие как:
                     <select
                         className={s.select}
@@ -162,34 +192,34 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                         <option>USD</option>
                         <option>EUR</option>
                         <option>RUB</option>
-                    </select> 
-                    
+                    </select>
+
                     <Form.Item className={s.list}
-                    style={{marginBottom: 0, marginRight: 5}}
-                    wrapperCol={{ span: 24}}> 
-                    <Select  defaultValue='Зарплата'>
+                        style={{ marginBottom: 0, marginRight: 5 }}
+                        wrapperCol={{ span: 24 }}>
+                        <Select defaultValue='Зарплата'>
                             <Select.Option value='Зарплата'>Зарплата</Select.Option >
                             <Select.Option value='Аванс'>Аванс</Select.Option >
                         </Select>
                     </Form.Item>
-                   
-                   
-                   , явлюются выпадающими списками.
+
+
+                    , явлюются выпадающими списками.
                     Выбирая элемент из списка, вы меняете формат отображаемой информации.
                 </div>
 
-                <div className={s.aboutInformItem} style={{'--i': 3}}>
+                <div className={s.aboutInformItem} style={{ '--i': 3 }}>
                     - Ёж в левом нижнем углу является Вашим помощником, коментирующим Ваши действия в приложении.
                     Сообщение ежа исчезает при нажатии вне сообщения.
                     Увидеть последнее сообщение можно, нажав на самого ежа.
                 </div>
-                <div className={s.aboutInformItem} style={{'--i': 4}}>
+                <div className={s.aboutInformItem} style={{ '--i': 4 }}>
                     - Во вкладке "Настройки" Вы можете добавить дату зарплаты и/или аванса,
                     и приложение будет автоматически напоминать Вам о получении зарплаты и/или аванса
                     на вкладке "Главная". По умолчанию даты не установлены.
                 </div>
-                <div className={s.aboutInformItem} style={{'--i': 5}}>
-                    - Удаление записей возможно во вкладке "Статистика", по нажатию красного крестика 
+                <div className={s.aboutInformItem} style={{ '--i': 5 }}>
+                    - Удаление записей возможно во вкладке "Статистика", по нажатию красного крестика
                     рядом со строками общей таблицы.
                 </div>
             </div>
@@ -204,4 +234,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addText, addActivHedgehog})(AboutApp) 
+export default connect(mapStateToProps, { addText, addActivHedgehog })(AboutApp) 
