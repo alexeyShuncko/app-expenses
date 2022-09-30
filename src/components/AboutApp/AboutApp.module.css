@@ -5,7 +5,7 @@
 
 
 .aboutDescript {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   animation: descriptAbout var(--time);
 }
 @keyframes descriptAbout {
@@ -126,3 +126,6 @@ animation: curs 1s 2.2;
     opacity: 1;
   }
 }
+
+
+

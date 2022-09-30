@@ -62,8 +62,7 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
                 <span className={s.spanBold}> (BYN)</span>.
                 <div>
                     {!edit
-                        ? <Button type='primary' onClick={aboutFunc} >Подробнее ...</Button>
-
+                        ?  <Button type='primary' onClick={aboutFunc} >Подробнее ...</Button>
                         : <div>
                             <Button type='primary' danger onClick={aboutFuncOff} >Меньше подробностей ...</Button>
 
