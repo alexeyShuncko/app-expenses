@@ -10,7 +10,7 @@ const ADD_LOGIN = 'ADD_LOGIN'
 const ADD_FIRST_LOGIN = 'ADD_FIRST_LOGIN'
 
 
-let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3ODk2NTQ0LCJqdGkiOiJiZmY2OTQ3N2U0NWU0ZGRmOGQxN2IyMjdhNmZjNjVjMCIsInVzZXJfaWQiOjV9.3BLWwLIX3RfLqFlSr7x7qLFcKGZ2tsK3AdDJipFQFWg'
+let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyOTA5MjQwLCJqdGkiOiJmYjI3NzY0YTRlNTM0NTk3OGM0MDQ4ODEwZDcxYmNlMCIsInVzZXJfaWQiOjV9.vr_BdRyvlCn7e7D_7NOtOcmC3CIiogJyJGLMlpmka8Q'
 
 
 let initialState = {
@@ -135,7 +135,7 @@ export const registration = (name, password, email) => (dispatch) => {
 
 export const login = (name, password) => (dispatch) => {
 
-    if (name === 'test') {
+    if (name === 'testUser') {
         return new Promise(() => {
             localStorage.removeItem('key')
             localStorage.setItem('key', token)
