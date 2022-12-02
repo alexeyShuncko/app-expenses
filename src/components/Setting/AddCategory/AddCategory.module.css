@@ -1,10 +1,8 @@
-
 .title {
     font-size: 22px;
     text-align: center;
     animation: var(--animTitle), var(--animAdd);
 }
-
 
 .item {
     display: flex;
@@ -20,26 +18,19 @@
     flex: 3;
     padding: 0px;
     margin-top: 10px;
-  animation: var(--animInf);
+    animation: var(--animInf);
 }
-
-
-
-
 
 .square {
     padding: 1px;
 }
 
-
 .inform {
     margin-left: 10px;
-
 }
 
 .colorCategory {
     display: flex;
-
 }
 
 .name {

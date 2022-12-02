@@ -9,8 +9,9 @@
 .grafTitle {
     margin-right: 5px;
 }
+
 .grafTitle input {
-margin: 0px 5px;
+    margin: 0px 5px;
 }
 
 /* Классы переключателя валюты */
@@ -30,6 +31,7 @@ margin: 0px 5px;
 .fieldBynUsd:focus {
     outline: none;
 }
+
 /* Классы переключателя графиков */
 .selectDiag {
     background-color: rgb(204, 163, 204);
@@ -38,12 +40,12 @@ margin: 0px 5px;
     font-size: 18px;
     margin: 0px 4px;
     font-weight: bold;
-    }
-    
-    .selectDiag:hover {
-        border-color:green;
-    }
-    .selectDiag:focus {
-        outline: none;
-    }
-    
+}
+
+.selectDiag:hover {
+    border-color: green;
+}
+
+.selectDiag:focus {
+    outline: none;
+}

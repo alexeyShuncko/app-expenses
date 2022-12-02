@@ -1,7 +1,7 @@
 .graff {
-height: 500px;
-margin-bottom: 20px;
-animation: vis 0.7s;
+    height: 500px;
+    margin-bottom: 20px;
+    animation: vis 0.7s;
 }
 
 
@@ -10,8 +10,9 @@ animation: vis 0.7s;
         opacity: 0;
         translate: -400px;
     }
+
     100% {
-        opacity: 1; 
+        opacity: 1;
         translate: 0px;
     }
 }

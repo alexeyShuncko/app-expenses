@@ -4,19 +4,15 @@
     animation: var(--animTitle), var(--animDelete);
 }
 
-
 .delet {
     display: flex;
     margin-top: 20px;
-    }
-    
+}
+
 .form {
     flex: 1;
     animation: var(--animForm)
-    }
-
-
-
+}
 
 .instruction {
     flex: 2;
@@ -24,16 +20,12 @@
     animation: var(--animInf);
 }
 
-.selectCateg > div {
+.selectCateg>div {
     background: none !important;
 }
+
 .selectCateg>div>span {
     /* font-weight: bold; */
     color: black !important;
     font-size: 16px;
 }
-
-
-
-
-

@@ -1,15 +1,16 @@
 .fieldBynUsd {
-background-color: rgb(204, 163, 204);
-border-color: rgb(204, 163, 204);
-border-radius: 10px;
-text-align: center;
-font-weight: bold;
-font-size: 15px;
+    background-color: rgb(204, 163, 204);
+    border-color: rgb(204, 163, 204);
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 .fieldBynUsd:hover {
-    border-color:green;
+    border-color: green;
 }
+
 .fieldBynUsd:focus {
     outline: none;
 }

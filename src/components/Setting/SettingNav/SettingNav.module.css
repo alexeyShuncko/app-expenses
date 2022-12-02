@@ -35,6 +35,7 @@
         translate: 0 calc(80px * var(--i));
         opacity: 0;
     }
+
     100% {
         translate: 0 0;
         opacity: 1

@@ -1,10 +1,6 @@
-
-
 .statisticDateTable {
     text-align: center;
-   }
-
-
+}
 
 .statisticTable {
     display: flex;
@@ -12,12 +8,10 @@
     margin: 5px 50px 0px 50px;
     border-bottom: solid 2px black;
 }
- 
-.row > td{
-padding: 0px !important;
-} 
 
-
+.row>td {
+    padding: 0px !important;
+}
 
 /* Всего потрачено */
 .totalSumm {
@@ -34,6 +28,7 @@ padding: 0px !important;
     color: rgb(238, 76, 76);
     font-size: 20px;
 }
+
 .delete:hover {
     font-size: 24px;
     top: 1%;

@@ -1,16 +1,13 @@
+.popup img {
+  height: 150px;
+  width: 75px;
+}
 
-  .popup img {
-    height: 150px;
-    width: 75px;
-  }
-
-
-  /* анимация */
+/* анимация */
 .popup {
   position: relative;
   width: 250px;
   display: inline-block;
- 
 }
 
 /* The actual popup (appears on top) */
@@ -38,7 +35,7 @@
   margin-left: -7px;
   border-width: 7px;
   border-style: solid;
-  border-color: #555 transparent  transparent transparent;
+  border-color: #555 transparent transparent transparent;
 }
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
@@ -59,19 +56,35 @@
   animation: fadeIn 2s
 }
 
-
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-   50% { opacity:0.5} 
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-   50% {opacity:0.5} 
-  to {opacity:1 ;}
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 img {
   cursor: pointer;
 }

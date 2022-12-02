@@ -1,7 +1,6 @@
 .statisticDateTable {
     text-align: center;
-   }
-
+}
 
 .select {
     background-color: rgb(204, 163, 204);
@@ -10,12 +9,12 @@
     font-size: 15px;
     margin: 0px 3px;
     font-weight: bold;
-    }
-    
-    .select:hover {
-        border-color:green;
-    }
-    .select:focus {
-        outline: none;
-    }
-    
+}
+
+.select:hover {
+    border-color: green;
+}
+
+.select:focus {
+    outline: none;
+}

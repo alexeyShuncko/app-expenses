@@ -9,7 +9,6 @@
 .test {
   align-self: center;
   font-size: 20px;
- 
 }
 
 .container {
@@ -21,8 +20,8 @@
 }
 
 .err {
-      margin-left: 22vw;
-      font-size: 30px;
+  margin-left: 22vw;
+  font-size: 30px;
 }
 
 .passLog {
@@ -32,12 +31,10 @@
 }
 
 .firstLogin {
-text-align: center;
-font-size: 16px;
-margin-bottom: 10px;
-
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
-
 
 .testData {
   display: inline-block;
@@ -45,7 +42,6 @@ margin-bottom: 10px;
   cursor: pointer;
   font-size: 20px;
 }
-
 
 .popup {
   opacity: 0;
@@ -58,7 +54,6 @@ margin-bottom: 10px;
   background-color: rgb(211, 204, 204);
 }
 
-
 .popupGreen::after {
   content: "";
   position: absolute;
@@ -67,13 +62,10 @@ margin-bottom: 10px;
   left: 180px;
   top: 7px;
   margin-left: 3px;
- border-left: 2px solid rgb(6, 95, 6);
- border-bottom: 2px solid rgb(6, 95, 6);
- transform: rotate(-45deg);
+  border-left: 2px solid rgb(6, 95, 6);
+  border-bottom: 2px solid rgb(6, 95, 6);
+  transform: rotate(-45deg);
 }
-
-
-
 
 .popupGreen {
   position: absolute;

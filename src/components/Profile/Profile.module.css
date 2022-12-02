@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: 2fr 1fr 6fr;
     font-size: 20px;
-
 }
 
 .list:nth-child(1) {
@@ -25,7 +24,6 @@
     animation: profEmail var(--time);
 }
 
-
 @keyframes profEmail {
     0% {
         translate: 50px;
@@ -37,5 +35,3 @@
         opacity: 1;
     }
 }
-
-.profile {}

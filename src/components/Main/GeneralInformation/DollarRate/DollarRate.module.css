@@ -1,4 +1,3 @@
-
 .dollar {
     display: flex;
     flex-direction: column;
@@ -14,7 +13,6 @@
     align-items: center;
 }
 
-
 .rates {
-font-size: 20px;
+    font-size: 20px;
 }

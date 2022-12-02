@@ -1,18 +1,19 @@
 .diagrammMain {
   margin-top: 10px;
   animation: start 1s;
- 
 }
+
 .diagrammMain::-webkit-scrollbar {
-width: 0;
+  width: 0;
 }
 
 @keyframes start {
-  0%{
+  0% {
     translate: -150px;
-opacity: 0;
+    opacity: 0;
   }
-  100%{
+
+  100% {
     opacity: 1;
     translate: 0;
   }
@@ -26,23 +27,24 @@ opacity: 0;
 }
 
 .diagrammMainDiagramm {
-margin-top: 50px;
+  margin-top: 50px;
   height: 370px;
   display: flex;
   justify-content: center;
 }
 
 .select {
-display: flex;
+  display: flex;
 }
 
 .selectText {
-flex: 3;
-text-align: end;
+  flex: 3;
+  text-align: end;
 }
+
 .selectValue {
-flex: 2;
-text-align: left;
-margin-left: 3px;
-font-weight: bold;
+  flex: 2;
+  text-align: left;
+  margin-left: 3px;
+  font-weight: bold;
 }

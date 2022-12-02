@@ -1,12 +1,10 @@
 .title {
-    margin:0 auto;
+    margin: 0 auto;
     width: 550px;
     font-size: 22px;
     text-align: center;
     animation: var(--animTitle), var(--animDate);
-    
 }
-
 
 .salaryDay {
     display: flex;
@@ -20,12 +18,12 @@
 
 /* Даты аванса и зарплаты */
 .dateItem {
-display: flex;
-margin-bottom: 10px;
-font-size: 16px;
-justify-content: flex-end;
-
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 16px;
+    justify-content: flex-end;
 }
+
 .dateItem div {
     margin-right: 5px;
 }
@@ -40,4 +38,3 @@ justify-content: flex-end;
     margin-top: 30px;
     animation: var(--animInf);
 }
-

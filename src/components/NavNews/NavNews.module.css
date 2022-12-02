@@ -1,20 +1,18 @@
-
 .navNewsitem .active {
- 
     font-size: 27px;
     color: green;
     font-weight: bold;
-
 }
+
 .navNewsitem a {
     font-size: 22px;
     color: white;
     text-decoration: none;
-    
 }
+
 .navNews {
-    margin-left: 20px; 
-    margin-right: 20px; 
-  padding-bottom: 20px;
-  border-bottom: solid 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px;
 }

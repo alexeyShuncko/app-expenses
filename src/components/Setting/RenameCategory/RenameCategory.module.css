@@ -1,16 +1,16 @@
 .item {
     display: flex;
     margin-top: 20px;
-
 }
 
 .title {
-    margin:0 auto;
+    margin: 0 auto;
     width: 550px;
     font-size: 22px;
     text-align: center;
     animation: var(--animTitle), var(--animRename)
 }
+
 .form {
     margin-top: 30px;
     flex: 2;
@@ -23,12 +23,12 @@
     animation: var(--animInf);
 }
 
-.selectCateg > div {
+.selectCateg>div {
     background: none !important;
 }
+
 .selectCateg>div>span {
     /* font-weight: bold; */
     color: black !important;
     font-size: 16px;
 }
-

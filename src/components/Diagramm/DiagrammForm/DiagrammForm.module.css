@@ -6,15 +6,13 @@
 }
 
 .selectText {
-font-size: 20px;
+    font-size: 20px;
 }
 
-.select input{
-margin-left: 5px;
-margin-right: 10px;
+.select input {
+    margin-left: 5px;
+    margin-right: 10px;
 }
-
-
 
 /* выбор расходы или доходы */
 .selectDiag {
@@ -24,12 +22,12 @@ margin-right: 10px;
     font-size: 18px;
     margin: 0px 4px;
     font-weight: bold;
-    }
-    
-    .selectDiag:hover {
-        border-color:green;
-    }
-    .selectDiag:focus {
-        outline: none;
-    }
-    
+}
+
+.selectDiag:hover {
+    border-color: green;
+}
+
+.selectDiag:focus {
+    outline: none;
+}

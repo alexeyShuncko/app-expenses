@@ -1,10 +1,10 @@
-
 /* Общий контейнер */
 .statisticDateTable {
     text-align: center;
 }
+
 .statisticDateTable>div {
-margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 
 /* блок таблицы */
@@ -13,23 +13,15 @@ margin-bottom: 3px;
     flex-direction: column;
 }
 
-
-.row > td{
+.row>td {
     padding: 0px !important
-    } 
-    
-
-/* Потрачено на ... */
-.statisticDateSumm {
-    
 }
 
+/* Потрачено на ... */
 .categorySumm {
     font-weight: bold;
     border-bottom: solid 1px;
 }
-
-
 
 /* Выравнивание итогового числа и валюты  */
 .totalCategory {

@@ -2,22 +2,21 @@
 .diagramm {
     margin-top: 20px;
     margin-bottom: 40px;
-    }
-    
-   .block {
+}
+
+.block {
     height: 450px;
-    animation: vis 0.7s 
-   } 
-    
-    @keyframes vis {
-        0% {
-            translate: -300px -180px;
-            opacity: 0;
-          
-        }
-        100%{
-            translate: 0 0;
-            opacity: 1;
-           
-        }
+    animation: vis 0.7s
+}
+
+@keyframes vis {
+    0% {
+        translate: -300px -180px;
+        opacity: 0;
     }
+
+    100% {
+        translate: 0 0;
+        opacity: 1;
+    }
+}
