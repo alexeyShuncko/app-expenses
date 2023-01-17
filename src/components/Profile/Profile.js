@@ -9,8 +9,6 @@ const Profile = (props) => {
   const updateProfile = (e) => {
     props.addText(`Функционал в стадии разработки ...`);
     props.addActivHedgehog(true);
-
-    console.log(e.currentTarget.name);
   };
 
   const Logout = () => {

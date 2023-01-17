@@ -32,7 +32,6 @@ const Main = (props) => {
           getValute={props.getValute}
         />
       </div>
-
       <div className={s.mainDiagramm}>
         <DiagrammMain
           addActivHedgehog={props.addActivHedgehog}

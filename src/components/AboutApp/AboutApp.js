@@ -9,8 +9,23 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
   const [edit, setEdit] = useState(false);
   const [arrTest, setArrTest] = useState([]);
 
+  // Побуквенный вывод
+  const strTest = 'Основные тонкости: ';
+
   useEffect(() => {
+    const funcArr = () => {
+      let arr = [];
+      for (let letter = 0; letter < strTest.length; letter++) {
+        const element = strTest[letter];
+
+        setTimeout(() => {
+          setArrTest([...arr, element]);
+          arr.push(element);
+        }, 100 * (letter + 7));
+      }
+    };
     funcArr();
+    return () => setArrTest([]);
   }, []);
 
   const aboutFunc = () => {
@@ -22,21 +37,6 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
     addText('Я спрятал подробности ...');
     addActivHedgehog(true);
     setEdit(false);
-  };
-
-  // Побуквенный вывод
-  const strTest = 'Основные тонкости: ';
-
-  const funcArr = () => {
-    let arr = [];
-    for (let letter = 0; letter < strTest.length; letter++) {
-      const element = strTest[letter];
-
-      setTimeout(() => {
-        setArrTest([...arr, element]);
-        arr.push(element);
-      }, 100 * (letter + 7));
-    }
   };
 
   return (

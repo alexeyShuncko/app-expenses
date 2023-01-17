@@ -13,7 +13,7 @@ import GrafsIncome from './GrafIncome/GrafsIncome';
 
 const Grafs = (props) => {
   return (
-    <div>
+    <>
       <GrafsForm
         addGrafSelectValuta={props.addGrafSelectValuta}
         grafSelectValuta={props.expenses.grafSelectValuta}
@@ -50,7 +50,7 @@ const Grafs = (props) => {
           todayS={props.expenses.today.s}
         />
       )}
-    </div>
+    </>
   );
 };
 
