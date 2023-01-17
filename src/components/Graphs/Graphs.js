@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './Graphs.module.css';
 import { connect } from 'react-redux';
 import GrafsExpenses from './GrafsExpenses/GrafsExpenses';
 import GrafsForm from './GrafsForm/GrafsForm';
@@ -14,7 +13,7 @@ import GrafsIncome from './GrafIncome/GrafsIncome';
 
 const Grafs = (props) => {
   return (
-    <div className={s.graff}>
+    <div>
       <GrafsForm
         addGrafSelectValuta={props.addGrafSelectValuta}
         grafSelectValuta={props.expenses.grafSelectValuta}
