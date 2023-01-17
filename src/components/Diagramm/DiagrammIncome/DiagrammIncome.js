@@ -124,7 +124,7 @@ const DiagrammIncome = (props) => {
             .reduce((sum, current) => sum + current, 0) /
             totalDiag) *
           100
-        ).toFixed(1),
+        ).toFixed(2),
       };
     });
   };

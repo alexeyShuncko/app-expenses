@@ -87,7 +87,7 @@ const DiagrammTop = (props) => {
           (a.data.map((b) => b.amount).reduce((acc, num) => acc + num, 0) /
             totalSumm) *
           100
-        ).toFixed(1),
+        ).toFixed(2),
         color: a.color,
       };
     });
