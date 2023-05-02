@@ -15,7 +15,7 @@ const ADD_LOGIN = 'ADD_LOGIN';
 const ADD_FIRST_LOGIN = 'ADD_FIRST_LOGIN';
 
 let token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyNjk0NDE2LCJqdGkiOiI4YTYwMjYxNzcxMTI0MTQyYWMzZGIxZDkxMDI3NmQ1ZCIsInVzZXJfaWQiOjV9.QMMRbJbfXn4lz-yLxhLjpkliB9-n8wLSLCuC3MoPOd4';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3MzQ4NDQ1LCJqdGkiOiI4YmNmMDkyZTU1NmY0Zjg5OGM1MTdjZmM3ZDg4MjY5NiIsInVzZXJfaWQiOjV9.cH9sI_nBc32pci_YKTesHgDjzjU8mHZZ2YrekkT4MRM';
 
 let initialState = {
   users: [{ username: 'testUser' }],
