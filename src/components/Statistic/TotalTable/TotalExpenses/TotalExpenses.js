@@ -169,8 +169,9 @@ const TotalTableExpenses = (props) => {
               tableTotalValuta={setTotalValuta}
               value="statisticTotal"
               totalSumm={totalSumm}
-              exchangeRates={props.diagramm.exchangeRates}
-            />
+              exchangeRates={props.diagramm.exchangeRates}>
+              {' '}
+            </HocValuta>
           </div>
         </div>
       ) : (

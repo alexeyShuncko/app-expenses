@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import s from './TotalTable.module.css';
 import TotalTableExpenses from './TotalExpenses/TotalExpenses';
 import MyModal from '../../helpers/Modal';
+import ExportExcel from './ExportExcel/ExportExcel';
 
 const TotalTable = (props) => {
   const [visible, setVisible] = useState(false);
@@ -18,7 +19,12 @@ const TotalTable = (props) => {
 
   return (
     <div className={s.statisticDateTable}>
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         Таблица
         <select
           className={s.select}
@@ -27,7 +33,8 @@ const TotalTable = (props) => {
           <option>расходов</option>
           <option>доходов</option>
         </select>
-        за выбранный период.{' '}
+        за выбранный период.
+        <ExportExcel />
       </div>
 
       <TotalTableExpenses
