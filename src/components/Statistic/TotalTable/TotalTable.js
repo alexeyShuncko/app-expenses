@@ -35,8 +35,9 @@ const TotalTable = (props) => {
         </select>
         за выбранный период.
         <ExportExcel
-          addText={props.addText}
-          addActivHedgehog={props.addActivHedgehog}
+          diagramm={props.diagramm}
+          periodS={props.diagramm.period[0].S}
+          periodPo={props.diagramm.period[0].Po}
         />
       </div>
 
