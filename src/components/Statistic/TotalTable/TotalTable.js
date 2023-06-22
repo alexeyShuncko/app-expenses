@@ -34,7 +34,10 @@ const TotalTable = (props) => {
           <option>доходов</option>
         </select>
         за выбранный период.
-        <ExportExcel />
+        <ExportExcel
+          addText={props.addText}
+          addActivHedgehog={props.addActivHedgehog}
+        />
       </div>
 
       <TotalTableExpenses
