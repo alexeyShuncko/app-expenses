@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import s from './Header.module.css';
 import hedgehog from '../../image/hedgehog.png';
 
-const Header = (props) => {
+const Header = ({ updateLogin }) => {
   const navName = [
     { name: 'Главная', path: '/' },
     { name: 'Статистика', path: '/statistic' },
@@ -32,6 +32,11 @@ const Header = (props) => {
     },
   ];
 
+  const logout = () => {
+    updateLogin(false);
+    localStorage.clear();
+  };
+
   const items = [
     {
       label: (
@@ -44,7 +49,7 @@ const Header = (props) => {
       key: '0',
     },
     {
-      label: <a href="https://www.aliyun.com">Выйти</a>,
+      label: <span onClick={logout}>Выйти</span>,
       key: '1',
     },
   ];

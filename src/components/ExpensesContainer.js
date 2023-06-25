@@ -21,6 +21,7 @@ import {
   salary,
   relativ,
 } from './../Redux/diagrammReducer';
+import { updateLogin } from './../Redux/profileReducer';
 import { connect } from 'react-redux';
 import Hedgehog from './Hedgehog/Hedgehog';
 
@@ -74,7 +75,7 @@ const ExpensesContainer = ({
   return (
     <div className={s.newsContainerItems}>
       <div className={s.newsContainerNav}>
-        <Header />
+        <Header updateLogin={props.updateLogin} />
         {/* <div className={s.hedgehog}>
           <Hedgehog
             category={props.diagramm.category}
@@ -118,4 +119,5 @@ export default connect(mapStateToProps, {
   sources,
   salary,
   relativ,
+  updateLogin,
 })(ExpensesContainer);

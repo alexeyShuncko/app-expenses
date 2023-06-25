@@ -24,7 +24,7 @@ const Profile = (props) => {
     <div className={s.profile}>
       <div>
         <div style={{ fontSize: '30px', marginBottom: '20px' }}>
-          Информация о пользователе:
+          Личный кабинет
         </div>
         <ul>
           {user.map((a, index) => (
