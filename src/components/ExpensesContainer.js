@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import s from './ExpensesContainer.module.css';
-import NavNews from './NavNews/NavNews';
+import Header from './Header/Header';
 import { Route, Routes } from 'react-router';
 import Main from './Main/Main';
 import Statistic from './Statistic/Statistic';
@@ -74,18 +74,18 @@ const ExpensesContainer = ({
   return (
     <div className={s.newsContainerItems}>
       <div className={s.newsContainerNav}>
-        <NavNews />
-        <div className={s.hedgehog}>
+        <Header />
+        {/* <div className={s.hedgehog}>
           <Hedgehog
             category={props.diagramm.category}
             addActivHedgehog={addActivHedgehog}
             text={props.diagramm.text}
             activHedgehog={props.diagramm.activHedgehog}
           />
-        </div>
+        </div> */}
       </div>
 
-      <div className={s.newsContainerContent}>
+      <div className={s.content}>
         <div>
           {/* <Suspense fallback={null}> */}
           <Routes>

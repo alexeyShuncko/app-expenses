@@ -1,0 +1,56 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+    background: #1668dc;
+    box-shadow: 0 0 5px #1668dc;
+}
+
+.logo {
+    position: absolute;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 3px black;
+    padding: 0 3px;
+}
+
+.selectValuta {
+    position: absolute;
+    left: 130px;
+    /*в зависимости от ширины логотипа */
+}
+
+.menu {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuItem a {
+    color: black;
+    text-decoration: none;
+}
+
+.menuItem a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.nameUser {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 30px;
+    cursor: pointer;
+
+}

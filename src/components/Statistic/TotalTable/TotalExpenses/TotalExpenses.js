@@ -3,7 +3,6 @@ import s from './TotalExpenses.module.css';
 import HocValuta from '../../../HOC/HocValuta';
 import { DataTransformation } from '../../../helpers/DataTransformation/DataTransformation';
 import Message from '../../../helpers/Message/Message';
-import moment from 'moment';
 import { Table } from 'antd';
 import Converter_V_RGB from '../../../helpers/converter/converter';
 import { CloseCircleOutlined } from '@ant-design/icons';
@@ -90,7 +89,7 @@ const TotalTableExpenses = (props) => {
       dataIndex: 'created',
       key: 'key',
       align: 'center',
-      sorter: (a, b) => moment(a.created) - moment(b.created),
+      sorter: (a, b) => new Date(a.created) - new Date(b.created),
       render: (text, record, index) => (
         <div
           style={{

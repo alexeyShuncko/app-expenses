@@ -4,7 +4,6 @@ import HocValuta from '../../HOC/HocValuta';
 import Message from '../../helpers/Message/Message';
 import { DataTransformation } from '../../helpers/DataTransformation/DataTransformation';
 import { Table } from 'antd';
-import moment from 'moment';
 import Converter_V_RGB from '../../helpers/converter/converter';
 import { coefficientFunc } from '../../helpers/CoefficientFunc';
 
@@ -53,7 +52,7 @@ const StatisticTable = (props) => {
       dataIndex: 'created',
       key: 'key',
       align: 'center',
-      sorter: (a, b) => moment(a.created) - moment(b.created),
+      sorter: (a, b) => new Date(a.created) - new Date(b.created),
       render: (text, record, index) => (
         <div
           style={{

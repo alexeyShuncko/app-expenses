@@ -1,21 +1,20 @@
 import React from 'react';
 import { DatePicker } from 'antd';
-import moment from 'moment';
 
 const DateAnt = (props) => {
   const { RangePicker } = DatePicker;
 
   const disabledDate = (current) => {
     let customDate = props.po;
-    return current && current > moment(customDate, 'YYYY-MM-DD');
+    return current && current > new Date(customDate);
   };
 
   return (
     <RangePicker
       placement="bottomLeft"
       defaultValue={[
-        (props.period.S && moment(props.period.S)) || moment(props.s),
-        (props.period.Po && moment(props.period.Po)) || moment(props.po),
+        (props.period.S && new Date(props.period.S)) || new Date(props.s),
+        (props.period.Po && new Date(props.period.Po)) || new Date(props.po),
       ]}
       disabledDate={disabledDate}
       onChange={props.onChangeDate}
