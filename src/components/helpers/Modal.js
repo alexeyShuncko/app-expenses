@@ -28,7 +28,7 @@ const MyModal = (props) => {
     <>
       <Modal
         title={props.title}
-        visible={props.visible}
+        open={props.visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}>

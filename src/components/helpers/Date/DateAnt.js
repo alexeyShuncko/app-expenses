@@ -1,4 +1,3 @@
-import React from 'react';
 import { DatePicker } from 'antd';
 
 const DateAnt = (props) => {
@@ -11,11 +10,11 @@ const DateAnt = (props) => {
 
   return (
     <RangePicker
-      placement="bottomLeft"
-      defaultValue={[
-        (props.period.S && new Date(props.period.S)) || new Date(props.s),
-        (props.period.Po && new Date(props.period.Po)) || new Date(props.po),
-      ]}
+      placement={'bottomLeft'}
+      // defaultValue={[
+      //   (props.period.S && new Date(props.period.S)) || new Date(props.s),
+      //   (props.period.Po && new Date(props.period.Po)) || new Date(props.po),
+      // ]}
       disabledDate={disabledDate}
       onChange={props.onChangeDate}
     />

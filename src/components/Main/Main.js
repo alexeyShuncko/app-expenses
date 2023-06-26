@@ -17,6 +17,8 @@ import {
 } from './../../Redux/diagrammReducer';
 
 const Main = (props) => {
+  console.log(props.diagramm);
+
   return (
     <div className={s.main}>
       <div className={s.mainInform}>
