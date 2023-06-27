@@ -2,8 +2,10 @@ import { Select, Dropdown } from 'antd';
 import { NavLink } from 'react-router-dom';
 import s from './Header.module.css';
 import hedgehog from '../../image/hedgehog.png';
+import { updateLogin } from './../Redux/profileReducer';
+import { connect } from 'react-redux';
 
-const Header = ({ updateLogin }) => {
+const Header = ({ updateLogin, profile }) => {
   const navName = [
     { name: 'Главная', path: '/' },
     { name: 'Статистика', path: '/statistic' },
@@ -82,10 +84,17 @@ const Header = ({ updateLogin }) => {
             items,
           }}
           trigger={['click']}>
-          <span>Имя пользователя</span>
+          <span>{profile.actionUser.username}</span>
         </Dropdown>
       </div>
     </header>
   );
 };
-export default Header;
+let mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+  };
+};
+export default connect(mapStateToProps, {
+  updateLogin,
+})(Header);

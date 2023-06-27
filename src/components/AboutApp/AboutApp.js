@@ -1,43 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import s from './AboutApp.module.css';
 import { connect } from 'react-redux';
-import { addText, addActivHedgehog } from '../../Redux/diagrammReducer';
 import { Button, Form, Select } from 'antd';
 import DateAnt from '../helpers/Date/DateAnt';
+import Ticker from './Ticker/ticker';
 
-const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
+const AboutApp = (props) => {
   const [edit, setEdit] = useState(false);
-  const [arrTest, setArrTest] = useState([]);
-
-  // Побуквенный вывод
-  const strTest = 'Основные тонкости: ';
-
-  useEffect(() => {
-    const funcArr = () => {
-      let arr = [];
-      for (let letter = 0; letter < strTest.length; letter++) {
-        const element = strTest[letter];
-
-        setTimeout(() => {
-          setArrTest([...arr, element]);
-          arr.push(element);
-        }, 100 * (letter + 7));
-      }
-    };
-    funcArr();
-    return () => setArrTest([]);
-  }, []);
-
-  const aboutFunc = () => {
-    //addText('Вот более подробная информация ...')
-    //addActivHedgehog(true)
-    setEdit(true);
-  };
-  const aboutFuncOff = () => {
-    addText('Я спрятал подробности ...');
-    addActivHedgehog(true);
-    setEdit(false);
-  };
 
   return (
     <div className={s.about}>
@@ -50,12 +19,12 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
         <span className={s.spanBold}> (BYN)</span>.
         <div>
           {!edit ? (
-            <Button type="primary" onClick={aboutFunc}>
+            <Button type="primary" onClick={() => setEdit(!edit)}>
               Подробнее ...
             </Button>
           ) : (
             <div>
-              <Button type="primary" danger onClick={aboutFuncOff}>
+              <Button type="primary" danger onClick={() => setEdit(!edit)}>
                 Меньше подробностей ...
               </Button>
 
@@ -184,7 +153,8 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
       </div>
       <div className={s.aboutInform}>
         <div className={s.spanBold}>
-          <span>{arrTest.join('')}</span>
+          <Ticker />
+
           <span className={s.cursor}>|</span>
         </div>
         <div className={s.aboutInformItem} style={{ '--i': 1 }}>
@@ -193,9 +163,9 @@ const AboutApp = ({ addText, addActivHedgehog, ...props }) => {
           <span className={s.spanBold}>33 дня. </span>
           Изменить период вы можете нажав на поле даты{' '}
           <DateAnt
-            period={props.diagramm.period[0]}
             s={props.diagramm.today.s}
             po={props.diagramm.today.po}
+            period={props.diagramm.period[0]}
           />{' '}
           и выбрав необходимую Вам дату.
         </div>
@@ -251,6 +221,4 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addText, addActivHedgehog })(
-  AboutApp
-);
+export default connect(mapStateToProps, {})(AboutApp);

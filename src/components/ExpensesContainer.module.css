@@ -1,29 +1,5 @@
-/* .newsContainerItems {
-  display: flex;
-} */
-
-/* .newsContainerNav {
-  position: fixed;
-  height: 95vh;
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  border-right: solid 1px;
-}
-
-.newsContainerContent {
-  padding-left: 285px;
-  flex: 8;
-  margin-top: 20px;
-}
-
-.hedgehog {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-} */
-
 .content {
   margin-top: 60px;
+  max-width: 80vw;
+  margin: 60px auto 0;
 }

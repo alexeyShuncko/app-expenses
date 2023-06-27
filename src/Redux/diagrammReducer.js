@@ -386,8 +386,11 @@ export const addRelativ = (data) => {
 
 // Доходы
 export const sources = () => (dispatch) => {
-  getSources().then((data) => {
-    dispatch(addSource(data));
+  return new Promise((resolve, reject) => {
+    getSources().then((data) => {
+      dispatch(addSource(data));
+      resolve();
+    });
   });
 };
 // Добавление отдельного дохода
@@ -396,9 +399,12 @@ export const addIncome = (created, amount, category) => (dispatch) => {
 };
 // Расходы
 export const categories = () => (dispatch) => {
-  getСategories().then((data) => {
-    dispatch(addCategories(data.sort((a, b) => a.id - b.id)));
-    dispatch(addActiv(data[0]));
+  return new Promise((resolve, reject) => {
+    getСategories().then((data) => {
+      dispatch(addCategories(data.sort((a, b) => a.id - b.id)));
+      dispatch(addActiv(data[0]));
+      resolve();
+    });
   });
 };
 
@@ -437,7 +443,10 @@ export const updateColor = (name, nameRusСase, color, id) => (dispatch) => {
 
 // Дата зарплаты
 export const salary = () => (dispatch) => {
-  getSalary().then((data) => dispatch(addSalary(data)));
+  return new Promise((resolve, reject) => {
+    getSalary().then((data) => dispatch(addSalary(data)));
+    resolve();
+  });
 };
 export const updateSalary = (day, month, id, user) => (dispatch) => {
   putSalary(day, month, id, user).then(() => dispatch(salary()));
@@ -445,7 +454,10 @@ export const updateSalary = (day, month, id, user) => (dispatch) => {
 
 // Относительная величина
 export const relativ = () => (dispatch) => {
-  getRelativity().then((data) => dispatch(addRelativ(data)));
+  return new Promise((resolve, reject) => {
+    getRelativity().then((data) => dispatch(addRelativ(data)));
+    resolve();
+  });
 };
 export const nameCaseRelativity = (name, unit, prise) => (dispatch) => {
   getItem(name)
